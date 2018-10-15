@@ -18,11 +18,13 @@ public class Application extends JFrame {
 
             ex.setVisible(true);
         });
+
     }
 
     private void initUI() {
-
+//add(new LoginPageUI());
         add(new MainUI(this));
+//        add(new LoginForm());
 
         setTitle("Application");
 
