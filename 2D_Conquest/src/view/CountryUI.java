@@ -2,30 +2,42 @@ package view;
 
 
 import javax.swing.*;
-import java.awt.*;
 
 public class CountryUI extends JPanel {
 
     public CountryUI(Application app) {
-        JButton start = new JButton("Start_Game");
-        JButton quit = new JButton("QUIT_Country_Game");
-        JPanel panel = new JPanel();
+        countryButtons(app);
+    }
 
+    public void countryButtons(Application app) {
         app.setTitle("Country Page");
 
-        setSize(800, 800);
-        setLocation(500, 280);
-        panel.setLayout(null);
+        JPanel panel = new JPanel();
+        JButton start = new JButton("Start_Game");
+        JButton quit = new JButton("QUIT_Country_Game");
+
+        JButton back = new JButton("Back");
+
+        panel.add(start);
+        panel.add(quit);
+        panel.add(back);
+        app.add(panel);
+
+        app.setSize(800, 400);
 
         start.setBounds(70, 50, 160, 40);
         quit.setBounds(70, 150, 160, 40);
-
-        app.add(panel);
-        app.add(start, BorderLayout.CENTER);
-        app.add(quit, BorderLayout.CENTER);
+        back.setBounds(70, 350, 160, 40);
 
         start.addActionListener(e -> app.dispose());
         quit.addActionListener(e -> app.dispose());
+        back.addActionListener(e -> {
+
+//            this.setVisible(false);
+            MainUI mainUI = new MainUI(app);
+            mainUI.setVisible(true);
+
+        });
     }
 
 }

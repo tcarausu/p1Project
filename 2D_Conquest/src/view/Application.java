@@ -22,13 +22,10 @@ public class Application extends JFrame {
     }
 
     private void initUI() {
-//add(new LoginPageUI());
+//      add(new LoginPageUI());
         add(new MainUI(this));
-//        add(new LoginForm());
+//      add(new LoginForm());
 
-        setTitle("Application");
-
-        setSize(300,300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
     }

@@ -4,9 +4,9 @@ import javax.swing.*;
 
 public class LoginPageUI extends JFrame {
 
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         LoginPageUI frameTabel = new LoginPageUI();
-    }*/
+    }
 
 
     public LoginPageUI() {

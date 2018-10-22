@@ -1,12 +1,11 @@
 package view;
 
 import javax.swing.*;
-import java.awt.*;
 
 
 public class MainUI extends JPanel {
 
-    private Image image;
+//    private Image image;
 
     public MainUI(Application app) {
 
@@ -14,20 +13,29 @@ public class MainUI extends JPanel {
     }
 
     public void introduceButton(Application app) {
+        app.setTitle("Main UI");
+
+//        JPanel panel = new JPanel();
         JButton start = new JButton("Start");
         JButton quit = new JButton("QUIT");
+
+        app.add(start);
+        app.add(quit);
+//        app.add(panel);
+
+//        app.add(start, BorderLayout.CENTER);
+//        app.add(quit, BorderLayout.CENTER);
+        app.setSize(400, 400);
 
         start.setBounds(70, 50, 160, 40);
         quit.setBounds(70, 150, 160, 40);
 
-        app.add(start, BorderLayout.CENTER);
-        app.add(quit, BorderLayout.CENTER);
-
         start.addActionListener(
                 e -> {
+
+                    this.setVisible(false);
                     CountryUI cui = new CountryUI(app);
                     cui.setVisible(true);
-//                    app.dispose();
 
                 }
                 /* e -> new CountryUI(app)*/
