@@ -1,44 +1,53 @@
-package view;
-
-import notNeededRighNow.newframe;
+package notNeededRighNow;
 
 import javax.swing.*;
 
-public class LoginPageUI extends JFrame {
+public class CountryMapUI extends JFrame {
+    private JButton fblogin = new JButton("first map");
+    private JButton sblogin = new JButton("second map");
+    private JButton tblogin = new JButton("third map");
+    private JButton fthblogin = new JButton("fortth map");
 
     public static void main(String[] args) {
-        LoginPageUI frameTabel = new LoginPageUI();
+        CountryMapUI frameTabel = new CountryMapUI();
     }
 
 
-    public LoginPageUI() {
-        JButton blogin = new JButton("Login");
+    public CountryMapUI() {
+
+
         JPanel panel = new JPanel();
         JTextField txuser = new JTextField(15);
         JPasswordField pass = new JPasswordField(15);
 
         setTitle("Login Authentication");
-        setSize(300, 200);
+        setSize(300, 400);
         setLocation(500, 280);
         panel.setLayout(null);
 
 
         txuser.setBounds(70, 30, 150, 20);
         pass.setBounds(70, 65, 150, 20);
-        blogin.setBounds(110, 100, 80, 20);
+        fblogin.setBounds(110, 100, 80, 20);
+        sblogin.setBounds(110, 150, 80, 20);
+        tblogin.setBounds(110, 200, 80, 20);
+        fthblogin.setBounds(110, 250, 80, 20);
 
-        panel.add(blogin);
+        panel.add(fblogin);
+        panel.add(sblogin);
+        panel.add(tblogin);
+        panel.add(fthblogin);
         panel.add(txuser);
         panel.add(pass);
 
         getContentPane().add(panel);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
-        blogin.addActionListener(ae -> {
+        fblogin.addActionListener(ae -> {
             String puname = txuser.getText();
             String ppaswd = pass.getText();
             if (puname.equals("test") && ppaswd.equals("12345")) {
-                newframe regFace = new newframe();
+                Welcome regFace = new Welcome();
                 regFace.setVisible(true);
                 dispose();
             } else {
@@ -51,5 +60,4 @@ public class LoginPageUI extends JFrame {
 
         });
     }
-
 }

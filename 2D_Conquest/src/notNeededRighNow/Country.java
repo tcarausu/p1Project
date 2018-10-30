@@ -1,4 +1,4 @@
-package model;
+package notNeededRighNow;
 
 public class Country {
 }

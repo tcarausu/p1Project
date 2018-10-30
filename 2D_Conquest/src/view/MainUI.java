@@ -6,11 +6,17 @@ import javax.swing.*;
 public class MainUI extends JPanel {
 
 
+    /**
+     * @param app
+     */
     public MainUI(Application app) {
 
         introduceButton(app);
     }
 
+    /**
+     * @param app
+     */
     public void introduceButton(Application app) {
         app.setTitle("Main UI");
 
