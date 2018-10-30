@@ -8,7 +8,7 @@ public class newframe  extends JFrame {
     JLabel welcome = new JLabel("Welcome to a New Frame");
     JPanel panel = new JPanel();
 
-    newframe(){
+    public newframe(){
         super("Welcome");
         setSize(300,200);
         setLocation(500,280);

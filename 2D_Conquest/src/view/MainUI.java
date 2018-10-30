@@ -3,50 +3,48 @@ package view;
 import javax.swing.*;
 
 
-public class MainUI extends JPanel {
+public class MainUI extends JFrame {
 
+    private JButton start = new JButton("Start");
+    private JButton quit = new JButton("QUIT");
 
     /**
-     * @param app
      */
-    public MainUI(Application app) {
+    public MainUI() {
+        super("Main UI");
+        setLayout(null);
+        setResizable(false);
+        setVisible(true);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        introduceButton(app);
+        introduceButton();
     }
 
     /**
-     * @param app
      */
-    public void introduceButton(Application app) {
-        app.setTitle("Main UI");
+    private void introduceButton() {
 
-//        JPanel panel = new JPanel();
-        JButton start = new JButton("Start");
-        JButton quit = new JButton("QUIT");
+        super.add(start);
+        super.add(quit);
 
-        app.add(start);
-        app.add(quit);
-//        app.add(panel);
-
-//        app.add(start, BorderLayout.CENTER);
-//        app.add(quit, BorderLayout.CENTER);
-        app.setSize(400, 400);
+        setSize(300, 400);
 
         start.setBounds(70, 50, 160, 40);
         quit.setBounds(70, 150, 160, 40);
 
         start.addActionListener(
                 e -> {
-
-                    this.setVisible(false);
-                    CountryUI cui = new CountryUI(app);
+                    dispose();
+                    CountryUI cui = new CountryUI();
                     cui.setVisible(true);
 
                 }
-                /* e -> new CountryUI(app)*/
         );
-        quit.addActionListener(e -> app.dispose());
+        quit.addActionListener(e -> dispose());
     }
 
-
+    public static void main(String[] args) {
+       MainUI mainUI=  new MainUI();
+        mainUI.setVisible(true);
+    }
 }
