@@ -3,41 +3,47 @@ package view;
 
 import javax.swing.*;
 
-public class CountryUI extends JPanel {
+public class CountryUI extends JFrame {
 
-    public CountryUI(Application app) {
-        countryButtons(app);
+    private JButton start = new JButton("Start_Game");
+    private JButton quit = new JButton("QUIT_Country_Game");
+    private JButton back = new JButton("Back");
+
+    public CountryUI() {
+
+        super("Country UI");
+        setLayout(null);
+        setResizable(false);
+        setVisible(true);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+        countryButtons();
     }
 
-    public void countryButtons(Application app) {
-        app.setTitle("Country Page");
+    /**
+     *  sets up the functionality for the Country "UI"
+     */
+    private void countryButtons() {
 
-        JPanel panel = new JPanel();
-        JButton start = new JButton("Start_Game");
-        JButton quit = new JButton("QUIT_Country_Game");
+        super.add(start);
+        super.add(quit);
+        super.add(back);
 
-        JButton back = new JButton("Back");
-
-        panel.add(start);
-        panel.add(quit);
-        panel.add(back);
-        app.add(panel);
-
-        app.setSize(800, 400);
+        setSize(400, 400);
 
         start.setBounds(70, 50, 160, 40);
         quit.setBounds(70, 150, 160, 40);
-        back.setBounds(70, 350, 160, 40);
+        back.setBounds(70, 250, 160, 40);
 
-        start.addActionListener(e -> app.dispose());
-        quit.addActionListener(e -> app.dispose());
-        back.addActionListener(e -> {
+        start.addActionListener(e -> dispose());
+        quit.addActionListener(e -> dispose());
 
-//            this.setVisible(false);
-            MainUI mainUI = new MainUI(app);
-            mainUI.setVisible(true);
-
-        });
+        back.addActionListener(
+                e -> {
+                    dispose();
+                    MainUI mainUI = new MainUI();
+                    mainUI.setVisible(true);
+                });
     }
 
 }

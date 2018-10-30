@@ -5,20 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aedcec4c-7021-4938-a607-1890db313d4b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/model/Admin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/SimpleUser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/notNeededRighNow/CountryMapUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/notNeededRighNow/Welcome.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/2D_Conquest/Blank_Map_of_Denmark.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Country.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/notNeededRighNow/Country.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/BoardInit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/notNeededRighNow/BoardInit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/LoginForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/LoginPageUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginPageUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/notNeededRighNow/Welcome.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/notNeededRighNow/Welcome.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/notNeededRighNow/newframe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/notNeededRighNow/newframe.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/Application.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/CountryUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CountryUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/MainUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MainUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/Welcome.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/newframe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/notNeededRighNow/newframe.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -76,27 +68,27 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="1232" />
+          <entry key="java" value="1466" />
           <entry key="xml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="1232" />
+          <entry key="JAVA" value="1466" />
           <entry key="XML" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="class" value="1" />
-          <entry key="java" value="23" />
+          <entry key="java" value="27" />
           <entry key="xml" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CLASS" value="1" />
-          <entry key="JAVA" value="23" />
+          <entry key="JAVA" value="27" />
           <entry key="XML" value="2" />
         </counts>
       </usages-collector>
@@ -104,34 +96,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/view/CountryUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" selection-start-line="3" selection-end-line="3" />
-              <folding>
-                <element signature="e#176#177#0" expanded="true" />
-                <element signature="e#211#212#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/model/Admin.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-68">
-              <caret line="5" column="15" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="15" />
-              <folding>
-                <element signature="e#303#304#0" expanded="true" />
-                <element signature="e#334#335#0" expanded="true" />
-                <element signature="e#396#397#0" expanded="true" />
-                <element signature="e#436#437#0" expanded="true" />
-                <element signature="e#485#486#0" expanded="true" />
-                <element signature="e#516#517#0" expanded="true" />
-                <element signature="e#578#579#0" expanded="true" />
-                <element signature="e#618#619#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="227">
+              <caret line="23" column="54" selection-start-line="23" selection-start-column="54" selection-end-line="23" selection-end-column="54" />
             </state>
           </provider>
         </entry>
@@ -139,8 +108,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/view/MainUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="13" selection-start-column="13" selection-end-column="13" />
+            <state relative-caret-position="125">
+              <caret line="36" column="20" selection-start-line="36" selection-start-column="20" selection-end-line="36" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -178,11 +147,11 @@
         <option value="$PROJECT_DIR$/src/view/newframe.java" />
         <option value="$PROJECT_DIR$/src/view/LoginForm.java" />
         <option value="$PROJECT_DIR$/src/view/Welcome.java" />
-        <option value="$PROJECT_DIR$/src/view/Application.java" />
-        <option value="$PROJECT_DIR$/src/view/CountryUI.java" />
-        <option value="$PROJECT_DIR$/src/view/LoginPageUI.java" />
         <option value="$PROJECT_DIR$/src/view/BoardInit.java" />
+        <option value="$PROJECT_DIR$/src/view/LoginPageUI.java" />
+        <option value="$PROJECT_DIR$/src/view/Application.java" />
         <option value="$PROJECT_DIR$/src/view/MainUI.java" />
+        <option value="$PROJECT_DIR$/src/view/CountryUI.java" />
       </list>
     </option>
   </component>
@@ -308,7 +277,7 @@
               <item name="2D_Conquest" type="b2602c69:ProjectViewProjectNode" />
               <item name="2D_Conquest" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -323,7 +292,7 @@
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540299038869" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540922437906" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.0" />
@@ -353,7 +322,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Application">
+  <component name="RunManager" selected="Application.MainUI">
     <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="view.Application" />
       <module name="2D_Conquest" />
@@ -406,25 +375,29 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="info.Main" />
+    <configuration name="MainUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="view.MainUI" />
       <module name="2D_Conquest" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="view.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.Main" />
       <item itemvalue="Application.Application" />
       <item itemvalue="Application.Donut" />
       <item itemvalue="Application.LoginPageUI" />
       <item itemvalue="Application.LoginForm" />
+      <item itemvalue="Application.MainUI" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.MainUI" />
         <item itemvalue="Application.Application" />
         <item itemvalue="Application.LoginPageUI" />
         <item itemvalue="Application.LoginForm" />
@@ -446,7 +419,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="175000" />
+    <option name="totallyTimeSpent" value="1372000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -459,8 +432,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24496645" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24496645" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -469,7 +443,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49798658" weight="0.44895104" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49798658" visible="true" weight="0.44895104" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49932885" weight="0.4965035" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -523,20 +497,8 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/view/Application.java</url>
-          <line>18</line>
-          <properties />
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/view/Application.java</url>
-          <line>28</line>
-          <properties />
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/view/CountryUI.java</url>
-          <line>25</line>
+          <line>31</line>
           <properties />
           <option name="timeStamp" value="17" />
         </line-breakpoint>
@@ -637,52 +599,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/LoginForm.java">
+    <entry file="file://$PROJECT_DIR$/src/view/Welcome.java" />
+    <entry file="file://$PROJECT_DIR$/src/view/newframe.java" />
+    <entry file="file://$PROJECT_DIR$/src/view/BoardInit.java" />
+    <entry file="file://$PROJECT_DIR$/src/view/LoginPageUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="51" column="16" selection-start-line="51" selection-start-column="16" selection-end-line="51" selection-end-column="16" />
+        <state relative-caret-position="144">
+          <caret line="40" column="41" lean-forward="true" selection-start-line="40" selection-start-column="41" selection-end-line="40" selection-end-column="41" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/Welcome.java" />
-    <entry file="file://$PROJECT_DIR$/src/view/newframe.java" />
-    <entry file="file://$PROJECT_DIR$/src/view/LoginPageUI.java">
+    <entry file="file://$PROJECT_DIR$/src/view/LoginForm.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="38" column="41" selection-start-line="38" selection-start-column="41" selection-end-line="38" selection-end-column="41" />
-          <folding>
-            <element signature="e#124#125#0" expanded="true" />
-            <element signature="e#182#183#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="302">
+          <caret line="53" column="40" lean-forward="true" selection-start-line="53" selection-start-column="40" selection-end-line="53" selection-end-column="40" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/view/Application.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="19" column="11" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
+        <state relative-caret-position="119">
+          <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/BoardInit.java" />
-    <entry file="file://$PROJECT_DIR$/src/view/CountryUI.java">
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.2/lib/src.zip!/java.desktop/javax/swing/JButton.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-          <folding>
-            <element signature="e#176#177#0" expanded="true" />
-            <element signature="e#211#212#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="123">
+          <caret line="72" column="13" selection-start-line="72" selection-start-column="13" selection-end-line="72" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/view/MainUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="13" selection-start-column="13" selection-end-column="13" />
+        <state relative-caret-position="125">
+          <caret line="36" column="20" selection-start-line="36" selection-start-column="20" selection-end-line="36" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/CountryUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="23" column="54" selection-start-line="23" selection-start-column="54" selection-end-line="23" selection-end-column="54" />
         </state>
       </provider>
     </entry>

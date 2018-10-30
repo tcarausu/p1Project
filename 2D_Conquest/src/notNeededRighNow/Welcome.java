@@ -11,7 +11,7 @@ public class Welcome extends JFrame {
     JButton medium = new JButton("medium");
     JButton hard = new JButton("hard");
 
-    Welcome() {
+    public Welcome() {
         super("Welcome");
         setSize(650, 300);
         setLocation(500, 280);
