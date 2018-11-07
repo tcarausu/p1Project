@@ -38,8 +38,8 @@ public class LoginPageUI extends JFrame {
             String puname = txuser.getText();
             String ppaswd = pass.getText();
             if (puname.equals("test") && ppaswd.equals("12345")) {
-                newframe regFace = new newframe();
-                regFace.setVisible(true);
+                CountryUI countryUI = new CountryUI();
+                countryUI.setVisible(true);
                 dispose();
             } else {
 

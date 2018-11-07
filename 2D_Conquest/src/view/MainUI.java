@@ -35,8 +35,8 @@ public class MainUI extends JFrame {
         start.addActionListener(
                 e -> {
                     dispose();
-                    CountryUI cui = new CountryUI();
-                    cui.setVisible(true);
+                    LoginPageUI loginPageUI = new LoginPageUI();
+                    loginPageUI.setVisible(true);
 
                 }
         );

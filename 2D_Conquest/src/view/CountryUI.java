@@ -67,8 +67,8 @@ public class CountryUI extends JFrame {
         back.addActionListener(
                 e -> {
                     dispose();
-                    MainUI mainUI = new MainUI();
-                    mainUI.setVisible(true);
+                    LoginPageUI loginPageUI = new LoginPageUI();
+                    loginPageUI.setVisible(true);
                 });
     }
 

@@ -4,13 +4,11 @@
     <bookmark url="file://$PROJECT_DIR$/src/view/LoginPageUI.java" line="8" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aedcec4c-7021-4938-a607-1890db313d4b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/view/DifficultyLevelUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/EasyQuestionUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/HardQuestionUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/MediumQuestionUI.java" afterDir="false" />
+    <list default="true" id="1f34e2c1-271a-4818-b752-d49436ea4de9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/CountryUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CountryUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/LoginPageUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginPageUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/MainUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MainUI.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -68,27 +66,27 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="1466" />
+          <entry key="java" value="1479" />
           <entry key="xml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="1466" />
+          <entry key="JAVA" value="1479" />
           <entry key="XML" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="class" value="1" />
-          <entry key="java" value="31" />
+          <entry key="java" value="35" />
           <entry key="xml" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CLASS" value="1" />
-          <entry key="JAVA" value="31" />
+          <entry key="JAVA" value="35" />
           <entry key="XML" value="2" />
         </counts>
       </usages-collector>
@@ -99,35 +97,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/view/MainUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-504">
-              <caret line="4" selection-start-line="4" selection-end-line="4" />
+            <state relative-caret-position="361">
+              <caret line="37" column="18" selection-start-line="37" selection-start-column="18" selection-end-line="38" selection-end-column="49" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/view/CountryUI.java">
+        <entry file="file://$PROJECT_DIR$/src/view/LoginPageUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6">
-              <caret line="56" column="34" lean-forward="true" selection-start-line="56" selection-start-column="34" selection-end-line="56" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/view/DifficultyLevelUI.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="48" column="27" selection-start-line="48" selection-start-column="27" selection-end-line="48" selection-end-column="27" />
+            <state relative-caret-position="327">
+              <caret line="40" column="16" lean-forward="true" selection-start-line="40" selection-start-column="16" selection-end-line="41" selection-end-column="43" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/view/MediumQuestionUI.java">
+        <entry file="file://$PROJECT_DIR$/src/view/CountryUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="55" lean-forward="true" selection-start-line="55" selection-end-line="55" />
+            <state relative-caret-position="497">
+              <caret line="70" column="49" selection-start-line="70" selection-start-column="49" selection-end-line="70" selection-end-column="49" />
             </state>
           </provider>
         </entry>
@@ -166,14 +155,14 @@
         <option value="$PROJECT_DIR$/src/view/LoginForm.java" />
         <option value="$PROJECT_DIR$/src/view/Welcome.java" />
         <option value="$PROJECT_DIR$/src/view/BoardInit.java" />
-        <option value="$PROJECT_DIR$/src/view/LoginPageUI.java" />
         <option value="$PROJECT_DIR$/src/view/Application.java" />
-        <option value="$PROJECT_DIR$/src/view/MainUI.java" />
-        <option value="$PROJECT_DIR$/src/view/CountryUI.java" />
         <option value="$PROJECT_DIR$/src/view/DifficultyLevelUI.java" />
         <option value="$PROJECT_DIR$/src/view/HardQuestionUI.java" />
         <option value="$PROJECT_DIR$/src/view/EasyQuestionUI.java" />
         <option value="$PROJECT_DIR$/src/view/MediumQuestionUI.java" />
+        <option value="$PROJECT_DIR$/src/view/MainUI.java" />
+        <option value="$PROJECT_DIR$/src/view/LoginPageUI.java" />
+        <option value="$PROJECT_DIR$/src/view/CountryUI.java" />
       </list>
     </option>
   </component>
@@ -275,16 +264,12 @@
       </profile-state>
     </entry>
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -301,18 +286,14 @@
               <item name="2D_Conquest" type="b2602c69:ProjectViewProjectNode" />
               <item name="2D_Conquest" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="notNeededRighNow" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="2D_Conquest" type="b2602c69:ProjectViewProjectNode" />
-              <item name="2D_Conquest" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="view" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="AndroidView" />
     </panes>
   </component>
@@ -320,7 +301,7 @@
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541095433651" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541607677267" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.0" />
@@ -447,7 +428,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1458000" />
+    <option name="totallyTimeSpent" value="1704000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -462,16 +443,17 @@
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25167784" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2751678" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Spring" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49798658" visible="true" weight="0.44895104" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49798658" weight="0.44895104" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49932885" weight="0.4965035" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -490,24 +472,25 @@
       <window_info anchor="right" id="Maven Projects" order="7" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27114093" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2758389" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49798658" visible="true" weight="0.44055945" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49932885" weight="0.49787235" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32867134" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32867134" />
-      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50201344" side_tool="true" weight="0.32867134" />
-      <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.32867134" />
+      <window_info anchor="bottom" id="Spring" order="0" />
+      <window_info anchor="bottom" id="Message" order="1" />
+      <window_info anchor="bottom" id="Find" order="2" />
+      <window_info active="true" anchor="bottom" id="Run" order="3" sideWeight="0.49798658" visible="true" weight="0.44895104" />
+      <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.49932885" weight="0.4965035" />
+      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="7" weight="0.32867134" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32867134" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50201344" side_tool="true" weight="0.32867134" />
+      <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32867134" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -630,13 +613,6 @@
     <entry file="file://$PROJECT_DIR$/src/view/Welcome.java" />
     <entry file="file://$PROJECT_DIR$/src/view/newframe.java" />
     <entry file="file://$PROJECT_DIR$/src/view/BoardInit.java" />
-    <entry file="file://$PROJECT_DIR$/src/view/LoginPageUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="40" column="41" lean-forward="true" selection-start-line="40" selection-start-column="41" selection-end-line="40" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/view/LoginForm.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="302">
@@ -649,20 +625,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="123">
           <caret line="72" column="13" selection-start-line="72" selection-start-column="13" selection-end-line="72" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/MainUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-504">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/CountryUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6">
-          <caret line="56" column="34" lean-forward="true" selection-start-line="56" selection-start-column="34" selection-end-line="56" selection-end-column="34" />
         </state>
       </provider>
     </entry>
@@ -691,6 +653,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="312">
           <caret line="55" lean-forward="true" selection-start-line="55" selection-end-line="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/MainUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="37" column="18" selection-start-line="37" selection-start-column="18" selection-end-line="38" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/LoginPageUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="40" column="16" lean-forward="true" selection-start-line="40" selection-start-column="16" selection-end-line="41" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/CountryUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="497">
+          <caret line="70" column="49" selection-start-line="70" selection-start-column="49" selection-end-line="70" selection-end-column="49" />
         </state>
       </provider>
     </entry>
