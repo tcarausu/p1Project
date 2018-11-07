@@ -23,7 +23,6 @@
 hs_err_pid*
 
 # XML and HTML(related) for a more clear commits
-*.xml
 *.html
 *.css
 *.js
@@ -52,7 +51,5 @@ hs_err_pid*
 *.iws
 
 # IntelliJ
-/out/
-/2D_Conquest/.idea/workspace.xml
 *.xml
-/2D_Conquest/.idea/workspace.xml
+
