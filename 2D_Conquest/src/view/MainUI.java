@@ -1,17 +1,23 @@
 package view;
 
+import controller.MyController;
+
 import javax.swing.*;
 
 
 public class MainUI extends JFrame {
+
+    private MyController myController;
 
     private JButton start = new JButton("Start");
     private JButton quit = new JButton("QUIT");
 
     /**
      */
-    public MainUI() {
+    public MainUI(MyController myController) {
         super("Main UI");
+        this.myController = myController;
+
         setLayout(null);
         setResizable(false);
         setVisible(true);
@@ -35,7 +41,7 @@ public class MainUI extends JFrame {
         start.addActionListener(
                 e -> {
                     dispose();
-                    LoginPageUI loginPageUI = new LoginPageUI();
+                    LoginPageUI loginPageUI = new LoginPageUI(myController);
                     loginPageUI.setVisible(true);
 
                 }
@@ -44,7 +50,8 @@ public class MainUI extends JFrame {
     }
 
     public static void main(String[] args) {
-       MainUI mainUI=  new MainUI();
+        MyController myController = new MyController();
+        MainUI mainUI = new MainUI(myController);
         mainUI.setVisible(true);
     }
 }

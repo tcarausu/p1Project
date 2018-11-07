@@ -1,31 +1,33 @@
 package view;
 
+import controller.MyController;
+
 import javax.swing.*;
 
 public class LoginPageUI extends JFrame {
-    //        private MyController myController;
+    private MyController myController;
     private JButton blogin = new JButton("Login");
     private JTextField txuser = new JTextField(15);
     private JPasswordField pass = new JPasswordField(15);
 
     public LoginPageUI(
-//                MyController myController
+            MyController myController
     ) {
 
         super("LoginPage UI");
 
-//            this.myController=myController;
+        this.myController = myController;
         setLayout(null);
         setResizable(false);
         setVisible(true);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         setTitle("Login Authentication");
-//            introduceLogin();
-//
-//        }
-//
-//        private void introduceLogin() {
+        introduceLogin();
+
+    }
+
+    private void introduceLogin() {
         setSize(300, 200);
         setLocation(500, 280);
 
@@ -43,9 +45,8 @@ public class LoginPageUI extends JFrame {
         blogin.addActionListener(ae -> {
             String puname = txuser.getText();
             String ppaswd = pass.getText();
-            if (puname.equals("test") && ppaswd.equals("12345")) {
-                CountryUI countryUI = new CountryUI();
-//                if (myController.jdbcConnectForLogin(puname, ppaswd)) {
+            if (puname.equals(myController.getUsername()) && ppaswd.equals(myController.getPassword())) {
+                CountryUI countryUI = new CountryUI(myController);
                 countryUI.setVisible(true);
                 dispose();
             } else {
