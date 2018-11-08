@@ -1,23 +1,26 @@
 package view;
 
 import controller.MyController;
+import dao.Database;
 
 import javax.swing.*;
+import java.sql.SQLException;
 
 
 public class MainUI extends JFrame {
 
-    private MyController myController;
+    private MyController ctrler;
 
     private JButton start = new JButton("Start");
     private JButton quit = new JButton("QUIT");
 
     /**
      */
-    public MainUI(MyController myController) {
+    public MainUI(MyController ctrler) {
         super("Main UI");
-        this.myController = myController;
+        this.ctrler = ctrler;
 
+        setLocation(500, 500);
         setLayout(null);
         setResizable(false);
         setVisible(true);
@@ -41,17 +44,16 @@ public class MainUI extends JFrame {
         start.addActionListener(
                 e -> {
                     dispose();
-                    LoginPageUI loginPageUI = new LoginPageUI(myController);
-                    loginPageUI.setVisible(true);
+                    ctrler.openLoginWindow();
 
                 }
         );
         quit.addActionListener(e -> dispose());
     }
 
-    public static void main(String[] args) {
-        MyController myController = new MyController();
-        MainUI mainUI = new MainUI(myController);
-        mainUI.setVisible(true);
+    public static void main(String[] args) throws SQLException {
+        Database database = new Database();
+        MyController myController = new MyController(database);
+        myController.start();
     }
 }

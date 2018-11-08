@@ -10,7 +10,7 @@ import javax.swing.*;
  **/
 public class MediumQuestionUI extends JFrame {
 
-    private MyController myController;
+    private MyController ctrler;
 
     private JButton easy = new JButton("Easy");
     private JButton hard = new JButton("Hard");
@@ -22,7 +22,7 @@ public class MediumQuestionUI extends JFrame {
     public MediumQuestionUI(MyController myController) {
 
         super("MediumQuestion UI");
-        this.myController = myController;
+        this.ctrler = myController;
 
         setLayout(null);
         setResizable(false);
@@ -53,8 +53,7 @@ public class MediumQuestionUI extends JFrame {
         back.addActionListener(
                 e -> {
                     dispose();
-                    DifficultyLevelUI difficultyUI = new DifficultyLevelUI(myController);
-                    difficultyUI.setVisible(true);
+                    ctrler.openDifficultyWindow();
                 });
     }
 
