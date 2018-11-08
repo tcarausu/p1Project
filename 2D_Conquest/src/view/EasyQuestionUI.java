@@ -1,5 +1,7 @@
 package view;
 
+import controller.MyController;
+
 import javax.swing.*;
 
 /**
@@ -8,6 +10,8 @@ import javax.swing.*;
  **/
 public class EasyQuestionUI extends JFrame {
 
+    private MyController ctrler;
+
     private JButton medium = new JButton("Medium");
     private JButton hard = new JButton("Hard");
 
@@ -15,9 +19,11 @@ public class EasyQuestionUI extends JFrame {
 
     private JButton back = new JButton("Back");
 
-    public EasyQuestionUI() {
+    public EasyQuestionUI(MyController myController) {
 
         super("EasyQuestion UI");
+        this.ctrler = myController;
+
         setLayout(null);
         setResizable(false);
         setVisible(true);
@@ -47,8 +53,7 @@ public class EasyQuestionUI extends JFrame {
         back.addActionListener(
                 e -> {
                     dispose();
-                    DifficultyLevelUI difficultyUI = new DifficultyLevelUI();
-                    difficultyUI.setVisible(true);
+                    ctrler.openDifficultyWindow();
                 });
     }
 

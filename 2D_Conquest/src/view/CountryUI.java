@@ -1,10 +1,14 @@
 package view;
 
 
+import controller.MyController;
+
 import javax.swing.*;
 
 public class CountryUI extends JFrame {
     private ImageIcon firstImage = new ImageIcon("src/Blank_Map_of_Denmark.png");
+
+    private MyController ctrler;
 
     private JButton firstMap = new JButton(firstImage);
     private JButton secondMap = new JButton(firstImage);
@@ -16,9 +20,11 @@ public class CountryUI extends JFrame {
 
     private JButton back = new JButton("Back");
 
-    public CountryUI() {
+    public CountryUI(MyController myController) {
 
         super("Country UI");
+        this.ctrler = myController;
+
         setLayout(null);
         setResizable(false);
         setVisible(true);
@@ -54,8 +60,7 @@ public class CountryUI extends JFrame {
 
         firstMap.addActionListener(e -> {
                     dispose();
-                    DifficultyLevelUI difficultyUI = new DifficultyLevelUI();
-                    difficultyUI.setVisible(true);
+                ctrler.openDifficultyWindow();
                 }
         );
         secondMap.addActionListener(e -> dispose());
@@ -67,7 +72,7 @@ public class CountryUI extends JFrame {
         back.addActionListener(
                 e -> {
                     dispose();
-                    LoginPageUI loginPageUI = new LoginPageUI();
+                    LoginPageUI loginPageUI = new LoginPageUI(ctrler);
                     loginPageUI.setVisible(true);
                 });
     }

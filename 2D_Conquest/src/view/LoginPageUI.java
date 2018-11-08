@@ -1,40 +1,49 @@
 package view;
 
+import controller.MyController;
+
 import javax.swing.*;
+import java.sql.SQLException;
 
 public class LoginPageUI extends JFrame {
-    //        private MyController myController;
+    private MyController ctrler;
     private JButton blogin = new JButton("Login");
+    private JButton alogin = new JButton("Admin Login");
     private JTextField txuser = new JTextField(15);
     private JPasswordField pass = new JPasswordField(15);
+    private JLabel luser = new JLabel("Login UserName");
+    private JLabel lpass = new JLabel("Login Password");
 
-    public LoginPageUI(
-//                MyController myController
-    ) {
+    public LoginPageUI(MyController ctrler) {
 
         super("LoginPage UI");
 
-//            this.myController=myController;
+        this.ctrler = ctrler;
         setLayout(null);
         setResizable(false);
         setVisible(true);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         setTitle("Login Authentication");
-//            introduceLogin();
-//
-//        }
-//
-//        private void introduceLogin() {
-        setSize(300, 200);
+        introduceLogin();
+
+    }
+
+    private void introduceLogin() {
+        setSize(350, 250);
         setLocation(500, 280);
 
+        luser.setBounds(20, 30, 120, 20);
+        lpass.setBounds(20, 65, 120, 20);
+        txuser.setBounds(140, 30, 150, 20);
+        pass.setBounds(140, 65, 150, 20);
+        blogin.setBounds(30, 140, 120, 40);
+        alogin.setBounds(190, 140, 120, 40);
 
-        txuser.setBounds(70, 30, 150, 20);
-        pass.setBounds(70, 65, 150, 20);
-        blogin.setBounds(110, 100, 80, 20);
-
+        super.add(luser);
+        super.add(lpass);
         super.add(blogin);
+        super.add(alogin);
         super.add(txuser);
         super.add(pass);
 
@@ -43,19 +52,31 @@ public class LoginPageUI extends JFrame {
         blogin.addActionListener(ae -> {
             String puname = txuser.getText();
             String ppaswd = pass.getText();
-            if (puname.equals("test") && ppaswd.equals("12345")) {
-                CountryUI countryUI = new CountryUI();
-//                if (myController.jdbcConnectForLogin(puname, ppaswd)) {
-                countryUI.setVisible(true);
+            try {
                 dispose();
-            } else {
-                JOptionPane.showMessageDialog(null, "Wrong Password / Username");
-                txuser.setText("");
-                pass.setText("");
-                txuser.requestFocus();
+                ctrler.verifyUserLogin(puname, ppaswd);
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-
+        });
+        alogin.addActionListener(ae -> {
+            String puname = txuser.getText();
+            String ppaswd = pass.getText();
+            try {
+                dispose();
+                ctrler.verifyAdminLogin(puname, ppaswd);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         });
     }
 
+    public void clearFields() {
+        JOptionPane.showMessageDialog(null,
+                "The system could not log you in.\n" + " Please make sure your username and password are correct",
+                "Login Failure", JOptionPane.INFORMATION_MESSAGE);
+        txuser.setText("");
+        pass.setText("");
+        txuser.requestFocus();
+    }
 }

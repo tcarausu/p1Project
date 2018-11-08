@@ -53,3 +53,5 @@ hs_err_pid*
 # IntelliJ
 *.xml
 
+/2D_Conquest/.idea/workspace.xml
+/2D_Conquest/.idea/workspace.xml
