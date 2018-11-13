@@ -9,6 +9,9 @@ import java.sql.SQLException;
 public interface DatabaseI {
 
     public boolean verifyUserLogin(String username, String password) throws SQLException;
+
     public boolean verifyAdminLogin(String username, String password) throws SQLException;
+
+    public boolean createNewUser(String username, String password) throws SQLException;
 
 }

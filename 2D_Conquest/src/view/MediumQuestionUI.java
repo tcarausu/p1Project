@@ -19,6 +19,10 @@ public class MediumQuestionUI extends JFrame {
 
     private JButton back = new JButton("Back");
 
+    /**
+     * Medium Question UI's Constructor
+     * @param myController
+     */
     public MediumQuestionUI(MyController myController) {
 
         super("MediumQuestion UI");

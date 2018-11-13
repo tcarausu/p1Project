@@ -1,6 +1,5 @@
 package dao;
 
-import dao.DatabaseI;
 import org.postgresql.Driver;
 
 import java.sql.*;
@@ -28,6 +27,7 @@ public class Database implements DatabaseI {
         }
 
     }
+
     public boolean verifyUserLogin(String username, String password) throws SQLException {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
 
@@ -45,6 +45,7 @@ public class Database implements DatabaseI {
         }
 
     }
+
     public boolean verifyAdminLogin(String username, String password) throws SQLException {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
 
@@ -62,4 +63,27 @@ public class Database implements DatabaseI {
         }
 
     }
+
+    public boolean createNewUser(String username, String password) throws SQLException {
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
+        if (username != null && password != null) {
+            try {
+                String SQL = "Insert into  p1Project.user(username,password) values(?,?)";
+
+                PreparedStatement st = conn.prepareStatement(SQL);
+                st.setString(1, username);
+                st.setString(2, password);
+                st.execute();
+            } finally {
+                conn.close();
+
+            }
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+
 }

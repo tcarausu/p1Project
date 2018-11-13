@@ -18,6 +18,10 @@ public class DifficultyLevelUI extends JFrame {
 
     private JButton back = new JButton("Back");
 
+    /**
+     * DifficultyLevel UI's Constructor
+     * @param myController
+     */
     public DifficultyLevelUI(MyController myController) {
 
         super("DifficultyUI UI");
@@ -51,7 +55,7 @@ public class DifficultyLevelUI extends JFrame {
 
         easy.addActionListener(e -> {
             dispose();
-         ctrler.openEasyWindow();
+            ctrler.openEasyWindow();
         });
         medium.addActionListener(e -> {
             dispose();
@@ -67,8 +71,7 @@ public class DifficultyLevelUI extends JFrame {
         back.addActionListener(
                 e -> {
                     dispose();
-                    CountryUI countryUI = new CountryUI(ctrler);
-                    countryUI.setVisible(true);
+                    ctrler.openCountryWindow();
                 });
     }
 

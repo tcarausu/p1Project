@@ -20,6 +20,10 @@ public class CountryUI extends JFrame {
 
     private JButton back = new JButton("Back");
 
+    /**
+     * Country UI's Constructor
+     * @param myController
+     */
     public CountryUI(MyController myController) {
 
         super("Country UI");

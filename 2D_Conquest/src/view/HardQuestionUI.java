@@ -19,6 +19,10 @@ public class HardQuestionUI extends JFrame {
 
     private JButton back = new JButton("Back");
 
+    /**
+     * Hard Question UI's Constructor
+     * @param myController
+     */
     public HardQuestionUI(MyController myController) {
 
         super("HardQuestion UI");

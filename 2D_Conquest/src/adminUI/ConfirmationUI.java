@@ -1,24 +1,30 @@
-package view;
+package adminUI;
 
 import controller.MyController;
 
 import javax.swing.*;
 import java.sql.SQLException;
 
-public class LoginPageUI extends JFrame {
+/**
+ * File created on 11/12/2018
+ * by Toader
+ **/
+public class ConfirmationUI extends JFrame {
     private MyController ctrler;
-    private JButton blogin = new JButton("Login");
-    private JButton alogin = new JButton("Admin Login");
+    private JButton continueToGame = new JButton("Play");
+    private JButton back = new JButton("Back");
+
     private JTextField txuser = new JTextField(15);
     private JPasswordField pass = new JPasswordField(15);
     private JLabel luser = new JLabel("Login UserName");
     private JLabel lpass = new JLabel("Login Password");
 
     /**
-     * Login Page UI's Constructor
+     * Confirmation UI's Constructor
+     *
      * @param ctrler
      */
-    public LoginPageUI(MyController ctrler) {
+    public ConfirmationUI(MyController ctrler) {
 
         super("LoginPage UI");
 
@@ -41,44 +47,48 @@ public class LoginPageUI extends JFrame {
         lpass.setBounds(20, 65, 120, 20);
         txuser.setBounds(140, 30, 150, 20);
         pass.setBounds(140, 65, 150, 20);
-        blogin.setBounds(30, 140, 120, 40);
-        alogin.setBounds(190, 140, 120, 40);
+        continueToGame.setBounds(30, 140, 120, 40);
+        back.setBounds(190, 140, 120, 40);
 
+        super.add(continueToGame);
+        super.add(back);
         super.add(luser);
         super.add(lpass);
         super.add(txuser);
         super.add(pass);
-        super.add(blogin);
-        super.add(alogin);
 
-        blogin.addActionListener(ae -> {
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
+        continueToGame.addActionListener(ae -> {
             String puname = txuser.getText();
             String ppaswd = pass.getText();
             try {
                 dispose();
                 ctrler.verifyUserLogin(puname, ppaswd);
+                ctrler.openCountryWindow();
+
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+
         });
-        alogin.addActionListener(ae -> {
+        back.addActionListener(ae -> {
+
+            dispose();
+            ctrler.openAdminPageUI();
             String puname = txuser.getText();
             String ppaswd = pass.getText();
             try {
                 dispose();
-                ctrler.verifyAdminLogin(puname, ppaswd);
+                ctrler.verifyUserLogin(puname, ppaswd);
+                ctrler.openAdminPageUI();
+
+
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+
         });
     }
 
-    public void clearFields() {
-        JOptionPane.showMessageDialog(null,
-                "The system could not log you in.\n" + " Please make sure your username and password are correct",
-                "Login Failure", JOptionPane.INFORMATION_MESSAGE);
-        txuser.setText("");
-        pass.setText("");
-        txuser.requestFocus();
-    }
 }
