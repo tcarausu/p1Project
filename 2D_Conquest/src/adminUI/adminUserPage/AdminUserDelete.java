@@ -1,11 +1,15 @@
-package view;
+package adminUI.adminUserPage;
 
 import controller.MyController;
 
 import javax.swing.*;
 import java.sql.SQLException;
 
-public class LoginPageUI extends JFrame {
+/**
+ * File created on 11/12/2018
+ * by Toader
+ **/
+public class AdminUserDelete  extends JFrame {
     private MyController controller;
     private JButton blogin = new JButton("Login");
     private JButton alogin = new JButton("Admin Login");
@@ -15,10 +19,10 @@ public class LoginPageUI extends JFrame {
     private JLabel lpass = new JLabel("Login Password");
 
     /**
-     * Login Page UI's Constructor
+     * Admin User Delete Page  UI's Constructor
      * @param controller of type MyController
      */
-    public LoginPageUI(MyController controller) {
+    public AdminUserDelete(MyController controller) {
 
         super("LoginPage UI");
 
@@ -46,11 +50,13 @@ public class LoginPageUI extends JFrame {
 
         super.add(luser);
         super.add(lpass);
-        super.add(txuser);
-        super.add(pass);
         super.add(blogin);
         super.add(alogin);
+        super.add(txuser);
+        super.add(pass);
 
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
         blogin.addActionListener(ae -> {
             String puname = txuser.getText();
             String ppaswd = String.valueOf(pass.getPassword());

@@ -1,6 +1,5 @@
 package dao;
 
-import dao.DatabaseI;
 import org.postgresql.Driver;
 
 import java.sql.*;
@@ -28,6 +27,8 @@ public class Database implements DatabaseI {
         }
 
     }
+
+    @Override
     public boolean verifyUserLogin(String username, String password) throws SQLException {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
 
@@ -45,6 +46,7 @@ public class Database implements DatabaseI {
         }
 
     }
+
     public boolean verifyAdminLogin(String username, String password) throws SQLException {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
 
@@ -62,4 +64,5 @@ public class Database implements DatabaseI {
         }
 
     }
+
 }

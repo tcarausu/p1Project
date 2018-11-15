@@ -1,24 +1,29 @@
-package view;
+package adminUI.adminUserPage;
 
 import controller.MyController;
 
 import javax.swing.*;
 import java.sql.SQLException;
 
-public class LoginPageUI extends JFrame {
+/**
+ * File created on 11/12/2018
+ * by Toader
+ **/
+public class AdminUserCreate extends JFrame {
     private MyController controller;
-    private JButton blogin = new JButton("Login");
-    private JButton alogin = new JButton("Admin Login");
+    private JButton createNewUser = new JButton("Create User");
+    private JButton back = new JButton("Back");
     private JTextField txuser = new JTextField(15);
     private JPasswordField pass = new JPasswordField(15);
-    private JLabel luser = new JLabel("Login UserName");
-    private JLabel lpass = new JLabel("Login Password");
+    private JLabel luser = new JLabel("New UserName");
+    private JLabel lpass = new JLabel("New Password");
 
     /**
      * Login Page UI's Constructor
+     *
      * @param controller of type MyController
      */
-    public LoginPageUI(MyController controller) {
+    public AdminUserCreate(MyController controller) {
 
         super("LoginPage UI");
 
@@ -41,42 +46,45 @@ public class LoginPageUI extends JFrame {
         lpass.setBounds(20, 65, 120, 20);
         txuser.setBounds(140, 30, 150, 20);
         pass.setBounds(140, 65, 150, 20);
-        blogin.setBounds(30, 140, 120, 40);
-        alogin.setBounds(190, 140, 120, 40);
+        createNewUser.setBounds(30, 140, 120, 40);
+        back.setBounds(190, 140, 120, 40);
 
         super.add(luser);
         super.add(lpass);
+        super.add(createNewUser);
+        super.add(back);
         super.add(txuser);
         super.add(pass);
-        super.add(blogin);
-        super.add(alogin);
 
-        blogin.addActionListener(ae -> {
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
+        createNewUser.addActionListener(ae -> {
             String puname = txuser.getText();
             String ppaswd = String.valueOf(pass.getPassword());
             try {
                 dispose();
-                controller.verifyUserLogin(puname, ppaswd);
+                if (puname != null && !puname.equals("") && !ppaswd.equals("")) {
+
+                    controller.verifyAdminDataOnUserCreate(puname, ppaswd);
+                } else {
+                    clearFields();
+                    controller.openAdminCreateUserUI();
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         });
-        alogin.addActionListener(ae -> {
-            String puname = txuser.getText();
-            String ppaswd = String.valueOf(pass.getPassword());
-            try {
-                dispose();
-                controller.verifyAdminLogin(puname, ppaswd);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        back.addActionListener(ae -> {
+            dispose();
+            controller.openAdminPageUI();
         });
     }
 
     public void clearFields() {
         JOptionPane.showMessageDialog(null,
-                "The system could not log you in.\n" + " Please make sure your username and password are correct",
-                "Login Failure", JOptionPane.INFORMATION_MESSAGE);
+                "The information introduced is wrong.\n" +
+                        " Please make sure your username and password are correct and available",
+                "Incorect Information", JOptionPane.INFORMATION_MESSAGE);
         txuser.setText("");
         pass.setText("");
         txuser.requestFocus();
