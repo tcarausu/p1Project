@@ -1,4 +1,4 @@
-package adminUI;
+package view;
 
 import controller.MyController;
 
