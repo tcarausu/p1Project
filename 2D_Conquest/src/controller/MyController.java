@@ -2,6 +2,9 @@ package controller;
 
 import adminUI.*;
 import adminUI.adminUserPage.AdminUserCreate;
+import adminUI.adminUserPage.AdminUserDelete;
+import adminUI.adminUserPage.AdminUserEdit;
+import adminUI.adminUserPage.AdminUserReset;
 import dao.DatabaseI;
 import dao.QuestionDatabaseI;
 import dao.UserDatabaseI;
@@ -16,7 +19,7 @@ public class MyController {
     private QuestionDatabaseI qdb;
     private LoginPageUI loginPageUI;
 
-    public MyController(DatabaseI db, UserDatabaseI udb, QuestionDatabaseI qdb) throws SQLException {
+    public MyController(DatabaseI db, UserDatabaseI udb, QuestionDatabaseI qdb) {
         this.db = db;
         this.udb = udb;
         this.qdb = qdb;
@@ -70,51 +73,63 @@ public class MyController {
     }
 
     public void openCountryWindow() {
-        CountryUI countryUI = new CountryUI(this);
+        new CountryUI(this);
     }
 
     public void openDifficultyWindow() {
-        DifficultyLevelUI difficultyLevelUI = new DifficultyLevelUI(this);
+        new DifficultyLevelUI(this);
     }
 
     public void openEasyWindow() {
-        EasyQuestionUI easyQuestionUI = new EasyQuestionUI(this);
+        new EasyQuestionUI(this);
     }
 
     public void openMediumWindow() {
-        MediumQuestionUI mediumQuestionUI = new MediumQuestionUI(this);
+        new MediumQuestionUI(this);
     }
 
     public void openHardWindow() {
-        HardQuestionUI hardQuestionUI = new HardQuestionUI(this);
+        new HardQuestionUI(this);
     }
 
     public void openAdminQuestionUI() {
-        AdminQuestionUI adminQuestionUI = new AdminQuestionUI(this);
+        new AdminQuestionUI(this);
     }
 
     public void openAdminUserUI() {
-        AdminUserUI adminUserUI = new AdminUserUI(this);
+        new AdminUserUI(this);
     }
 
     public void openAdminSettingsUI() {
-        AdminSettingsUI adminSettingsUI = new AdminSettingsUI(this);
+        new AdminSettingsUI(this);
     }
 
     public void openAdminPageUI() {
-        AdminPageUI adminPageUI = new AdminPageUI(this);
-    }
-
-    public void openScoreWindow() {
-        HighScoreUI highscoreUI = new HighScoreUI(this);
+        new AdminPageUI(this);
     }
 
     public void openAdminCreateUserUI() {
-        AdminUserCreate adminUserUI = new AdminUserCreate(this);
+        new AdminUserCreate(this);
     }
 
-    public void confirmationUI() {
-        ConfirmationUI confirmationUI = new ConfirmationUI(this);
+    public void openAdminDeleteUserUI() {
+        new AdminUserDelete(this);
+    }
+
+    public void openAdminEditUserUI() {
+        new AdminUserEdit(this);
+    }
+
+    public void openAdminResetUserUI() {
+        new AdminUserReset(this);
+    }
+
+    private void confirmationUI() {
+        new ConfirmationUI(this);
+    }
+
+    public void openScoreWindow() {
+        new HighScoreUI(this);
     }
 
     private void alreadyInDatabaseFields() {
@@ -130,4 +145,6 @@ public class MyController {
                         " Please decide your next operation",
                 "Success", JOptionPane.INFORMATION_MESSAGE);
     }
+
+
 }
