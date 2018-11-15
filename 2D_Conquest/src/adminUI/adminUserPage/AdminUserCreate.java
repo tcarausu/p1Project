@@ -10,7 +10,7 @@ import java.sql.SQLException;
  * by Toader
  **/
 public class AdminUserCreate extends JFrame {
-    private MyController ctrler;
+    private MyController controller;
     private JButton createNewUser = new JButton("Create User");
     private JButton back = new JButton("Back");
     private JTextField txuser = new JTextField(15);
@@ -21,13 +21,13 @@ public class AdminUserCreate extends JFrame {
     /**
      * Login Page UI's Constructor
      *
-     * @param ctrler
+     * @param controller of type MyController
      */
-    public AdminUserCreate(MyController ctrler) {
+    public AdminUserCreate(MyController controller) {
 
         super("LoginPage UI");
 
-        this.ctrler = ctrler;
+        this.controller = controller;
         setLayout(null);
         setResizable(false);
         setVisible(true);
@@ -60,24 +60,31 @@ public class AdminUserCreate extends JFrame {
         setVisible(true);
         createNewUser.addActionListener(ae -> {
             String puname = txuser.getText();
-            String ppaswd = pass.getText();
+            String ppaswd = String.valueOf(pass.getPassword());
             try {
                 dispose();
-                ctrler.createNewUser(puname, ppaswd);
+                if (puname != null && !puname.equals("") && !ppaswd.equals("")) {
+
+                    controller.verifyAdminDataOnUserCreate(puname, ppaswd);
+                } else {
+                    clearFields();
+                    controller.openAdminCreateUserUI();
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         });
         back.addActionListener(ae -> {
             dispose();
-            ctrler.openAdminPageUI();
+            controller.openAdminPageUI();
         });
     }
 
     public void clearFields() {
         JOptionPane.showMessageDialog(null,
-                "The system could not log you in.\n" + " Please make sure your username and password are correct",
-                "Login Failure", JOptionPane.INFORMATION_MESSAGE);
+                "The information introduced is wrong.\n" +
+                        " Please make sure your username and password are correct and available",
+                "Incorect Information", JOptionPane.INFORMATION_MESSAGE);
         txuser.setText("");
         pass.setText("");
         txuser.requestFocus();

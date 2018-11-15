@@ -45,7 +45,7 @@ public class CountryMapUI extends JFrame {
         setVisible(true);
         fblogin.addActionListener(ae -> {
             String puname = txuser.getText();
-            String ppaswd = pass.getText();
+            String ppaswd = String.valueOf(pass.getPassword());
             if (puname.equals("test") && ppaswd.equals("12345")) {
                 Welcome regFace = new Welcome();
                 regFace.setVisible(true);

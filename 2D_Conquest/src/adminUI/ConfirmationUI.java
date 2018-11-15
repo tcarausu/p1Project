@@ -10,78 +10,67 @@ import java.sql.SQLException;
  * by Toader
  **/
 public class ConfirmationUI extends JFrame {
-    private MyController ctrler;
+    private MyController controller;
     private JButton continueToGame = new JButton("Play");
-    private JButton back = new JButton("Back");
+    private JButton back = new JButton("Back To Editing");
 
-    private JTextField txuser = new JTextField(15);
+    private JTextField adminUser = new JTextField(15);
     private JPasswordField pass = new JPasswordField(15);
-    private JLabel luser = new JLabel("Login UserName");
-    private JLabel lpass = new JLabel("Login Password");
+    private JLabel luser = new JLabel("Admin UserName");
+    private JLabel lpass = new JLabel("Admin Password");
 
     /**
      * Confirmation UI's Constructor
      *
-     * @param ctrler
+     * @param controller of type MyController
      */
-    public ConfirmationUI(MyController ctrler) {
+    public ConfirmationUI(MyController controller) {
 
-        super("LoginPage UI");
+        super("Confirmation UI");
 
-        this.ctrler = ctrler;
+        this.controller = controller;
         setLayout(null);
         setResizable(false);
         setVisible(true);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        setTitle("Login Authentication");
         introduceLogin();
 
     }
 
     private void introduceLogin() {
-        setSize(350, 250);
+        setSize(380, 250);
         setLocation(500, 280);
 
-        luser.setBounds(20, 30, 120, 20);
-        lpass.setBounds(20, 65, 120, 20);
-        txuser.setBounds(140, 30, 150, 20);
+        luser.setBounds(20, 30, 140, 20);
+        lpass.setBounds(20, 65, 140, 20);
+        adminUser.setBounds(140, 30, 150, 20);
         pass.setBounds(140, 65, 150, 20);
         continueToGame.setBounds(30, 140, 120, 40);
-        back.setBounds(190, 140, 120, 40);
+        back.setBounds(180, 140, 160, 40);
 
         super.add(continueToGame);
         super.add(back);
         super.add(luser);
         super.add(lpass);
-        super.add(txuser);
+        super.add(adminUser);
         super.add(pass);
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
         continueToGame.addActionListener(ae -> {
-            String puname = txuser.getText();
-            String ppaswd = pass.getText();
-            try {
-                dispose();
-                ctrler.verifyUserLogin(puname, ppaswd);
-                ctrler.openCountryWindow();
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            dispose();
+            controller.openCountryWindow();
 
         });
         back.addActionListener(ae -> {
 
-            dispose();
-            ctrler.openAdminPageUI();
-            String puname = txuser.getText();
-            String ppaswd = pass.getText();
+            String puname = adminUser.getText();
+            String ppaswd = String.valueOf(pass.getPassword());
             try {
                 dispose();
-                ctrler.verifyUserLogin(puname, ppaswd);
-                ctrler.openAdminPageUI();
+                controller.verifyUserLogin(puname, ppaswd);
+                controller.openAdminPageUI();
 
 
             } catch (SQLException e) {

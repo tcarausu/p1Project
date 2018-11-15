@@ -3,16 +3,23 @@ package controller;
 import adminUI.*;
 import adminUI.adminUserPage.AdminUserCreate;
 import dao.DatabaseI;
+import dao.QuestionDatabaseI;
+import dao.UserDatabaseI;
 import view.*;
 
+import javax.swing.*;
 import java.sql.SQLException;
 
 public class MyController {
     private DatabaseI db;
+    private UserDatabaseI udb;
+    private QuestionDatabaseI qdb;
     private LoginPageUI loginPageUI;
 
-    public MyController(DatabaseI db) throws SQLException {
+    public MyController(DatabaseI db, UserDatabaseI udb, QuestionDatabaseI qdb) throws SQLException {
         this.db = db;
+        this.udb = udb;
+        this.qdb = qdb;
 
     }
 
@@ -22,6 +29,17 @@ public class MyController {
         } else {
             loginPageUI.clearFields();
             openLoginWindow();
+        }
+
+    }
+
+    public void verifyAdminDataOnUserCreate(String userName, String password) throws SQLException {
+        if (db.verifyUserLogin(userName, password)) {
+            alreadyInDatabaseFields();
+            openAdminCreateUserUI();
+        } else {
+            createNewUser(userName, password);
+
         }
 
     }
@@ -36,13 +54,10 @@ public class MyController {
 
     }
 
-    public void createNewUser(String userName, String password) throws SQLException {
-        if (db.createNewUser(userName, password)) {
-            confirmationUI();
-        } else {
-            openAdminPageUI();
-        }
-
+    private void createNewUser(String userName, String password) throws SQLException {
+        udb.createNewUser(userName, password);
+        dataAddedSuccess();
+        confirmationUI();
     }
 
     public void start() {
@@ -102,4 +117,17 @@ public class MyController {
         ConfirmationUI confirmationUI = new ConfirmationUI(this);
     }
 
+    private void alreadyInDatabaseFields() {
+        JOptionPane.showMessageDialog(null,
+                "The information introduced already exists.\n" +
+                        " Please make sure your information you are trying to introduce is not already in use",
+                "Already In Use", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private void dataAddedSuccess() {
+        JOptionPane.showMessageDialog(null,
+                "The information had been introduced with success.\n" +
+                        " Please decide your next operation",
+                "Success", JOptionPane.INFORMATION_MESSAGE);
+    }
 }

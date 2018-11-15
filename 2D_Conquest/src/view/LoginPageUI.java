@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.sql.SQLException;
 
 public class LoginPageUI extends JFrame {
-    private MyController ctrler;
+    private MyController controller;
     private JButton blogin = new JButton("Login");
     private JButton alogin = new JButton("Admin Login");
     private JTextField txuser = new JTextField(15);
@@ -16,13 +16,13 @@ public class LoginPageUI extends JFrame {
 
     /**
      * Login Page UI's Constructor
-     * @param ctrler
+     * @param controller of type MyController
      */
-    public LoginPageUI(MyController ctrler) {
+    public LoginPageUI(MyController controller) {
 
         super("LoginPage UI");
 
-        this.ctrler = ctrler;
+        this.controller = controller;
         setLayout(null);
         setResizable(false);
         setVisible(true);
@@ -53,20 +53,20 @@ public class LoginPageUI extends JFrame {
 
         blogin.addActionListener(ae -> {
             String puname = txuser.getText();
-            String ppaswd = pass.getText();
+            String ppaswd = String.valueOf(pass.getPassword());
             try {
                 dispose();
-                ctrler.verifyUserLogin(puname, ppaswd);
+                controller.verifyUserLogin(puname, ppaswd);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         });
         alogin.addActionListener(ae -> {
             String puname = txuser.getText();
-            String ppaswd = pass.getText();
+            String ppaswd = String.valueOf(pass.getPassword());
             try {
                 dispose();
-                ctrler.verifyAdminLogin(puname, ppaswd);
+                controller.verifyAdminLogin(puname, ppaswd);
             } catch (SQLException e) {
                 e.printStackTrace();
             }

@@ -10,8 +10,8 @@ import java.sql.SQLException;
  * by Toader
  **/
 public class AdminUserEdit extends JFrame {
-    private MyController ctrler;
-    private JButton blogin = new JButton("Login");
+    private MyController controller;
+    private JButton editMe = new JButton("Login");
     private JButton alogin = new JButton("Admin Login");
     private JTextField txuser = new JTextField(15);
     private JPasswordField pass = new JPasswordField(15);
@@ -20,13 +20,13 @@ public class AdminUserEdit extends JFrame {
 
     /**
      * Admin User Edit UI's Constructor
-     * @param ctrler
+     * @param controller of type MyController
      */
-    public AdminUserEdit(MyController ctrler) {
+    public AdminUserEdit(MyController controller) {
 
         super("LoginPage UI");
 
-        this.ctrler = ctrler;
+        this.controller = controller;
         setLayout(null);
         setResizable(false);
         setVisible(true);
@@ -45,38 +45,39 @@ public class AdminUserEdit extends JFrame {
         lpass.setBounds(20, 65, 120, 20);
         txuser.setBounds(140, 30, 150, 20);
         pass.setBounds(140, 65, 150, 20);
-        blogin.setBounds(30, 140, 120, 40);
+        editMe.setBounds(30, 140, 120, 40);
         alogin.setBounds(190, 140, 120, 40);
 
         super.add(luser);
         super.add(lpass);
-        super.add(blogin);
+        super.add(editMe);
         super.add(alogin);
         super.add(txuser);
         super.add(pass);
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
-        blogin.addActionListener(ae -> {
+        editMe.addActionListener(ae -> {
             String puname = txuser.getText();
-            String ppaswd = pass.getText();
+            String ppaswd = String.valueOf(pass.getPassword());
+
             try {
                 dispose();
-                ctrler.verifyUserLogin(puname, ppaswd);
+                controller.verifyUserLogin(puname, ppaswd);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         });
-        alogin.addActionListener(ae -> {
-            String puname = txuser.getText();
-            String ppaswd = pass.getText();
-            try {
-                dispose();
-                ctrler.verifyAdminLogin(puname, ppaswd);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        });
+//        alogin.addActionListener(ae -> {
+//            String puname = txuser.getText();
+     //   String ppaswd = String.valueOf(pass.getPassword());
+        //            try {
+//                dispose();
+//                controller.verifyAdminLogin(puname, ppaswd);
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//        });
     }
 
     public void clearFields() {

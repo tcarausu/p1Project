@@ -10,7 +10,7 @@ import java.sql.SQLException;
  * by Toader
  **/
 public class AdminUserReset  extends JFrame {
-    private MyController ctrler;
+    private MyController controller;
     private JButton blogin = new JButton("Login");
     private JButton alogin = new JButton("Admin Login");
     private JTextField txuser = new JTextField(15);
@@ -20,13 +20,13 @@ public class AdminUserReset  extends JFrame {
 
     /**
      * Admin User Reset Page UI's Constructor
-     * @param ctrler
+     * @param controller of type MyController
      */
-    public AdminUserReset(MyController ctrler) {
+    public AdminUserReset(MyController controller) {
 
         super("LoginPage UI");
 
-        this.ctrler = ctrler;
+        this.controller = controller;
         setLayout(null);
         setResizable(false);
         setVisible(true);
@@ -59,20 +59,20 @@ public class AdminUserReset  extends JFrame {
         setVisible(true);
         blogin.addActionListener(ae -> {
             String puname = txuser.getText();
-            String ppaswd = pass.getText();
+            String ppaswd = String.valueOf(pass.getPassword());
             try {
                 dispose();
-                ctrler.verifyUserLogin(puname, ppaswd);
+                controller.verifyUserLogin(puname, ppaswd);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         });
         alogin.addActionListener(ae -> {
             String puname = txuser.getText();
-            String ppaswd = pass.getText();
+            String ppaswd = String.valueOf(pass.getPassword());
             try {
                 dispose();
-                ctrler.verifyAdminLogin(puname, ppaswd);
+                controller.verifyAdminLogin(puname, ppaswd);
             } catch (SQLException e) {
                 e.printStackTrace();
             }

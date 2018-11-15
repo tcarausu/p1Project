@@ -2,6 +2,8 @@ package view;
 
 import controller.MyController;
 import dao.Database;
+import dao.QuestionDao;
+import dao.UserDao;
 
 import javax.swing.*;
 import java.sql.SQLException;
@@ -9,7 +11,7 @@ import java.sql.SQLException;
 
 public class MainUI extends JFrame {
 
-    private MyController ctrler;
+    private MyController controller;
 
     private JButton start = new JButton("Start");
     private JButton highScore = new JButton("High Score");
@@ -19,11 +21,11 @@ public class MainUI extends JFrame {
 
     /**
      * Main UI's Constructor
-     * @param ctrler
+     * @param controller of type MyController
      */
-    public MainUI(MyController ctrler) {
+    public MainUI(MyController controller) {
         super("Main UI");
-        this.ctrler = ctrler;
+        this.controller = controller;
 
         setLocation(500, 200);
         setLayout(null);
@@ -53,21 +55,21 @@ public class MainUI extends JFrame {
         start.addActionListener(
                 e -> {
                     dispose();
-                    ctrler.openLoginWindow();
+                    controller.openLoginWindow();
 
                 }
         );
         highScore.addActionListener(
                 e -> {
                     dispose();
-                    ctrler.openScoreWindow();
+                    controller.openScoreWindow();
 
                 }
         );
         adminUI.addActionListener(
                 e -> {
                     dispose();
-                    ctrler.openAdminPageUI();
+                    controller.openAdminPageUI();
 
                 }
         );
@@ -76,7 +78,9 @@ public class MainUI extends JFrame {
 
     public static void main(String[] args) throws SQLException {
         Database database = new Database();
-        MyController myController = new MyController(database);
+        UserDao userDao = new UserDao();
+        QuestionDao questionDao = new QuestionDao();
+        MyController myController = new MyController(database, userDao, questionDao);
         myController.start();
     }
 }

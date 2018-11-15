@@ -9,7 +9,7 @@ import javax.swing.*;
  * by Toader
  **/
 public class AdminQuestionUI extends JFrame {
-    private MyController ctrler;
+    private MyController controller;
 
     private JButton addQuestion = new JButton("Create Question");
     private JButton deleteQuestion = new JButton("Delete Question");
@@ -22,11 +22,11 @@ public class AdminQuestionUI extends JFrame {
 //    private JButton playGame = new JButton("Start");
 //
    /** Admin Question UI's Constructor
-    * @param ctrler
+    * @param controller of type MyController
     */
-    public AdminQuestionUI(MyController ctrler) {
+    public AdminQuestionUI(MyController controller) {
         super("AdminPage Questions UI");
-        this.ctrler = ctrler;
+        this.controller = controller;
 
         setLocation(500, 200);
         setLayout(null);
@@ -67,28 +67,28 @@ public class AdminQuestionUI extends JFrame {
         addQuestion.addActionListener(
                 e -> {
                     dispose();
-                    ctrler.openLoginWindow();
+                    controller.openLoginWindow();
 
                 }
         );
         deleteQuestion.addActionListener(
                 e -> {
                     dispose();
-                    ctrler.openScoreWindow();
+                    controller.openScoreWindow();
 
                 }
         );
         editQuestion.addActionListener(
                 e -> {
                     dispose();
-                    ctrler.openScoreWindow();
+                    controller.openScoreWindow();
 
                 }
         );
         back.addActionListener(
                 e -> {
                     dispose();
-                    ctrler.openAdminPageUI();
+                    controller.openAdminPageUI();
 
                 }
         );

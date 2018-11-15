@@ -9,7 +9,7 @@ import javax.swing.*;
  * by Toader
  **/
 public class HighScoreUI extends JFrame {
-    private MyController ctrler;
+    private MyController controller;
 
     private JButton back = new JButton("Back");
     private JButton openMe = new JButton("Easy");
@@ -17,12 +17,12 @@ public class HighScoreUI extends JFrame {
 
     /**
      * High Score UI's Constructor
-     * @param myController
+     * @param controller of type MyController
      */
-    public HighScoreUI(MyController myController) {
+    public HighScoreUI(MyController controller) {
 
         super("Highscore UI");
-        this.ctrler = myController;
+        this.controller = controller;
 
         setLayout(null);
         setResizable(false);
@@ -49,7 +49,7 @@ public class HighScoreUI extends JFrame {
         back.addActionListener(
                 e -> {
                     dispose();
-                    ctrler.start();
+                    controller.start();
                 });
     }
 }
