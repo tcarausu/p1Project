@@ -32,7 +32,7 @@ create table p1project.questions (
   subject         varchar(255),
   correctanswer   varchar(255),
   typeOfQuestion  varchar(12) CONSTRAINT typeOfQuestions CHECK
-  (typeOfQuestion IN ('history', 'culture', 'civil')), -- all types of question we are going to use
+  (typeOfQuestion IN ('history', 'culture', 'civil','literature',)), -- all types of question we are going to use
   difficultylevel varchar(6) references p1project.difficulty (difficulty),
   region          varchar(25), -- add real life regions
   primary key (subject, correctanswer, difficultylevel)

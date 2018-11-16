@@ -57,6 +57,7 @@ public class LoginPageUI extends JFrame {
             try {
                 dispose();
                 controller.verifyUserLogin(puname, ppaswd);
+                //try to do also admin login to play the game.
             } catch (SQLException e) {
                 e.printStackTrace();
             }
