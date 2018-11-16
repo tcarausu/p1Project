@@ -24,7 +24,7 @@ public class AdminUserDelete  extends JFrame {
      */
     public AdminUserDelete(MyController controller) {
 
-        super("LoginPage UI");
+        super("Delete an User");
 
         this.controller = controller;
         setLayout(null);
@@ -32,7 +32,6 @@ public class AdminUserDelete  extends JFrame {
         setVisible(true);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        setTitle("Login Authentication");
         introduceLogin();
 
     }

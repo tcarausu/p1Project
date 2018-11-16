@@ -24,7 +24,7 @@ public class AdminUserReset  extends JFrame {
      */
     public AdminUserReset(MyController controller) {
 
-        super("LoginPage UI");
+        super("Reset an User Password");
 
         this.controller = controller;
         setLayout(null);
@@ -32,7 +32,6 @@ public class AdminUserReset  extends JFrame {
         setVisible(true);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        setTitle("Login Authentication");
         introduceLogin();
 
     }

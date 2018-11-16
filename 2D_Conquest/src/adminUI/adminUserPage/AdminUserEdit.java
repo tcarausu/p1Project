@@ -24,7 +24,7 @@ public class AdminUserEdit extends JFrame {
      */
     public AdminUserEdit(MyController controller) {
 
-        super("LoginPage UI");
+        super("Edit an User");
 
         this.controller = controller;
         setLayout(null);
@@ -32,7 +32,6 @@ public class AdminUserEdit extends JFrame {
         setVisible(true);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        setTitle("Login Authentication");
         introduceLogin();
 
     }

@@ -76,21 +76,21 @@ public class AdminUserUI extends JFrame {
         resetUser.addActionListener(
                 e -> {
                     dispose();
-                    controller.openScoreWindow();
+                    controller.openAdminResetUserUI();
 
                 }
         );
         deleteUser.addActionListener(
                 e -> {
                     dispose();
-                    controller.openScoreWindow();
+                    controller.openAdminDeleteUserUI();
 
                 }
         );
         editUser.addActionListener(
                 e -> {
                     dispose();
-                    controller.openScoreWindow();
+                    controller.openAdminEditUserUI();
 
                 }
         );

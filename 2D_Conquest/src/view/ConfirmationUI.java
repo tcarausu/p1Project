@@ -1,4 +1,4 @@
-package adminUI;
+package view;
 
 import controller.MyController;
 
@@ -16,8 +16,8 @@ public class ConfirmationUI extends JFrame {
 
     private JTextField adminUser = new JTextField(15);
     private JPasswordField pass = new JPasswordField(15);
-    private JLabel luser = new JLabel("Admin UserName");
-    private JLabel lpass = new JLabel("Admin Password");
+    private JLabel luser = new JLabel("New Admin UserName");
+    private JLabel lpass = new JLabel("New Admin Password");
 
     /**
      * Confirmation UI's Constructor
@@ -44,8 +44,8 @@ public class ConfirmationUI extends JFrame {
 
         luser.setBounds(20, 30, 140, 20);
         lpass.setBounds(20, 65, 140, 20);
-        adminUser.setBounds(140, 30, 150, 20);
-        pass.setBounds(140, 65, 150, 20);
+        adminUser.setBounds(160, 30, 180, 20);
+        pass.setBounds(160, 65, 180, 20);
         continueToGame.setBounds(30, 140, 120, 40);
         back.setBounds(180, 140, 160, 40);
 
@@ -65,18 +65,8 @@ public class ConfirmationUI extends JFrame {
         });
         back.addActionListener(ae -> {
 
-            String puname = adminUser.getText();
-            String ppaswd = String.valueOf(pass.getPassword());
-            try {
-                dispose();
-                controller.verifyUserLogin(puname, ppaswd);
-                controller.openAdminPageUI();
-
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
+            dispose();
+            controller.openAdminPageUI();
         });
     }
 

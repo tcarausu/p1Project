@@ -25,7 +25,7 @@ public class AdminUserCreate extends JFrame {
      */
     public AdminUserCreate(MyController controller) {
 
-        super("LoginPage UI");
+        super("Create a New User");
 
         this.controller = controller;
         setLayout(null);
@@ -33,7 +33,6 @@ public class AdminUserCreate extends JFrame {
         setVisible(true);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        setTitle("Login Authentication");
         introduceLogin();
 
     }
