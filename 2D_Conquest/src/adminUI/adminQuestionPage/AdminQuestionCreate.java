@@ -1,0 +1,152 @@
+package adminUI.adminQuestionPage;
+
+import controller.MyController;
+
+import javax.swing.*;
+import java.sql.SQLException;
+
+/**
+ * File created on 11/17/2018
+ * by Toader
+ **/
+public class AdminQuestionCreate extends JFrame {
+    private MyController controller;
+    private JButton createNewQuestion = new JButton("Create Question");
+    private JButton back = new JButton("Back");
+
+    private JTextField subject = new JTextField(15);
+    private JTextField correctAnswer = new JTextField(15);
+    private JTextField typeOfQuestion = new JTextField(15);
+    private JTextField difficultylevel = new JTextField(15);
+    private JTextField region = new JTextField(15);
+
+    private JLabel lsubject = new JLabel("Subject");
+    private JLabel lcorrectAn = new JLabel("Correct Answer");
+    private JLabel ltype = new JLabel("Type Of Question");
+    private JLabel ldiff = new JLabel("Difficulty");
+    private JLabel lregion = new JLabel("Region");
+
+    /**
+     * Login Page UI's Constructor
+     *
+     * @param controller of type MyController
+     */
+    public AdminQuestionCreate(MyController controller) {
+
+        super("Create a New Question");
+
+        this.controller = controller;
+        setLayout(null);
+        setResizable(false);
+        setVisible(true);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+        introduceLogin();
+
+    }
+
+    private void introduceLogin() {
+        setSize(500, 300);
+        setLocation(500, 280);
+
+
+        lsubject.setBounds(20, 30, 140, 20);
+        subject.setBounds(160, 30, 250, 20);
+
+        lcorrectAn.setBounds(20, 60, 140, 20);
+        correctAnswer.setBounds(160, 60, 250, 20);
+
+        ltype.setBounds(20, 90, 140, 20);
+        typeOfQuestion.setBounds(160, 90, 250, 20);
+
+        ldiff.setBounds(20, 120, 140, 20);
+        difficultylevel.setBounds(160, 120, 250, 20);
+
+        lregion.setBounds(20, 150, 140, 20);
+        region.setBounds(160, 150, 250, 20);
+
+        createNewQuestion.setBounds(30, 220, 120, 40);
+        back.setBounds(350, 220, 120, 40);
+
+        super.add(lsubject);
+        super.add(createNewQuestion);
+
+        super.add(lcorrectAn);
+        super.add(correctAnswer);
+
+        super.add(ltype);
+        super.add(typeOfQuestion);
+
+        super.add(ldiff);
+        super.add(difficultylevel);
+
+        super.add(lregion);
+        super.add(region);
+
+        super.add(back);
+        super.add(subject);
+
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
+        createNewQuestion.addActionListener(ae -> {
+            String subjectT = subject.getText();
+            String correctAns = correctAnswer.getText();
+            String type = typeOfQuestion.getText();
+            String diff = difficultylevel.getText();
+            String regionT = region.getText();
+            try {
+                dispose();
+                if ((subjectT != null &&
+                        correctAns != null &&
+                        type != null &&
+                        diff != null &&
+                        regionT != null) &&
+
+                        !subjectT.equals("")
+                        && !correctAns.equals("")
+                        && !type.equals("")
+                        && !diff.equals("")
+                        && !regionT.equals("")
+                ) {
+
+                    controller.verifyAdminDataOnQuestionCreate(subjectT, correctAns,
+                            type, diff, regionT);
+                }  else {
+                    clearFieldsWhenNeeded();
+                    controller.openAdminQuestionUI();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
+        back.addActionListener(ae -> {
+            dispose();
+            controller.openAdminPageUI();
+        });
+    }
+
+    public void clearFieldsWhenNeeded() {
+        JOptionPane.showMessageDialog(null,
+                "The information introduced is cleared",
+                "Reset", JOptionPane.INFORMATION_MESSAGE);
+        subject.setText("");
+        correctAnswer.setText("");
+        typeOfQuestion.setText("");
+        difficultylevel.setText("");
+        region.setText("");
+        subject.requestFocus();
+    }
+
+    public void clearFieldsWhenDataAlreadyExists() {
+        JOptionPane.showMessageDialog(null,
+                "The information introduced is already in use.\n" +
+                        " Please make sure your information you are trying to introduce is not already in use",
+                "Already In use", JOptionPane.INFORMATION_MESSAGE);
+        subject.setText("");
+        correctAnswer.setText("");
+        typeOfQuestion.setText("");
+        difficultylevel.setText("");
+        region.setText("");
+        subject.requestFocus();
+    }
+}

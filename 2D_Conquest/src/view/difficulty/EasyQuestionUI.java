@@ -1,4 +1,4 @@
-package view;
+package view.difficulty;
 
 import controller.MyController;
 
@@ -8,24 +8,24 @@ import javax.swing.*;
  * File created on 11/1/2018
  * by Toader
  **/
-public class HardQuestionUI extends JFrame {
+public class EasyQuestionUI extends JFrame {
 
     private MyController controller;
 
-    private JButton easy = new JButton("Easy");
     private JButton medium = new JButton("Medium");
+    private JButton hard = new JButton("Hard");
 
-    private JLabel hard = new JLabel("Hard");
+    private JLabel easy = new JLabel("Easy");
 
     private JButton back = new JButton("Back");
 
     /**
-     * Hard Question UI's Constructor
+     * Easy Question UI's Constructor
      * @param controller of type MyController
      */
-    public HardQuestionUI(MyController controller) {
+    public EasyQuestionUI(MyController controller) {
 
-        super("HardQuestion UI");
+        super("EasyQuestion UI");
         this.controller = controller;
 
         setLayout(null);
@@ -33,10 +33,10 @@ public class HardQuestionUI extends JFrame {
         setVisible(true);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        setQuestionsHard();
+        setEasy();
     }
 
-    private void setQuestionsHard() {
+    private void setEasy() {
 
         super.add(easy);
         super.add(medium);
@@ -45,19 +45,19 @@ public class HardQuestionUI extends JFrame {
 
         setSize(500, 400);
 
-        easy.setBounds(70, 50, 100, 40);
+        easy.setBounds(20, 50, 100, 40);
         medium.setBounds(200, 50, 100, 40);
-        hard.setBounds(20, 50, 100, 40);
+        hard.setBounds(330, 50, 100, 40);
 
         back.setBounds(70, 150, 160, 40);
 
-        easy.addActionListener(e -> dispose());
         medium.addActionListener(e -> dispose());
+        hard.addActionListener(e -> dispose());
 
         back.addActionListener(
                 e -> {
                     dispose();
-                controller.openDifficultyWindow();
+                    controller.openDifficultyWindow();
                 });
     }
 

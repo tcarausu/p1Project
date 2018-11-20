@@ -14,6 +14,7 @@ public class AdminQuestionUI extends JFrame {
     private JButton addQuestion = new JButton("Create Question");
     private JButton deleteQuestion = new JButton("Delete Question");
     private JButton editQuestion = new JButton("Edit Question");
+    private JButton displayAllQuestions = new JButton("Display QuestionTable");
 
     private JButton quit = new JButton("QUIT");
     private JButton back = new JButton("Back");
@@ -45,6 +46,7 @@ public class AdminQuestionUI extends JFrame {
         super.add(addQuestion);
         super.add(deleteQuestion);
         super.add(editQuestion);
+        super.add(displayAllQuestions);
 
         super.add(quit);
         super.add(back);
@@ -57,7 +59,7 @@ public class AdminQuestionUI extends JFrame {
         addQuestion.setBounds(70, 50, 160, 40);
         deleteQuestion.setBounds(250, 50, 160, 40);
         editQuestion.setBounds(70, 150, 160, 40);
-
+        displayAllQuestions.setBounds(250, 150, 160, 40);
 
         back.setBounds(70, 250, 160, 40);
         quit.setBounds(250, 250, 160, 40);
@@ -67,7 +69,7 @@ public class AdminQuestionUI extends JFrame {
         addQuestion.addActionListener(
                 e -> {
                     dispose();
-                    controller.openLoginWindow();
+                    controller.openAdminQuestionCreateUI();
 
                 }
         );
@@ -79,6 +81,13 @@ public class AdminQuestionUI extends JFrame {
                 }
         );
         editQuestion.addActionListener(
+                e -> {
+                    dispose();
+                    controller.openScoreWindow();
+
+                }
+        );
+        displayAllQuestions.addActionListener(
                 e -> {
                     dispose();
                     controller.openScoreWindow();

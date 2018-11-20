@@ -8,6 +8,8 @@ import java.sql.SQLException;
 /**
  * File created on 11/12/2018
  * by Toader
+ * This class deals with the user creation.
+ * If the user inserted already exists in the database then the class with give a warning.
  **/
 public class AdminUserCreate extends JFrame {
     private MyController controller;
@@ -79,7 +81,7 @@ public class AdminUserCreate extends JFrame {
         });
     }
 
-    public void clearFields() {
+    private void clearFields() {
         JOptionPane.showMessageDialog(null,
                 "The information introduced is wrong.\n" +
                         " Please make sure your username and password are correct and available",

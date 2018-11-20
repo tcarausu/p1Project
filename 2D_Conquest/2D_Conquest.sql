@@ -31,15 +31,17 @@ create table p1project.highscore (
 create table p1project.questions (
   subject         varchar(255),
   correctanswer   varchar(255),
+  -- add all questions(bad and good answers)
   typeOfQuestion  varchar(12) CONSTRAINT typeOfQuestions CHECK
-  (typeOfQuestion IN ('history', 'culture', 'civil','literature',)), -- all types of question we are going to use
+  (typeOfQuestion IN ('history', 'culture', 'civil','literature')), -- all types of question we are going to use
   difficultylevel varchar(6) references p1project.difficulty (difficulty),
   region          varchar(25), -- add real life regions
   primary key (subject, correctanswer, difficultylevel)
 );
 create table p1project.answer (
+  id serial,
   question        varchar(255),
-  correct         bool,
+  correct         bool default false ,
   difficultylevel varchar(6) references p1project.difficulty (difficulty),
   primary key (question, correct, difficultylevel)
 );

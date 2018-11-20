@@ -1,6 +1,10 @@
 package controller;
 
 import adminUI.*;
+import adminUI.adminQuestionPage.AdminAllQuestionTable;
+import adminUI.adminQuestionPage.AdminQuestionCreate;
+import adminUI.adminQuestionPage.AdminQuestionDelete;
+import adminUI.adminQuestionPage.AdminQuestionEdit;
 import adminUI.adminUserPage.AdminUserCreate;
 import adminUI.adminUserPage.AdminUserDelete;
 import adminUI.adminUserPage.AdminUserEdit;
@@ -9,9 +13,14 @@ import dao.DatabaseI;
 import dao.QuestionDatabaseI;
 import dao.UserDatabaseI;
 import view.*;
+import view.difficulty.DifficultyLevelUI;
+import view.difficulty.EasyQuestionUI;
+import view.difficulty.HardQuestionUI;
+import view.difficulty.MediumQuestionUI;
 
 import javax.swing.*;
 import java.sql.SQLException;
+import java.util.List;
 
 public class MyController {
     private DatabaseI db;
@@ -36,6 +45,16 @@ public class MyController {
 
     }
 
+    public void verifyAdminLogin(String userName, String password) throws SQLException {
+        if (db.verifyAdminLogin(userName, password)) {
+            openCountryWindow();
+        } else {
+            loginPageUI.clearFields();
+            openLoginWindow();
+        }
+
+    }
+
     public void verifyAdminDataOnUserCreate(String userName, String password) throws SQLException {
         if (db.verifyUserLogin(userName, password)) {
             alreadyInDatabaseFields();
@@ -47,24 +66,39 @@ public class MyController {
 
     }
 
-    public void verifyAdminLogin(String userName, String password) throws SQLException {
-        if (db.verifyAdminLogin(userName, password)) {
-            openCountryWindow();
-        } else {
-            loginPageUI.clearFields();
-            openLoginWindow();
-        }
-
-    }
-
     private void createNewUser(String userName, String password) throws SQLException {
         udb.createNewUser(userName, password);
         dataAddedSuccess();
         confirmationUI();
     }
 
+    public void verifyAdminDataOnQuestionCreate(String subject, String correctAnswer,
+                                                String typeOfQuestion, String difficultylevel,
+                                                String region) throws SQLException {
+        if (qdb.verifyIntroducedQuestion(subject, correctAnswer, typeOfQuestion, difficultylevel, region)) {
+            alreadyInDatabaseFields();
+            openAdminQuestionCreateUI();
+        } else {
+            createNewQuestion(subject, correctAnswer, typeOfQuestion, difficultylevel, region);
+
+        }
+
+    }
+
+    private void createNewQuestion(String subject, String correctAnswer,
+                                   String typeOfQuestion, String difficultylevel,
+                                   String region) throws SQLException {
+        qdb.createNewQuestion(subject, correctAnswer,
+                typeOfQuestion, difficultylevel, region);
+        dataAddedSuccess();
+        confirmationUI();
+    }
+
+    public List getAllQuestion() throws SQLException {
+        return qdb.getAll();
+    }
     public void start() {
-        MainUI mainUI = new MainUI(this);
+        new MainUI(this);
 
     }
 
@@ -130,6 +164,22 @@ public class MyController {
 
     public void openScoreWindow() {
         new HighScoreUI(this);
+    }
+
+    public void openAdminQuestionCreateUI() {
+        new AdminQuestionCreate(this);
+    }
+
+    public void openAdminQuestionEditUI() {
+//        new AdminQuestionEdit(this);
+    }
+
+    public void openAdminQuestionDeleteUI() {
+//        new AdminQuestionDelete(this);
+    }
+
+    public void openAdminFullQuestionTable() {
+        new AdminAllQuestionTable(this);
     }
 
     private void alreadyInDatabaseFields() {
