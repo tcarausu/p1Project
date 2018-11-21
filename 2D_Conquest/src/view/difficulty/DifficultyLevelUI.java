@@ -46,6 +46,7 @@ public class DifficultyLevelUI extends JFrame {
         super.add(back);
 
         setSize(500, 400);
+        setLocation(500,200);
 
         easy.setBounds(70, 50, 100, 40);
         medium.setBounds(200, 50, 100, 40);

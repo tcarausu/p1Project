@@ -3,6 +3,8 @@ package view;
 import controller.MyController;
 
 import javax.swing.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 
 public class LoginPageUI extends JFrame {
@@ -16,6 +18,7 @@ public class LoginPageUI extends JFrame {
 
     /**
      * Login Page UI's Constructor
+     *
      * @param controller of type MyController
      */
     public LoginPageUI(MyController controller) {
@@ -52,6 +55,7 @@ public class LoginPageUI extends JFrame {
         super.add(alogin);
 
         blogin.addActionListener(ae -> {
+
             String puname = txuser.getText();
             String ppaswd = String.valueOf(pass.getPassword());
             try {
@@ -62,6 +66,23 @@ public class LoginPageUI extends JFrame {
                 e.printStackTrace();
             }
         });
+        blogin.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent event) {
+                if (event.getKeyCode() == KeyEvent.VK_ENTER) {
+                    String puname = txuser.getText();
+                    String ppaswd = String.valueOf(pass.getPassword());
+                    try {
+                        dispose();
+                        controller.verifyUserLogin(puname, ppaswd);
+                        //try to do also admin login to play the game.
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
         alogin.addActionListener(ae -> {
             String puname = txuser.getText();
             String ppaswd = String.valueOf(pass.getPassword());

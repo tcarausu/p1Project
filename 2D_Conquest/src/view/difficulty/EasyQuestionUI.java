@@ -3,6 +3,7 @@ package view.difficulty;
 import controller.MyController;
 
 import javax.swing.*;
+import java.sql.SQLException;
 
 /**
  * File created on 11/1/2018
@@ -12,15 +13,19 @@ public class EasyQuestionUI extends JFrame {
 
     private MyController controller;
 
-    private JButton medium = new JButton("Medium");
-    private JButton hard = new JButton("Hard");
+    private JButton next = new JButton("NEXT");
+    private JButton done = new JButton("DONE");
 
-    private JLabel easy = new JLabel("Easy");
-
+    private JLabel question = new JLabel();
+    private JRadioButton radioButton1 = new JRadioButton();
+    private JRadioButton radioButton2 = new JRadioButton();
+    private JRadioButton radioButton3 = new JRadioButton();
+    private JRadioButton radioButton4 = new JRadioButton();
     private JButton back = new JButton("Back");
 
     /**
      * Easy Question UI's Constructor
+     *
      * @param controller of type MyController
      */
     public EasyQuestionUI(MyController controller) {
@@ -33,26 +38,54 @@ public class EasyQuestionUI extends JFrame {
         setVisible(true);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        setEasy();
+        try {
+            setEasy();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void setEasy() {
+    private void setEasy() throws SQLException {
 
-        super.add(easy);
-        super.add(medium);
-        super.add(hard);
+        super.add(question);
+        super.add(next);
+        super.add(done);
         super.add(back);
 
-        setSize(500, 400);
+        super.add(radioButton1);
+        super.add(radioButton2);
+        super.add(radioButton3);
+        super.add(radioButton4);
 
-        easy.setBounds(20, 50, 100, 40);
-        medium.setBounds(200, 50, 100, 40);
-        hard.setBounds(330, 50, 100, 40);
+        setSize(600, 400);
+        setLocation(500, 200);
 
-        back.setBounds(70, 150, 160, 40);
+        question.setBounds(20, 50, 450, 50);
+        next.setBounds(175, 250, 125, 40);
+        done.setBounds(325, 250, 125, 40);
 
-        medium.addActionListener(e -> dispose());
-        hard.addActionListener(e -> dispose());
+        radioButton1.setBounds(25, 150, 125, 40);
+        radioButton2.setBounds(175, 150, 125, 40);
+        radioButton3.setBounds(325, 150, 125, 40);
+        radioButton4.setBounds(475, 150, 125, 40);
+
+        back.setBounds(200, 300, 150, 40);
+
+
+        radioButton1.setText(controller.getAnEasyQuestionCorrectAnswer());
+        radioButton2.setText(controller.getAnEasyQuestionCorrectAnswer());
+        radioButton3.setText(controller.getAnEasyQuestionCorrectAnswer());
+        radioButton4.setText(controller.getAnEasyQuestionCorrectAnswer());
+
+        question.setText(controller.getAnEasyQuestion());
+
+        next.addActionListener(e ->
+        {
+            dispose();
+            controller.openEasyWindow();
+
+        });
+        done.addActionListener(e -> dispose());
 
         back.addActionListener(
                 e -> {

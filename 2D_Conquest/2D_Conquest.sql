@@ -41,8 +41,15 @@ create table p1project.questions (
 create table p1project.answer (
   id serial,
   question        varchar(255),
-  correct         bool default false ,
+  correct         varchar(255) unique,
   difficultylevel varchar(6) references p1project.difficulty (difficulty),
   primary key (question, correct, difficultylevel)
 );
+
+create table p1project.questions_answers(
+  questionsId int,
+  answersId int  ,
+  correctAnswer varchar(255) references p1project.answer(correct),
+  primary key (questionsId,answersId,correctAnswer)
+)
 --   create constraint for both correct answer referring to ANSWER table and appropriate question to QUESTION table

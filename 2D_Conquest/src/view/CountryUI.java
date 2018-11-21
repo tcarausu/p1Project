@@ -52,6 +52,7 @@ public class CountryUI extends JFrame {
         super.add(back);
 
         setSize(400, 600);
+        setLocation(500,200);
 
         firstMap.setBounds(70, 50, 80, 80);
         secondMap.setBounds(70, 150, 80, 80);

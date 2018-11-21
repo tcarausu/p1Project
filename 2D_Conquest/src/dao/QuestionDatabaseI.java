@@ -8,14 +8,17 @@ import java.util.List;
  * by Toader
  **/
 public interface QuestionDatabaseI {
-    public void createNewQuestion(String subject, String correctAnswer,
-                                  String typeOfQuestion, String difficultylevel,
-                                  String region) throws SQLException;
+    void createNewQuestion(String subject, String correctAnswer,
+                           String typeOfQuestion, String difficultylevel,
+                           String region) throws SQLException;
 
-    public boolean verifyIntroducedQuestion(String subject, String correctAnswer,
-                                            String typeOfQuestion, String difficultylevel,
-                                            String region
-                                             ) throws SQLException;
+    boolean verifyIntroducedQuestion(String subject, String correctAnswer,
+                                     String typeOfQuestion, String difficultylevel,
+                                     String region) throws SQLException;
 
-    public List getAll() throws SQLException;
+    String getAnEasyQuestion() throws SQLException;
+
+    String getAnEasyQuestionCorrectAnswer() throws SQLException;
+
+    List getAll() throws SQLException;
 }

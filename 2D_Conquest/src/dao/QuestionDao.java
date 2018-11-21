@@ -3,6 +3,7 @@ package dao;
 import org.postgresql.Driver;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -64,15 +65,73 @@ public class QuestionDao implements QuestionDatabaseI {
 
         try {
             String SQL = "SELECT * FROM p1Project.questions where subject ='" + subject + "' " +
-                    " AND correctanswer ='" + correctAnswer + "'"+
-                    " AND typeOfQuestion ='" + typeOfQuestion + "'"+
-                    " AND difficultylevel ='" + difficultylevel + "'"+
+                    " AND correctanswer ='" + correctAnswer + "'" +
+                    " AND typeOfQuestion ='" + typeOfQuestion + "'" +
+                    " AND difficultylevel ='" + difficultylevel + "'" +
                     " AND region ='" + region + "'";
 
             PreparedStatement st = conn.prepareStatement(SQL);
             st.execute();
             ResultSet rs = st.getResultSet();
             return rs.next();
+
+        } finally {
+            conn.close();
+
+        }
+
+    }
+
+    @Override
+    public String getAnEasyQuestion() throws SQLException {
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
+
+        try {
+            String SQL = "SELECT * FROM p1Project.questions " +
+                    "where difficultylevel like 'easy'" +
+                    "ORDER BY random()" +
+                    "LIMIT 1";
+
+            PreparedStatement st = conn.prepareStatement(SQL);
+            st.execute();
+            ResultSet rs = st.getResultSet();
+            ArrayList<String> arr = new ArrayList<>();
+            while (rs.next()) {
+                arr.add("The Question is : "
+                        + rs.getString("subject")
+                );
+            }
+            return arr.get(0);
+
+        } finally {
+            conn.close();
+
+        }
+
+    }
+
+    @Override
+    public String getAnEasyQuestionCorrectAnswer() throws SQLException {
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
+
+        try {
+            String SQL = "SELECT quest.correctanswer FROM p1Project.questions as quest " +
+                    "join p1project.questions_answers as qAnsw on quest.correctanswer = qAnsw.correctanswer " +
+                    "where quest.difficultylevel like 'easy' and  " +
+                    "qAnsw.correctanswer = quest.correctanswer " +
+                    "ORDER BY random()" +
+                    "LIMIT 1";
+
+
+            PreparedStatement st = conn.prepareStatement(SQL);
+            st.execute();
+            ResultSet rs = st.getResultSet();
+            ArrayList<String> arr = new ArrayList<>();
+            while (rs.next()) {
+                arr.add(rs.getString("correctAnswer")
+                );
+            }
+            return arr.get(0);
 
         } finally {
             conn.close();
@@ -91,8 +150,7 @@ public class QuestionDao implements QuestionDatabaseI {
             PreparedStatement st = conn.prepareStatement(SQL);
             st.execute();
             ResultSet rs = st.getResultSet();
-            List<ResultSet> resultSets = Collections.singletonList(rs);
-            return resultSets;
+            return Collections.singletonList(rs);
 
         } finally {
             conn.close();

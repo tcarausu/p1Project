@@ -90,7 +90,7 @@ public class AdminQuestionUI extends JFrame {
         displayAllQuestions.addActionListener(
                 e -> {
                     dispose();
-                    controller.openScoreWindow();
+                    controller.openAdminFullQuestionTable();
 
                 }
         );

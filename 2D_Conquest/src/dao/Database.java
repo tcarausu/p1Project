@@ -9,7 +9,7 @@ import java.sql.*;
  * by Toader
  **/
 public class Database implements DatabaseI {
-    private static Connection conn;
+    private  Connection conn;
 
     public Database() {
 
@@ -65,7 +65,7 @@ public class Database implements DatabaseI {
 
     }
 
-    public static ResultSet getData() throws SQLException {
+    public ResultSet getData() throws SQLException {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres",
                 "postgres", "postgres");
 

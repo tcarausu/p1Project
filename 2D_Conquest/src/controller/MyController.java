@@ -9,6 +9,7 @@ import adminUI.adminUserPage.AdminUserCreate;
 import adminUI.adminUserPage.AdminUserDelete;
 import adminUI.adminUserPage.AdminUserEdit;
 import adminUI.adminUserPage.AdminUserReset;
+import dao.Database;
 import dao.DatabaseI;
 import dao.QuestionDatabaseI;
 import dao.UserDatabaseI;
@@ -19,8 +20,12 @@ import view.difficulty.HardQuestionUI;
 import view.difficulty.MediumQuestionUI;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Vector;
 
 public class MyController {
     private DatabaseI db;
@@ -97,6 +102,7 @@ public class MyController {
     public List getAllQuestion() throws SQLException {
         return qdb.getAll();
     }
+
     public void start() {
         new MainUI(this);
 
@@ -178,8 +184,17 @@ public class MyController {
 //        new AdminQuestionDelete(this);
     }
 
+    public String getAnEasyQuestion() throws SQLException {
+        return qdb.getAnEasyQuestion();
+
+    }
+    public String getAnEasyQuestionCorrectAnswer() throws SQLException {
+        return qdb.getAnEasyQuestionCorrectAnswer();
+
+    }
+
     public void openAdminFullQuestionTable() {
-        new AdminAllQuestionTable(this);
+        new AdminAllQuestionTable(this, (Database) db);
     }
 
     private void alreadyInDatabaseFields() {
@@ -196,5 +211,26 @@ public class MyController {
                 "Success", JOptionPane.INFORMATION_MESSAGE);
     }
 
+    public TableModel buildTableModel(ResultSet resultSet)
+            throws SQLException {
+        int columnCount = resultSet.getMetaData().getColumnCount();
 
+        // Column names.
+        Vector<String> columnNames = new Vector<>();
+        for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
+            columnNames.add(resultSet.getMetaData().getColumnName(columnIndex));
+        }
+
+        // Data of the table.
+        Vector<Vector<Object>> dataVector = new Vector<>();
+        while (resultSet.next()) {
+            Vector<Object> rowVector = new Vector<>();
+            for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
+                rowVector.add(resultSet.getObject(columnIndex));
+            }
+            dataVector.add(rowVector);
+        }
+
+        return new DefaultTableModel(dataVector, columnNames);
+    }
 }
