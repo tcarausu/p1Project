@@ -1,4 +1,4 @@
-package view;
+package view.difficulty;
 
 import controller.MyController;
 
@@ -8,24 +8,24 @@ import javax.swing.*;
  * File created on 11/1/2018
  * by Toader
  **/
-public class MediumQuestionUI extends JFrame {
+public class HardQuestionUI extends JFrame {
 
     private MyController controller;
 
     private JButton easy = new JButton("Easy");
-    private JButton hard = new JButton("Hard");
+    private JButton medium = new JButton("Medium");
 
-    private JLabel medium = new JLabel("Medium");
+    private JLabel hard = new JLabel("Hard");
 
     private JButton back = new JButton("Back");
 
     /**
-     * Medium Question UI's Constructor
+     * Hard Question UI's Constructor
      * @param controller of type MyController
      */
-    public MediumQuestionUI(MyController controller) {
+    public HardQuestionUI(MyController controller) {
 
-        super("MediumQuestion UI");
+        super("HardQuestion UI");
         this.controller = controller;
 
         setLayout(null);
@@ -33,10 +33,10 @@ public class MediumQuestionUI extends JFrame {
         setVisible(true);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        setMedium();
+        setQuestionsHard();
     }
 
-    private void setMedium() {
+    private void setQuestionsHard() {
 
         super.add(easy);
         super.add(medium);
@@ -46,18 +46,18 @@ public class MediumQuestionUI extends JFrame {
         setSize(500, 400);
 
         easy.setBounds(70, 50, 100, 40);
-        medium.setBounds(20, 50, 100, 40);
-        hard.setBounds(330, 50, 100, 40);
+        medium.setBounds(200, 50, 100, 40);
+        hard.setBounds(20, 50, 100, 40);
 
         back.setBounds(70, 150, 160, 40);
 
         easy.addActionListener(e -> dispose());
-        hard.addActionListener(e -> dispose());
+        medium.addActionListener(e -> dispose());
 
         back.addActionListener(
                 e -> {
                     dispose();
-                    controller.openDifficultyWindow();
+                controller.openDifficultyWindow();
                 });
     }
 
