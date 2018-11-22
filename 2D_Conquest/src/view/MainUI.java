@@ -1,6 +1,8 @@
 package view;
 
+import controller.AdminController;
 import controller.MyController;
+import controller.QuestionController;
 import dao.Database;
 import dao.QuestionDao;
 import dao.UserDao;
@@ -12,6 +14,8 @@ import java.sql.SQLException;
 public class MainUI extends JFrame {
 
     private MyController controller;
+    private AdminController aController;
+    private QuestionController qController;
 
     private JButton start = new JButton("Start");
     private JButton highScore = new JButton("High Score");
@@ -21,11 +25,14 @@ public class MainUI extends JFrame {
 
     /**
      * Main UI's Constructor
+     *
      * @param controller of type MyController
      */
-    public MainUI(MyController controller) {
+    public MainUI(MyController controller,AdminController aController,QuestionController qController) {
         super("Main UI");
         this.controller = controller;
+        this.aController = aController;
+        this.qController = qController;
 
         setLocation(500, 200);
         setLayout(null);
@@ -69,18 +76,25 @@ public class MainUI extends JFrame {
         adminUI.addActionListener(
                 e -> {
                     dispose();
-                    controller.openAdminPageUI();
+                    aController.openAdminPageUI();
 
                 }
         );
         quit.addActionListener(e -> dispose());
     }
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
         Database database = new Database();
         UserDao userDao = new UserDao();
         QuestionDao questionDao = new QuestionDao();
-        MyController myController = new MyController(database, userDao, questionDao);
+
+        AdminController aController = new AdminController(userDao);
+        QuestionController qController = new QuestionController(questionDao);
+        MyController myController = new MyController(database,  aController, qController);
+
+        aController.setMainControllerAdminController(myController);
+        qController.setMainControllerQuestionController(myController);
+
         myController.start();
     }
 }

@@ -1,5 +1,6 @@
 package adminUI.adminUserPage;
 
+import controller.AdminController;
 import controller.MyController;
 
 import javax.swing.*;
@@ -13,6 +14,8 @@ import java.sql.SQLException;
  **/
 public class AdminUserCreate extends JFrame {
     private MyController controller;
+    private AdminController aController;
+
     private JButton createNewUser = new JButton("Create User");
     private JButton back = new JButton("Back");
     private JTextField txuser = new JTextField(15);
@@ -25,11 +28,13 @@ public class AdminUserCreate extends JFrame {
      *
      * @param controller of type MyController
      */
-    public AdminUserCreate(MyController controller) {
+    public AdminUserCreate(MyController controller, AdminController aController) {
 
         super("Create a New User");
 
         this.controller = controller;
+        this.aController = aController;
+
         setLayout(null);
         setResizable(false);
         setVisible(true);
@@ -69,7 +74,7 @@ public class AdminUserCreate extends JFrame {
                     controller.verifyAdminDataOnUserCreate(puname, ppaswd);
                 } else {
                     clearFields();
-                    controller.openAdminCreateUserUI();
+                    aController.openAdminCreateUserUI();
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -77,7 +82,7 @@ public class AdminUserCreate extends JFrame {
         });
         back.addActionListener(ae -> {
             dispose();
-            controller.openAdminPageUI();
+            aController.openAdminPageUI();
         });
     }
 

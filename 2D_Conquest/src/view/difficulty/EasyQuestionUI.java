@@ -1,6 +1,7 @@
 package view.difficulty;
 
 import controller.MyController;
+import controller.QuestionController;
 
 import javax.swing.*;
 import java.sql.SQLException;
@@ -12,6 +13,7 @@ import java.sql.SQLException;
 public class EasyQuestionUI extends JFrame {
 
     private MyController controller;
+    private QuestionController qController;
 
     private JButton next = new JButton("NEXT");
     private JButton done = new JButton("DONE");
@@ -23,15 +25,20 @@ public class EasyQuestionUI extends JFrame {
     private JRadioButton radioButton4 = new JRadioButton();
     private JButton back = new JButton("Back");
 
+    private JLabel currentNrOfQuestion = new JLabel();
+    private JLabel totalNrOfQuestions = new JLabel();
+
+
     /**
      * Easy Question UI's Constructor
      *
      * @param controller of type MyController
      */
-    public EasyQuestionUI(MyController controller) {
+    public EasyQuestionUI(MyController controller,QuestionController qController) {
 
         super("EasyQuestion UI");
         this.controller = controller;
+        this.qController = qController;
 
         setLayout(null);
         setResizable(false);
@@ -48,6 +55,9 @@ public class EasyQuestionUI extends JFrame {
     private void setEasy() throws SQLException {
 
         super.add(question);
+        super.add(currentNrOfQuestion);
+        super.add(totalNrOfQuestions);
+
         super.add(next);
         super.add(done);
         super.add(back);
@@ -72,12 +82,14 @@ public class EasyQuestionUI extends JFrame {
         back.setBounds(200, 300, 150, 40);
 
 
-        radioButton1.setText(controller.getAnEasyQuestionCorrectAnswer());
-        radioButton2.setText(controller.getAnEasyQuestionCorrectAnswer());
-        radioButton3.setText(controller.getAnEasyQuestionCorrectAnswer());
-        radioButton4.setText(controller.getAnEasyQuestionCorrectAnswer());
+        radioButton1.setText(qController.getAnEasyQuestionCorrectAnswer());
+        radioButton2.setText(qController.getAnEasyQuestionCorrectAnswer());
+        radioButton3.setText(qController.getAnEasyQuestionCorrectAnswer());
+        radioButton4.setText(qController.getAnEasyQuestionCorrectAnswer());
 
-        question.setText(controller.getAnEasyQuestion());
+        question.setText(qController.getAnEasyQuestion());
+        currentNrOfQuestion.setText(qController.getAnEasyQuestion());
+        totalNrOfQuestions.setText(qController.getAnEasyQuestion());
 
         next.addActionListener(e ->
         {

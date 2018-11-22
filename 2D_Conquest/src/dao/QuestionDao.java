@@ -32,21 +32,20 @@ public class QuestionDao implements QuestionDatabaseI {
 
     }
 
-
-    public void createNewQuestion(String subject, String correctAnswer,
+    @Override
+    public void createNewQuestion(String subject,
                                   String typeOfQuestion, String difficultylevel,
                                   String region) throws SQLException {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
         try {
-            String SQL = "Insert into  p1Project.questions(subject,correctAnswer," +
-                    "typeOfQuestion,difficultylevel,region) values(?,?,?,?,?)";
+            String SQL = "Insert into  p1Project.questions(subject," +
+                    "typeOfQuestion,difficultylevel,region) values(?,?,?,?)";
 
             PreparedStatement st = conn.prepareStatement(SQL);
             st.setString(1, subject);
-            st.setString(2, correctAnswer);
-            st.setString(3, typeOfQuestion);
-            st.setString(4, difficultylevel.toLowerCase());
-            st.setString(5, region);
+            st.setString(2, typeOfQuestion);
+            st.setString(3, difficultylevel.toLowerCase());
+            st.setString(4, region);
             st.execute();
         } finally {
             conn.close();
@@ -57,7 +56,7 @@ public class QuestionDao implements QuestionDatabaseI {
     }
 
     @Override
-    public boolean verifyIntroducedQuestion(String subject, String correctAnswer,
+    public boolean verifyIntroducedQuestion(String subject,
                                             String typeOfQuestion, String difficultylevel,
                                             String region
     ) throws SQLException {
@@ -65,7 +64,6 @@ public class QuestionDao implements QuestionDatabaseI {
 
         try {
             String SQL = "SELECT * FROM p1Project.questions where subject ='" + subject + "' " +
-                    " AND correctanswer ='" + correctAnswer + "'" +
                     " AND typeOfQuestion ='" + typeOfQuestion + "'" +
                     " AND difficultylevel ='" + difficultylevel + "'" +
                     " AND region ='" + region + "'";
@@ -111,14 +109,15 @@ public class QuestionDao implements QuestionDatabaseI {
     }
 
     @Override
-    public String getAnEasyQuestionCorrectAnswer() throws SQLException {
+    public String getAnEasyQuestionCorrectAnswer(
+    ) throws SQLException {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
 
         try {
-            String SQL = "SELECT quest.correctanswer FROM p1Project.questions as quest " +
-                    "join p1project.questions_answers as qAnsw on quest.correctanswer = qAnsw.correctanswer " +
-                    "where quest.difficultylevel like 'easy' and  " +
-                    "qAnsw.correctanswer = quest.correctanswer " +
+            String SQL = "SELECT ans.givenanswer FROM p1Project.answer as ans " +
+                    "join p1project.questions_answers as qAnsw on ans.id = qAnsw.answersid " +
+                    "join p1project.questions as quest on quest.id = qAnsw.questionsid " +
+                    "where ans.difficultylevel like 'easy' and qAnsw.valityofanswer = true " +
                     "ORDER BY random()" +
                     "LIMIT 1";
 
@@ -128,7 +127,7 @@ public class QuestionDao implements QuestionDatabaseI {
             ResultSet rs = st.getResultSet();
             ArrayList<String> arr = new ArrayList<>();
             while (rs.next()) {
-                arr.add(rs.getString("correctAnswer")
+                arr.add(rs.getString("givenanswer")
                 );
             }
             return arr.get(0);

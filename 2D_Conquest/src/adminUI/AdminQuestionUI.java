@@ -1,5 +1,6 @@
 package adminUI;
 
+import controller.AdminController;
 import controller.MyController;
 
 import javax.swing.*;
@@ -10,6 +11,7 @@ import javax.swing.*;
  **/
 public class AdminQuestionUI extends JFrame {
     private MyController controller;
+    private AdminController aController;
 
     private JButton addQuestion = new JButton("Create Question");
     private JButton deleteQuestion = new JButton("Delete Question");
@@ -25,9 +27,10 @@ public class AdminQuestionUI extends JFrame {
    /** Admin Question UI's Constructor
     * @param controller of type MyController
     */
-    public AdminQuestionUI(MyController controller) {
+    public AdminQuestionUI(MyController controller,AdminController aController) {
         super("AdminPage Questions UI");
         this.controller = controller;
+        this.aController = aController;
 
         setLocation(500, 200);
         setLayout(null);
@@ -69,7 +72,7 @@ public class AdminQuestionUI extends JFrame {
         addQuestion.addActionListener(
                 e -> {
                     dispose();
-                    controller.openAdminQuestionCreateUI();
+                    aController.openAdminQuestionCreateUI();
 
                 }
         );
@@ -97,7 +100,7 @@ public class AdminQuestionUI extends JFrame {
         back.addActionListener(
                 e -> {
                     dispose();
-                    controller.openAdminPageUI();
+                    aController.openAdminPageUI();
 
                 }
         );
