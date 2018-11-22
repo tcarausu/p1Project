@@ -1,6 +1,6 @@
 package adminUI;
 
-import controller.MyController;
+import controller.AdminController;
 
 import javax.swing.*;
 
@@ -9,7 +9,7 @@ import javax.swing.*;
  * by Toader
  **/
 public class AdminUserUI extends JFrame {
-    private MyController controller;
+    private AdminController aController;
 
     private JButton createUser = new JButton("Create User");
     private JButton resetUser = new JButton("Reset User");
@@ -24,11 +24,11 @@ public class AdminUserUI extends JFrame {
 
     /**
      * Admin User UI's Constructor
-     * @param controller of type MyController
+     * @param aController of type MyController
      */
-    public AdminUserUI(MyController controller) {
+    public AdminUserUI(AdminController aController) {
         super("AdminPage User UI");
-        this.controller = controller;
+        this.aController = aController;
 
         setLocation(500, 200);
         setLayout(null);
@@ -69,35 +69,35 @@ public class AdminUserUI extends JFrame {
         createUser.addActionListener(
                 e -> {
                     dispose();
-                    controller.openAdminCreateUserUI();
+                    aController.openAdminCreateUserUI();
 
                 }
         );
         resetUser.addActionListener(
                 e -> {
                     dispose();
-                    controller.openAdminResetUserUI();
+                    aController.openAdminResetUserUI();
 
                 }
         );
         deleteUser.addActionListener(
                 e -> {
                     dispose();
-                    controller.openAdminDeleteUserUI();
+                    aController.openAdminDeleteUserUI();
 
                 }
         );
         editUser.addActionListener(
                 e -> {
                     dispose();
-                    controller.openAdminEditUserUI();
+                    aController.openAdminEditUserUI();
 
                 }
         );
         back.addActionListener(
                 e -> {
                     dispose();
-                    controller.openAdminPageUI();
+                    aController.openAdminPageUI();
 
                 }
         );

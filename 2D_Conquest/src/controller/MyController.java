@@ -1,18 +1,8 @@
 package controller;
 
-import adminUI.*;
 import adminUI.adminQuestionPage.AdminAllQuestionTable;
-import adminUI.adminQuestionPage.AdminQuestionCreate;
-import adminUI.adminQuestionPage.AdminQuestionDelete;
-import adminUI.adminQuestionPage.AdminQuestionEdit;
-import adminUI.adminUserPage.AdminUserCreate;
-import adminUI.adminUserPage.AdminUserDelete;
-import adminUI.adminUserPage.AdminUserEdit;
-import adminUI.adminUserPage.AdminUserReset;
 import dao.Database;
 import dao.DatabaseI;
-import dao.QuestionDatabaseI;
-import dao.UserDatabaseI;
 import view.*;
 import view.difficulty.DifficultyLevelUI;
 import view.difficulty.EasyQuestionUI;
@@ -24,19 +14,18 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Vector;
 
 public class MyController {
     private DatabaseI db;
-    private UserDatabaseI udb;
-    private QuestionDatabaseI qdb;
+    private QuestionController qController;
+    private AdminController aController;
     private LoginPageUI loginPageUI;
 
-    public MyController(DatabaseI db, UserDatabaseI udb, QuestionDatabaseI qdb) {
+    public MyController(DatabaseI db, AdminController aController, QuestionController qController) {
         this.db = db;
-        this.udb = udb;
-        this.qdb = qdb;
+        this.qController = qController;
+        this.aController = aController;
 
     }
 
@@ -63,48 +52,30 @@ public class MyController {
     public void verifyAdminDataOnUserCreate(String userName, String password) throws SQLException {
         if (db.verifyUserLogin(userName, password)) {
             alreadyInDatabaseFields();
-            openAdminCreateUserUI();
+            aController.openAdminCreateUserUI();
         } else {
-            createNewUser(userName, password);
+            aController.createNewUser(userName, password);
 
         }
 
     }
 
-    private void createNewUser(String userName, String password) throws SQLException {
-        udb.createNewUser(userName, password);
-        dataAddedSuccess();
-        confirmationUI();
-    }
 
-    public void verifyAdminDataOnQuestionCreate(String subject, String correctAnswer,
+    public void verifyAdminDataOnQuestionCreate(String subject,
                                                 String typeOfQuestion, String difficultylevel,
                                                 String region) throws SQLException {
-        if (qdb.verifyIntroducedQuestion(subject, correctAnswer, typeOfQuestion, difficultylevel, region)) {
+        if (qController.verifyIntroducedQuestion(subject, typeOfQuestion, difficultylevel, region)) {
             alreadyInDatabaseFields();
-            openAdminQuestionCreateUI();
+            aController.openAdminQuestionCreateUI();
         } else {
-            createNewQuestion(subject, correctAnswer, typeOfQuestion, difficultylevel, region);
+            qController.createNewQuestion(subject, typeOfQuestion, difficultylevel, region);
 
         }
 
-    }
-
-    private void createNewQuestion(String subject, String correctAnswer,
-                                   String typeOfQuestion, String difficultylevel,
-                                   String region) throws SQLException {
-        qdb.createNewQuestion(subject, correctAnswer,
-                typeOfQuestion, difficultylevel, region);
-        dataAddedSuccess();
-        confirmationUI();
-    }
-
-    public List getAllQuestion() throws SQLException {
-        return qdb.getAll();
     }
 
     public void start() {
-        new MainUI(this);
+        new MainUI(this, aController, qController);
 
     }
 
@@ -121,7 +92,7 @@ public class MyController {
     }
 
     public void openEasyWindow() {
-        new EasyQuestionUI(this);
+        new EasyQuestionUI(this, qController);
     }
 
     public void openMediumWindow() {
@@ -132,69 +103,16 @@ public class MyController {
         new HardQuestionUI(this);
     }
 
-    public void openAdminQuestionUI() {
-        new AdminQuestionUI(this);
-    }
-
-    public void openAdminUserUI() {
-        new AdminUserUI(this);
-    }
-
-    public void openAdminSettingsUI() {
-        new AdminSettingsUI(this);
-    }
-
-    public void openAdminPageUI() {
-        new AdminPageUI(this);
-    }
-
-    public void openAdminCreateUserUI() {
-        new AdminUserCreate(this);
-    }
-
-    public void openAdminDeleteUserUI() {
-        new AdminUserDelete(this);
-    }
-
-    public void openAdminEditUserUI() {
-        new AdminUserEdit(this);
-    }
-
-    public void openAdminResetUserUI() {
-        new AdminUserReset(this);
-    }
-
-    private void confirmationUI() {
-        new ConfirmationUI(this);
+    void confirmationUI() {
+        new ConfirmationUI(this, aController);
     }
 
     public void openScoreWindow() {
         new HighScoreUI(this);
     }
 
-    public void openAdminQuestionCreateUI() {
-        new AdminQuestionCreate(this);
-    }
-
-    public void openAdminQuestionEditUI() {
-//        new AdminQuestionEdit(this);
-    }
-
-    public void openAdminQuestionDeleteUI() {
-//        new AdminQuestionDelete(this);
-    }
-
-    public String getAnEasyQuestion() throws SQLException {
-        return qdb.getAnEasyQuestion();
-
-    }
-    public String getAnEasyQuestionCorrectAnswer() throws SQLException {
-        return qdb.getAnEasyQuestionCorrectAnswer();
-
-    }
-
     public void openAdminFullQuestionTable() {
-        new AdminAllQuestionTable(this, (Database) db);
+        new AdminAllQuestionTable(this, aController, (Database) db);
     }
 
     private void alreadyInDatabaseFields() {
@@ -204,7 +122,7 @@ public class MyController {
                 "Already In Use", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    private void dataAddedSuccess() {
+    void dataAddedSuccess() {
         JOptionPane.showMessageDialog(null,
                 "The information had been introduced with success.\n" +
                         " Please decide your next operation",

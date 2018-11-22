@@ -8,11 +8,11 @@ import java.util.List;
  * by Toader
  **/
 public interface QuestionDatabaseI {
-    void createNewQuestion(String subject, String correctAnswer,
+    void createNewQuestion(String subject,
                            String typeOfQuestion, String difficultylevel,
                            String region) throws SQLException;
 
-    boolean verifyIntroducedQuestion(String subject, String correctAnswer,
+    boolean verifyIntroducedQuestion(String subject,
                                      String typeOfQuestion, String difficultylevel,
                                      String region) throws SQLException;
 

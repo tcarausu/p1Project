@@ -1,9 +1,9 @@
 package view;
 
+import controller.AdminController;
 import controller.MyController;
 
 import javax.swing.*;
-import java.sql.SQLException;
 
 /**
  * File created on 11/12/2018
@@ -11,6 +11,7 @@ import java.sql.SQLException;
  **/
 public class ConfirmationUI extends JFrame {
     private MyController controller;
+    private AdminController aController;
     private JButton continueToGame = new JButton("Play");
     private JButton back = new JButton("Back To Editing");
 
@@ -24,11 +25,12 @@ public class ConfirmationUI extends JFrame {
      *
      * @param controller of type MyController
      */
-    public ConfirmationUI(MyController controller) {
+    public ConfirmationUI(MyController controller,AdminController aController) {
 
         super("Confirmation UI");
 
         this.controller = controller;
+        this.aController = aController;
         setLayout(null);
         setResizable(false);
         setVisible(true);
@@ -66,7 +68,7 @@ public class ConfirmationUI extends JFrame {
         back.addActionListener(ae -> {
 
             dispose();
-            controller.openAdminPageUI();
+            aController.openAdminPageUI();
         });
     }
 

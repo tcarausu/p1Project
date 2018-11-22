@@ -9,7 +9,7 @@ import java.sql.*;
  * by Toader
  **/
 public class Database implements DatabaseI {
-    private  Connection conn;
+    private Connection conn;
 
     public Database() {
 

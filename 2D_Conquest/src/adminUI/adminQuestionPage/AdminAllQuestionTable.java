@@ -1,14 +1,12 @@
 package adminUI.adminQuestionPage;
 
+import controller.AdminController;
 import controller.MyController;
 import dao.Database;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import javax.swing.text.Utilities;
-import java.sql.*;
-import java.util.Vector;
+import java.sql.SQLException;
 
 /**
  * File created on 11/17/2018
@@ -16,11 +14,11 @@ import java.util.Vector;
  **/
 public class AdminAllQuestionTable extends JFrame {
     private MyController controller;
-    private Utilities utilities;
+    private AdminController aController;
     private Database database;
-    private Connection conn;
     private JTable questionsTable;
     private JButton back = new JButton("Back");
+
     /**
      * Admin Question Table Page  UI's Constructor
      *
@@ -28,12 +26,14 @@ public class AdminAllQuestionTable extends JFrame {
      */
     public AdminAllQuestionTable(
             MyController controller,
+            AdminController aController,
             Database database
     ) {
 
         super("All Questions Tsble");
 
         this.controller = controller;
+        this.aController = aController;
         this.database = database;
         setResizable(false);
         setVisible(true);
@@ -63,7 +63,7 @@ public class AdminAllQuestionTable extends JFrame {
 
         back.addActionListener(ae -> {
             dispose();
-            controller.openAdminPageUI();
+            aController.openAdminPageUI();
         });
    /*
 
