@@ -18,6 +18,7 @@ import java.util.Vector;
 
 public class MyController {
     private DatabaseI db;
+    private User user;
     private QuestionController qController;
     private AdminController aController;
     private LoginPageUI loginPageUI;
@@ -31,7 +32,9 @@ public class MyController {
 
     public void verifyUserLogin(String userName, String password) throws SQLException {
         if (db.verifyUserLogin(userName, password)) {
+            setCurrentUser(userName, password);
             openCountryWindow();
+//            openEasyWindow();
         } else {
             loginPageUI.clearFields();
             openLoginWindow();
@@ -60,6 +63,21 @@ public class MyController {
 
     }
 
+    public void updateScoreOnEasyForUser(int nrOfQAnswered) throws SQLException {
+        String difficulty = "easy";
+        String userName = getUser().getUserName();
+        int totalScore = getHighScoreOnUserWithDifficultyLevel(userName, difficulty);
+        int totalNrOfQ = getNrOfQuestionsTotalFromCurrentQuiz(userName, difficulty, totalScore);
+        if (nrOfQAnswered == 0) {
+            updateNrfQuestionsAnswFromCurrentQuiz(nrOfQAnswered + 1, userName, totalScore);
+            updateScoreOnDifficultyForUser(nrOfQAnswered + 1, totalScore, userName, difficulty);
+
+        } else if (nrOfQAnswered >= 1 && nrOfQAnswered < totalNrOfQ) {
+            updateNrfQuestionsAnswFromCurrentQuiz(nrOfQAnswered + 1, userName, totalScore);
+            updateScoreOnDifficultyForUser(nrOfQAnswered + 1, totalScore, userName, difficulty);
+        }
+
+    }
 
     public void verifyAdminDataOnQuestionCreate(String subject,
                                                 String typeOfQuestion, String difficultylevel,
@@ -72,6 +90,33 @@ public class MyController {
 
         }
 
+    }
+
+    public void startEasyQuiz(String username, int total, String difficultylevel) throws SQLException {
+        if (!db.checkHighscoreData(getUser().getUserName(), total, difficultylevel)) {
+            db.startQuiz(getUser().getUserName(), total, difficultylevel);
+
+        }
+    }
+
+    public int getNrOfQuestionsAnsweredFromCurrentQuiz(String username, String difficultylevel, int score) throws SQLException {
+        return db.getNumberOfQuestionsAnsweredFromCurrentQuiz(username, difficultylevel, score);
+    }
+
+    private void updateNrfQuestionsAnswFromCurrentQuiz(int nrOfQAnswered, String userName, int totalScore) throws SQLException {
+        db.updateNrfQuestionsAnswFromCurrentQuiz(nrOfQAnswered, userName, totalScore);
+    }
+
+    private void updateScoreOnDifficultyForUser(int nrOfQAnswered, int totalScore, String userName, String difficulty) throws SQLException {
+        db.updateScoreOnDifficultyForUser(nrOfQAnswered, totalScore, userName, difficulty);
+    }
+
+    public int getHighScoreOnUserWithDifficultyLevel(String username, String difficultyLevel) throws SQLException {
+        return db.getHighScoreOnUserWithDifficultyLevel(username, difficultyLevel);
+    }
+
+    public int getNrOfQuestionsTotalFromCurrentQuiz(String username, String difficultylevel, int score) throws SQLException {
+        return db.getNumberOfQuestionsTotalFromCurrentQuiz(username, difficultylevel, score);
     }
 
     public void start() {
@@ -90,6 +135,7 @@ public class MyController {
     public void openDifficultyWindow() {
         new DifficultyLevelUI(this);
     }
+
 
     public void openEasyWindow() {
         new EasyQuestionUI(this, qController);
@@ -150,5 +196,14 @@ public class MyController {
         }
 
         return new DefaultTableModel(dataVector, columnNames);
+    }
+
+    private void setCurrentUser(String userName, String password) {
+        user = new User(userName, password);
+        user.setController(this);
+    }
+
+    public User getUser() {
+        return user;
     }
 }

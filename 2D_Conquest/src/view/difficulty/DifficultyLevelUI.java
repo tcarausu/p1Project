@@ -3,6 +3,7 @@ package view.difficulty;
 import controller.MyController;
 
 import javax.swing.*;
+import java.sql.SQLException;
 
 /**
  * File created on 11/1/2018
@@ -56,6 +57,11 @@ public class DifficultyLevelUI extends JFrame {
 
         easy.addActionListener(e -> {
             dispose();
+            try {
+                controller.startEasyQuiz(controller.getUser().getUserName(),20,"easy");
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
             controller.openEasyWindow();
         });
         medium.addActionListener(e -> {
