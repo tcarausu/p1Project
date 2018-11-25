@@ -56,17 +56,17 @@ public class AdminUserEdit extends JFrame {
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
-        editMe.addActionListener(ae -> {
-            String puname = txuser.getText();
-            String ppaswd = String.valueOf(pass.getPassword());
-
-            try {
-                dispose();
-                controller.verifyUserLogin(puname, ppaswd);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        });
+//        editMe.addActionListener(ae -> {
+//            String puname = txuser.getText();
+//            String ppaswd = String.valueOf(pass.getPassword());
+//
+//            try {
+//                dispose();
+//                controller.verifyUserLogin(puname, ppaswd);
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//        });
 //        alogin.addActionListener(ae -> {
 //            String puname = txuser.getText();
      //   String ppaswd = String.valueOf(pass.getPassword());

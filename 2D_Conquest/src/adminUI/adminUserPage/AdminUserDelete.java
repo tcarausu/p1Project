@@ -56,26 +56,26 @@ public class AdminUserDelete  extends JFrame {
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
-        blogin.addActionListener(ae -> {
-            String puname = txuser.getText();
-            String ppaswd = String.valueOf(pass.getPassword());
-            try {
-                dispose();
-                controller.verifyUserLogin(puname, ppaswd);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        });
-        alogin.addActionListener(ae -> {
-            String puname = txuser.getText();
-            String ppaswd = String.valueOf(pass.getPassword());
-            try {
-                dispose();
-                controller.verifyAdminLogin(puname, ppaswd);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        });
+//        blogin.addActionListener(ae -> {
+//            String puname = txuser.getText();
+//            String ppaswd = String.valueOf(pass.getPassword());
+//            try {
+//                dispose();
+//                controller.verifyUserLogin(puname, ppaswd);
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//        });
+//        alogin.addActionListener(ae -> {
+//            String puname = txuser.getText();
+//            String ppaswd = String.valueOf(pass.getPassword());
+//            try {
+//                dispose();
+//                controller.verifyAdminLogin(puname, ppaswd);
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//        });
     }
 
     public void clearFields() {
