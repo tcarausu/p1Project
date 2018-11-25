@@ -16,7 +16,6 @@ public class AdminAllQuestionTable extends JFrame {
     private MyController controller;
     private AdminController aController;
     private Database database;
-    private JTable questionsTable;
     private JButton back = new JButton("Back");
 
     /**
@@ -30,7 +29,7 @@ public class AdminAllQuestionTable extends JFrame {
             Database database
     ) {
 
-        super("All Questions Tsble");
+        super("All Questions Table");
 
         this.controller = controller;
         this.aController = aController;
@@ -50,10 +49,11 @@ public class AdminAllQuestionTable extends JFrame {
     private void displayAllQuestionsTable() throws SQLException {
 
         super.setBounds(0, 0, 800, 200);
+        setLocation(500, 300);
 
         JPanel panel = new JPanel();
         TableModel tableModel = controller.buildTableModel(database.getData());
-        questionsTable = new JTable(tableModel);
+        JTable questionsTable = new JTable(tableModel);
         panel.add(new JScrollPane(questionsTable));
 
         back.setBounds(0, 150, 120, 40);

@@ -32,7 +32,7 @@ public class UserDao implements UserDatabaseI {
 
     }
 
-
+    @Override
     public void createNewUser(String username, String password) throws SQLException {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
         try {

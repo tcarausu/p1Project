@@ -5,6 +5,7 @@ import controller.QuestionController;
 
 import javax.swing.*;
 import java.sql.SQLException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * File created on 11/1/2018
@@ -34,7 +35,7 @@ public class EasyQuestionUI extends JFrame {
      *
      * @param controller of type MyController
      */
-    public EasyQuestionUI(MyController controller,QuestionController qController) {
+    public EasyQuestionUI(MyController controller, QuestionController qController) {
 
         super("EasyQuestion UI");
         this.controller = controller;
@@ -70,7 +71,11 @@ public class EasyQuestionUI extends JFrame {
         setSize(600, 400);
         setLocation(500, 200);
 
+        currentNrOfQuestion.setBounds(500, 0, 30, 20);
+        totalNrOfQuestions.setBounds(550, 0, 30, 20);
         question.setBounds(20, 50, 450, 50);
+
+
         next.setBounds(175, 250, 125, 40);
         done.setBounds(325, 250, 125, 40);
 
@@ -81,20 +86,42 @@ public class EasyQuestionUI extends JFrame {
 
         back.setBounds(200, 300, 150, 40);
 
-
         radioButton1.setText(qController.getAnEasyQuestionCorrectAnswer());
         radioButton2.setText(qController.getAnEasyQuestionCorrectAnswer());
         radioButton3.setText(qController.getAnEasyQuestionCorrectAnswer());
         radioButton4.setText(qController.getAnEasyQuestionCorrectAnswer());
 
         question.setText(qController.getAnEasyQuestion());
-        currentNrOfQuestion.setText(qController.getAnEasyQuestion());
-        totalNrOfQuestions.setText(qController.getAnEasyQuestion());
+
+        String userName = controller.getUser().getUserName();
+        String difficultyLevel = "easy";
+        int highscore = controller.getHighScoreOnUserWithDifficultyLevel(userName, difficultyLevel);
+
+        AtomicInteger nrOfCurrentQAnswered = new AtomicInteger(controller.getNrOfQuestionsAnsweredFromCurrentQuiz(userName,
+                difficultyLevel, highscore));
+
+        currentNrOfQuestion.setText(
+                nrOfCurrentQAnswered
+                        + "/");
+
+        totalNrOfQuestions.setText(
+                String.valueOf(
+                        controller.getNrOfQuestionsTotalFromCurrentQuiz(userName, difficultyLevel, highscore)));
 
         next.addActionListener(e ->
         {
             dispose();
-            controller.openEasyWindow();
+            try {
+                int value = nrOfCurrentQAnswered.getAndIncrement();
+
+                controller.updateScoreOnEasyForUser(value);
+                if(value>=20){
+                    dispose();
+                }
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+            controller.openScoreWindow();
 
         });
         done.addActionListener(e -> dispose());
