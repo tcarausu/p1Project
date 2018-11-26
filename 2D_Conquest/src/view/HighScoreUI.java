@@ -39,6 +39,7 @@ public class HighScoreUI extends JFrame {
         super.add(hscore);
 
         setSize(300, 400);
+        setLocation(500,200);
 
         openMe.setBounds(100, 50, 100, 40);
         back.setBounds(70, 150, 160, 40);
