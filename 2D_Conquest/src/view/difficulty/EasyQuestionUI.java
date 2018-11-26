@@ -63,6 +63,12 @@ public class EasyQuestionUI extends JFrame {
         super.add(next);
         super.add(done);
 
+        ButtonGroup answers = new ButtonGroup();
+        answers.add(radioButton1);
+        answers.add(radioButton2);
+        answers.add(radioButton3);
+        answers.add(radioButton4);
+
         super.add(radioButton1);
         super.add(radioButton2);
         super.add(radioButton3);
@@ -86,9 +92,12 @@ public class EasyQuestionUI extends JFrame {
 
 
         radioButton1.setText(qController.getAnEasyQuestionCorrectAnswer());
-        radioButton2.setText(qController.getAnEasyQuestionCorrectAnswer());
-        radioButton3.setText(qController.getAnEasyQuestionCorrectAnswer());
-        radioButton4.setText(qController.getAnEasyQuestionCorrectAnswer());
+        radioButton2.setText(qController.getAnEasyQuestionWrongAnswer());
+        radioButton3.setText(qController.getAnEasyQuestionWrongAnswer());
+        radioButton4.setText(qController.getAnEasyQuestionWrongAnswer());
+
+        String radiobuttonText = radioButton1.getText();
+        String radiobutton2Text = radioButton2.getText();
 
         question.setText(qController.getAnEasyQuestion(region));
 
@@ -107,27 +116,33 @@ public class EasyQuestionUI extends JFrame {
                 String.valueOf(
                         controller.getNrOfQuestionsTotalFromCurrentQuiz(userName, difficultyLevel, highscore)));
 
-        next.addActionListener(e ->
-        {
-            dispose();
-            try {
-                int value = nrOfCurrentQAnswered.getAndIncrement();
 
-                controller.updateScoreOnEasyForUser(value);
-                if (value >= 20) {
-                    dispose();
-                    controller.openScoreWindow();
+            String pizdeojCorrect = String.valueOf(qController.getAnEasyQuestionCorrectAnswer(radiobuttonText));
+            String pizdeojGresit = String.valueOf(qController.getAnEasyQuestionCorrectAnswer(radiobutton2Text));
+            System.out.println(pizdeojCorrect + "  hellnot "+pizdeojGresit);
+
+            next.addActionListener(e ->
+            {
+                dispose();
+                try {
+                    int value = nrOfCurrentQAnswered.getAndIncrement();
+
+                    controller.updateScoreOnEasyForUser(value);
+                    if (value >= 20) {
+                        dispose();
+                        controller.openScoreWindow();
 
                 } else {
                     dispose();
                     controller.openEasyWindow(region);
 
-                }
+                    }
 
-            } catch (SQLException e1) {
-                e1.printStackTrace();
-            }
-        });
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+            });
+
         done.addActionListener(e -> dispose());
 
     }
