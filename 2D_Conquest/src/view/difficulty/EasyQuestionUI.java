@@ -115,14 +115,19 @@ public class EasyQuestionUI extends JFrame {
                 int value = nrOfCurrentQAnswered.getAndIncrement();
 
                 controller.updateScoreOnEasyForUser(value);
-                if(value>=20){
+                if (value >= 20) {
                     dispose();
+                    controller.openScoreWindow();
+
+                } else {
+                    dispose();
+                    controller.openEasyWindow();
+
                 }
+
             } catch (SQLException e1) {
                 e1.printStackTrace();
             }
-            controller.openScoreWindow();
-
         });
         done.addActionListener(e -> dispose());
 

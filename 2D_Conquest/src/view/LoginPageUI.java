@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class LoginPageUI extends JFrame {
     private MyController controller;
-    private JButton blogin = new JButton("Login");
+    private JButton ulogin = new JButton("User Login");
     private JButton alogin = new JButton("Admin Login");
     private JTextField txuser = new JTextField(15);
     private JPasswordField pass = new JPasswordField(15);
@@ -44,17 +44,17 @@ public class LoginPageUI extends JFrame {
         lpass.setBounds(20, 65, 120, 20);
         txuser.setBounds(140, 30, 150, 20);
         pass.setBounds(140, 65, 150, 20);
-        blogin.setBounds(30, 140, 120, 40);
+        ulogin.setBounds(30, 140, 120, 40);
         alogin.setBounds(190, 140, 120, 40);
 
         super.add(luser);
         super.add(lpass);
         super.add(txuser);
         super.add(pass);
-        super.add(blogin);
+        super.add(ulogin);
         super.add(alogin);
 
-        blogin.addActionListener(ae -> {
+        ulogin.addActionListener(ae -> {
 
             String puname = txuser.getText();
             String ppaswd = String.valueOf(pass.getPassword());
@@ -66,7 +66,7 @@ public class LoginPageUI extends JFrame {
                 e.printStackTrace();
             }
         });
-        blogin.addKeyListener(new KeyAdapter() {
+        ulogin.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent event) {
                 if (event.getKeyCode() == KeyEvent.VK_ENTER) {
