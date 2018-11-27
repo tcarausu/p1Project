@@ -124,6 +124,7 @@ public class EasyQuestionUI extends JFrame {
         System.out.println(pizdeojCorrect + "  hellnot " + pizdeojGresit);
 
         if (radioButton1.isSelected()) {
+//            radioButton1.addActionListener();
             radioButton1.addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent e) {
