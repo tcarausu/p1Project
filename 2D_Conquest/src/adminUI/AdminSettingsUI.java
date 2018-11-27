@@ -11,10 +11,10 @@ import javax.swing.*;
 public class AdminSettingsUI extends JFrame {
     private MyController controller;
 
-    private JButton createUser = new JButton("Start");
-    private JButton resetUser = new JButton("Start");
-    private JButton deleteUser = new JButton("Start");
-    private JButton editUser = new JButton("Start");
+    private JButton volume = new JButton("Volume");
+    private JButton defDif = new JButton("Default difficulty"); // easy-medium-hard-off radio button
+    private JButton soundEffects = new JButton("Sound Effects"); // on-off
+    private JButton music = new JButton("Music"); // on-off
 
     private JButton addQuestion = new JButton("Start");
     private JButton deleteQuestion = new JButton("Start");
@@ -25,6 +25,8 @@ public class AdminSettingsUI extends JFrame {
 
     private JButton quit = new JButton("QUIT");
     private JButton back = new JButton("Back");
+
+    private JSlider testslider = new JSlider(0,10);
 
     /**
      * Admin Settings UI's Constructor
@@ -47,10 +49,10 @@ public class AdminSettingsUI extends JFrame {
      */
     private void introduceButton() {
 
-        super.add(createUser);
-        super.add(resetUser);
-        super.add(deleteUser);
-        super.add(addQuestion);
+        super.add(volume);
+        super.add(defDif);
+        super.add(soundEffects);
+        super.add(music);
 
         super.add(setttingsMenu);
         super.add(playGame);
@@ -58,29 +60,31 @@ public class AdminSettingsUI extends JFrame {
         super.add(quit);
         super.add(back);
 
-        setSize(600, 800);
+        super.add(testslider);
 
-        createUser.setBounds(70, 50, 160, 40);
-        resetUser.setBounds(70, 50, 160, 40);
-        deleteUser.setBounds(70, 50, 160, 40);
+        testslider.setBounds(240, 50, 160, 40);
 
-        addQuestion.setBounds(70, 50, 160, 40);
-        addQuestion.setBounds(70, 50, 160, 40);
-        addQuestion.setBounds(70, 50, 160, 40);
+        setSize(500, 700);
 
-        createUser.setBounds(70, 50, 160, 40);
-        setttingsMenu.setBounds(70, 150, 160, 40);
+        volume.setBounds(70, 50, 160, 40);
+        defDif.setBounds(70, 100, 160, 40);
+        soundEffects.setBounds(70, 150, 160, 40);
 
-        quit.setBounds(70, 250, 160, 40);
-        back.setBounds(70, 250, 160, 40);
+        music.setBounds(70, 200, 160, 40);
 
-        createUser.addActionListener(
-                e -> {
-                    dispose();
-                    controller.openLoginWindow();
 
-                }
-        );
+        setttingsMenu.setBounds(70, 400, 160, 40);
+
+        back.setBounds(70, 500, 160, 40);
+        quit.setBounds(70, 550, 160, 40);
+
+//        createUser.addActionListener(
+//                e -> {
+//                    dispose();
+//                    controller.openLoginWindow();
+//
+//                }
+//        );
         setttingsMenu.addActionListener(
                 e -> {
                     dispose();
