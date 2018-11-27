@@ -121,7 +121,7 @@ public class Database implements DatabaseI {
         try {
             String SQL = "update p1project.highscore " +
                     "set  nrofquestionsanswered  = '" + nrOfQAnswered + "' ,"
-                    + " score ='" + score  +"' " +
+                    + " score ='" + score + "' " +
                     "where usernameofplayer ='" + username + "'";
 
             PreparedStatement st = conn.prepareStatement(SQL);
@@ -229,6 +229,8 @@ public class Database implements DatabaseI {
         }
 
     }
+
+
 
     public ResultSet getData() throws SQLException {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres",

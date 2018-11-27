@@ -34,8 +34,8 @@ public class MyController {
     public void verifyUserLogin(String userName, String password) throws SQLException {
         if (db.verifyUserLogin(userName, password)) {
             setCurrentUser(userName, password);
-//            openCountryWindow();
-            openEasyWindow();
+            openCountryWindow();
+//            openEasyWindow();
         } else {
             loginPageUI.clearFields();
             openLoginWindow();
@@ -177,21 +177,27 @@ public class MyController {
         new CountryUI(this);
     }
 
-    public void openDifficultyWindow() {
-        new DifficultyLevelUI(this);
+    public void openDifficultyWindow(String region) throws SQLException {
+        qController.getRegion(region);
+        /*
+        While intitiating the difficulty/question we are going to check it based on the input/zone
+        String getRegion(String region)
+
+         */
+        new DifficultyLevelUI(this, region);
     }
 
 
-    public void openEasyWindow() {
-        new EasyQuestionUI(this, qController);
+    public void openEasyWindow(String region) {
+        new EasyQuestionUI(this, qController, region);
     }
 
-    public void openMediumWindow() {
-        new MediumQuestionUI(this, qController);
+    public void openMediumWindow(String region) {
+        new MediumQuestionUI(this, qController,region);
     }
 
-    public void openHardWindow() {
-        new HardQuestionUI(this, qController);
+    public void openHardWindow(String region) {
+        new HardQuestionUI(this, qController,region);
     }
 
     void confirmationUI() {

@@ -12,6 +12,7 @@ import java.sql.SQLException;
 public class DifficultyLevelUI extends JFrame {
 
     private MyController controller;
+    private String region;
 
     private JButton easy = new JButton("Easy");
     private JButton medium = new JButton("Medium");
@@ -21,12 +22,14 @@ public class DifficultyLevelUI extends JFrame {
 
     /**
      * DifficultyLevel UI's Constructor
+     *
      * @param controller of type MyController
      */
-    public DifficultyLevelUI(MyController controller) {
+    public DifficultyLevelUI(MyController controller, String region) {
 
         super("DifficultyUI UI");
         this.controller = controller;
+        this.region = region;
 
         setLayout(null);
         setResizable(false);
@@ -47,7 +50,7 @@ public class DifficultyLevelUI extends JFrame {
         super.add(back);
 
         setSize(500, 400);
-        setLocation(500,200);
+        setLocation(500, 200);
 
         easy.setBounds(70, 100, 100, 40);
         medium.setBounds(200, 100, 100, 40);
@@ -58,30 +61,34 @@ public class DifficultyLevelUI extends JFrame {
         easy.addActionListener(e -> {
             dispose();
             try {
-                controller.startEasyQuiz(20,"easy");
+                controller.startEasyQuiz(20, "easy");
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
-            controller.openEasyWindow();
+            controller.openEasyWindow(region);
         });
 
         medium.addActionListener(e -> {
             dispose();
+            controller.openMediumWindow(region);
+
             try {
                 controller.startMediumQuiz(20,"medium");
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
-            controller.openMediumWindow();
+            controller.openMediumWindow(region);
         });
         hard.addActionListener(e -> {
             dispose();
+            controller.openHardWindow(region);
+
             try {
                 controller.startHardQuiz(controller.getUser().getUserName(),20,"hard");
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
-            controller.openHardWindow();
+            controller.openHardWindow(region);
         });
 
         back.addActionListener(

@@ -14,6 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class MediumQuestionUI extends JFrame {
 
     private MyController controller;
+    private String region;
     private QuestionController qController;
 
     private JButton next = new JButton("NEXT");
@@ -30,14 +31,17 @@ public class MediumQuestionUI extends JFrame {
 
 
     /**
+     * Medium Question UI's Constructor
+     *
      * Easy Question UI's Constructor
      *
      * @param controller of type MyController
      */
-    public MediumQuestionUI(MyController controller, QuestionController qController) {
+    public MediumQuestionUI(MyController controller, QuestionController qController,String region) {
 
         super("MediumQuestion UI");
         this.controller = controller;
+        this.region = region;
         this.qController = qController;
 
         setLayout(null);
@@ -90,7 +94,7 @@ public class MediumQuestionUI extends JFrame {
 
 
 
-        question.setText(qController.getAnEasyQuestion());
+        question.setText(qController.getAnEasyQuestion(region));
 
         String userName = controller.getUser().getUserName();
         String difficultyLevel = "medium";
@@ -120,7 +124,7 @@ public class MediumQuestionUI extends JFrame {
 
                 } else {
                     dispose();
-                    controller.openMediumWindow();
+                    controller.openMediumWindow(region);
 
                 }
 

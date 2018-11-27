@@ -14,6 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class HardQuestionUI extends JFrame {
 
     private MyController controller;
+    private String region;
     private QuestionController qController;
 
     private JButton next = new JButton("NEXT");
@@ -30,14 +31,17 @@ public class HardQuestionUI extends JFrame {
 
 
     /**
+     * Hard Question UI's Constructor
+     *
      * Easy Question UI's Constructor
      *
      * @param controller of type MyController
      */
-    public HardQuestionUI(MyController controller, QuestionController qController) {
+    public HardQuestionUI(MyController controller, QuestionController qController, String region) {
 
         super("HardQuestion UI");
         this.controller = controller;
+        this.region = region;
         this.qController = qController;
 
         setLayout(null);
@@ -83,12 +87,12 @@ public class HardQuestionUI extends JFrame {
         radioButton4.setBounds(360, 200, 150, 50);
 
 
-        radioButton1.setText(qController.getAnHardQuestionCorrectAnswer());
-        radioButton2.setText(qController.getAnHardQuestionCorrectAnswer());
-        radioButton3.setText(qController.getAnHardQuestionCorrectAnswer());
-        radioButton4.setText(qController.getAnHardQuestionCorrectAnswer());
+        radioButton1.setText(qController.getAHardQuestionCorrectAnswer());
+        radioButton2.setText(qController.getAHardQuestionCorrectAnswer());
+        radioButton3.setText(qController.getAHardQuestionCorrectAnswer());
+        radioButton4.setText(qController.getAHardQuestionCorrectAnswer());
 
-        question.setText(qController.getAnHardQuestion());
+        question.setText(qController.getAHardQuestion());
 
         String userName = controller.getUser().getUserName();
         String difficultyLevel = "hard";
@@ -118,7 +122,7 @@ public class HardQuestionUI extends JFrame {
 
                 } else {
                     dispose();
-                    controller.openHardWindow();
+                    controller.openHardWindow(region);
 
                 }
 

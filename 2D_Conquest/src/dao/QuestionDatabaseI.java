@@ -16,7 +16,7 @@ public interface QuestionDatabaseI {
                                      String typeOfQuestion, String difficultylevel,
                                      String region) throws SQLException;
 
-    String getAnEasyQuestion() throws SQLException;
+    String getAnEasyQuestion(String region) throws SQLException;
 
     String getAMediumQuestion() throws SQLException;
 
@@ -35,4 +35,7 @@ public interface QuestionDatabaseI {
     String getAHardQuestionWrongAnswer() throws SQLException;
 
     List getAll() throws SQLException;
+
+    String getRegion(String region) throws SQLException;
+
 }
