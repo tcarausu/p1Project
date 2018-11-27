@@ -24,7 +24,6 @@ public class EasyQuestionUI extends JFrame {
     private JRadioButton radioButton2 = new JRadioButton();
     private JRadioButton radioButton3 = new JRadioButton();
     private JRadioButton radioButton4 = new JRadioButton();
-    private JButton back = new JButton("Back");
 
     private JLabel currentNrOfQuestion = new JLabel();
     private JLabel totalNrOfQuestions = new JLabel();
@@ -61,30 +60,28 @@ public class EasyQuestionUI extends JFrame {
 
         super.add(next);
         super.add(done);
-        super.add(back);
 
         super.add(radioButton1);
         super.add(radioButton2);
         super.add(radioButton3);
         super.add(radioButton4);
 
-        setSize(600, 400);
+        setSize(750, 500);
         setLocation(500, 200);
 
-        currentNrOfQuestion.setBounds(500, 0, 30, 20);
-        totalNrOfQuestions.setBounds(550, 0, 30, 20);
-        question.setBounds(20, 50, 450, 50);
+        currentNrOfQuestion.setBounds(675, 0, 30, 20);
+        totalNrOfQuestions.setBounds(725, 0, 30, 20);
+        question.setBounds(100, 80, 450, 50);
 
 
-        next.setBounds(175, 250, 125, 40);
-        done.setBounds(325, 250, 125, 40);
+        next.setBounds(600, 180, 110, 40);
+        done.setBounds(600, 340, 110, 40);
 
-        radioButton1.setBounds(25, 150, 125, 40);
-        radioButton2.setBounds(175, 150, 125, 40);
-        radioButton3.setBounds(325, 150, 125, 40);
-        radioButton4.setBounds(475, 150, 125, 40);
+        radioButton1.setBounds(150, 250, 150, 50);
+        radioButton2.setBounds(360, 250, 150, 50);
+        radioButton3.setBounds(150, 200, 150, 50);
+        radioButton4.setBounds(360, 200, 150, 50);
 
-        back.setBounds(200, 300, 150, 40);
 
         radioButton1.setText(qController.getAnEasyQuestionCorrectAnswer());
         radioButton2.setText(qController.getAnEasyQuestionCorrectAnswer());
@@ -131,11 +128,6 @@ public class EasyQuestionUI extends JFrame {
         });
         done.addActionListener(e -> dispose());
 
-        back.addActionListener(
-                e -> {
-                    dispose();
-                    controller.openDifficultyWindow();
-                });
     }
 
 }
