@@ -92,8 +92,6 @@ public class MediumQuestionUI extends JFrame {
         radioButton3.setText(qController.getAnEasyQuestionCorrectAnswer());
         radioButton4.setText(qController.getAnEasyQuestionCorrectAnswer()); // PUT ME MEDIUM WRONG HERE
 
-
-
         question.setText(qController.getAnEasyQuestion(region));
 
         String userName = controller.getUser().getUserName();

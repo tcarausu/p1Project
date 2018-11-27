@@ -89,7 +89,7 @@ public class QuestionDao implements QuestionDatabaseI {
         try {
             String SQL = "SELECT * FROM p1Project.questions " +
                     "where difficultylevel like 'easy'" +
-                    "and region like '"+region+"'" +
+                    "and region like '" + region + "'" +
                     "ORDER BY random()" +
                     "LIMIT 1";
 
@@ -112,8 +112,7 @@ public class QuestionDao implements QuestionDatabaseI {
     }
 
     @Override
-    public String getAnEasyQuestionCorrectAnswer(
-    ) throws SQLException {
+    public String getAnEasyQuestionCorrectAnswer() throws SQLException {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
 
         try {
@@ -143,8 +142,7 @@ public class QuestionDao implements QuestionDatabaseI {
     }
 
     @Override
-    public String getAnEasyQuestionWrongAnswer(
-    ) throws SQLException {
+    public String getAnEasyQuestionWrongAnswer() throws SQLException {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
 
         try {

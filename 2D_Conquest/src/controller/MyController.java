@@ -205,7 +205,7 @@ public class MyController {
     }
 
     public void openScoreWindow() {
-        new HighScoreUI(this);
+        new HighScoreUI(this, aController, (Database) db);
     }
 
     public void openAdminFullQuestionTable() {

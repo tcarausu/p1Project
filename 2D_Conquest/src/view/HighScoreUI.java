@@ -1,8 +1,12 @@
 package view;
 
+import controller.AdminController;
 import controller.MyController;
+import dao.Database;
 
 import javax.swing.*;
+import javax.swing.table.TableModel;
+import java.sql.SQLException;
 
 /**
  * File created on 11/9/2018
@@ -12,45 +16,57 @@ public class HighScoreUI extends JFrame {
     private MyController controller;
 
     private JButton back = new JButton("Back");
-    private JButton openMe = new JButton("Easy");
-    private JLabel hscore = new JLabel("Highscore");
+    private AdminController aController;
+    private Database database;
 
     /**
-     * High Score UI's Constructor
+     * Admin Question Table Page  UI's Constructor
+     *
      * @param controller of type MyController
      */
-    public HighScoreUI(MyController controller) {
+    public HighScoreUI(
+            MyController controller,
+            AdminController aController,
+            Database database
+    ) {
 
-        super("Highscore UI");
+        super("All Questions Table");
+
         this.controller = controller;
-
-        setLayout(null);
+        this.aController = aController;
+        this.database = database;
         setResizable(false);
         setVisible(true);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        setHighScore();
+        try {
+            displayAllQuestionsTable();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void setHighScore() {
 
-        super.add(openMe);
-        super.add(back);
-        super.add(hscore);
+    private void displayAllQuestionsTable() throws SQLException {
 
-        setSize(300, 400);
-        setLocation(500,200);
+        super.setBounds(0, 0, 800, 200);
+        setLocation(500, 300);
 
-        openMe.setBounds(100, 50, 100, 40);
-        back.setBounds(70, 150, 160, 40);
-        hscore.setBounds(20, 50, 120, 20);
+        JPanel panel = new JPanel();
+        TableModel tableModel = controller.buildTableModel(database.getHighscore());
+        JTable questionsTable = new JTable(tableModel);
+        panel.add(new JScrollPane(questionsTable));
 
-        openMe.addActionListener(e -> dispose());
+        back.setBounds(0, 150, 120, 40);
+        panel.add(back);
 
-        back.addActionListener(
-                e -> {
-                    dispose();
-                    controller.start();
-                });
+        super.getContentPane().add(panel);
+
+        back.addActionListener(ae -> {
+            dispose();
+            aController.openAdminPageUI();
+        });
     }
+
+
 }

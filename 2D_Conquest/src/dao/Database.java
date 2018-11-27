@@ -232,11 +232,19 @@ public class Database implements DatabaseI {
 
 
 
-    public ResultSet getData() throws SQLException {
+    public ResultSet getQuestionsData() throws SQLException {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres",
                 "postgres", "postgres");
 
         final String sql = "SELECT * FROM p1Project.questions";
+        final PreparedStatement preparedStatement = conn.prepareStatement(sql);
+        return preparedStatement.executeQuery();
+    }
+    public ResultSet getHighscore() throws SQLException {
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres",
+                "postgres", "postgres");
+
+        final String sql = "SELECT * FROM p1Project.highscore ";
         final PreparedStatement preparedStatement = conn.prepareStatement(sql);
         return preparedStatement.executeQuery();
     }

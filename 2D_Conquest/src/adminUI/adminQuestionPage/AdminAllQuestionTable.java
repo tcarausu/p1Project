@@ -52,7 +52,7 @@ public class AdminAllQuestionTable extends JFrame {
         setLocation(500, 300);
 
         JPanel panel = new JPanel();
-        TableModel tableModel = controller.buildTableModel(database.getData());
+        TableModel tableModel = controller.buildTableModel(database.getQuestionsData());
         JTable questionsTable = new JTable(tableModel);
         panel.add(new JScrollPane(questionsTable));
 
@@ -65,37 +65,6 @@ public class AdminAllQuestionTable extends JFrame {
             dispose();
             aController.openAdminPageUI();
         });
-   /*
-
-        version 2
-        setSize(800, 300);
-        setLocation(500, 300);
-
-
-        TableModel tableModel = controller.buildTableModel(database.getData());
-        questionsTable = new JTable(tableModel);
-        super.add(new JScrollPane(questionsTable));
-
-        super.setVisible(true);
-
-        back.setBounds(350, 220, 120, 40);
-        super.add(back);
-
-        back.addActionListener(ae -> {
-            dispose();
-            controller.openAdminPageUI();
-        });*/
-
-//        setSize(350, 250);
-//        setLocation(500, 280);
-//        setLayout(null);
-//        setResizable(false);
-//        setVisible(true);
-//        final JPanel panel = new JPanel();
-//        final TableModel tableModel = buildTableModel(getData());
-//        final JTable table = new JTable(tableModel);
-//        panel.add(new JScrollPane(table));
-//        super.getContentPane().add(panel);
     }
 
 
