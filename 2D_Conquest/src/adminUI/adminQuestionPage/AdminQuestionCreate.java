@@ -10,7 +10,7 @@ import java.sql.SQLException;
  * File created on 11/17/2018
  * by Toader
  **/
-public class AdminQuestionCreate extends JFrame {
+public class    AdminQuestionCreate extends JFrame {
     private MyController controller;
     private AdminController aController;
 

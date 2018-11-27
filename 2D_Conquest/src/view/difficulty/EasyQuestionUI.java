@@ -4,6 +4,8 @@ import controller.MyController;
 import controller.QuestionController;
 
 import javax.swing.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -117,31 +119,43 @@ public class EasyQuestionUI extends JFrame {
                         controller.getNrOfQuestionsTotalFromCurrentQuiz(userName, difficultyLevel, highscore)));
 
 
-            String pizdeojCorrect = String.valueOf(qController.getAnEasyQuestionCorrectAnswer(radiobuttonText));
-            String pizdeojGresit = String.valueOf(qController.getAnEasyQuestionCorrectAnswer(radiobutton2Text));
-            System.out.println(pizdeojCorrect + "  hellnot "+pizdeojGresit);
+        String pizdeojCorrect = String.valueOf(qController.getAnEasyQuestionCorrectAnswer(radiobuttonText));
+        String pizdeojGresit = String.valueOf(qController.getAnEasyQuestionCorrectAnswer(radiobutton2Text));
+        System.out.println(pizdeojCorrect + "  hellnot " + pizdeojGresit);
 
-            next.addActionListener(e ->
-            {
-                dispose();
-                try {
-                    int value = nrOfCurrentQAnswered.getAndIncrement();
+        if (radioButton1.isSelected()) {
+            radioButton1.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 
-                    controller.updateScoreOnEasyForUser(value);
-                    if (value >= 20) {
                         dispose();
-                        controller.openScoreWindow();
+                        try {
+                            int value = nrOfCurrentQAnswered.getAndIncrement();
+
+                            controller.updateScoreOnEasyForUser(value);
+                            if (value >= 20) {
+                                dispose();
+                                controller.openScoreWindow();
 
                 } else {
                     dispose();
                     controller.openEasyWindow(region);
 
-                    }
+                            }
 
-                } catch (SQLException e1) {
-                    e1.printStackTrace();
+                        } catch (SQLException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
                 }
             });
+        }
+
+       /* next.addActionListener(e ->
+        {
+
+        });*/
 
         done.addActionListener(e -> dispose());
 
