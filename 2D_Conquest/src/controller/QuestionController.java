@@ -23,9 +23,18 @@ public class QuestionController {
         this.mainController = mainController;
     }
 
-
     public String getAnEasyQuestion() throws SQLException {
         return qdb.getAnEasyQuestion();
+
+    }
+
+    public String getAMediumQuestion() throws SQLException {
+        return qdb.getAMediumQuestion();
+
+    }
+
+    public String getAHardQuestion() throws SQLException {
+        return qdb.getAHardQuestion();
 
     }
 
@@ -34,20 +43,46 @@ public class QuestionController {
 
     }
 
+    public String getAMediumQuestionCorrectAnswer() throws SQLException {
+        return qdb.getAMediumQuestionCorrectAnswer();
+
+    }
+
+    public String getAHardQuestionCorrectAnswer() throws SQLException {
+        return qdb.getAHardQuestionCorrectAnswer();
+
+    }
+
+    public String getAnEasyQuestionWrongAnswer() throws SQLException {
+        return qdb.getAnEasyQuestionWrongAnswer();
+
+    }
+
+    public String getAMediumQuestionWrongAnswer() throws SQLException {
+        return qdb.getAMediumQuestionWrongAnswer();
+
+    }
+
+
+    public String getAHardQuestionWrongAnswer() throws SQLException {
+        return qdb.getAHardQuestionWrongAnswer();
+
+    }
+
     void createNewQuestion(String subject,
-                           String typeOfQuestion, String difficultylevel,
+                           String typeOfQuestion, String difficultyLevel,
                            String region) throws SQLException {
         qdb.createNewQuestion(subject,
-                typeOfQuestion, difficultylevel, region);
+                typeOfQuestion, difficultyLevel, region);
         mainController.dataAddedSuccess();
         mainController.confirmationUI();
     }
 
     boolean verifyIntroducedQuestion(String subject,
-                                     String typeOfQuestion, String difficultylevel,
+                                     String typeOfQuestion, String difficultyLevel,
                                      String region) throws SQLException {
         return qdb.verifyIntroducedQuestion(subject,
-                typeOfQuestion, difficultylevel, region);
+                typeOfQuestion, difficultyLevel, region);
     }
 
     public List getAllQuestion() throws SQLException {

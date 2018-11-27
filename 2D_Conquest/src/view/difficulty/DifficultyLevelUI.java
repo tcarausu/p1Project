@@ -58,7 +58,7 @@ public class DifficultyLevelUI extends JFrame {
         easy.addActionListener(e -> {
             dispose();
             try {
-                controller.startEasyQuiz(controller.getUser().getUserName(),20,"easy");
+                controller.startEasyQuiz(20,"easy");
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }

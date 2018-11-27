@@ -18,7 +18,21 @@ public interface QuestionDatabaseI {
 
     String getAnEasyQuestion() throws SQLException;
 
+    String getAMediumQuestion() throws SQLException;
+
+    String getAHardQuestion() throws SQLException;
+
     String getAnEasyQuestionCorrectAnswer() throws SQLException;
+
+    String getAMediumQuestionCorrectAnswer() throws SQLException;
+
+    String getAHardQuestionCorrectAnswer() throws SQLException;
+
+    String getAnEasyQuestionWrongAnswer() throws SQLException;
+
+    String getAMediumQuestionWrongAnswer() throws SQLException;
+
+    String getAHardQuestionWrongAnswer() throws SQLException;
 
     List getAll() throws SQLException;
 }
