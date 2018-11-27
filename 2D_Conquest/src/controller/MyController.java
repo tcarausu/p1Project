@@ -33,8 +33,8 @@ public class MyController {
     public void verifyUserLogin(String userName, String password) throws SQLException {
         if (db.verifyUserLogin(userName, password)) {
             setCurrentUser(userName, password);
-            openCountryWindow();
-//            openEasyWindow();
+//            openCountryWindow();
+            openEasyWindow();
         } else {
             loginPageUI.clearFields();
             openLoginWindow();
@@ -80,27 +80,28 @@ public class MyController {
     }
 
     public void verifyAdminDataOnQuestionCreate(String subject,
-                                                String typeOfQuestion, String difficultylevel,
+                                                String typeOfQuestion, String difficultyLevel,
                                                 String region) throws SQLException {
-        if (qController.verifyIntroducedQuestion(subject, typeOfQuestion, difficultylevel, region)) {
+        if (qController.verifyIntroducedQuestion(subject, typeOfQuestion, difficultyLevel, region)) {
             alreadyInDatabaseFields();
             aController.openAdminQuestionCreateUI();
         } else {
-            qController.createNewQuestion(subject, typeOfQuestion, difficultylevel, region);
+            qController.createNewQuestion(subject, typeOfQuestion, difficultyLevel, region);
 
         }
 
     }
 
-    public void startEasyQuiz(String username, int total, String difficultylevel) throws SQLException {
-        if (!db.checkHighscoreData(getUser().getUserName(), total, difficultylevel)) {
-            db.startQuiz(getUser().getUserName(), total, difficultylevel);
+    public void startEasyQuiz(int total, String difficultyLevel) throws SQLException {
+        String username = getUser().getUserName();
+        if (!db.checkHighscoreData(username, total, difficultyLevel)) {
+            db.startQuiz(username, total, difficultyLevel);
 
         }
     }
 
-    public int getNrOfQuestionsAnsweredFromCurrentQuiz(String username, String difficultylevel, int score) throws SQLException {
-        return db.getNumberOfQuestionsAnsweredFromCurrentQuiz(username, difficultylevel, score);
+    public int getNrOfQuestionsAnsweredFromCurrentQuiz(String username, String difficultyLevel, int score) throws SQLException {
+        return db.getNumberOfQuestionsAnsweredFromCurrentQuiz(username, difficultyLevel, score);
     }
 
     private void updateNrfQuestionsAnswFromCurrentQuiz(int nrOfQAnswered, String userName, int totalScore) throws SQLException {
@@ -115,8 +116,8 @@ public class MyController {
         return db.getHighScoreOnUserWithDifficultyLevel(username, difficultyLevel);
     }
 
-    public int getNrOfQuestionsTotalFromCurrentQuiz(String username, String difficultylevel, int score) throws SQLException {
-        return db.getNumberOfQuestionsTotalFromCurrentQuiz(username, difficultylevel, score);
+    public int getNrOfQuestionsTotalFromCurrentQuiz(String username, String difficultyLevel, int score) throws SQLException {
+        return db.getNumberOfQuestionsTotalFromCurrentQuiz(username, difficultyLevel, score);
     }
 
     public void start() {

@@ -140,6 +140,214 @@ public class QuestionDao implements QuestionDatabaseI {
     }
 
     @Override
+    public String getAnEasyQuestionWrongAnswer(
+    ) throws SQLException {
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
+
+        try {
+            String SQL = "SELECT ans.givenanswer FROM p1Project.answer as ans " +
+                    "join p1project.questions_answers as qAnsw on ans.id = qAnsw.answersid " +
+                    "join p1project.questions as quest on quest.id = qAnsw.questionsid " +
+                    "where ans.difficultylevel like 'easy' and qAnsw.valityofanswer = false " +
+                    "ORDER BY random()" +
+                    "LIMIT 1";
+
+
+            PreparedStatement st = conn.prepareStatement(SQL);
+            st.execute();
+            ResultSet rs = st.getResultSet();
+            ArrayList<String> arr = new ArrayList<>();
+            while (rs.next()) {
+                arr.add(rs.getString("givenanswer")
+                );
+            }
+            return arr.get(0);
+
+        } finally {
+            conn.close();
+
+        }
+
+    }
+
+    @Override
+    public String getAHardQuestion() throws SQLException {
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
+
+        try {
+            String SQL = "SELECT * FROM p1Project.questions " +
+                    "where difficultylevel like 'hard'" +
+                    "ORDER BY random()" +
+                    "LIMIT 1";
+
+            PreparedStatement st = conn.prepareStatement(SQL);
+            st.execute();
+            ResultSet rs = st.getResultSet();
+            ArrayList<String> arr = new ArrayList<>();
+            while (rs.next()) {
+                arr.add("The Question is : "
+                        + rs.getString("subject")
+                );
+            }
+            return arr.get(0);
+
+        } finally {
+            conn.close();
+
+        }
+
+    }
+
+    @Override
+    public String getAMediumQuestion() throws SQLException {
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
+
+        try {
+            String SQL = "SELECT * FROM p1Project.questions " +
+                    "where difficultylevel like 'medium'" +
+                    "ORDER BY random()" +
+                    "LIMIT 1";
+
+            PreparedStatement st = conn.prepareStatement(SQL);
+            st.execute();
+            ResultSet rs = st.getResultSet();
+            ArrayList<String> arr = new ArrayList<>();
+            while (rs.next()) {
+                arr.add("The Question is : "
+                        + rs.getString("subject")
+                );
+            }
+            return arr.get(0);
+
+        } finally {
+            conn.close();
+
+        }
+
+    }
+
+    @Override
+    public String getAHardQuestionCorrectAnswer() throws SQLException {
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
+
+        try {
+            String SQL = "SELECT ans.givenanswer FROM p1Project.answer as ans " +
+                    "join p1project.questions_answers as qAnsw on ans.id = qAnsw.answersid " +
+                    "join p1project.questions as quest on quest.id = qAnsw.questionsid " +
+                    "where ans.difficultylevel like 'hard' and qAnsw.valityofanswer = true " +
+                    "ORDER BY random()" +
+                    "LIMIT 1";
+
+
+            PreparedStatement st = conn.prepareStatement(SQL);
+            st.execute();
+            ResultSet rs = st.getResultSet();
+            ArrayList<String> arr = new ArrayList<>();
+            while (rs.next()) {
+                arr.add(rs.getString("givenanswer")
+                );
+            }
+            return arr.get(0);
+
+        } finally {
+            conn.close();
+
+        }
+
+    }
+
+    @Override
+    public String getAHardQuestionWrongAnswer() throws SQLException {
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
+
+        try {
+            String SQL = "SELECT ans.givenanswer FROM p1Project.answer as ans " +
+                    "join p1project.questions_answers as qAnsw on ans.id = qAnsw.answersid " +
+                    "join p1project.questions as quest on quest.id = qAnsw.questionsid " +
+                    "where ans.difficultylevel like 'hard' and qAnsw.valityofanswer = false " +
+                    "ORDER BY random()" +
+                    "LIMIT 1";
+
+
+            PreparedStatement st = conn.prepareStatement(SQL);
+            st.execute();
+            ResultSet rs = st.getResultSet();
+            ArrayList<String> arr = new ArrayList<>();
+            while (rs.next()) {
+                arr.add(rs.getString("givenanswer")
+                );
+            }
+            return arr.get(0);
+
+        } finally {
+            conn.close();
+
+        }
+
+    }
+
+
+    @Override
+    public String getAMediumQuestionCorrectAnswer() throws SQLException {
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
+
+        try {
+            String SQL = "SELECT ans.givenanswer FROM p1Project.answer as ans " +
+                    "join p1project.questions_answers as qAnsw on ans.id = qAnsw.answersid " +
+                    "join p1project.questions as quest on quest.id = qAnsw.questionsid " +
+                    "where ans.difficultylevel like 'medium' and qAnsw.valityofanswer = true " +
+                    "ORDER BY random()" +
+                    "LIMIT 1";
+
+
+            PreparedStatement st = conn.prepareStatement(SQL);
+            st.execute();
+            ResultSet rs = st.getResultSet();
+            ArrayList<String> arr = new ArrayList<>();
+            while (rs.next()) {
+                arr.add(rs.getString("givenanswer")
+                );
+            }
+            return arr.get(0);
+
+        } finally {
+            conn.close();
+
+        }
+
+    }
+
+    @Override
+    public String getAMediumQuestionWrongAnswer() throws SQLException {
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
+
+        try {
+            String SQL = "SELECT ans.givenanswer FROM p1Project.answer as ans " +
+                    "join p1project.questions_answers as qAnsw on ans.id = qAnsw.answersid " +
+                    "join p1project.questions as quest on quest.id = qAnsw.questionsid " +
+                    "where ans.difficultylevel like 'medium' and qAnsw.valityofanswer = false " +
+                    "ORDER BY random()" +
+                    "LIMIT 1";
+
+
+            PreparedStatement st = conn.prepareStatement(SQL);
+            st.execute();
+            ResultSet rs = st.getResultSet();
+            ArrayList<String> arr = new ArrayList<>();
+            while (rs.next()) {
+                arr.add(rs.getString("givenanswer")
+                );
+            }
+            return arr.get(0);
+
+        } finally {
+            conn.close();
+
+        }
+
+    }
+
+    @Override
     public List getAll() throws SQLException {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
 
