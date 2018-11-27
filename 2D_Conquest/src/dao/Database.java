@@ -232,7 +232,6 @@ public class Database implements DatabaseI {
 
 
 
-    public ResultSet getData() throws SQLException {
     public ResultSet getQuestionsData() throws SQLException {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres",
                 "postgres", "postgres");

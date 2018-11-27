@@ -24,11 +24,9 @@ public class QuestionController {
     }
 
     public String getAnEasyQuestion(String region) throws SQLException {
-        return qdb.getAnEasyQuestion(region);
-    public String getAnEasyQuestion() throws SQLException {
-        String question = qdb.getAnEasyQuestion();
-        if(question.matches(question)){
-            qdb.getAnEasyQuestion();
+        String question = qdb.getAnEasyQuestion(region);
+        if (question.matches(question)) {
+            qdb.getAnEasyQuestion(region);
         }
         return question;
 

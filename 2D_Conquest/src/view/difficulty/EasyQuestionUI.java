@@ -119,10 +119,10 @@ public class EasyQuestionUI extends JFrame {
                         controller.getNrOfQuestionsTotalFromCurrentQuiz(userName, difficultyLevel, highscore)));
 
 
-        String pizdeojCorrect = String.valueOf(qController.getAnEasyQuestionCorrectAnswer(radiobuttonText));
+       /* String pizdeojCorrect = String.valueOf(qController.getAnEasyQuestionCorrectAnswer(radiobuttonText));
         String pizdeojGresit = String.valueOf(qController.getAnEasyQuestionCorrectAnswer(radiobutton2Text));
         System.out.println(pizdeojCorrect + "  hellnot " + pizdeojGresit);
-
+*/
         if (radioButton1.isSelected()) {
 //            radioButton1.addActionListener();
             radioButton1.addKeyListener(new KeyAdapter() {
