@@ -1,64 +1,133 @@
 package view.difficulty;
 
 import controller.MyController;
+import controller.QuestionController;
 
 import javax.swing.*;
+import java.sql.SQLException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * File created on 11/1/2018
- * by Toader
+ * by Alex
  **/
 public class HardQuestionUI extends JFrame {
 
     private MyController controller;
+    private QuestionController qController;
 
-    private JButton easy = new JButton("Easy");
-    private JButton medium = new JButton("Medium");
+    private JButton next = new JButton("NEXT");
+    private JButton done = new JButton("DONE");
 
-    private JLabel hard = new JLabel("Hard");
+    private JLabel question = new JLabel();
+    private JRadioButton radioButton1 = new JRadioButton();
+    private JRadioButton radioButton2 = new JRadioButton();
+    private JRadioButton radioButton3 = new JRadioButton();
+    private JRadioButton radioButton4 = new JRadioButton();
 
-    private JButton back = new JButton("Back");
+    private JLabel currentNrOfQuestion = new JLabel();
+    private JLabel totalNrOfQuestions = new JLabel();
+
 
     /**
-     * Hard Question UI's Constructor
+     * Easy Question UI's Constructor
+     *
      * @param controller of type MyController
      */
-    public HardQuestionUI(MyController controller) {
+    public HardQuestionUI(MyController controller, QuestionController qController) {
 
         super("HardQuestion UI");
         this.controller = controller;
+        this.qController = qController;
 
         setLayout(null);
         setResizable(false);
         setVisible(true);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        setQuestionsHard();
+        try {
+            setHard();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void setQuestionsHard() {
+    private void setHard() throws SQLException {
 
-        super.add(easy);
-        super.add(medium);
-        super.add(hard);
-        super.add(back);
+        super.add(question);
+        super.add(currentNrOfQuestion);
+        super.add(totalNrOfQuestions);
 
-        setSize(500, 400);
+        super.add(next);
+        super.add(done);
 
-        easy.setBounds(70, 50, 100, 40);
-        medium.setBounds(200, 50, 100, 40);
-        hard.setBounds(20, 50, 100, 40);
+        super.add(radioButton1);
+        super.add(radioButton2);
+        super.add(radioButton3);
+        super.add(radioButton4);
 
-        back.setBounds(70, 150, 160, 40);
+        setSize(750, 500);
+        setLocation(500, 200);
 
-        easy.addActionListener(e -> dispose());
-        medium.addActionListener(e -> dispose());
+        currentNrOfQuestion.setBounds(500, 0, 30, 20);
+        totalNrOfQuestions.setBounds(550, 0, 30, 20);
+        question.setBounds(20, 50, 450, 50);
 
-        back.addActionListener(
-                e -> {
+
+        next.setBounds(600, 180, 110, 40);
+        done.setBounds(600, 240, 110, 40);
+
+        radioButton1.setBounds(190, 250, 150, 50);
+        radioButton2.setBounds(360, 250, 150, 50);
+        radioButton3.setBounds(190, 200, 150, 50);
+        radioButton4.setBounds(360, 200, 150, 50);
+
+
+        radioButton1.setText(qController.getAnHardQuestionCorrectAnswer());
+        radioButton2.setText(qController.getAnHardQuestionCorrectAnswer());
+        radioButton3.setText(qController.getAnHardQuestionCorrectAnswer());
+        radioButton4.setText(qController.getAnHardQuestionCorrectAnswer());
+
+        question.setText(qController.getAnHardQuestion());
+
+        String userName = controller.getUser().getUserName();
+        String difficultyLevel = "hard";
+        int highscore = controller.getHighScoreOnUserWithDifficultyLevel(userName, difficultyLevel);
+
+        AtomicInteger nrOfCurrentQAnswered = new AtomicInteger(controller.getNrOfQuestionsAnsweredFromCurrentQuiz(userName,
+                difficultyLevel, highscore));
+
+        currentNrOfQuestion.setText(
+                nrOfCurrentQAnswered
+                        + "/");
+
+        totalNrOfQuestions.setText(
+                String.valueOf(
+                        controller.getNrOfQuestionsTotalFromCurrentQuiz(userName, difficultyLevel, highscore)));
+
+        next.addActionListener(e ->
+        {
+            dispose();
+            try {
+                int value = nrOfCurrentQAnswered.getAndIncrement();
+
+                controller.updateScoreOnHardForUser(value);
+                if (value >= 20) {
                     dispose();
-                controller.openDifficultyWindow();
-                });
+                    controller.openScoreWindow();
+
+                } else {
+                    dispose();
+                    controller.openHardWindow();
+
+                }
+
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+        });
+        done.addActionListener(e -> dispose());
+
     }
 
 }

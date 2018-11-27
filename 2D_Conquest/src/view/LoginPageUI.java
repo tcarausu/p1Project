@@ -36,7 +36,7 @@ public class LoginPageUI extends JFrame {
 
     }
 
-    private void introduceLogin() {
+    private void introduceLogin() { // admin panel de mutat dupa admin login
         setSize(350, 250);
         setLocation(500, 280);
 

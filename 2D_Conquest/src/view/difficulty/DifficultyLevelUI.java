@@ -49,11 +49,11 @@ public class DifficultyLevelUI extends JFrame {
         setSize(500, 400);
         setLocation(500,200);
 
-        easy.setBounds(70, 50, 100, 40);
-        medium.setBounds(200, 50, 100, 40);
-        hard.setBounds(330, 50, 100, 40);
+        easy.setBounds(70, 100, 100, 40);
+        medium.setBounds(200, 100, 100, 40);
+        hard.setBounds(330, 100, 100, 40);
 
-        back.setBounds(70, 150, 160, 40);
+        back.setBounds(68, 200, 362, 40);
 
         easy.addActionListener(e -> {
             dispose();
@@ -64,15 +64,24 @@ public class DifficultyLevelUI extends JFrame {
             }
             controller.openEasyWindow();
         });
+
         medium.addActionListener(e -> {
             dispose();
+            try {
+                controller.startMediumQuiz(20,"medium");
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
             controller.openMediumWindow();
-
         });
         hard.addActionListener(e -> {
             dispose();
+            try {
+                controller.startHardQuiz(controller.getUser().getUserName(),20,"hard");
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
             controller.openHardWindow();
-
         });
 
         back.addActionListener(

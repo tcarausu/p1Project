@@ -1,5 +1,6 @@
 package controller;
 
+import QuestionUI.QuestionWindow;
 import adminUI.adminQuestionPage.AdminAllQuestionTable;
 import dao.Database;
 import dao.DatabaseI;
@@ -76,6 +77,35 @@ public class MyController {
             updateNrfQuestionsAnswFromCurrentQuiz(nrOfQAnswered + 1, userName, totalScore);
             updateScoreOnDifficultyForUser(nrOfQAnswered + 1, totalScore, userName, difficulty);
         }
+    }
+    public void updateScoreOnMediumForUser(int nrOfQAnsweredOnMedium) throws SQLException {
+        String difficulty = "medium";
+        String userName = getUser().getUserName();
+        int totalScore = getHighScoreOnUserWithDifficultyLevel(userName, difficulty);
+        int totalNrOfQ = getNrOfQuestionsTotalFromCurrentQuiz(userName, difficulty, totalScore);
+        if (nrOfQAnsweredOnMedium == 0) {
+            updateNrfQuestionsAnswFromCurrentQuiz(nrOfQAnsweredOnMedium + 1, userName, totalScore);
+            updateScoreOnDifficultyForUser(nrOfQAnsweredOnMedium + 1, totalScore, userName, difficulty);
+
+        } else if (nrOfQAnsweredOnMedium >= 1 && nrOfQAnsweredOnMedium < totalNrOfQ) {
+            updateNrfQuestionsAnswFromCurrentQuiz(nrOfQAnsweredOnMedium + 1, userName, totalScore);
+            updateScoreOnDifficultyForUser(nrOfQAnsweredOnMedium + 1, totalScore, userName, difficulty);
+        }
+    }
+
+    public void updateScoreOnHardForUser(int nrOfQAnsweredOnHard) throws SQLException {
+        String difficulty = "hard";
+        String userName = getUser().getUserName();
+        int totalScore = getHighScoreOnUserWithDifficultyLevel(userName, difficulty);
+        int totalNrOfQ = getNrOfQuestionsTotalFromCurrentQuiz(userName, difficulty, totalScore);
+        if (nrOfQAnsweredOnHard == 0) {
+            updateNrfQuestionsAnswFromCurrentQuiz(nrOfQAnsweredOnHard + 1, userName, totalScore);
+            updateScoreOnDifficultyForUser(nrOfQAnsweredOnHard + 1, totalScore, userName, difficulty);
+
+        } else if (nrOfQAnsweredOnHard >= 1 && nrOfQAnsweredOnHard < totalNrOfQ) {
+            updateNrfQuestionsAnswFromCurrentQuiz(nrOfQAnsweredOnHard + 1, userName, totalScore);
+            updateScoreOnDifficultyForUser(nrOfQAnsweredOnHard + 1, totalScore, userName, difficulty);
+        }
 
     }
 
@@ -96,6 +126,20 @@ public class MyController {
         String username = getUser().getUserName();
         if (!db.checkHighscoreData(username, total, difficultyLevel)) {
             db.startQuiz(username, total, difficultyLevel);
+
+        }
+    }
+    public void startHardQuiz(String username, int total, String difficultylevel) throws SQLException {
+        if (!db.checkHighscoreData(getUser().getUserName(), total, difficultylevel)) {
+            db.startQuiz(getUser().getUserName(), total, difficultylevel);
+
+        }
+    }
+    public void startMediumQuiz(int total, String difficultylevel) throws SQLException {
+        String username = getUser().getUserName();
+
+        if (!db.checkHighscoreData(username, total, difficultylevel)) {
+            db.startQuiz(getUser().getUserName(), total, difficultylevel);
 
         }
     }
@@ -143,11 +187,11 @@ public class MyController {
     }
 
     public void openMediumWindow() {
-        new MediumQuestionUI(this);
+        new MediumQuestionUI(this, qController);
     }
 
     public void openHardWindow() {
-        new HardQuestionUI(this);
+        new HardQuestionUI(this, qController);
     }
 
     void confirmationUI() {
@@ -160,6 +204,11 @@ public class MyController {
 
     public void openAdminFullQuestionTable() {
         new AdminAllQuestionTable(this, aController, (Database) db);
+    }
+
+
+    public void openQuestionWIndow() {
+        new QuestionWindow(this);
     }
 
     private void alreadyInDatabaseFields() {
