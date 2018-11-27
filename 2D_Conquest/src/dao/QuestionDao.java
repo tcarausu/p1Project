@@ -81,12 +81,15 @@ public class QuestionDao implements QuestionDatabaseI {
     }
 
     @Override
-    public String getAnEasyQuestion() throws SQLException {
+    public String getAnEasyQuestion(String region) throws SQLException {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
+
+        //do same for hard and medium
 
         try {
             String SQL = "SELECT * FROM p1Project.questions " +
                     "where difficultylevel like 'easy'" +
+                    "and region like '"+region+"'" +
                     "ORDER BY random()" +
                     "LIMIT 1";
 
@@ -364,5 +367,33 @@ public class QuestionDao implements QuestionDatabaseI {
 
         }
     }
+
+
+    @Override
+    public String getRegion(String region) throws SQLException {
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
+
+        try {
+            String SQL = "SELECT quest.region FROM p1Project.questions as quest " +
+                    "where quest.region ='" + region.toLowerCase() + "'";
+
+            PreparedStatement st = conn.prepareStatement(SQL);
+            st.execute();
+            ResultSet rs = st.getResultSet();
+            ArrayList<String> arr = new ArrayList<>();
+            while (rs.next()) {
+                arr.add(rs.getString("region")
+                );
+            }
+            return arr.get(0);
+
+        } finally {
+            conn.close();
+
+        }
+
+
+    }
+
 
 }

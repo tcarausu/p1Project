@@ -4,6 +4,7 @@ package view;
 import controller.MyController;
 
 import javax.swing.*;
+import java.sql.SQLException;
 
 public class CountryUI extends JFrame {
     private ImageIcon firstImage = new ImageIcon("src/Blank_Map_of_Denmark.png");
@@ -40,7 +41,7 @@ public class CountryUI extends JFrame {
     /**
      * sets up the functionality for the Country "UI"
      */
-    private void countryButtons() {
+    private void countryButtons()  {
 
         super.add(firstMap);
         super.add(secondMap);
@@ -61,11 +62,19 @@ public class CountryUI extends JFrame {
         fifthMap.setBounds(170, 150, 80, 80);
         sixThMap.setBounds(170, 250, 80, 80);
 
+        firstMap.setText("capital");
+
+        String firstMapRegion = firstMap.getText();
+
         back.setBounds(70, 350, 160, 40);
 
         firstMap.addActionListener(e -> {
                     dispose();
-                controller.openDifficultyWindow();
+                    try {
+                        controller.openDifficultyWindow(firstMapRegion);
+                    } catch (SQLException e1) {
+                        e1.printStackTrace();
+                    }
                 }
         );
         secondMap.addActionListener(e -> dispose());

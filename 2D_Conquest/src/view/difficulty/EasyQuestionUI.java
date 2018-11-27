@@ -15,6 +15,7 @@ public class EasyQuestionUI extends JFrame {
 
     private MyController controller;
     private QuestionController qController;
+    private String region;
 
     private JButton next = new JButton("NEXT");
     private JButton done = new JButton("DONE");
@@ -34,11 +35,12 @@ public class EasyQuestionUI extends JFrame {
      *
      * @param controller of type MyController
      */
-    public EasyQuestionUI(MyController controller, QuestionController qController) {
+    public EasyQuestionUI(MyController controller, QuestionController qController, String region) {
 
         super("EasyQuestion UI");
         this.controller = controller;
         this.qController = qController;
+        this.region = region;
 
         setLayout(null);
         setResizable(false);
@@ -88,7 +90,7 @@ public class EasyQuestionUI extends JFrame {
         radioButton3.setText(qController.getAnEasyQuestionCorrectAnswer());
         radioButton4.setText(qController.getAnEasyQuestionCorrectAnswer());
 
-        question.setText(qController.getAnEasyQuestion());
+        question.setText(qController.getAnEasyQuestion(region));
 
         String userName = controller.getUser().getUserName();
         String difficultyLevel = "easy";
@@ -118,7 +120,7 @@ public class EasyQuestionUI extends JFrame {
 
                 } else {
                     dispose();
-                    controller.openEasyWindow();
+                    controller.openEasyWindow(region);
 
                 }
 

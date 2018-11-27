@@ -23,8 +23,8 @@ public class QuestionController {
         this.mainController = mainController;
     }
 
-    public String getAnEasyQuestion() throws SQLException {
-        return qdb.getAnEasyQuestion();
+    public String getAnEasyQuestion(String region) throws SQLException {
+        return qdb.getAnEasyQuestion(region);
 
     }
 
@@ -66,6 +66,11 @@ public class QuestionController {
 
     public String getAHardQuestionWrongAnswer() throws SQLException {
         return qdb.getAHardQuestionWrongAnswer();
+
+    }
+
+    public String getRegion(String region) throws SQLException {
+        return qdb.getRegion(region);
 
     }
 
