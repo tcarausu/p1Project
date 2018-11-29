@@ -12,17 +12,19 @@ public interface DatabaseI {
 
     boolean verifyAdminLogin(String username, String password) throws SQLException;
 
-    void startQuiz(String username, int total, String difficultylevel) throws SQLException;
+    void startQuiz(String username, int total, String difficultyLevel) throws SQLException;
 
-    int getNumberOfQuestionsAnsweredFromCurrentQuiz(String username, String difficultylevel, int score) throws SQLException;
+    int getNumberOfQuestionsAnsweredFromCurrentQuiz(String username, String difficultyLevel, int score) throws SQLException;
 
-    int getNumberOfQuestionsTotalFromCurrentQuiz(String username, String difficultylevel, int score) throws SQLException;
+    int getNumberOfQuestionsTotalFromCurrentQuiz(String username, String difficultyLevel, int score) throws SQLException;
 
-    boolean checkHighscoreData(String username, int total, String difficultylevel) throws SQLException;
+    boolean checkHighScoreData(String username, int total, String difficultyLevel) throws SQLException;
 
     int getHighScoreOnUserWithDifficultyLevel(String username, String difficultyLevel) throws SQLException;
 
-    void updateScoreOnDifficultyForUser(int currentNrOfQuestionsAnswered, int totalScore, String userName, String difficultylevel) throws SQLException;
+    void updateScoreOnDifficultyForUser(int currentNrOfQuestionsAnswered, int totalScore, String userName, String difficultyLevel) throws SQLException;
 
-    void updateNrfQuestionsAnswFromCurrentQuiz(int nrOfQAnswered, String username, int score) throws SQLException;
+    void updateNrfQuestionsAnswerFromCurrentQuiz(int nrOfQAnswered, String username, int score) throws SQLException;
+
+    boolean checkValidityOfAnswerForAQuestion(String answer) throws SQLException;
 }

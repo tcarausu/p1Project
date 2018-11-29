@@ -64,50 +64,49 @@ public class MyController {
 
     }
 
-    public void updateScoreOnEasyForUser(int nrOfQAnswered) throws SQLException {
-        String difficulty = "easy";
+
+    /**
+     * If the value is answer is correct for question, it will increase the score
+     * if not i will stay the same(it will not skip to the next one)
+     *
+     * @param answer
+     * @param nrOfQAnswered
+     * @param difficultyLevel
+     * @throws SQLException
+     */
+    public void updateScoreOnForUserAndDifficulty(String answer, int nrOfQAnswered, String difficultyLevel) throws SQLException {
         String userName = getUser().getUserName();
-        int totalScore = getHighScoreOnUserWithDifficultyLevel(userName, difficulty);
-        int totalNrOfQ = getNrOfQuestionsTotalFromCurrentQuiz(userName, difficulty, totalScore);
+        int totalScore = getHighScoreOnUserWithDifficultyLevel(userName, difficultyLevel);
+        int totalNrOfQ = getNrOfQuestionsTotalFromCurrentQuiz(userName, difficultyLevel, totalScore);
+        if (db.checkValidityOfAnswerForAQuestion(answer)) {
+            if (nrOfQAnswered == 0) {
+                updateNrfQuestionsAnswFromCurrentQuiz(nrOfQAnswered + 1, userName, totalScore);
+                updateScoreOnDifficultyForUser(nrOfQAnswered + 1, totalScore, userName, difficultyLevel);
+
+            } else if (nrOfQAnswered >= 1 && nrOfQAnswered < totalNrOfQ) {
+                updateNrfQuestionsAnswFromCurrentQuiz(nrOfQAnswered + 1, userName, totalScore);
+                updateScoreOnDifficultyForUser(nrOfQAnswered + 1, totalScore, userName, difficultyLevel);
+            }
+        } else {
+
+            skipToNextQuestion(nrOfQAnswered, difficultyLevel);
+        }
+
+    }
+
+    public void skipToNextQuestion(int nrOfQAnswered, String difficultyLevel) throws SQLException {
+        String userName = getUser().getUserName();
+        int totalScore = getHighScoreOnUserWithDifficultyLevel(userName, difficultyLevel);
+        int totalNrOfQ = getNrOfQuestionsTotalFromCurrentQuiz(userName, difficultyLevel, totalScore);
         if (nrOfQAnswered == 0) {
             updateNrfQuestionsAnswFromCurrentQuiz(nrOfQAnswered + 1, userName, totalScore);
-            updateScoreOnDifficultyForUser(nrOfQAnswered + 1, totalScore, userName, difficulty);
 
         } else if (nrOfQAnswered >= 1 && nrOfQAnswered < totalNrOfQ) {
             updateNrfQuestionsAnswFromCurrentQuiz(nrOfQAnswered + 1, userName, totalScore);
-            updateScoreOnDifficultyForUser(nrOfQAnswered + 1, totalScore, userName, difficulty);
-        }
-    }
-    public void updateScoreOnMediumForUser(int nrOfQAnsweredOnMedium) throws SQLException {
-        String difficulty = "medium";
-        String userName = getUser().getUserName();
-        int totalScore = getHighScoreOnUserWithDifficultyLevel(userName, difficulty);
-        int totalNrOfQ = getNrOfQuestionsTotalFromCurrentQuiz(userName, difficulty, totalScore);
-        if (nrOfQAnsweredOnMedium == 0) {
-            updateNrfQuestionsAnswFromCurrentQuiz(nrOfQAnsweredOnMedium + 1, userName, totalScore);
-            updateScoreOnDifficultyForUser(nrOfQAnsweredOnMedium + 1, totalScore, userName, difficulty);
-
-        } else if (nrOfQAnsweredOnMedium >= 1 && nrOfQAnsweredOnMedium < totalNrOfQ) {
-            updateNrfQuestionsAnswFromCurrentQuiz(nrOfQAnsweredOnMedium + 1, userName, totalScore);
-            updateScoreOnDifficultyForUser(nrOfQAnsweredOnMedium + 1, totalScore, userName, difficulty);
-        }
-    }
-
-    public void updateScoreOnHardForUser(int nrOfQAnsweredOnHard) throws SQLException {
-        String difficulty = "hard";
-        String userName = getUser().getUserName();
-        int totalScore = getHighScoreOnUserWithDifficultyLevel(userName, difficulty);
-        int totalNrOfQ = getNrOfQuestionsTotalFromCurrentQuiz(userName, difficulty, totalScore);
-        if (nrOfQAnsweredOnHard == 0) {
-            updateNrfQuestionsAnswFromCurrentQuiz(nrOfQAnsweredOnHard + 1, userName, totalScore);
-            updateScoreOnDifficultyForUser(nrOfQAnsweredOnHard + 1, totalScore, userName, difficulty);
-
-        } else if (nrOfQAnsweredOnHard >= 1 && nrOfQAnsweredOnHard < totalNrOfQ) {
-            updateNrfQuestionsAnswFromCurrentQuiz(nrOfQAnsweredOnHard + 1, userName, totalScore);
-            updateScoreOnDifficultyForUser(nrOfQAnsweredOnHard + 1, totalScore, userName, difficulty);
         }
 
     }
+
 
     public void verifyAdminDataOnQuestionCreate(String subject,
                                                 String typeOfQuestion, String difficultyLevel,
@@ -124,24 +123,32 @@ public class MyController {
 
     public void startEasyQuiz(int total, String difficultyLevel) throws SQLException {
         String username = getUser().getUserName();
-        if (!db.checkHighscoreData(username, total, difficultyLevel)) {
+        if (!db.checkHighScoreData(username, total, difficultyLevel)) {
             db.startQuiz(username, total, difficultyLevel);
 
         }
     }
-    public void startHardQuiz(String username, int total, String difficultylevel) throws SQLException {
-        if (!db.checkHighscoreData(getUser().getUserName(), total, difficultylevel)) {
-            db.startQuiz(getUser().getUserName(), total, difficultylevel);
+
+    public void startHardQuiz(int total, String difficultyLevel) throws SQLException {
+        String username = getUser().getUserName();
+        if (db.checkHighScoreData(username, total, difficultyLevel)) {
+            db.startQuiz(username, total, difficultyLevel);
 
         }
     }
-    public void startMediumQuiz(int total, String difficultylevel) throws SQLException {
+
+    public void startMediumQuiz(int total, String difficultyLevel) throws SQLException {
         String username = getUser().getUserName();
 
-        if (!db.checkHighscoreData(username, total, difficultylevel)) {
-            db.startQuiz(getUser().getUserName(), total, difficultylevel);
+        if (db.checkHighScoreData(username, total, difficultyLevel)) {
+            db.startQuiz(getUser().getUserName(), total, difficultyLevel);
 
         }
+    }
+
+    public boolean validityOfValueFromArray(
+    ) {
+        return true;
     }
 
     public int getNrOfQuestionsAnsweredFromCurrentQuiz(String username, String difficultyLevel, int score) throws SQLException {
@@ -149,11 +156,20 @@ public class MyController {
     }
 
     private void updateNrfQuestionsAnswFromCurrentQuiz(int nrOfQAnswered, String userName, int totalScore) throws SQLException {
-        db.updateNrfQuestionsAnswFromCurrentQuiz(nrOfQAnswered, userName, totalScore);
+        db.updateNrfQuestionsAnswerFromCurrentQuiz(nrOfQAnswered, userName, totalScore);
     }
 
     private void updateScoreOnDifficultyForUser(int nrOfQAnswered, int totalScore, String userName, String difficulty) throws SQLException {
-        db.updateScoreOnDifficultyForUser(nrOfQAnswered, totalScore, userName, difficulty);
+        if (difficulty == "easy") {
+            db.updateScoreOnDifficultyForUser(nrOfQAnswered, totalScore + 100, userName, difficulty);
+
+        } else if (difficulty == "medium") {
+            db.updateScoreOnDifficultyForUser(nrOfQAnswered, totalScore + 200, userName, difficulty);
+
+        } else if (difficulty == "hard") {
+            db.updateScoreOnDifficultyForUser(nrOfQAnswered, totalScore + 500, userName, difficulty);
+
+        }
     }
 
     public int getHighScoreOnUserWithDifficultyLevel(String username, String difficultyLevel) throws SQLException {
@@ -178,13 +194,13 @@ public class MyController {
     }
 
     public void openDifficultyWindow(String region) throws SQLException {
-        qController.getRegion(region);
+
         /*
         While intitiating the difficulty/question we are going to check it based on the input/zone
         String getRegion(String region)
 
          */
-        new DifficultyLevelUI(this, region);
+        new DifficultyLevelUI(this, qController.getRegion(region));
     }
 
 
@@ -193,11 +209,11 @@ public class MyController {
     }
 
     public void openMediumWindow(String region) {
-        new MediumQuestionUI(this, qController,region);
+        new MediumQuestionUI(this, qController, region);
     }
 
     public void openHardWindow(String region) {
-        new HardQuestionUI(this, qController,region);
+        new HardQuestionUI(this, qController, region);
     }
 
     void confirmationUI() {
@@ -229,6 +245,12 @@ public class MyController {
                 "The information had been introduced with success.\n" +
                         " Please decide your next operation",
                 "Success", JOptionPane.INFORMATION_MESSAGE);
+    }
+    public void answerSelectionFailure() {
+        JOptionPane.showMessageDialog(null,
+                "You have not selected anything as an answer.\n" +
+                        " Please select your answer",
+                "Failure", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public TableModel buildTableModel(ResultSet resultSet)
@@ -262,4 +284,6 @@ public class MyController {
     public User getUser() {
         return user;
     }
+
+
 }

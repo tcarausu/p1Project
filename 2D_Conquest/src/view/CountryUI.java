@@ -31,7 +31,7 @@ public class CountryUI extends JFrame {
         this.controller = controller;
 
         setLayout(null);
-        setResizable(false);
+        setResizable(true);
         setVisible(true);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
@@ -52,8 +52,8 @@ public class CountryUI extends JFrame {
 
         super.add(back);
 
-        setSize(400, 600);
-        setLocation(500,200);
+        setSize(900, 700);
+        setLocation(250,50);
 
         firstMap.setBounds(70, 50, 80, 80);
         secondMap.setBounds(70, 150, 80, 80);

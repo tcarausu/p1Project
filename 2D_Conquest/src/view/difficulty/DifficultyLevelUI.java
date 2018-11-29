@@ -84,7 +84,7 @@ public class DifficultyLevelUI extends JFrame {
             controller.openHardWindow(region);
 
             try {
-                controller.startHardQuiz(controller.getUser().getUserName(),20,"hard");
+                controller.startHardQuiz(20,"hard");
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
