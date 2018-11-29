@@ -8,7 +8,6 @@ import dao.QuestionDao;
 import dao.UserDao;
 
 import javax.swing.*;
-import java.sql.SQLException;
 
 
 public class MainUI extends JFrame {
@@ -52,12 +51,11 @@ public class MainUI extends JFrame {
         super.add(highScore);
         super.add(adminUI);
 
-        setSize(300, 500);
+        setSize(300, 385);
 
         start.setBounds(70, 50, 160, 40);
         highScore.setBounds(70, 150, 160, 40);
-        adminUI.setBounds(70, 250, 160, 40);
-        quit.setBounds(70, 350, 160, 40);
+        quit.setBounds(70, 250, 160, 40);
 
         start.addActionListener(
                 e -> {

@@ -1,6 +1,7 @@
 package view;
 
 
+import controller.AdminController;
 import controller.MyController;
 
 import javax.swing.*;
@@ -10,6 +11,7 @@ public class CountryUI extends JFrame {
     private ImageIcon firstImage = new ImageIcon("src/Blank_Map_of_Denmark.png");
 
     private MyController controller;
+    private AdminController aController;
 
     private JButton firstMap = new JButton(firstImage);
     private JButton secondMap = new JButton(firstImage);
@@ -25,13 +27,14 @@ public class CountryUI extends JFrame {
      * Country UI's Constructor
      * @param controller of type MyController
      */
-    public CountryUI(MyController controller) {
+    public CountryUI(MyController controller,AdminController aController) {
 
         super("Country UI");
         this.controller = controller;
+        this.aController = aController;
 
         setLayout(null);
-        setResizable(true);
+        setResizable(false);
         setVisible(true);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
@@ -51,7 +54,7 @@ public class CountryUI extends JFrame {
         super.add(sixThMap);
 
         super.add(back);
-
+        
         setSize(900, 700);
         setLocation(250,50);
 
@@ -86,7 +89,7 @@ public class CountryUI extends JFrame {
         back.addActionListener(
                 e -> {
                     dispose();
-                    LoginPageUI loginPageUI = new LoginPageUI(controller);
+                    LoginPageUI loginPageUI = new LoginPageUI(controller,aController);
                     loginPageUI.setVisible(true);
                 });
     }
