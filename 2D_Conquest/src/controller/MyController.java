@@ -87,7 +87,7 @@ public class MyController {
                 updateNrfQuestionsAnswFromCurrentQuiz(nrOfQAnswered + 1, userName, totalScore);
                 updateScoreOnDifficultyForUser(nrOfQAnswered + 1, totalScore, userName, difficultyLevel);
             }
-        } else if(!db.checkValidityOfAnswerForAQuestion(answer)){
+        } else {
 
             skipToNextQuestion(nrOfQAnswered, difficultyLevel);
         }
@@ -245,6 +245,12 @@ public class MyController {
                 "The information had been introduced with success.\n" +
                         " Please decide your next operation",
                 "Success", JOptionPane.INFORMATION_MESSAGE);
+    }
+    public void answerSelectionFailure() {
+        JOptionPane.showMessageDialog(null,
+                "You have not selected anything as an answer.\n" +
+                        " Please select your answer",
+                "Failure", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public TableModel buildTableModel(ResultSet resultSet)

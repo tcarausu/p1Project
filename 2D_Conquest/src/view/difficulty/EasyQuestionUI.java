@@ -170,7 +170,8 @@ public class EasyQuestionUI extends JFrame {
                     validationOfRButton(radioButton4.getText(), value, difficultyLevel);
                 } else if (!radioButton1.isSelected() && !radioButton2.isSelected()
                         && !radioButton3.isSelected() && !radioButton4.isSelected()) {
-                    validationOfRButton("", value, difficultyLevel);
+                    controller.answerSelectionFailure();
+                    controller.openEasyWindow(region);
                 }
 
             } catch (SQLException e1) {

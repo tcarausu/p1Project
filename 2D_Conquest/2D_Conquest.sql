@@ -9,7 +9,7 @@ create table p1project.admin
 );
 
 insert into p1project.admin
-values (default, 'admin1', 'admin');
+values (default, 'admin', 'admin');
 
 
 create table p1project.user
@@ -42,7 +42,7 @@ create table p1project.questions
   difficultyLevel varchar(6) references p1project.difficulty (difficulty),
   region          varchar(25)
     CONSTRAINT denmarkRegion CHECK
-      (region IN ('capital', 'midtjuland', 'nordjyland', 'southDenmark', 'zealand')) not null, -- add real life regions
+      (region IN ('capital', lower('midDenmark'), lower('northDenmark'), lower('southDenmark'))) not null,
   primary key (id, subject, typeOfQuestion, difficultyLevel)
 );
 create table p1project.answer
