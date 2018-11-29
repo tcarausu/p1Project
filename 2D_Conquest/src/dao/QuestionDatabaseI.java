@@ -9,30 +9,24 @@ import java.util.List;
  **/
 public interface QuestionDatabaseI {
     void createNewQuestion(String subject,
-                           String typeOfQuestion, String difficultylevel,
+                           String typeOfQuestion, String difficultyLevel,
                            String region) throws SQLException;
 
     boolean verifyIntroducedQuestion(String subject,
-                                     String typeOfQuestion, String difficultylevel,
+                                     String typeOfQuestion, String difficultyLevel,
                                      String region) throws SQLException;
 
     String getAnEasyQuestion(String region) throws SQLException;
 
-    String getAMediumQuestion() throws SQLException;
+    String getAMediumQuestion(String region) throws SQLException;
 
-    String getAHardQuestion() throws SQLException;
+    String getAHardQuestion(String region) throws SQLException;
 
-    String getAnEasyQuestionCorrectAnswer() throws SQLException;
+    String getAMediumQuestionCorrectAnswer(String region) throws SQLException;
 
-    String getAMediumQuestionCorrectAnswer() throws SQLException;
+    String getAHardQuestionCorrectAnswer(String region) throws SQLException;
 
-    String getAHardQuestionCorrectAnswer() throws SQLException;
-
-    String getAnEasyQuestionWrongAnswer() throws SQLException;
-
-    String getAMediumQuestionWrongAnswer() throws SQLException;
-
-    String getAHardQuestionWrongAnswer() throws SQLException;
+    List<String> getAnEasyQuestionAnswerList(String region, String question) throws SQLException;
 
     List getAll() throws SQLException;
 

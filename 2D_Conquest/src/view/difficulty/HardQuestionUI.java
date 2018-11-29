@@ -56,6 +56,7 @@ public class HardQuestionUI extends JFrame {
         }
     }
 
+    @SuppressWarnings("Duplicates")
     private void setHard() throws SQLException {
 
         super.add(question);
@@ -87,19 +88,19 @@ public class HardQuestionUI extends JFrame {
         radioButton4.setBounds(360, 200, 150, 50);
 
 
-        radioButton1.setText(qController.getAHardQuestionCorrectAnswer());
-        radioButton2.setText(qController.getAHardQuestionCorrectAnswer());
-        radioButton3.setText(qController.getAHardQuestionCorrectAnswer());
-        radioButton4.setText(qController.getAHardQuestionCorrectAnswer());
+        radioButton1.setText(qController.getAHardQuestionCorrectAnswer(region));
+        radioButton2.setText(qController.getAHardQuestionCorrectAnswer(region));
+        radioButton3.setText(qController.getAHardQuestionCorrectAnswer(region));
+        radioButton4.setText(qController.getAHardQuestionCorrectAnswer(region));
 
-        question.setText(qController.getAHardQuestion());
+        question.setText(qController.getAHardQuestion(region));
 
         String userName = controller.getUser().getUserName();
         String difficultyLevel = "hard";
-        int highscore = controller.getHighScoreOnUserWithDifficultyLevel(userName, difficultyLevel);
+        int highScore = controller.getHighScoreOnUserWithDifficultyLevel(userName, difficultyLevel);
 
         AtomicInteger nrOfCurrentQAnswered = new AtomicInteger(controller.getNrOfQuestionsAnsweredFromCurrentQuiz(userName,
-                difficultyLevel, highscore));
+                difficultyLevel, highScore));
 
         currentNrOfQuestion.setText(
                 nrOfCurrentQAnswered
@@ -107,7 +108,7 @@ public class HardQuestionUI extends JFrame {
 
         totalNrOfQuestions.setText(
                 String.valueOf(
-                        controller.getNrOfQuestionsTotalFromCurrentQuiz(userName, difficultyLevel, highscore)));
+                        controller.getNrOfQuestionsTotalFromCurrentQuiz(userName, difficultyLevel, highScore)));
 
         next.addActionListener(e ->
         {
@@ -115,15 +116,17 @@ public class HardQuestionUI extends JFrame {
             try {
                 int value = nrOfCurrentQAnswered.getAndIncrement();
 
-                controller.updateScoreOnHardForUser(value);
-                if (value >= 20) {
-                    dispose();
-                    controller.openScoreWindow();
-
-                } else {
-                    dispose();
-                    controller.openHardWindow(region);
-
+                if (radioButton1.isSelected()) {
+                    validationOfRButton(radioButton1.getText(),value, difficultyLevel);
+                }
+                if (radioButton2.isSelected()) {
+                    validationOfRButton(radioButton2.getText(),value, difficultyLevel);
+                }
+                if (radioButton3.isSelected()) {
+                    validationOfRButton(radioButton3.getText(),value, difficultyLevel);
+                }
+                if (radioButton4.isSelected()) {
+                    validationOfRButton(radioButton4.getText(),value, difficultyLevel);
                 }
 
             } catch (SQLException e1) {
@@ -133,5 +136,16 @@ public class HardQuestionUI extends JFrame {
         done.addActionListener(e -> dispose());
 
     }
+    private void validationOfRButton(String answer, int value, String difficultyLevel) throws SQLException {
+        controller.updateScoreOnForUserAndDifficulty(answer,value, difficultyLevel);
+        if (value >= 20) {
+            dispose();
+            controller.openScoreWindow();
 
+        } else {
+            dispose();
+            controller.openHardWindow(region);
+
+        }
+    }
 }

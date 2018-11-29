@@ -32,12 +32,12 @@ public class MediumQuestionUI extends JFrame {
 
     /**
      * Medium Question UI's Constructor
-     *
+     * <p>
      * Easy Question UI's Constructor
      *
      * @param controller of type MyController
      */
-    public MediumQuestionUI(MyController controller, QuestionController qController,String region) {
+    public MediumQuestionUI(MyController controller, QuestionController qController, String region) {
 
         super("MediumQuestion UI");
         this.controller = controller;
@@ -56,6 +56,7 @@ public class MediumQuestionUI extends JFrame {
         }
     }
 
+    @SuppressWarnings("Duplicates")
     private void setMedium() throws SQLException {
 
         super.add(question);
@@ -87,19 +88,19 @@ public class MediumQuestionUI extends JFrame {
         radioButton4.setBounds(360, 200, 150, 50);
 
 
-        radioButton1.setText(qController.getAnEasyQuestionCorrectAnswer());
-        radioButton2.setText(qController.getAnEasyQuestionCorrectAnswer());
-        radioButton3.setText(qController.getAnEasyQuestionCorrectAnswer());
-        radioButton4.setText(qController.getAnEasyQuestionCorrectAnswer()); // PUT ME MEDIUM WRONG HERE
+        radioButton1.setText(qController.getAMediumQuestionCorrectAnswer(region));
+        radioButton2.setText(qController.getAMediumQuestionCorrectAnswer(region));
+        radioButton3.setText(qController.getAMediumQuestionCorrectAnswer(region));
+        radioButton4.setText(qController.getAMediumQuestionCorrectAnswer(region)); // PUT ME MEDIUM WRONG HERE
 
-        question.setText(qController.getAnEasyQuestion(region));
+        question.setText(qController.getAMediumQuestion(region));
 
         String userName = controller.getUser().getUserName();
         String difficultyLevel = "medium";
-        int highscore = controller.getHighScoreOnUserWithDifficultyLevel(userName, difficultyLevel);
+        int highScore = controller.getHighScoreOnUserWithDifficultyLevel(userName, difficultyLevel);
 
         AtomicInteger nrOfCurrentQAnswered = new AtomicInteger(controller.getNrOfQuestionsAnsweredFromCurrentQuiz(userName,
-                difficultyLevel, highscore));
+                difficultyLevel, highScore));
 
         currentNrOfQuestion.setText(
                 nrOfCurrentQAnswered
@@ -107,7 +108,7 @@ public class MediumQuestionUI extends JFrame {
 
         totalNrOfQuestions.setText(
                 String.valueOf(
-                        controller.getNrOfQuestionsTotalFromCurrentQuiz(userName, difficultyLevel, highscore)));
+                        controller.getNrOfQuestionsTotalFromCurrentQuiz(userName, difficultyLevel, highScore)));
 
         next.addActionListener(e ->
         {
@@ -115,15 +116,17 @@ public class MediumQuestionUI extends JFrame {
             try {
                 int value = nrOfCurrentQAnswered.getAndIncrement();
 
-                controller.updateScoreOnMediumForUser(value);
-                if (value >= 20) {
-                    dispose();
-                    controller.openScoreWindow();
-
-                } else {
-                    dispose();
-                    controller.openMediumWindow(region);
-
+                if (radioButton1.isSelected()) {
+                    validationOfRButton(radioButton1.getText(), value, difficultyLevel);
+                }
+                if (radioButton2.isSelected()) {
+                    validationOfRButton(radioButton2.getText(), value, difficultyLevel);
+                }
+                if (radioButton3.isSelected()) {
+                    validationOfRButton(radioButton3.getText(), value, difficultyLevel);
+                }
+                if (radioButton4.isSelected()) {
+                    validationOfRButton(radioButton4.getText(), value, difficultyLevel);
                 }
 
             } catch (SQLException e1) {
@@ -134,4 +137,16 @@ public class MediumQuestionUI extends JFrame {
 
     }
 
+    private void validationOfRButton(String answer, int value, String difficultyLevel) throws SQLException {
+        controller.updateScoreOnForUserAndDifficulty(answer, value, difficultyLevel);
+        if (value >= 20) {
+            dispose();
+            controller.openScoreWindow();
+
+        } else {
+            dispose();
+            controller.openMediumWindow(region);
+
+        }
+    }
 }

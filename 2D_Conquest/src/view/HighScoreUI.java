@@ -30,7 +30,7 @@ public class HighScoreUI extends JFrame {
             Database database
     ) {
 
-        super("All Questions Table");
+        super("High Score");
 
         this.controller = controller;
         this.aController = aController;
@@ -49,8 +49,8 @@ public class HighScoreUI extends JFrame {
 
     private void displayAllQuestionsTable() throws SQLException {
 
-        super.setBounds(0, 0, 800, 200);
-        setLocation(500, 300);
+        super.setBounds(0, 0, 500, 500);
+        setLocation(500, 200);
 
         JPanel panel = new JPanel();
         TableModel tableModel = controller.buildTableModel(database.getHighscore());

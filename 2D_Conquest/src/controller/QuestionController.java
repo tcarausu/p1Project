@@ -24,59 +24,33 @@ public class QuestionController {
     }
 
     public String getAnEasyQuestion(String region) throws SQLException {
-        String question = qdb.getAnEasyQuestion(region);
-        if (question.matches(question)) {
-            qdb.getAnEasyQuestion(region);
-        }
-        return question;
+        return qdb.getAnEasyQuestion(region);
+    }
+
+    public String getAMediumQuestion(String region) throws SQLException {
+        return qdb.getAMediumQuestion(region);
+    }
+
+    public String getAHardQuestion(String region) throws SQLException {
+        return qdb.getAHardQuestion(region);
 
     }
 
-    public String getAMediumQuestion() throws SQLException {
-        return qdb.getAMediumQuestion();
+    public List<String> getAnEasyQuestionAnswerList(String region, String question) throws SQLException {
+        return qdb.getAnEasyQuestionAnswerList(region, question);
 
     }
 
-    public String getAHardQuestion() throws SQLException {
-        return qdb.getAHardQuestion();
+    public String getAMediumQuestionCorrectAnswer(String region) throws SQLException {
+        return qdb.getAMediumQuestionCorrectAnswer(region);
 
     }
 
-    public String getAnEasyQuestionCorrectAnswer() throws SQLException {
-        return qdb.getAnEasyQuestionCorrectAnswer();
+    public String getAHardQuestionCorrectAnswer(String region) throws SQLException {
+        return qdb.getAHardQuestionCorrectAnswer(region);
 
     }
 
-    public String getAMediumQuestionCorrectAnswer() throws SQLException {
-        return qdb.getAMediumQuestionCorrectAnswer();
-
-    }
-
-    public String getAHardQuestionCorrectAnswer() throws SQLException {
-        return qdb.getAHardQuestionCorrectAnswer();
-
-    }
-
-    public String getAnEasyQuestionWrongAnswer() throws SQLException {
-        return qdb.getAnEasyQuestionWrongAnswer();
-
-    }
-
-    public String getAMediumQuestionWrongAnswer() throws SQLException {
-        return qdb.getAMediumQuestionWrongAnswer();
-
-    }
-
-
-    public String getAHardQuestionWrongAnswer() throws SQLException {
-        return qdb.getAHardQuestionWrongAnswer();
-
-    }
-
-    public String getRegion(String region) throws SQLException {
-        return qdb.getRegion(region);
-
-    }
 
     void createNewQuestion(String subject,
                            String typeOfQuestion, String difficultyLevel,
@@ -92,6 +66,11 @@ public class QuestionController {
                                      String region) throws SQLException {
         return qdb.verifyIntroducedQuestion(subject,
                 typeOfQuestion, difficultyLevel, region);
+    }
+
+    String getRegion(String region) throws SQLException {
+        return qdb.getRegion(region);
+
     }
 
     public List getAllQuestion() throws SQLException {

@@ -36,6 +36,7 @@ public class LoginPageUI extends JFrame {
 
     }
 
+    @SuppressWarnings("Duplicates")
     private void introduceLogin() { // admin panel de mutat dupa admin login
         setSize(350, 250);
         setLocation(500, 280);
@@ -57,7 +58,7 @@ public class LoginPageUI extends JFrame {
         pass.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 
                     String puname = txuser.getText();
                     String ppaswd = String.valueOf(pass.getPassword());
@@ -72,6 +73,17 @@ public class LoginPageUI extends JFrame {
             }
         });
 
+        ulogin.addActionListener(e -> {
+            String puname = txuser.getText();
+            String ppaswd = String.valueOf(pass.getPassword());
+            try {
+                dispose();
+                controller.verifyUserLogin(puname, ppaswd);
+                //try to do also admin login to play the game.
+            } catch (SQLException sql) {
+                sql.printStackTrace();
+            }
+        });
 
         alogin.addActionListener(ae -> {
             String puname = txuser.getText();
