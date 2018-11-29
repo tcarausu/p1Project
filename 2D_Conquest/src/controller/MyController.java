@@ -45,7 +45,7 @@ public class MyController {
 
     public void verifyAdminLogin(String userName, String password) throws SQLException {
         if (db.verifyAdminLogin(userName, password)) {
-            openCountryWindow();
+            aController.openAdminPageUI();
         } else {
             loginPageUI.clearFields();
             openLoginWindow();
@@ -64,6 +64,16 @@ public class MyController {
 
     }
 
+    public void verifyAdminDataOnUserCreateOnLogin(String userName, String password) throws SQLException {
+        if (db.verifyUserLogin(userName, password)) {
+            alreadyInDatabaseFields();
+            openLoginWindow();
+        } else {
+            aController.createNewUserOnLogin(userName, password);
+
+        }
+
+    }
 
     /**
      * If the value is answer is correct for question, it will increase the score
@@ -133,7 +143,6 @@ public class MyController {
         String username = getUser().getUserName();
         if (db.checkHighScoreData(username, total, difficultyLevel)) {
             db.startQuiz(username, total, difficultyLevel);
-
         }
     }
 
@@ -142,13 +151,7 @@ public class MyController {
 
         if (db.checkHighScoreData(username, total, difficultyLevel)) {
             db.startQuiz(getUser().getUserName(), total, difficultyLevel);
-
         }
-    }
-
-    public boolean validityOfValueFromArray(
-    ) {
-        return true;
     }
 
     public int getNrOfQuestionsAnsweredFromCurrentQuiz(String username, String difficultyLevel, int score) throws SQLException {
@@ -186,15 +189,14 @@ public class MyController {
     }
 
     public void openLoginWindow() {
-        loginPageUI = new LoginPageUI(this);
+        loginPageUI = new LoginPageUI(this, aController);
     }
 
     public void openCountryWindow() {
-        new CountryUI(this);
+        new CountryUI(this, aController);
     }
 
     public void openDifficultyWindow(String region) throws SQLException {
-
         /*
         While intitiating the difficulty/question we are going to check it based on the input/zone
         String getRegion(String region)
@@ -246,6 +248,7 @@ public class MyController {
                         " Please decide your next operation",
                 "Success", JOptionPane.INFORMATION_MESSAGE);
     }
+
     public void answerSelectionFailure() {
         JOptionPane.showMessageDialog(null,
                 "You have not selected anything as an answer.\n" +
@@ -284,6 +287,4 @@ public class MyController {
     public User getUser() {
         return user;
     }
-
-
 }

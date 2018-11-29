@@ -30,10 +30,15 @@ public class AdminController {
         this.mainController = mainController;
     }
 
-    void createNewUser(String userName, String password) throws SQLException {
+    public void createNewUser(String userName, String password) throws SQLException {
         udb.createNewUser(userName, password);
         mainController.dataAddedSuccess();
         mainController.confirmationUI();
+    }
+    public void createNewUserOnLogin(String userName, String password) throws SQLException {
+        udb.createNewUser(userName, password);
+        mainController.dataAddedSuccess();
+        mainController.openCountryWindow();
     }
 
     public void openAdminQuestionUI() {
@@ -48,9 +53,7 @@ public class AdminController {
         new AdminSettingsUI(mainController);
     }
 
-    public void openAdminPageUI() {
-        new AdminPageUI(mainController, this);
-    }
+    public void openAdminPageUI() { new AdminPageUI(mainController, this); }
 
     public void openAdminCreateUserUI() {
         new AdminUserCreate(mainController, this);

@@ -1,5 +1,6 @@
 package view;
 
+import controller.AdminController;
 import controller.MyController;
 
 import javax.swing.*;
@@ -9,8 +10,11 @@ import java.sql.SQLException;
 
 public class LoginPageUI extends JFrame {
     private MyController controller;
+    private AdminController aController;
+
     private JButton ulogin = new JButton("User Login");
     private JButton alogin = new JButton("Admin Login");
+    private JButton createuser = new JButton("Create User");
     private JTextField txuser = new JTextField(15);
     private JPasswordField pass = new JPasswordField(15);
     private JLabel luser = new JLabel("Login UserName");
@@ -21,11 +25,12 @@ public class LoginPageUI extends JFrame {
      *
      * @param controller of type MyController
      */
-    public LoginPageUI(MyController controller) {
+    public LoginPageUI(MyController controller, AdminController adminController) {
 
         super("LoginPage UI");
 
         this.controller = controller;
+        this.aController = adminController;
         setLayout(null);
         setResizable(false);
         setVisible(true);
@@ -36,17 +41,17 @@ public class LoginPageUI extends JFrame {
 
     }
 
-    @SuppressWarnings("Duplicates")
     private void introduceLogin() { // admin panel de mutat dupa admin login
-        setSize(350, 250);
+        setSize(350, 280);
         setLocation(500, 280);
 
         luser.setBounds(20, 30, 120, 20);
         lpass.setBounds(20, 65, 120, 20);
         txuser.setBounds(140, 30, 150, 20);
         pass.setBounds(140, 65, 150, 20);
-        ulogin.setBounds(30, 140, 120, 40);
-        alogin.setBounds(190, 140, 120, 40);
+        ulogin.setBounds(30, 125, 120, 40);
+        alogin.setBounds(110, 190, 120, 40);
+        createuser.setBounds(190, 125, 120, 40);
 
         super.add(luser);
         super.add(lpass);
@@ -54,6 +59,7 @@ public class LoginPageUI extends JFrame {
         super.add(pass);
         super.add(ulogin);
         super.add(alogin);
+        super.add(createuser);
 
         pass.addKeyListener(new KeyAdapter() {
             @Override
@@ -65,21 +71,36 @@ public class LoginPageUI extends JFrame {
                     try {
                         dispose();
                         controller.verifyUserLogin(puname, ppaswd);
-                        //try to do also admin login to play the game.
                     } catch (SQLException sql) {
                         sql.printStackTrace();
                     }
+
                 }
             }
         });
-
         ulogin.addActionListener(e -> {
+
             String puname = txuser.getText();
             String ppaswd = String.valueOf(pass.getPassword());
             try {
                 dispose();
                 controller.verifyUserLogin(puname, ppaswd);
-                //try to do also admin login to play the game.
+            } catch (SQLException sql) {
+                sql.printStackTrace();
+            }
+        });
+
+        createuser.addActionListener(e -> {
+            String puname = txuser.getText();
+            String ppaswd = String.valueOf(pass.getPassword());
+            try {
+                dispose();
+                if (puname != null && !puname.equals("") && !ppaswd.equals("")) {
+                    controller.verifyAdminDataOnUserCreateOnLogin(puname, ppaswd);
+                } else {
+                    clearFields();
+                    controller.openLoginWindow();
+                }
             } catch (SQLException sql) {
                 sql.printStackTrace();
             }

@@ -11,7 +11,9 @@ import javax.swing.*;
 public class AdminSettingsUI extends JFrame {
     private MyController controller;
 
-    private JButton volume = new JButton("Volume");
+    private ImageIcon button = new ImageIcon("C:\\Users\\Jesus\\Downloads\\button.jpg");
+
+    private JButton volume = new JButton("Volume",button);
     private JButton defDif = new JButton("Default difficulty"); // easy-medium-hard-off radio button
     private JButton soundEffects = new JButton("Sound Effects"); // on-off
     private JButton music = new JButton("Music"); // on-off
@@ -37,7 +39,7 @@ public class AdminSettingsUI extends JFrame {
         this.controller = controller;
 
         setLocation(500, 200);
-        setLayout(null);
+//        setLayout(null);
         setResizable(false);
         setVisible(true);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -61,6 +63,11 @@ public class AdminSettingsUI extends JFrame {
         super.add(back);
 
         super.add(testslider);
+
+        JLabel background = new JLabel(new ImageIcon("C:\\Users\\Jesus\\Downloads\\clipart-png-elephant-11.png"));
+        super.add(background);
+
+
 
         testslider.setBounds(240, 50, 160, 40);
 
