@@ -108,7 +108,7 @@ public class Database implements DatabaseI {
                     );
                 }
                 return arr.get(0);
-            }else{
+            } else {
                 return false;
             }
 
@@ -271,7 +271,7 @@ public class Database implements DatabaseI {
         return preparedStatement.executeQuery();
     }
 
-    public ResultSet getHighscore() throws SQLException {
+    public ResultSet getHighScore() throws SQLException {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres",
                 "postgres", "postgres");
 
@@ -279,4 +279,24 @@ public class Database implements DatabaseI {
         final PreparedStatement preparedStatement = conn.prepareStatement(sql);
         return preparedStatement.executeQuery();
     }
+
+    public ResultSet getHighScoreOnUser(String username) throws SQLException {
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres",
+                "postgres", "postgres");
+
+        final String sql = "SELECT * FROM p1Project.highscore " +
+                "where usernameofplayer = '" + username + "'";
+        final PreparedStatement preparedStatement = conn.prepareStatement(sql);
+        return preparedStatement.executeQuery();
+    }
+
+    public ResultSet getUsers() throws SQLException {
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres",
+                "postgres", "postgres");
+
+        final String sql = "SELECT * FROM p1Project.user ";
+        final PreparedStatement preparedStatement = conn.prepareStatement(sql);
+        return preparedStatement.executeQuery();
+    }
+
 }

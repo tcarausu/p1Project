@@ -30,12 +30,13 @@ public class AdminController {
         this.mainController = mainController;
     }
 
-    public void createNewUser(String userName, String password) throws SQLException {
+    void createNewUser(String userName, String password) throws SQLException {
         udb.createNewUser(userName, password);
         mainController.dataAddedSuccess();
         mainController.confirmationUI();
     }
-    public void createNewUserOnLogin(String userName, String password) throws SQLException {
+
+    void createNewUserOnLogin(String userName, String password) throws SQLException {
         udb.createNewUser(userName, password);
         mainController.dataAddedSuccess();
         mainController.openCountryWindow();
@@ -53,26 +54,28 @@ public class AdminController {
         new AdminSettingsUI(mainController);
     }
 
-    public void openAdminPageUI() { new AdminPageUI(mainController, this); }
+    public void openAdminPageUI() {
+        new AdminPageUI(mainController, this);
+    }
 
     public void openAdminCreateUserUI() {
         new AdminUserCreate(mainController, this);
     }
 
     public void openAdminDeleteUserUI() {
-        new AdminUserDelete(mainController);
+        new AdminUserDelete(mainController, this);
     }
 
     public void openAdminEditUserUI() {
-        new AdminUserEdit(mainController);
+        new AdminUserEdit(mainController, this);
     }
 
     public void openAdminResetUserUI() {
-        new AdminUserReset(mainController);
+        new AdminUserReset(mainController, this);
     }
 
     public void openAdminQuestionCreateUI() {
-        new AdminQuestionCreate(mainController,this);
+        new AdminQuestionCreate(mainController, this);
     }
 
     public void openAdminQuestionEditUI() {
@@ -83,4 +86,21 @@ public class AdminController {
 //        new AdminQuestionDelete(this);
     }
 
+    public void deleteUser(int id) throws SQLException {
+        udb.deleteUser(id);
+        mainController.confirmationUI();
+
+    }
+
+    public void updateUser(int id) throws SQLException {
+        udb.updateUser(id);
+        mainController.confirmationUI();
+
+    }
+
+    public void resetPasswordForUserById(int id) throws SQLException {
+        udb.resetPasswordForUserById(id);
+        mainController.confirmationUI();
+
+    }
 }
