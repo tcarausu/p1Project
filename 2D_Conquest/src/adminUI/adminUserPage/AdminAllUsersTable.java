@@ -1,4 +1,4 @@
-package view;
+package adminUI.adminUserPage;
 
 import controller.AdminController;
 import controller.MyController;
@@ -9,10 +9,10 @@ import javax.swing.table.TableModel;
 import java.sql.SQLException;
 
 /**
- * File created on 11/9/2018
- * by Toader
+ * File created on 11/30/2018
+ * BY Toader
  **/
-public class HighScoreUI extends JFrame {
+public class AdminAllUsersTable extends JFrame {
     private MyController controller;
 
     private JButton back = new JButton("Back");
@@ -20,17 +20,17 @@ public class HighScoreUI extends JFrame {
     private Database database;
 
     /**
-     * Admin Question Table Page  UI's Constructor
+     * Admin Users Table Page  UI's Constructor
      *
      * @param controller of type MyController
      */
-    public HighScoreUI(
+    public AdminAllUsersTable(
             MyController controller,
             AdminController aController,
             Database database
     ) {
 
-        super("High Score");
+        super("User Table");
 
         this.controller = controller;
         this.aController = aController;
@@ -47,13 +47,14 @@ public class HighScoreUI extends JFrame {
     }
 
 
+    @SuppressWarnings("Duplicates")
     private void displayAllQuestionsTable() throws SQLException {
 
         super.setBounds(0, 0, 500, 500);
         setLocation(500, 200);
 
         JPanel panel = new JPanel();
-        TableModel tableModel = controller.buildTableModel(database.getHighScore());
+        TableModel tableModel = controller.buildTableModel(database.getUsers());
         JTable questionsTable = new JTable(tableModel);
         panel.add(new JScrollPane(questionsTable));
 

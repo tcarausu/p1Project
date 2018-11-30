@@ -50,5 +50,58 @@ public class UserDao implements UserDatabaseI {
 
     }
 
+    @Override
+    public void deleteUser(int id) throws SQLException {
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
+        try {
+            String SQL = "delete from p1Project.user " +
+                    "where id = '" + id + "'";
+
+            PreparedStatement st = conn.prepareStatement(SQL);
+            st.execute();
+        } finally {
+            conn.close();
+
+        }
+
+
+    }
+
+    @Override
+    public void updateUser(int id) throws SQLException {
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
+        try {
+            String SQL = "update p1project.user " +
+                    "set  password  = '"+ "' "+
+                    "where id  = '" + id + "' ";
+
+            PreparedStatement st = conn.prepareStatement(SQL);
+            st.execute();
+        } finally {
+            conn.close();
+
+        }
+
+
+    }
+
+    @Override
+    public void resetPasswordForUserById(int id) throws SQLException {
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
+        try {
+            String SQL = "update p1project.user " +
+                    "set  password  = 'password' "+
+                    "where id  = '" + id + "' ";
+
+            PreparedStatement st = conn.prepareStatement(SQL);
+            st.execute();
+        } finally {
+            conn.close();
+
+        }
+
+
+    }
+
 
 }

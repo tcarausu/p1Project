@@ -4,6 +4,9 @@ import controller.AdminController;
 import controller.MyController;
 
 import javax.swing.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.sql.SQLException;
 
 /**
  * File created on 11/12/2018
@@ -12,7 +15,6 @@ import javax.swing.*;
 public class ConfirmationUI extends JFrame {
     private MyController controller;
     private AdminController aController;
-    private JButton continueToGame = new JButton("Play");
     private JButton back = new JButton("Back To Editing");
 
     private JTextField adminUser = new JTextField(15);
@@ -25,7 +27,7 @@ public class ConfirmationUI extends JFrame {
      *
      * @param controller of type MyController
      */
-    public ConfirmationUI(MyController controller,AdminController aController) {
+    public ConfirmationUI(MyController controller, AdminController aController) {
 
         super("Confirmation UI");
 
@@ -48,10 +50,9 @@ public class ConfirmationUI extends JFrame {
         lpass.setBounds(20, 65, 140, 20);
         adminUser.setBounds(160, 30, 180, 20);
         pass.setBounds(160, 65, 180, 20);
-        continueToGame.setBounds(30, 140, 120, 40);
-        back.setBounds(180, 140, 160, 40);
+        back.setBounds(110, 140, 160, 40);
 
-        super.add(continueToGame);
+
         super.add(back);
         super.add(luser);
         super.add(lpass);
@@ -60,11 +61,24 @@ public class ConfirmationUI extends JFrame {
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
-        continueToGame.addActionListener(ae -> {
-            dispose();
-            controller.openCountryWindow();
+        pass.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 
+                    String puname = adminUser.getText();
+                    String ppaswd = String.valueOf(pass.getPassword());
+                    try {
+                        dispose();
+                        controller.verifyAdminLogin(puname, ppaswd);
+                    } catch (SQLException sql) {
+                        sql.printStackTrace();
+                    }
+
+                }
+            }
         });
+
         back.addActionListener(ae -> {
 
             dispose();

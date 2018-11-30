@@ -7,5 +7,11 @@ import java.sql.SQLException;
  * by Toader
  **/
 public interface UserDatabaseI {
-    public void createNewUser(String username, String password) throws SQLException;
+    void createNewUser(String username, String password) throws SQLException;
+
+    void deleteUser(int id) throws SQLException;
+
+    void updateUser(int id) throws SQLException;
+
+    void resetPasswordForUserById(int id) throws SQLException;
 }

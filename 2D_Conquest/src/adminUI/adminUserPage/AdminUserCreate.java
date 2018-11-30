@@ -17,6 +17,7 @@ public class AdminUserCreate extends JFrame {
     private AdminController aController;
 
     private JButton createNewUser = new JButton("Create User");
+    private JButton userTable = new JButton("Display User Table");
     private JButton back = new JButton("Back");
     private JTextField txuser = new JTextField(15);
     private JPasswordField pass = new JPasswordField(15);
@@ -45,7 +46,7 @@ public class AdminUserCreate extends JFrame {
     }
 
     private void introduceLogin() {
-        setSize(350, 250);
+        setSize(350, 300);
         setLocation(500, 280);
 
         luser.setBounds(20, 30, 120, 20);
@@ -53,11 +54,13 @@ public class AdminUserCreate extends JFrame {
         txuser.setBounds(140, 30, 150, 20);
         pass.setBounds(140, 65, 150, 20);
         createNewUser.setBounds(30, 140, 120, 40);
-        back.setBounds(190, 140, 120, 40);
+        userTable.setBounds(190, 140, 150, 40);
+        back.setBounds(100, 190, 120, 40);
 
         super.add(luser);
         super.add(lpass);
         super.add(createNewUser);
+        super.add(userTable);
         super.add(back);
         super.add(txuser);
         super.add(pass);
@@ -80,6 +83,11 @@ public class AdminUserCreate extends JFrame {
                 e.printStackTrace();
             }
         });
+
+        userTable.addActionListener(e -> {
+            controller.openAdminFullUserTable();
+        });
+
         back.addActionListener(ae -> {
             dispose();
             aController.openAdminPageUI();

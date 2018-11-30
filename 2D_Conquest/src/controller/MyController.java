@@ -2,6 +2,7 @@ package controller;
 
 import QuestionUI.QuestionWindow;
 import adminUI.adminQuestionPage.AdminAllQuestionTable;
+import adminUI.adminUserPage.AdminAllUsersTable;
 import dao.Database;
 import dao.DatabaseI;
 import view.*;
@@ -126,7 +127,6 @@ public class MyController {
             aController.openAdminQuestionCreateUI();
         } else {
             qController.createNewQuestion(subject, typeOfQuestion, difficultyLevel, region);
-
         }
 
     }
@@ -230,6 +230,9 @@ public class MyController {
         new AdminAllQuestionTable(this, aController, (Database) db);
     }
 
+    public void openAdminFullUserTable() {
+        new AdminAllUsersTable(this, aController, (Database) db);
+    }
 
     public void openQuestionWIndow() {
         new QuestionWindow(this);
@@ -279,7 +282,7 @@ public class MyController {
         return new DefaultTableModel(dataVector, columnNames);
     }
 
-    private void setCurrentUser(String userName, String password) {
+    public void setCurrentUser(String userName, String password) {
         user = new User(userName, password);
         user.setController(this);
     }

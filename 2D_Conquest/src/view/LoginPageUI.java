@@ -97,6 +97,7 @@ public class LoginPageUI extends JFrame {
                 dispose();
                 if (puname != null && !puname.equals("") && !ppaswd.equals("")) {
                     controller.verifyAdminDataOnUserCreateOnLogin(puname, ppaswd);
+                    controller.setCurrentUser(puname,ppaswd);
                 } else {
                     clearFields();
                     controller.openLoginWindow();
