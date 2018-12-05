@@ -21,6 +21,8 @@ public class EasyQuestionUI extends JFrame {
     private JButton skip = new JButton("SKIP");
     private JButton done = new JButton("DONE");
 
+    private final String difficultyLevel = "easy";
+
     private JLabel question = new JLabel();
     private JRadioButton[] selectionButtons = new JRadioButton[4];
     private int rbSelection = 0;
@@ -90,7 +92,7 @@ public class EasyQuestionUI extends JFrame {
         radioButton3.setBounds(150, 200, 150, 50);
         radioButton4.setBounds(360, 200, 150, 50);
 
-        question.setText(qController.getAnEasyQuestion(region));
+        question.setText(controller.questionToBeAnswered(difficultyLevel, region));
 
         String questionToBeAnswered = question.getText();
 
@@ -103,7 +105,6 @@ public class EasyQuestionUI extends JFrame {
         question.setText("This is The Question: " + questionToBeAnswered);
 
         String userName = controller.getUser().getUserName();
-        String difficultyLevel = "easy";
         int highScore = controller.getHighScoreOnUserWithDifficultyLevel(userName, difficultyLevel);
 
         AtomicInteger nrOfCurrentQAnswered = new AtomicInteger(controller.getNrOfQuestionsAnsweredFromCurrentQuiz(userName,
@@ -116,41 +117,6 @@ public class EasyQuestionUI extends JFrame {
         totalNrOfQuestions.setText(
                 String.valueOf(
                         controller.getNrOfQuestionsTotalFromCurrentQuiz(userName, difficultyLevel, highScore)));
-
-//        JPanel jp = new JPanel(new GridLayout(4, 1));
-//        ButtonGroup group = new ButtonGroup();
-//        for (int x = 0; x < selectionButtons.length; x++) {
-//            selectionButtons[x] = new JRadioButton("RB " + x);
-//            group.add(selectionButtons[x]);
-//            jp.add(selectionButtons[x]);
-//            selectionButtons[x].addKeyListener(new KeyAdapter() {
-//                public void keyPressed(KeyEvent ke) {
-//                    if (ke.getKeyCode() == KeyEvent.VK_DOWN) {
-//                        rbSelection = (rbSelection + 1) % selectionButtons.length;
-//                        ke.consume();
-//                        selectionButtons[rbSelection].setSelected(true);
-//                        selectionButtons[rbSelection].requestFocusInWindow();
-//                    }
-//                }
-//            });
-//        }
-//        super.add(jp);
-
-
-//       String pizdeojCorrect = String.valueOf(qController.getAnEasyQuestionCorrectAnswer(radiobuttonText));
-//        String pizdeojGresit = String.valueOf(qController.getAnEasyQuestionCorrectAnswer(radiobutton2Text));
-//        System.out.println(pizdeojCorrect + "  hellnot " + pizdeojGresit);
-
-
-//        radioButton1.addKeyListener(new KeyAdapter() {
-//            @Override
-//            public void keyPressed(KeyEvent e) {
-//                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-//
-//                }
-//            }
-//        });
-
         next.addActionListener(e ->
         {
             dispose();
@@ -158,16 +124,17 @@ public class EasyQuestionUI extends JFrame {
                 int value = nrOfCurrentQAnswered.getAndIncrement();
 
                 if (radioButton1.isSelected()) {
-                    validationOfRButton(radioButton1.getText(), value, difficultyLevel);
+                    validationOfRButton(radioButton1.getText(), value);
                 }
                 if (radioButton2.isSelected()) {
-                    validationOfRButton(radioButton2.getText(), value, difficultyLevel);
+                    validationOfRButton(radioButton2.getText(), value);
                 }
                 if (radioButton3.isSelected()) {
-                    validationOfRButton(radioButton3.getText(), value, difficultyLevel);
+                    validationOfRButton(radioButton3.getText(), value);
                 }
                 if (radioButton4.isSelected()) {
-                    validationOfRButton(radioButton4.getText(), value, difficultyLevel);
+                    validationOfRButton(radioButton4.getText(), value);
+
                 } else if (!radioButton1.isSelected() && !radioButton2.isSelected()
                         && !radioButton3.isSelected() && !radioButton4.isSelected()) {
                     controller.answerSelectionFailure();
@@ -209,7 +176,7 @@ public class EasyQuestionUI extends JFrame {
 
     }
 
-    private void validationOfRButton(String answer, int value, String difficultyLevel) throws SQLException {
+    private void validationOfRButton(String answer, int value) throws SQLException {
         controller.updateScoreOnForUserAndDifficulty(answer, value, difficultyLevel);
         if (value >= 20) {
             dispose();

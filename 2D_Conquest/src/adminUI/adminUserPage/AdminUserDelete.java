@@ -4,6 +4,8 @@ import controller.AdminController;
 import controller.MyController;
 
 import javax.swing.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 
 /**
@@ -23,7 +25,7 @@ public class AdminUserDelete extends JFrame {
     private JLabel userId = new JLabel("User ID");
 
     /**
-     * Admin Quest Delete's Constructor
+     * Admin User Delete's Constructor
      *
      * @param controller of type MyController
      */
@@ -60,26 +62,39 @@ public class AdminUserDelete extends JFrame {
         super.add(back);
         super.add(id);
 
-        deleteUser.addActionListener(ae -> {
-            String idText = id.getText();
-            try {
-                dispose();
-                if (idText != null
-                        && !idText.equals("")
-                ) {
-                    aController.deleteUser(Integer.parseInt(idText));
-                } else {
-                    clearFieldsWhenNeeded();
-                    aController.openAdminUserUI();
+        id.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    deleteUser();
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
+
             }
+        });
+        deleteUser.addActionListener(ae -> {
+            deleteUser();
         });
         back.addActionListener(ae -> {
             dispose();
             aController.openAdminPageUI();
         });
+    }
+
+    private void deleteUser() {
+        String idText = id.getText();
+        try {
+            dispose();
+            if (idText != null
+                    && !idText.equals("")
+            ) {
+                aController.deleteUser(Integer.parseInt(idText));
+            } else {
+                clearFieldsWhenNeeded();
+                aController.openAdminUserUI();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private void clearFieldsWhenNeeded() {

@@ -8,6 +8,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 
+import static java.lang.String.valueOf;
+
 /**
  * File created on 11/12/2018
  * by Toader
@@ -66,11 +68,11 @@ public class ConfirmationUI extends JFrame {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 
-                    String puname = adminUser.getText();
-                    String ppaswd = String.valueOf(pass.getPassword());
+                    String user = adminUser.getText();
+                    String password = valueOf(pass.getPassword());
                     try {
                         dispose();
-                        controller.verifyAdminLogin(puname, ppaswd);
+                        controller.verifyAdminLogin(user, password);
                     } catch (SQLException sql) {
                         sql.printStackTrace();
                     }

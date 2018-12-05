@@ -66,33 +66,19 @@ public class LoginPageUI extends JFrame {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 
-                    String puname = txuser.getText();
-                    String ppaswd = String.valueOf(pass.getPassword());
-                    try {
-                        dispose();
-                        controller.verifyUserLogin(puname, ppaswd);
-                    } catch (SQLException sql) {
-                        sql.printStackTrace();
-                    }
+                    login();
 
                 }
             }
         });
         ulogin.addActionListener(e -> {
 
-            String puname = txuser.getText();
-            String ppaswd = String.valueOf(pass.getPassword());
-            try {
-                dispose();
-                controller.verifyUserLogin(puname, ppaswd);
-            } catch (SQLException sql) {
-                sql.printStackTrace();
-            }
+            login();
         });
 
         createuser.addActionListener(e -> {
-            String puname = txuser.getText();
-            String ppaswd = String.valueOf(pass.getPassword());
+            String puname = txuser.getText().toLowerCase();
+            String ppaswd = String.valueOf(pass.getPassword()).toLowerCase();
             try {
                 dispose();
                 if (puname != null && !puname.equals("") && !ppaswd.equals("")) {
@@ -117,6 +103,17 @@ public class LoginPageUI extends JFrame {
                 e.printStackTrace();
             }
         });
+    }
+
+    private void login() {
+        String puname = txuser.getText().toLowerCase();
+        String ppaswd = String.valueOf(pass.getPassword()).toLowerCase();
+        try {
+            dispose();
+            controller.verifyUserLogin(puname, ppaswd);
+        } catch (SQLException sql) {
+            sql.printStackTrace();
+        }
     }
 
     public void clearFields() {

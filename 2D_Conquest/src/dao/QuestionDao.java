@@ -4,7 +4,6 @@ import org.postgresql.Driver;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -232,24 +231,6 @@ public class QuestionDao implements QuestionDatabaseI {
     }
 
     @Override
-    public List getAll() throws SQLException {
-        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
-
-        try {
-            String SQL = "SELECT * FROM p1Project.questions ";
-
-            PreparedStatement st = conn.prepareStatement(SQL);
-            st.execute();
-            ResultSet rs = st.getResultSet();
-            return Collections.singletonList(rs);
-
-        } finally {
-            conn.close();
-
-        }
-    }
-
-    @Override
     public List<String> getAnEasyQuestionAnswerList(String region, String question) throws SQLException {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
 
@@ -307,6 +288,99 @@ public class QuestionDao implements QuestionDatabaseI {
         }
 
 
+    }
+
+    @Override
+    public void deleteQuestionById(int id) throws SQLException {
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
+        try {
+
+//            String SQL = " ALTER TABLE p1project.questions DISABLE TRIGGER ALL;" +
+//                    "delete from p1Project.questions as quest " +
+//                    "where id = '" + id + "' " +
+//                    "and quest.id in (select qAnsw.questionsid " +
+//                    "from p1project.questions_answers as qAnsw" +
+//                    " where qAnsw.questionsid= quest.id);" +
+//                    " ALTER TABLE p1project.questions ENABLE TRIGGER ALL;";
+            String SQL = "delete from p1Project.questions as quest " +
+                    "where id = '" + id + "' ";
+
+            PreparedStatement st = conn.prepareStatement(SQL);
+            st.execute();
+        } finally {
+            conn.close();
+
+        }
+
+    }
+
+    @Override
+    public void deleteQuestionByIdFromQuestionAnswer(int id) throws SQLException {
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
+        try {
+
+            String SQL =
+                    "delete from p1Project.questions_answers as qAnsw " +
+                            "where qAnsw.questionsid = '" + id + "' ";
+
+            PreparedStatement st = conn.prepareStatement(SQL);
+            st.execute();
+        } finally {
+            conn.close();
+
+        }
+
+    }
+
+    @Override
+    public void updateQuestionById(int id, String subject, String typeOfQ,
+                                   String diffLevel, String region) throws SQLException {
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
+        try {
+            String SQL = "update p1project.questions " +
+                    "set  subject  = '" + subject + "' ," +
+                    "  typeofquestion  = '" + typeOfQ + "' ," +
+                    "  difficultylevel  = '" + diffLevel + "' ," +
+                    "  region  = '" + region + "' " +
+                    "where id  = '" + id + "' ";
+
+            PreparedStatement st = conn.prepareStatement(SQL);
+            st.execute();
+        } finally {
+            conn.close();
+
+        }
+
+    }
+
+    @Override
+    public List<String> getAllQuestionsByDifficultyLevelAndRegion(String difficulty, String region) throws SQLException {
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
+
+        try {
+            String SQL = "SELECT quest.subject FROM p1Project.questions as quest " +
+                    "where quest.difficultylevel like '" + difficulty + "' " +
+                    "and quest.region like '" + region + "'";
+
+            List<String> result = new ArrayList<>();
+            PreparedStatement st = conn.prepareStatement(SQL);
+            st.execute();
+            ResultSet rs = st.getResultSet();
+            int numCols = rs.getMetaData().getColumnCount();
+
+            while (rs.next()) {
+
+                for (int i = 1; i <= numCols; i++) {
+                    // loop through the ArrayList and add results accordingly
+                    result.add(rs.getString(i));
+                }
+            }
+            return result;
+
+        } finally {
+            conn.close();
+
+        }
     }
 
 

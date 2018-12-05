@@ -24,10 +24,13 @@ public class AdminQuestionUI extends JFrame {
 //    private JButton setttingsMenu = new JButton("High Score");
 //    private JButton playGame = new JButton("Start");
 //
-   /** Admin Question UI's Constructor
-    * @param controller of type MyController
-    */
-    public AdminQuestionUI(MyController controller,AdminController aController) {
+
+    /**
+     * Admin Question UI's Constructor
+     *
+     * @param controller of type MyController
+     */
+    public AdminQuestionUI(MyController controller, AdminController aController) {
         super("AdminPage Questions UI");
         this.controller = controller;
         this.aController = aController;
@@ -42,6 +45,7 @@ public class AdminQuestionUI extends JFrame {
     }
 
     /**
+     *
      */
     private void introduceButton() {
 
@@ -68,7 +72,6 @@ public class AdminQuestionUI extends JFrame {
         quit.setBounds(250, 250, 160, 40);
 
 
-
         addQuestion.addActionListener(
                 e -> {
                     dispose();
@@ -79,14 +82,14 @@ public class AdminQuestionUI extends JFrame {
         deleteQuestion.addActionListener(
                 e -> {
                     dispose();
-                    controller.openScoreWindow();
+                    controller.openAdminQuestionDeleteUI();
 
                 }
         );
         editQuestion.addActionListener(
                 e -> {
                     dispose();
-                    controller.openScoreWindow();
+                    controller.openAdminQuestionEditUI();
 
                 }
         );

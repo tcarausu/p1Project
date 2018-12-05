@@ -1,7 +1,8 @@
 package controller;
 
-import QuestionUI.QuestionWindow;
 import adminUI.adminQuestionPage.AdminAllQuestionTable;
+import adminUI.adminQuestionPage.AdminQuestionDelete;
+import adminUI.adminQuestionPage.AdminQuestionEdit;
 import adminUI.adminUserPage.AdminAllUsersTable;
 import dao.Database;
 import dao.DatabaseI;
@@ -16,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Vector;
 
 public class MyController {
@@ -24,6 +26,7 @@ public class MyController {
     private QuestionController qController;
     private AdminController aController;
     private LoginPageUI loginPageUI;
+    private int initialScore;
 
     public MyController(DatabaseI db, AdminController aController, QuestionController qController) {
         this.db = db;
@@ -91,11 +94,11 @@ public class MyController {
         int totalNrOfQ = getNrOfQuestionsTotalFromCurrentQuiz(userName, difficultyLevel, totalScore);
         if (db.checkValidityOfAnswerForAQuestion(answer)) {
             if (nrOfQAnswered == 0) {
-                updateNrfQuestionsAnswFromCurrentQuiz(nrOfQAnswered + 1, userName, totalScore);
+                updateNrfQuestionsAnswerFromCurrentQuiz(nrOfQAnswered + 1, userName, totalScore);
                 updateScoreOnDifficultyForUser(nrOfQAnswered + 1, totalScore, userName, difficultyLevel);
 
             } else if (nrOfQAnswered >= 1 && nrOfQAnswered < totalNrOfQ) {
-                updateNrfQuestionsAnswFromCurrentQuiz(nrOfQAnswered + 1, userName, totalScore);
+                updateNrfQuestionsAnswerFromCurrentQuiz(nrOfQAnswered + 1, userName, totalScore);
                 updateScoreOnDifficultyForUser(nrOfQAnswered + 1, totalScore, userName, difficultyLevel);
             }
         } else {
@@ -110,10 +113,10 @@ public class MyController {
         int totalScore = getHighScoreOnUserWithDifficultyLevel(userName, difficultyLevel);
         int totalNrOfQ = getNrOfQuestionsTotalFromCurrentQuiz(userName, difficultyLevel, totalScore);
         if (nrOfQAnswered == 0) {
-            updateNrfQuestionsAnswFromCurrentQuiz(nrOfQAnswered + 1, userName, totalScore);
+            updateNrfQuestionsAnswerFromCurrentQuiz(nrOfQAnswered + 1, userName, totalScore);
 
         } else if (nrOfQAnswered >= 1 && nrOfQAnswered < totalNrOfQ) {
-            updateNrfQuestionsAnswFromCurrentQuiz(nrOfQAnswered + 1, userName, totalScore);
+            updateNrfQuestionsAnswerFromCurrentQuiz(nrOfQAnswered + 1, userName, totalScore);
         }
 
     }
@@ -131,12 +134,28 @@ public class MyController {
 
     }
 
-    public void startEasyQuiz(int total, String difficultyLevel) throws SQLException {
+    public void startNewEasyQuiz(int total, String difficultyLevel) throws SQLException {
         String username = getUser().getUserName();
-        if (!db.checkHighScoreData(username, total, difficultyLevel)) {
+        int highScore = getHighScore(total, difficultyLevel);
+
+        int currentNrOfQuestion = db.getNumberOfQuestionsAnsweredFromCurrentQuiz(username, difficultyLevel, highScore);
+
+
+        if (currentNrOfQuestion != 0) {
             db.startQuiz(username, total, difficultyLevel);
 
+        }else{
+            db.startQuiz(username, total, difficultyLevel);
         }
+
+
+
+    }
+
+
+    private int getHighScore(int total, String difficultyLevel) throws SQLException {
+        String username = getUser().getUserName();
+        return Integer.parseInt(db.getHighScore(username, total, difficultyLevel));
     }
 
     public void startHardQuiz(int total, String difficultyLevel) throws SQLException {
@@ -158,7 +177,7 @@ public class MyController {
         return db.getNumberOfQuestionsAnsweredFromCurrentQuiz(username, difficultyLevel, score);
     }
 
-    private void updateNrfQuestionsAnswFromCurrentQuiz(int nrOfQAnswered, String userName, int totalScore) throws SQLException {
+    private void updateNrfQuestionsAnswerFromCurrentQuiz(int nrOfQAnswered, String userName, int totalScore) throws SQLException {
         db.updateNrfQuestionsAnswerFromCurrentQuiz(nrOfQAnswered, userName, totalScore);
     }
 
@@ -205,7 +224,6 @@ public class MyController {
         new DifficultyLevelUI(this, qController.getRegion(region));
     }
 
-
     public void openEasyWindow(String region) {
         new EasyQuestionUI(this, qController, region);
     }
@@ -234,8 +252,43 @@ public class MyController {
         new AdminAllUsersTable(this, aController, (Database) db);
     }
 
-    public void openQuestionWIndow() {
-        new QuestionWindow(this);
+    public void openAdminQuestionDeleteUI() {
+        new AdminQuestionDelete(this, qController, aController);
+    }
+
+    public void openAdminQuestionEditUI() {
+        new AdminQuestionEdit(this, qController, aController);
+    }
+
+    public String questionToBeAnswered(String difficulty, String region) throws SQLException {
+        //TODO FIX ME
+        List<String> result = qController.getAllQuestionsByDifficultyLevelAndRegion(difficulty, region);
+        int totalNrOfQ = result.size();
+
+        int i = 0;
+
+        while (i <= totalNrOfQ) {
+
+            String question = result.get(i);
+            String anyQ = qController.getAnEasyQuestion(region);
+
+            if (question.equals(anyQ)) {
+                i++;
+                questionToBeAnswered(difficulty, region);
+            } else {
+                return anyQ;
+
+            }
+
+        }
+
+        return null;
+
+    }
+
+    private static int decrementValueTilResultIsOne(int num) {
+        return (num == 1 ? 1 : decrementValueTilResultIsOne(num - 1));
+        //it was num*decrement for factorial
     }
 
     private void alreadyInDatabaseFields() {

@@ -20,6 +20,8 @@ public interface DatabaseI {
 
     boolean checkHighScoreData(String username, int total, String difficultyLevel) throws SQLException;
 
+    String getHighScore(String username, int total, String difficultyLevel) throws SQLException;
+
     int getHighScoreOnUserWithDifficultyLevel(String username, String difficultyLevel) throws SQLException;
 
     void updateScoreOnDifficultyForUser(int currentNrOfQuestionsAnswered, int totalScore, String userName, String difficultyLevel) throws SQLException;

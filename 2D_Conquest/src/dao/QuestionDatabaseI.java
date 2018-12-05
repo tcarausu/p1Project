@@ -28,8 +28,15 @@ public interface QuestionDatabaseI {
 
     List<String> getAnEasyQuestionAnswerList(String region, String question) throws SQLException;
 
-    List getAll() throws SQLException;
+    List<String> getAllQuestionsByDifficultyLevelAndRegion(String difficulty, String region) throws SQLException;
 
     String getRegion(String region) throws SQLException;
+
+    void deleteQuestionById(int id) throws SQLException;
+
+    void deleteQuestionByIdFromQuestionAnswer(int id) throws SQLException;
+
+    void updateQuestionById(int id, String subject, String typeOfQ,
+                            String diffLevel, String region) throws SQLException;
 
 }

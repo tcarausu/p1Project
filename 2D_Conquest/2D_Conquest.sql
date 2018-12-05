@@ -55,10 +55,10 @@ create table p1project.answer
 
 create table p1project.questions_answers
 (
-  questionsId      int references p1project.questions (id),
+  questionId       int references p1project.questions (id),
   answersId        int references p1project.answer (id),
   validityOfAnswer bool default false,
-  primary key (questionsId, answersId, validityOfAnswer)
+  primary key (questionId, answersId, validityOfAnswer)
 );
 
 
@@ -70,5 +70,5 @@ create table p1project.highScore
   nrOfQuestionsTotal    int,
   difficultyLevel       varchar(6) references p1project.difficulty (difficulty),
   score                 int,
-  primary key (usernameOfPlayer, difficultyLevel, score)
+  primary key (usernameOfPlayer, timeSpent, difficultyLevel, score)
 );

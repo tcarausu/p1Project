@@ -92,8 +92,8 @@ public class AdminController {
 
     }
 
-    public void updateUser(int id) throws SQLException {
-        udb.updateUser(id);
+    public void updateUser(int id, String username, String password) throws SQLException {
+        udb.updateUser(id, username, password);
         mainController.confirmationUI();
 
     }

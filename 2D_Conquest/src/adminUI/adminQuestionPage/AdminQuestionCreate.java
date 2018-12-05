@@ -4,6 +4,8 @@ import controller.AdminController;
 import controller.MyController;
 
 import javax.swing.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 
 /**
@@ -19,7 +21,7 @@ public class    AdminQuestionCreate extends JFrame {
 
     private JTextField subject = new JTextField(15);
     private JTextField typeOfQuestion = new JTextField(15);
-    private JTextField difficultylevel = new JTextField(15);
+    private JTextField difficultyLevel = new JTextField(15);
     private JTextField region = new JTextField(15);
 
     private JLabel lsubject = new JLabel("Subject");
@@ -60,7 +62,7 @@ public class    AdminQuestionCreate extends JFrame {
         typeOfQuestion.setBounds(160, 60, 250, 20);
 
         ldiff.setBounds(20, 90, 140, 20);
-        difficultylevel.setBounds(160, 90, 250, 20);
+        difficultyLevel.setBounds(160, 90, 250, 20);
 
         lregion.setBounds(20, 120, 140, 20);
         region.setBounds(160, 120, 250, 20);
@@ -75,7 +77,7 @@ public class    AdminQuestionCreate extends JFrame {
         super.add(typeOfQuestion);
 
         super.add(ldiff);
-        super.add(difficultylevel);
+        super.add(difficultyLevel);
 
         super.add(lregion);
         super.add(region);
@@ -85,38 +87,53 @@ public class    AdminQuestionCreate extends JFrame {
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
-        createNewQuestion.addActionListener(ae -> {
-            String subjectT = subject.getText();
-            String type = typeOfQuestion.getText();
-            String diff = difficultylevel.getText();
-            String regionT = region.getText();
-            try {
-                dispose();
-                if ((subjectT != null &&
-                        type != null &&
-                        diff != null &&
-                        regionT != null) &&
 
-                        !subjectT.equals("")
-                        && !type.equals("")
-                        && !diff.equals("")
-                        && !regionT.equals("")
-                ) {
-
-                    controller.verifyAdminDataOnQuestionCreate(subjectT,
-                            type, diff, regionT);
-                }  else {
-                    clearFieldsWhenNeeded();
-                    aController.openAdminQuestionUI();
+        region.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    createNewQuestion();
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
+        });
+
+
+        createNewQuestion.addActionListener(ae -> {
+            createNewQuestion();
         });
         back.addActionListener(ae -> {
             dispose();
             aController.openAdminPageUI();
         });
+    }
+
+    private void createNewQuestion() {
+        String subjectT = subject.getText();
+        String type = typeOfQuestion.getText();
+        String diff = difficultyLevel.getText();
+        String regionT = region.getText();
+        try {
+            dispose();
+            if ((subjectT != null &&
+                    type != null &&
+                    diff != null &&
+                    regionT != null) &&
+
+                    !subjectT.equals("")
+                    && !type.equals("")
+                    && !diff.equals("")
+                    && !regionT.equals("")
+            ) {
+
+                controller.verifyAdminDataOnQuestionCreate(subjectT,
+                        type, diff, regionT);
+            }  else {
+                clearFieldsWhenNeeded();
+                aController.openAdminQuestionUI();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private void clearFieldsWhenNeeded() {
@@ -125,7 +142,7 @@ public class    AdminQuestionCreate extends JFrame {
                 "Reset", JOptionPane.INFORMATION_MESSAGE);
         subject.setText("");
         typeOfQuestion.setText("");
-        difficultylevel.setText("");
+        difficultyLevel.setText("");
         region.setText("");
         subject.requestFocus();
     }
@@ -137,7 +154,7 @@ public class    AdminQuestionCreate extends JFrame {
                 "Already In use", JOptionPane.INFORMATION_MESSAGE);
         subject.setText("");
         typeOfQuestion.setText("");
-        difficultylevel.setText("");
+        difficultyLevel.setText("");
         region.setText("");
         subject.requestFocus();
     }
