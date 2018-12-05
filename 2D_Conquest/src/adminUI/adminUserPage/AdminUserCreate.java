@@ -4,6 +4,8 @@ import controller.AdminController;
 import controller.MyController;
 
 import javax.swing.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 
 /**
@@ -67,21 +69,18 @@ public class AdminUserCreate extends JFrame {
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
-        createNewUser.addActionListener(ae -> {
-            String puname = txuser.getText();
-            String ppaswd = String.valueOf(pass.getPassword());
-            try {
-                dispose();
-                if (puname != null && !puname.equals("") && !ppaswd.equals("")) {
 
-                    controller.verifyAdminDataOnUserCreate(puname, ppaswd);
-                } else {
-                    clearFields();
-                    aController.openAdminCreateUserUI();
+        pass.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    createUser();
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
+        });
+
+        createNewUser.addActionListener(ae -> {
+            createUser();
         });
 
         userTable.addActionListener(e -> {
@@ -92,6 +91,23 @@ public class AdminUserCreate extends JFrame {
             dispose();
             aController.openAdminPageUI();
         });
+    }
+
+    private void createUser() {
+        String puname = txuser.getText();
+        String ppaswd = String.valueOf(pass.getPassword());
+        try {
+            dispose();
+            if (puname != null && !puname.equals("") && !ppaswd.equals("")) {
+
+                controller.verifyAdminDataOnUserCreate(puname, ppaswd);
+            } else {
+                clearFields();
+                aController.openAdminCreateUserUI();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private void clearFields() {

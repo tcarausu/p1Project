@@ -118,7 +118,37 @@ public class Database implements DatabaseI {
         }
 
     }
+    @Override
+    public String getHighScore(String username, int total, String difficultyLevel) throws SQLException {
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
 
+        try {
+            String SQL = "SELECT score.score FROM p1Project.highscore as score " +
+                    "where usernameofplayer ='" + username + "'"
+                    + " AND difficultylevel ='" + difficultyLevel + "'"
+                    + " AND nrofquestionstotal ='" + total + "'";
+            PreparedStatement st = conn.prepareStatement(SQL);
+            st.execute();
+            ResultSet rs = st.getResultSet();
+
+            ArrayList<String> arr = new ArrayList<>();
+            while (rs.next()) {
+                if (!rs.getString("score").equals("0") || rs.getString("score") == null) {
+                    String initialScore = String.valueOf(0);
+                    arr.add(initialScore);
+                } else {
+                    arr.add(rs.getString("score"));
+
+                }
+            }
+            return arr.get(0);
+
+        } finally {
+            conn.close();
+
+        }
+
+    }
     @Override
     public int getNumberOfQuestionsAnsweredFromCurrentQuiz(String username, String difficultyLevel, int score) throws SQLException {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");

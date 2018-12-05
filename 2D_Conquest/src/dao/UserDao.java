@@ -68,11 +68,12 @@ public class UserDao implements UserDatabaseI {
     }
 
     @Override
-    public void updateUser(int id) throws SQLException {
+    public void updateUser(int id, String username, String password) throws SQLException {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
         try {
             String SQL = "update p1project.user " +
-                    "set  password  = '"+ "' "+
+                    "set  username  = '" + username + "' ," +
+                    "password  = '" + password + "' " +
                     "where id  = '" + id + "' ";
 
             PreparedStatement st = conn.prepareStatement(SQL);
@@ -90,7 +91,7 @@ public class UserDao implements UserDatabaseI {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
         try {
             String SQL = "update p1project.user " +
-                    "set  password  = 'password' "+
+                    "set  password  = 'password' " +
                     "where id  = '" + id + "' ";
 
             PreparedStatement st = conn.prepareStatement(SQL);

@@ -4,6 +4,8 @@ import controller.AdminController;
 import controller.MyController;
 
 import javax.swing.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 
 /**
@@ -15,12 +17,16 @@ public class AdminUserEdit extends JFrame {
     private MyController controller;
     private AdminController aController;
 
-    private JButton deleteUser = new JButton("Edit User");
+    private JButton editUser = new JButton("Edit User");
     private JButton back = new JButton("Back");
 
-    private JTextField id = new JTextField(15);
+    private JTextField id = new JTextField();
+    private JTextField username = new JTextField();
+    private JTextField password = new JTextField();
 
     private JLabel userId = new JLabel("User ID");
+    private JLabel user_name = new JLabel("User name");
+    private JLabel user_password = new JLabel("User password");
 
     /**
      * Admin Quest Delete's Constructor
@@ -49,37 +55,63 @@ public class AdminUserEdit extends JFrame {
 
 
         userId.setBounds(20, 30, 140, 20);
+        user_name.setBounds(20, 60, 140, 20);
+        user_password.setBounds(20, 90, 140, 20);
         id.setBounds(160, 30, 250, 20);
+        username.setBounds(160, 60, 250, 20);
+        password.setBounds(160, 90, 250, 20);
 
-        deleteUser.setBounds(30, 100, 120, 40);
-        back.setBounds(350, 100, 120, 40);
+        editUser.setBounds(30, 120, 120, 40);
+        back.setBounds(350, 120, 120, 40);
 
         super.add(userId);
-        super.add(deleteUser);
+        super.add(user_name);
+        super.add(user_password);
+        super.add(id);
+        super.add(username);
+        super.add(password);
+
+        super.add(editUser);
 
         super.add(back);
-        super.add(id);
 
-        deleteUser.addActionListener(ae -> {
-            String idText = id.getText();
-            try {
-                dispose();
-                if (idText != null
-                        && !idText.equals("")
-                ) {
-                    aController.updateUser(Integer.parseInt(idText));
-                } else {
-                    clearFieldsWhenNeeded();
-                    aController.openAdminUserUI();
+        password.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    editUser();
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
+
+        });
+
+
+        editUser.addActionListener(ae -> {
+            editUser();
         });
         back.addActionListener(ae -> {
             dispose();
             aController.openAdminPageUI();
         });
+    }
+
+    private void editUser() {
+        String idText = id.getText();
+        String user_nameText = username.getText();
+        String user_passwordText = password.getText();
+        try {
+            dispose();
+            if (idText != null
+                    && !idText.equals("")
+            ) {
+                aController.updateUser(Integer.parseInt(idText), user_nameText, user_passwordText);
+            } else {
+                clearFieldsWhenNeeded();
+                aController.openAdminUserUI();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private void clearFieldsWhenNeeded() {

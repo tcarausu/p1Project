@@ -11,7 +11,7 @@ public interface UserDatabaseI {
 
     void deleteUser(int id) throws SQLException;
 
-    void updateUser(int id) throws SQLException;
+    void updateUser(int id, String username, String password) throws SQLException;
 
     void resetPasswordForUserById(int id) throws SQLException;
 }

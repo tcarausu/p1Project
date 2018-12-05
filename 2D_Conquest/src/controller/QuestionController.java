@@ -73,7 +73,23 @@ public class QuestionController {
 
     }
 
-    public List getAllQuestion() throws SQLException {
-        return qdb.getAll();
+    public void deleteQuestionById(int id) throws SQLException {
+        qdb.deleteQuestionByIdFromQuestionAnswer(id);
+        qdb.deleteQuestionById(id);
+        mainController.confirmationUI();
+
     }
+
+    public void updateQuestionById(int id, String subject, String typeOfQ,
+                                   String diffLevel, String region) throws SQLException {
+        qdb.updateQuestionById(id, subject, typeOfQ, diffLevel, region);
+        mainController.confirmationUI();
+
+    }
+
+    List<String> getAllQuestionsByDifficultyLevelAndRegion(String difficulty, String region) throws SQLException {
+
+        return qdb.getAllQuestionsByDifficultyLevelAndRegion(difficulty, region);
+    }
+
 }
