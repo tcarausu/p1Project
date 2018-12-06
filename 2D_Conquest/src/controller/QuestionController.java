@@ -23,7 +23,7 @@ public class QuestionController {
         this.mainController = mainController;
     }
 
-    public String getAnEasyQuestion(String region) throws SQLException {
+    String getAnEasyQuestion(String region) throws SQLException {
         return qdb.getAnEasyQuestion(region);
     }
 

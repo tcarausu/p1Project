@@ -58,8 +58,7 @@ public class QuestionDao implements QuestionDatabaseI {
     @Override
     public boolean verifyIntroducedQuestion(String subject,
                                             String typeOfQuestion, String difficultyLevel,
-                                            String region
-    ) throws SQLException {
+                                            String region) throws SQLException {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
 
         try {
@@ -101,7 +100,10 @@ public class QuestionDao implements QuestionDatabaseI {
                 arr.add(rs.getString("subject")
                 );
             }
-            return arr.get(0);
+            if (arr.size() > 0 )
+                return arr.get(arr.size() - 1);
+            else
+                return null;
 
         } finally {
             conn.close();
@@ -130,7 +132,10 @@ public class QuestionDao implements QuestionDatabaseI {
                         + rs.getString("subject")
                 );
             }
-            return arr.get(0);
+            if (arr.size() > 0 )
+                return arr.get(arr.size() - 1);
+            else
+                return null;
 
         } finally {
             conn.close();
@@ -159,7 +164,10 @@ public class QuestionDao implements QuestionDatabaseI {
                         + rs.getString("subject")
                 );
             }
-            return arr.get(0);
+            if (arr.size() > 0 )
+                return arr.get(arr.size() - 1);
+            else
+                return null;
 
         } finally {
             conn.close();
@@ -175,8 +183,8 @@ public class QuestionDao implements QuestionDatabaseI {
         try {
             String SQL = "SELECT ans.givenanswer FROM p1Project.answer as ans " +
                     "join p1project.questions_answers as qAnsw on ans.id = qAnsw.answersid " +
-                    "join p1project.questions as quest on quest.id = qAnsw.questionsid " +
-                    "where ans.difficultylevel like 'hard' and qAnsw.valityofanswer = true " +
+                    "join p1project.questions as quest on quest.id = qAnsw.questionid " +
+                    "where ans.difficultylevel like 'hard' and qAnsw.validityofanswer = true " +
                     "and quest.region like '" + region + "'" +
                     "ORDER BY random()" +
                     "LIMIT 1";
@@ -190,8 +198,10 @@ public class QuestionDao implements QuestionDatabaseI {
                 arr.add(rs.getString("givenanswer")
                 );
             }
-            return arr.get(0);
-
+            if (arr.size() > 0 )
+                return arr.get(arr.size() - 1);
+            else
+                return null;
         } finally {
             conn.close();
 
@@ -206,8 +216,8 @@ public class QuestionDao implements QuestionDatabaseI {
         try {
             String SQL = "SELECT ans.givenanswer FROM p1Project.answer as ans " +
                     "join p1project.questions_answers as qAnsw on ans.id = qAnsw.answersid " +
-                    "join p1project.questions as quest on quest.id = qAnsw.questionsid " +
-                    "where ans.difficultylevel like 'medium' and qAnsw.valityofanswer = true " +
+                    "join p1project.questions as quest on quest.id = qAnsw.questionid " +
+                    "where ans.difficultylevel like 'medium' and qAnsw.validityofanswer = true " +
                     "and quest.region like '" + region + "'" +
                     "ORDER BY random()" +
                     "LIMIT 1";
@@ -221,7 +231,10 @@ public class QuestionDao implements QuestionDatabaseI {
                 arr.add(rs.getString("givenanswer")
                 );
             }
-            return arr.get(0);
+            if (arr.size() > 0 )
+                return arr.get(arr.size() - 1);
+            else
+                return null;
 
         } finally {
             conn.close();
@@ -237,7 +250,7 @@ public class QuestionDao implements QuestionDatabaseI {
         try {
             String SQL = "SELECT ans.givenanswer FROM p1Project.answer as ans " +
                     "join p1project.questions_answers as qAnsw on ans.id = qAnsw.answersid " +
-                    "join p1project.questions as quest on quest.id = qAnsw.questionsid " +
+                    "join p1project.questions as quest on quest.id = qAnsw.questionid " +
                     "where ans.difficultylevel like 'easy' and quest.subject = '" + question + "' " +
                     "and quest.region like '" + region + "'" +
                     "ORDER BY random()" +
@@ -280,8 +293,10 @@ public class QuestionDao implements QuestionDatabaseI {
                 arr.add(rs.getString("region")
                 );
             }
-            return arr.get(0);
-
+            if (arr.size() > 0 )
+                return arr.get(arr.size() - 1);
+            else
+                return null;
         } finally {
             conn.close();
 
@@ -291,19 +306,13 @@ public class QuestionDao implements QuestionDatabaseI {
     }
 
     @Override
-    public void deleteQuestionById(int id) throws SQLException {
+    public void deleteQuestionByIdFromQuestionAnswer(int id) throws SQLException {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
         try {
 
-//            String SQL = " ALTER TABLE p1project.questions DISABLE TRIGGER ALL;" +
-//                    "delete from p1Project.questions as quest " +
-//                    "where id = '" + id + "' " +
-//                    "and quest.id in (select qAnsw.questionsid " +
-//                    "from p1project.questions_answers as qAnsw" +
-//                    " where qAnsw.questionsid= quest.id);" +
-//                    " ALTER TABLE p1project.questions ENABLE TRIGGER ALL;";
-            String SQL = "delete from p1Project.questions as quest " +
-                    "where id = '" + id + "' ";
+            String SQL =
+                    "delete from p1Project.questions_answers as qAnsw " +
+                            "where qAnsw.questionid = '" + id + "' ";
 
             PreparedStatement st = conn.prepareStatement(SQL);
             st.execute();
@@ -315,13 +324,12 @@ public class QuestionDao implements QuestionDatabaseI {
     }
 
     @Override
-    public void deleteQuestionByIdFromQuestionAnswer(int id) throws SQLException {
+    public void deleteQuestionById(int id) throws SQLException {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
         try {
 
-            String SQL =
-                    "delete from p1Project.questions_answers as qAnsw " +
-                            "where qAnsw.questionsid = '" + id + "' ";
+            String SQL = "delete from p1Project.questions as quest " +
+                    "where id = '" + id + "' ";
 
             PreparedStatement st = conn.prepareStatement(SQL);
             st.execute();

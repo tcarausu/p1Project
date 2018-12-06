@@ -20,6 +20,10 @@ create table p1project.user
   primary key (id, username, password)
 );
 
+insert into p1project.user
+values (default, 'admin', 'admin');
+
+
 create table p1project.difficulty
 (
   difficulty varchar(6)
@@ -64,11 +68,11 @@ create table p1project.questions_answers
 
 create table p1project.highScore
 (
+  id                    serial primary key ,
   usernameOfPlayer      varchar(255) references p1project.user (username),
   timeSpent             int,
   nrOfQuestionsAnswered int,
   nrOfQuestionsTotal    int,
   difficultyLevel       varchar(6) references p1project.difficulty (difficulty),
-  score                 int,
-  primary key (usernameOfPlayer, timeSpent, difficultyLevel, score)
+  score                 int
 );

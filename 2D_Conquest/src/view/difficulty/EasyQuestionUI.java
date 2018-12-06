@@ -24,14 +24,13 @@ public class EasyQuestionUI extends JFrame {
     private final String difficultyLevel = "easy";
 
     private JLabel question = new JLabel();
-    private JRadioButton[] selectionButtons = new JRadioButton[4];
-    private int rbSelection = 0;
     private JRadioButton radioButton1 = new JRadioButton();
     private JRadioButton radioButton2 = new JRadioButton();
     private JRadioButton radioButton3 = new JRadioButton();
     private JRadioButton radioButton4 = new JRadioButton();
 
     private JLabel currentNrOfQuestion = new JLabel();
+    private JLabel timeSpentOnTheQuiz = new JLabel();
     private JLabel totalNrOfQuestions = new JLabel();
 
 
@@ -65,6 +64,7 @@ public class EasyQuestionUI extends JFrame {
         super.add(question);
         super.add(currentNrOfQuestion);
         super.add(totalNrOfQuestions);
+        super.add(timeSpentOnTheQuiz);
 
         super.add(next);
         super.add(skip);
@@ -80,6 +80,7 @@ public class EasyQuestionUI extends JFrame {
 
         currentNrOfQuestion.setBounds(675, 0, 30, 20);
         totalNrOfQuestions.setBounds(725, 0, 30, 20);
+        timeSpentOnTheQuiz.setBounds(325, 0, 30, 20);
         question.setBounds(100, 80, 450, 50);
 
 
@@ -106,9 +107,12 @@ public class EasyQuestionUI extends JFrame {
 
         String userName = controller.getUser().getUserName();
         int highScore = controller.getHighScoreOnUserWithDifficultyLevel(userName, difficultyLevel);
+        AtomicInteger timeSpent = new AtomicInteger(controller.timeSpent(userName, highScore, difficultyLevel));
 
         AtomicInteger nrOfCurrentQAnswered = new AtomicInteger(controller.getNrOfQuestionsAnsweredFromCurrentQuiz(userName,
                 difficultyLevel, highScore));
+
+        timeSpentOnTheQuiz.setText(String.valueOf(timeSpent));
 
         currentNrOfQuestion.setText(
                 nrOfCurrentQAnswered
@@ -122,18 +126,19 @@ public class EasyQuestionUI extends JFrame {
             dispose();
             try {
                 int value = nrOfCurrentQAnswered.getAndIncrement();
+                int timeSpentOnAQuestion = timeSpent.getAndIncrement();
 
                 if (radioButton1.isSelected()) {
-                    validationOfRButton(radioButton1.getText(), value);
+                    validationOfRButton(radioButton1.getText(), value, timeSpentOnAQuestion);
                 }
                 if (radioButton2.isSelected()) {
-                    validationOfRButton(radioButton2.getText(), value);
+                    validationOfRButton(radioButton2.getText(), value, timeSpentOnAQuestion);
                 }
                 if (radioButton3.isSelected()) {
-                    validationOfRButton(radioButton3.getText(), value);
+                    validationOfRButton(radioButton3.getText(), value, timeSpentOnAQuestion);
                 }
                 if (radioButton4.isSelected()) {
-                    validationOfRButton(radioButton4.getText(), value);
+                    validationOfRButton(radioButton4.getText(), value, timeSpentOnAQuestion);
 
                 } else if (!radioButton1.isSelected() && !radioButton2.isSelected()
                         && !radioButton3.isSelected() && !radioButton4.isSelected()) {
@@ -151,8 +156,8 @@ public class EasyQuestionUI extends JFrame {
                     dispose();
                     try {
                         int value = nrOfCurrentQAnswered.getAndIncrement();
-
-                        controller.skipToNextQuestion(value, difficultyLevel);
+                        int timeSpentOnAQuestion = timeSpent.getAndIncrement();
+                        controller.skipToNextQuestion(value, difficultyLevel,timeSpentOnAQuestion);
                         if (value >= 20) {
                             dispose();
                             controller.openScoreWindow();
@@ -176,11 +181,11 @@ public class EasyQuestionUI extends JFrame {
 
     }
 
-    private void validationOfRButton(String answer, int value) throws SQLException {
-        controller.updateScoreOnForUserAndDifficulty(answer, value, difficultyLevel);
+    private void validationOfRButton(String answer, int value, int timeSpentOnAQuestion) throws SQLException {
+        controller.updateScoreOnForUserAndDifficulty(answer, value, difficultyLevel,timeSpentOnAQuestion);
         if (value >= 20) {
             dispose();
-            controller.openScoreWindow();
+            controller.openScoreWindowOnUser(controller.getUser().getUserName());
 
         } else {
             dispose();
