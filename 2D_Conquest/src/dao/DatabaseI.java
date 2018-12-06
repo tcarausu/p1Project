@@ -14,19 +14,21 @@ public interface DatabaseI {
 
     void startQuiz(String username, int total, String difficultyLevel) throws SQLException;
 
-    int getNumberOfQuestionsAnsweredFromCurrentQuiz(String username, String difficultyLevel, int score) throws SQLException;
+    int getNrOfQAnsweredFromCurrQuiz(String username, String difficultyLevel, int score) throws SQLException;
 
     int getNumberOfQuestionsTotalFromCurrentQuiz(String username, String difficultyLevel, int score) throws SQLException;
 
     boolean checkHighScoreData(String username, int total, String difficultyLevel) throws SQLException;
 
-    String getHighScore(String username, int total, String difficultyLevel) throws SQLException;
-
     int getHighScoreOnUserWithDifficultyLevel(String username, String difficultyLevel) throws SQLException;
 
     void updateScoreOnDifficultyForUser(int currentNrOfQuestionsAnswered, int totalScore, String userName, String difficultyLevel) throws SQLException;
 
-    void updateNrfQuestionsAnswerFromCurrentQuiz(int nrOfQAnswered, String username, int score) throws SQLException;
+    void updateNrfQuestionsAnswerFromCurrentQuiz(int nrOfQAnswered, String username, int score, int timeSpent) throws SQLException;
 
     boolean checkValidityOfAnswerForAQuestion(String answer) throws SQLException;
+
+    int timeSpent(String username, int score, String difficultyLevel) throws SQLException;
+
+    int getHighScoreId() throws SQLException;
 }

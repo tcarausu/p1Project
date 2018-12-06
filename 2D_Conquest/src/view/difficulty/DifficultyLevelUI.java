@@ -61,7 +61,7 @@ public class DifficultyLevelUI extends JFrame {
         easy.addActionListener(e -> {
             dispose();
             try {
-                controller.startNewEasyQuiz(20, "easy");
+                controller.startQuiz(20, "easy");
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
@@ -73,7 +73,7 @@ public class DifficultyLevelUI extends JFrame {
             controller.openMediumWindow(region);
 
             try {
-                controller.startMediumQuiz(20,"medium");
+                controller.startQuiz(20,"medium");
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
@@ -84,7 +84,7 @@ public class DifficultyLevelUI extends JFrame {
             controller.openHardWindow(region);
 
             try {
-                controller.startHardQuiz(20,"hard");
+                controller.startQuiz(20,"hard");
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }

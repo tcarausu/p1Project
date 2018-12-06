@@ -93,9 +93,9 @@ public class Database implements DatabaseI {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
 
         try {
-            String SQL = "SELECT qAnsw.valityofanswer FROM p1Project.questions_answers as qAnsw " +
+            String SQL = "SELECT qAnsw.validityofanswer FROM p1Project.questions_answers as qAnsw " +
                     "join p1project.answer as answ on answ.id = qAnsw.answersid " +
-                    "join p1project.questions as quest on quest.id = qAnsw.questionsid " +
+                    "join p1project.questions as quest on quest.id = qAnsw.questionid " +
                     "where answ.givenanswer ='" + answer + "'";
             PreparedStatement st = conn.prepareStatement(SQL);
             st.execute();
@@ -104,7 +104,7 @@ public class Database implements DatabaseI {
             if (answer != null && !answer.equals("")) {
                 ArrayList<Boolean> arr = new ArrayList<>();
                 while (rs.next()) {
-                    arr.add(rs.getBoolean("valityofanswer")
+                    arr.add(rs.getBoolean("validityofanswer")
                     );
                 }
                 return arr.get(0);
@@ -118,56 +118,30 @@ public class Database implements DatabaseI {
         }
 
     }
+
     @Override
-    public String getHighScore(String username, int total, String difficultyLevel) throws SQLException {
-        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
-
-        try {
-            String SQL = "SELECT score.score FROM p1Project.highscore as score " +
-                    "where usernameofplayer ='" + username + "'"
-                    + " AND difficultylevel ='" + difficultyLevel + "'"
-                    + " AND nrofquestionstotal ='" + total + "'";
-            PreparedStatement st = conn.prepareStatement(SQL);
-            st.execute();
-            ResultSet rs = st.getResultSet();
-
-            ArrayList<String> arr = new ArrayList<>();
-            while (rs.next()) {
-                if (!rs.getString("score").equals("0") || rs.getString("score") == null) {
-                    String initialScore = String.valueOf(0);
-                    arr.add(initialScore);
-                } else {
-                    arr.add(rs.getString("score"));
-
-                }
-            }
-            return arr.get(0);
-
-        } finally {
-            conn.close();
-
-        }
-
-    }
-    @Override
-    public int getNumberOfQuestionsAnsweredFromCurrentQuiz(String username, String difficultyLevel, int score) throws SQLException {
+    public int getNrOfQAnsweredFromCurrQuiz(String username, String difficultyLevel, int score) throws SQLException {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
 
         try {
             String SQL = "SELECT score.nrofquestionsanswered FROM p1Project.highscore as score " +
                     "where usernameofplayer ='" + username + "'"
                     + " AND difficultylevel ='" + difficultyLevel + "'"
-                    + " AND score ='" + score + "'";
+                    + " AND score =" + score + "";
 
             PreparedStatement st = conn.prepareStatement(SQL);
             st.execute();
             ResultSet rs = st.getResultSet();
             ArrayList<Integer> arr = new ArrayList<>();
             while (rs.next()) {
-                arr.add(rs.getInt("nrofquestionsanswered")
-                );
+                arr.add(rs.getInt("nrofquestionsanswered"));
             }
-            return arr.get(0);
+
+            if (arr.size() > 0)
+                return arr.get(arr.size() - 1);
+            else
+                return -1;
+
         } finally {
             conn.close();
 
@@ -176,13 +150,14 @@ public class Database implements DatabaseI {
     }
 
     @Override
-    public void updateNrfQuestionsAnswerFromCurrentQuiz(int nrOfQAnswered, String username, int score) throws SQLException {
+    public void updateNrfQuestionsAnswerFromCurrentQuiz(int nrOfQAnswered, String username, int score, int timeSpent) throws SQLException {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
 
         try {
             String SQL = "update p1project.highscore " +
                     "set  nrofquestionsanswered  = '" + nrOfQAnswered + "' ,"
-                    + " score ='" + score + "' " +
+                    + " score ='" + score + "' ," +
+                    " timespent ='" + timeSpent + "' " +
                     "where usernameofplayer ='" + username + "'";
 
             PreparedStatement st = conn.prepareStatement(SQL);
@@ -234,7 +209,10 @@ public class Database implements DatabaseI {
                 arr.add(rs.getInt("nrofquestionstotal")
                 );
             }
-            return arr.get(0);
+            if (arr.size() > 0)
+                return arr.get(arr.size() - 1);
+            else
+                return -1;
 
         } finally {
             conn.close();
@@ -260,7 +238,10 @@ public class Database implements DatabaseI {
                 arr.add(rs.getInt("score")
                 );
             }
-            return arr.get(0);
+            if (arr.size() > 0)
+                return arr.get(arr.size() - 1);
+            else
+                return -1;
 
         } finally {
             conn.close();
@@ -274,8 +255,8 @@ public class Database implements DatabaseI {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
 
         try {
-            String SQL = "Insert into  p1Project.highscore(usernameofplayer,timespent," +
-                    "nrofquestionsanswered,nrofquestionstotal,difficultylevel,score) values(?,0,0,?,?,0)";
+            String SQL = "Insert into  p1Project.highscore(id,usernameofplayer,timespent," +
+                    "nrofquestionsanswered,nrofquestionstotal,difficultylevel,score) values(default,?,0,0,?,?,0)";
 
             PreparedStatement st = conn.prepareStatement(SQL);
             st.setString(1, username);
@@ -291,6 +272,60 @@ public class Database implements DatabaseI {
 
     }
 
+    @Override
+    public int timeSpent(String username, int score, String difficultyLevel) throws SQLException {
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
+
+        try {
+            String SQL = "SELECT score.timespent FROM p1Project.highscore as score " +
+                    "where score.usernameofplayer ='" + username + "'"
+                    + " AND difficultylevel ='" + difficultyLevel + "'"
+                    + " AND score ='" + score + "'";
+
+            PreparedStatement st = conn.prepareStatement(SQL);
+            st.execute();
+            ResultSet rs = st.getResultSet();
+            ArrayList<Integer> arr = new ArrayList<>();
+            while (rs.next()) {
+                arr.add(rs.getInt("timespent")
+                );
+            }
+            if (arr.size() > 0)
+                return arr.get(arr.size() - 1);
+            else
+                return -1;
+
+        } finally {
+            conn.close();
+
+        }
+    }
+
+    @Override
+    public int getHighScoreId() throws SQLException {
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
+
+        try {
+            String SQL = "SELECT score.id FROM p1Project.highscore as score " ;
+
+            PreparedStatement st = conn.prepareStatement(SQL);
+            st.execute();
+            ResultSet rs = st.getResultSet();
+            ArrayList<Integer> arr = new ArrayList<>();
+            while (rs.next()) {
+                arr.add(rs.getInt("id")
+                );
+            }
+            if (arr.size() > 0)
+                return arr.get(arr.size() - 1);
+            else
+                return -1;
+
+        } finally {
+            conn.close();
+
+        }
+    }
 
     public ResultSet getQuestionsData() throws SQLException {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres",

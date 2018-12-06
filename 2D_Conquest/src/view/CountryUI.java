@@ -5,29 +5,32 @@ import controller.AdminController;
 import controller.MyController;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 
 public class CountryUI extends JFrame {
-    private ImageIcon firstImage = new ImageIcon("src/Blank_Map_of_Denmark.png");
+    private ImageIcon firstImage = new ImageIcon("images/Region-Top.png");
+    private ImageIcon secondImage = new ImageIcon("images/Region-Middle.png");
+    private ImageIcon thirdImage = new ImageIcon("images/Region-Bottom.png");
+    private ImageIcon forthImage = new ImageIcon("images/Region-Side.png");
+
+    private JButton firstMap = new JButton("capital",firstImage);
+    private JButton secondMap = new JButton(secondImage);
+    private JButton thirdMap = new JButton(thirdImage);
+    private JButton forthMap = new JButton(forthImage);
+
+    private JButton back = new JButton("Back");
 
     private MyController controller;
     private AdminController aController;
 
-    private JButton firstMap = new JButton(firstImage);
-    private JButton secondMap = new JButton(firstImage);
-    private JButton thirdMap = new JButton(firstImage);
-    private JButton forthMap = new JButton(firstImage);
-    private JButton fifthMap = new JButton(firstImage);
-    private JButton sixThMap = new JButton(firstImage);
-
-
-    private JButton back = new JButton("Back");
-
     /**
      * Country UI's Constructor
+     *
      * @param controller of type MyController
      */
-    public CountryUI(MyController controller,AdminController aController) {
+    public CountryUI(MyController controller, AdminController aController) {
 
         super("Country UI");
         this.controller = controller;
@@ -44,32 +47,34 @@ public class CountryUI extends JFrame {
     /**
      * sets up the functionality for the Country "UI"
      */
-    private void countryButtons()  {
+    private void countryButtons() {
+        super.setBounds(0, 0, 900, 800);
+        setLocation(250, 50);
+
+//        JPanel panel = new JPanel(new BorderLayout());
+//        panel.add(new ScrollPane());
+
+        firstMap.setBounds(70, 50, 300, 300);
+        secondMap.setBounds(70, 350, 300, 300);
+        thirdMap.setBounds(370, 50, 300, 300);
+        forthMap.setBounds(370, 350, 300, 300);
+
+//        firstMap.setVerticalTextPosition(AbstractButton.BOTTOM);
+//        firstMap.setHorizontalTextPosition(AbstractButton.LEADING);
+//        firstMap.setMnemonic(KeyEvent.VK_ENTER);
+
+        back.setBounds(350, 650, 160, 40);
+
+        String firstMapRegion = firstMap.getText();
 
         super.add(firstMap);
         super.add(secondMap);
         super.add(thirdMap);
         super.add(forthMap);
-        super.add(fifthMap);
-        super.add(sixThMap);
 
         super.add(back);
-        
-        setSize(900, 700);
-        setLocation(250,50);
 
-        firstMap.setBounds(70, 50, 80, 80);
-        secondMap.setBounds(70, 150, 80, 80);
-        thirdMap.setBounds(70, 250, 80, 80);
-        forthMap.setBounds(170, 50, 80, 80);
-        fifthMap.setBounds(170, 150, 80, 80);
-        sixThMap.setBounds(170, 250, 80, 80);
-
-        firstMap.setText("capital");
-
-        String firstMapRegion = firstMap.getText();
-
-        back.setBounds(70, 350, 160, 40);
+//        super.getContentPane().add(panel);
 
         firstMap.addActionListener(e -> {
                     dispose();
@@ -83,13 +88,11 @@ public class CountryUI extends JFrame {
         secondMap.addActionListener(e -> dispose());
         thirdMap.addActionListener(e -> dispose());
         forthMap.addActionListener(e -> dispose());
-        fifthMap.addActionListener(e -> dispose());
-        sixThMap.addActionListener(e -> dispose());
 
         back.addActionListener(
                 e -> {
                     dispose();
-                    LoginPageUI loginPageUI = new LoginPageUI(controller,aController);
+                    LoginPageUI loginPageUI = new LoginPageUI(controller, aController);
                     loginPageUI.setVisible(true);
                 });
     }

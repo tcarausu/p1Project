@@ -98,6 +98,7 @@ public class HardQuestionUI extends JFrame {
         String userName = controller.getUser().getUserName();
         String difficultyLevel = "hard";
         int highScore = controller.getHighScoreOnUserWithDifficultyLevel(userName, difficultyLevel);
+        AtomicInteger timeSpent = new AtomicInteger(controller.timeSpent(userName, highScore, difficultyLevel));
 
         AtomicInteger nrOfCurrentQAnswered = new AtomicInteger(controller.getNrOfQuestionsAnsweredFromCurrentQuiz(userName,
                 difficultyLevel, highScore));
@@ -115,18 +116,18 @@ public class HardQuestionUI extends JFrame {
             dispose();
             try {
                 int value = nrOfCurrentQAnswered.getAndIncrement();
-
+                int timeSpentOnAQuestion = timeSpent.getAndIncrement();
                 if (radioButton1.isSelected()) {
-                    validationOfRButton(radioButton1.getText(),value, difficultyLevel);
+                    validationOfRButton(radioButton1.getText(),value, difficultyLevel,  timeSpentOnAQuestion);
                 }
                 if (radioButton2.isSelected()) {
-                    validationOfRButton(radioButton2.getText(),value, difficultyLevel);
+                    validationOfRButton(radioButton2.getText(),value, difficultyLevel,  timeSpentOnAQuestion);
                 }
                 if (radioButton3.isSelected()) {
-                    validationOfRButton(radioButton3.getText(),value, difficultyLevel);
+                    validationOfRButton(radioButton3.getText(),value, difficultyLevel,  timeSpentOnAQuestion);
                 }
                 if (radioButton4.isSelected()) {
-                    validationOfRButton(radioButton4.getText(),value, difficultyLevel);
+                    validationOfRButton(radioButton4.getText(),value, difficultyLevel,  timeSpentOnAQuestion);
                 }
 
             } catch (SQLException e1) {
@@ -136,8 +137,8 @@ public class HardQuestionUI extends JFrame {
         done.addActionListener(e -> dispose());
 
     }
-    private void validationOfRButton(String answer, int value, String difficultyLevel) throws SQLException {
-        controller.updateScoreOnForUserAndDifficulty(answer,value, difficultyLevel);
+    private void validationOfRButton(String answer, int value, String difficultyLevel, int timeSpentOnAQuestion) throws SQLException {
+        controller.updateScoreOnForUserAndDifficulty(answer,value, difficultyLevel,timeSpentOnAQuestion);
         if (value >= 20) {
             dispose();
             controller.openScoreWindow();

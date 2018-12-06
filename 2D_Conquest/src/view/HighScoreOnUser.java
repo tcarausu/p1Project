@@ -1,5 +1,6 @@
 package view;
 
+
 import controller.AdminController;
 import controller.MyController;
 import dao.Database;
@@ -9,11 +10,12 @@ import javax.swing.table.TableModel;
 import java.sql.SQLException;
 
 /**
- * File created on 11/9/2018
- * by Toader
+ * File created on 118/9/2018
+ * by Alex
  **/
-public class HighScoreUI extends JFrame {
+public class HighScoreOnUser extends JFrame {
     private MyController controller;
+    private String username;
 
     private JButton back = new JButton("Back");
     private AdminController aController;
@@ -24,36 +26,37 @@ public class HighScoreUI extends JFrame {
      *
      * @param controller of type MyController
      */
-    public HighScoreUI(
-            MyController controller,
-            AdminController aController,
-            Database database
-    ) {
+    public HighScoreOnUser(MyController controller,
+                           AdminController aController,
+                           Database database,
+                           String username) {
 
         super("High Score");
 
         this.controller = controller;
         this.aController = aController;
         this.database = database;
+        this.username = username;
+
         setResizable(false);
         setVisible(true);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         try {
-            displayAllQuestionsTable();
+            displayAllQuestionsTable(username);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
 
-    private void displayAllQuestionsTable() throws SQLException {
+    private void displayAllQuestionsTable(String username) throws SQLException {
 
-        super.setBounds(0, 0, 500, 500);
+        setBounds(0, 0, 500, 500);
         setLocation(500, 200);
 
         JPanel panel = new JPanel();
-        TableModel tableModel = controller.buildTableModel(database.getHighScore());
+        TableModel tableModel = controller.buildTableModel(database.getHighScoreOnUser(username));
         JTable questionsTable = new JTable(tableModel);
         panel.add(new JScrollPane(questionsTable));
 
@@ -64,7 +67,7 @@ public class HighScoreUI extends JFrame {
 
         back.addActionListener(ae -> {
             dispose();
-            controller.start();
+            controller.openScoreWindow();
         });
     }
 

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>controller.MyController</OriginalElement>
+  <nodes>
+    <node x="37.291666666666686" y="111.0">controller.QuestionController</node>
+    <node x="777.8084415584415" y="0.0">dao.UserDatabaseI</node>
+    <node x="729.2916666666667" y="122.5">dao.UserDao</node>
+    <node x="360.29166666666663" y="89.0">dao.Database</node>
+    <node x="12.742266414141397" y="0.0">dao.DatabaseI</node>
+    <node x="388.7628678365284" y="297.0">view.MainUI</node>
+    <node x="199.30453450319504" y="0.0">dao.QuestionDatabaseI</node>
+    <node x="10.840789914450568" y="428.0">controller.MyController</node>
+    <node x="505.2916666666667" y="572.0">controller.AdminController</node>
+    <node x="560.2916666666666" y="122.5">dao.QuestionDao</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="controller.MyController" target="view.MainUI">
+      <point x="72.90909090909088" y="-37.0" />
+      <point x="284.24988082354145" y="378.0" />
+      <point x="416.2628678365284" y="378.0" />
+      <point x="-165.0" y="25.5" />
+    </edge>
+    <edge source="view.MainUI" target="dao.Database">
+      <point x="0.0" y="-25.5" />
+      <point x="581.2628678365284" y="227.0" />
+      <point x="510.29166666666663" y="227.0" />
+      <point x="60.0" y="59.0" />
+    </edge>
+    <edge source="dao.QuestionDao" target="dao.QuestionDatabaseI">
+      <point x="0.0" y="-25.5" />
+      <point x="634.7916666666666" y="49.0" />
+      <point x="322.6378678365284" y="49.0" />
+      <point x="49.33333333333337" y="14.5" />
+    </edge>
+    <edge source="controller.QuestionController" target="dao.QuestionDatabaseI">
+      <point x="75.75" y="-37.0" />
+      <point x="264.5416666666667" y="69.0" />
+      <point x="273.30453450319504" y="69.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="view.MainUI" target="controller.QuestionController">
+      <point x="-171.1111111111111" y="-25.5" />
+      <point x="410.15175672541733" y="267.0" />
+      <point x="232.07738095238102" y="267.0" />
+      <point x="43.285714285714334" y="37.0" />
+    </edge>
+    <edge source="dao.Database" target="dao.DatabaseI">
+      <point x="0.0" y="-59.0" />
+      <point x="450.29166666666663" y="59.0" />
+      <point x="96.90893308080803" y="59.0" />
+      <point x="33.66666666666666" y="14.5" />
+    </edge>
+    <edge source="controller.MyController" target="dao.Database">
+      <point x="36.45454545454544" y="-37.0" />
+      <point x="247.795335368996" y="368.0" />
+      <point x="345.96504586683153" y="368.0" />
+      <point x="345.96504586683153" y="277.0" />
+      <point x="390.29166666666663" y="277.0" />
+      <point x="-60.0" y="59.0" />
+    </edge>
+    <edge source="controller.AdminController" target="dao.UserDatabaseI">
+      <point x="97.0" y="-37.0" />
+      <point x="747.7916666666667" y="542.0" />
+      <point x="864.7916666666667" y="542.0" />
+      <point x="864.7916666666667" y="69.0" />
+      <point x="839.8084415584415" y="69.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="view.MainUI" target="controller.AdminController">
+      <point x="110.00000000000001" y="25.5" />
+      <point x="691.2628678365284" y="398.0" />
+      <point x="661.7916666666666" y="398.0" />
+      <point x="661.7916666666666" y="552.0" />
+      <point x="683.125" y="552.0" />
+      <point x="32.333333333333314" y="-37.0" />
+    </edge>
+    <edge source="view.MainUI" target="dao.QuestionDao">
+      <point x="42.77777777777783" y="-25.5" />
+      <point x="624.0406456143062" y="277.0" />
+      <point x="597.5416666666666" y="277.0" />
+      <point x="-37.25" y="25.5" />
+    </edge>
+    <edge source="view.MainUI" target="controller.MyController">
+      <point x="0.0" y="25.5" />
+      <point x="581.2628678365284" y="408.0" />
+      <point x="393.6135171871778" y="408.0" />
+      <point x="182.27272727272725" y="-37.0" />
+    </edge>
+    <edge source="controller.MyController" target="dao.DatabaseI">
+      <point x="-145.81818181818176" y="-37.0" />
+      <point x="65.52260809626881" y="398.0" />
+      <point x="11.0" y="398.0" />
+      <point x="11.0" y="69.0" />
+      <point x="63.2422664141414" y="69.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="controller.AdminController" target="controller.MyController">
+      <point x="-97.00000000000006" y="-37.0" />
+      <point x="553.7916666666666" y="542.0" />
+      <point x="161.21578991445057" y="542.0" />
+      <point x="-50.125" y="37.0" />
+    </edge>
+    <edge source="dao.UserDao" target="dao.UserDatabaseI">
+      <point x="0.0" y="-25.5" />
+      <point x="791.7916666666667" y="69.0" />
+      <point x="798.4751082251082" y="69.0" />
+      <point x="-41.33333333333334" y="14.5" />
+    </edge>
+    <edge source="controller.MyController" target="controller.QuestionController">
+      <point x="-36.45454545454544" y="-37.0" />
+      <point x="174.88624445990513" y="398.0" />
+      <point x="127.5545345031951" y="398.0" />
+      <point x="127.5545345031951" y="277.0" />
+      <point x="145.50595238095246" y="277.0" />
+      <point x="-43.28571428571422" y="37.0" />
+    </edge>
+    <edge source="view.MainUI" target="dao.UserDao">
+      <point x="128.33333333333337" y="-25.5" />
+      <point x="709.5962011698618" y="267.0" />
+      <point x="760.5416666666667" y="267.0" />
+      <point x="-31.25" y="25.5" />
+    </edge>
+    <edge source="controller.QuestionController" target="controller.MyController">
+      <point x="-129.8571428571429" y="37.0" />
+      <point x="58.934523809523796" y="277.0" />
+      <point x="105.5545345031951" y="277.0" />
+      <point x="105.5545345031951" y="408.0" />
+      <point x="101.97715355081425" y="408.0" />
+      <point x="-109.36363636363632" y="-37.0" />
+    </edge>
+    <edge source="controller.MyController" target="controller.AdminController">
+      <point x="50.125" y="37.0" />
+      <point x="261.46578991445057" y="532.0" />
+      <point x="586.125" y="532.0" />
+      <point x="-64.66666666666671" y="-37.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="321.0" y="323.0" />
+  <SelectedNodes>
+    <node>controller.MyController</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
