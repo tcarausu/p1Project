@@ -6,6 +6,8 @@ import adminUI.adminQuestionPage.AdminQuestionEdit;
 import adminUI.adminUserPage.AdminAllUsersTable;
 import dao.Database;
 import dao.DatabaseI;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
 import view.*;
 import view.difficulty.DifficultyLevelUI;
 import view.difficulty.EasyQuestionUI;
@@ -341,5 +343,8 @@ public class MyController {
 
     public User getUser() {
         return user;
+    }
+    public void closeMusic(AudioStream audioStream) {
+        AudioPlayer.player.stop(audioStream);
     }
 }
