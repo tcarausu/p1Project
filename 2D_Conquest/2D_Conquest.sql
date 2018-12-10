@@ -131,4 +131,58 @@ values
 (default,'How does Denmark revise its constitution?','civil','medium','capital');
 
 
+insert into p1project.answer
+values
+ (default, 'Odense', 'medium'),
+ (default,'1805','medium'),
+(default, 'Langelinie', 'medium'),
+ (default, 'Hans Christian Andersen', 'easy'),
+(default, '1913', 'medium'),
+ (default, 'Carl Jacobsen', 'hard'),
+ (default, 'Edvard Eriksen','medium'),
+ (default, 'Eline Eriksen', 'hard'),
+ (default, '3300 stories', 'easy'),
+(default, 'The Tallow Candle', 'hard'),
+(default, 'Norrebro', 'easy'),
+ (default, 'The Snow Queen', 'medium'),
+ (default, 'International Children’s Book Day', 'easy'),
+ (default, '1875', 'easy'),
+ (default, 'Jutland and Zealand', 'easy'),
+ (default, 'The Old Little Belt Bridge', 'easy'),
+ (default, '~500.000', 'medium'),
+ (default, 'Jutland', 'easy'),
+ (default, 'Aarhus', 'easy'),
+ (default, 'Germany', 'medium'),
+ (default, 'Oresund Bridge', 'easy'),
+ (default, 'The North City Gate of Copenhagen', 'medium'),
+ (default, 'Danske statsbaner', 'easy'),
+ (default, 'S-train, Regional, and Metro trains', 'easy'),
+ (default, '01/10/1985', 'medium'),
+ (default, 'Over 60%', 'easy'),
+ (default, 'Cyclists', 'easy'),
+ (default, 'Lars Løkke Rasmussen', 'easy'),
+ (default, 'Venstre', 'easy'),
+ (default, 'Folketinget', 'easy'),
+ (default, 'Queen Margrethe II of Denmark', 'easy'),
+ (default, 'Crown Prince Frederik', 'medium'),
+ (default, 'Nine', 'medium'),
+ (default, 'Venstre, Conservative People’s Party, Social Democrats, and Danish Social Liberalist Party', 'medium'),
+ (default, 'A social democracy', 'easy'),
+ (default, '1219', 'hard'),
+ (default, 'Denmark’s flag', 'medium'),
+ (default, 'Funen and Zealand', 'medium'),
+ (default, 'Norway', 'medium'),
+(default, 'Sweden', 'medium'),
+ (default, 'Napoleonic Wars', 'hard'),
+(default, '1814', 'hard'),
+(default, 'five', 'medium'),
+(default, 'Socialistisk Folkeparti', 'hard'),
+(default, '1849 ', 'hard'),
+(default, '1953', 'medium'),
+(default, 'Majority support of parliament and national population', 'medium');
+
+insert into p1project.questions_answers values
+                                              (1,1,'true'),
+(2,2,'false');
+
 
