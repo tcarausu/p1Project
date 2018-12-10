@@ -76,6 +76,7 @@ create table p1project.highScore
   difficultyLevel       varchar(6) references p1project.difficulty (difficulty),
   score                 int
 );
+
 insert into p1project.questions
 values
  (default,'Where was Hans Christian Andersen born?','history','medium','southDenmark'),
