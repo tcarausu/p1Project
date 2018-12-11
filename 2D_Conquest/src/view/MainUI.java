@@ -22,14 +22,12 @@ public class MainUI extends JFrame {
 
     private JButton quit = new JButton("QUIT");
 
-
-
     /**
      * Main UI's Constructor
      *
      * @param controller of type MyController
      */
-    public MainUI(MyController controller,AdminController aController,QuestionController qController){
+    public MainUI(MyController controller,AdminController aController,QuestionController qController) {
         super("Main UI");
         this.controller = controller;
         this.aController = aController;
@@ -39,21 +37,14 @@ public class MainUI extends JFrame {
         setLayout(null);
         setResizable(false);
         setVisible(true);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-            introduceButton();
-
-//        try {
-//            MusicTest();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        introduceButton();
     }
-
 
     /**
      */
-    private void introduceButton()  {
+    private void introduceButton() {
 
         super.add(start);
         super.add(quit);
@@ -65,18 +56,6 @@ public class MainUI extends JFrame {
         start.setBounds(70, 50, 160, 40);
         highScore.setBounds(70, 150, 160, 40);
         quit.setBounds(70, 250, 160, 40);
-
-
-//            // open the sound file as a Java input stream
-//            String gongFile = "D:\\Medley1.wav";
-//            InputStream in = new FileInputStream(gongFile);
-//
-//            // create an audiostream from the inputstream
-//            AudioStream audioStream = new AudioStream(in);
-//
-//            // play the audio clip with the audioplayer class
-//            AudioPlayer.player.start(audioStream);
-
 
         start.addActionListener(
                 e -> {
@@ -99,31 +78,10 @@ public class MainUI extends JFrame {
 
                 }
         );
-        quit.addActionListener(e ->{
-            dispose();
-//            controller.closeMusic(audioStream);
-
-
-        });
+        quit.addActionListener(e -> dispose());
     }
-//        public void MusicTest()
-//                throws Exception
-//        {
-//            // open the sound file as a Java input stream
-//            String gongFile = "D:\\Medley1.wav";
-//            InputStream in = new FileInputStream(gongFile);
-//
-//            // create an audiostream from the inputstream
-//            AudioStream audioStream = new AudioStream(in);
-//
-//            // play the audio clip with the audioplayer class
-//            AudioPlayer.player.start(audioStream);
-//
-//        }
 
-
-
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         Database database = new Database();
         UserDao userDao = new UserDao();
         QuestionDao questionDao = new QuestionDao();
@@ -136,6 +94,5 @@ public class MainUI extends JFrame {
         qController.setMainControllerQuestionController(myController);
 
         myController.start();
-
     }
 }

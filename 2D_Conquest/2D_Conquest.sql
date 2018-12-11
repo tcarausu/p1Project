@@ -28,7 +28,7 @@ create table p1project.difficulty
 (
   difficulty varchar(6)
     CONSTRAINT onlyDifficulties CHECK
-    (difficulty IN ('easy', 'hard', 'medium')) primary key
+      (difficulty IN ('easy', 'hard', 'medium')) primary key
 );
 
 insert into p1project.difficulty
@@ -42,13 +42,14 @@ create table p1project.questions
   subject         varchar(255),
   typeOfQuestion  varchar(12)
     CONSTRAINT typeOfQuestions CHECK
-    (typeOfQuestion IN ('history', 'culture', 'civil', 'literature', 'economics', 'geography')),
+      (typeOfQuestion IN ('history', 'culture', 'civil', 'literature', 'economics', 'geography')),
   difficultyLevel varchar(6) references p1project.difficulty (difficulty),
   region          varchar(25)
     CONSTRAINT denmarkRegion CHECK
-    (region IN ('capital', 'midDenmark', 'northDenmark', 'southDenmark')) not null,
+      (region IN ('capital', 'midDenmark', 'northDenmark', 'southDenmark')) not null,
   primary key (id, subject, typeOfQuestion, difficultyLevel)
 );
+
 create table p1project.answer
 (
   id              serial unique,
@@ -355,7 +356,11 @@ values (default, 'Odense', 'medium'),
        (default, 'Majority support of parliament and national population', 'medium'),
        (default, 'Majority support in parliament', 'medium'),
        (default, 'Majority support in national voten', 'medium'),
-       (default, 'Monarch mandate', 'medium');
+       (default, 'Monarch mandate', 'medium'),
+       (default, 'Langelinie', 'easy'),
+       (default, 'Oceankaj', 'easy'),
+       (default, 'Norreport', 'easy'),
+       (default, 'Tivoli Gardens', 'easy');
 
 insert into p1project.questions_answers
 values (1, 1, 'true'),
@@ -597,7 +602,12 @@ values (1, 1, 'true'),
        (60, 97, 'true'),
        (60, 98, 'false'),
        (60, 99, 'false'),
-       (60, 100, 'false');
+       (60, 100, 'false'),
+       (3, 189, 'true'),
+       (3, 190, 'false'),
+       (3, 191, 'false'),
+       (3, 192, 'false')
+       ;
 
 
 
