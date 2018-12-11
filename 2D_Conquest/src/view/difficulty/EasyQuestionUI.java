@@ -7,8 +7,6 @@ import javax.swing.*;
 import java.sql.SQLException;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static com.sun.java.accessibility.util.AWTEventMonitor.addActionListener;
-
 /**
  * File created on 11/1/2018
  * by Toader
@@ -66,12 +64,16 @@ public class EasyQuestionUI extends JFrame {
         setLayout(null);
         setResizable(false);
         setVisible(true);
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         try {
             setEasy();
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+
+        if (t.isDaemon()) {
+            System.exit(0);
         }
     }
 
@@ -114,17 +116,17 @@ public class EasyQuestionUI extends JFrame {
         currentNrOfQuestion.setBounds(675, 0, 30, 20);
         totalNrOfQuestions.setBounds(725, 0, 30, 20);
         timeSpentOnTheQuiz.setBounds(325, 0, 30, 20);
-        question.setBounds(100, 80, 450, 50);
+        question.setBounds(50, 80, 600, 50);
 
 
         next.setBounds(600, 180, 110, 40);
         skip.setBounds(600, 260, 110, 40);
         done.setBounds(600, 340, 110, 40);
 
-        radioButton1.setBounds(150, 250, 150, 50);
-        radioButton2.setBounds(360, 250, 150, 50);
-        radioButton3.setBounds(150, 200, 150, 50);
-        radioButton4.setBounds(360, 200, 150, 50);
+        radioButton1.setBounds(100, 250, 200, 50);
+        radioButton2.setBounds(360, 250, 200, 50);
+        radioButton3.setBounds(100, 200, 200, 50);
+        radioButton4.setBounds(360, 200, 200, 50);
 
         startTimer();
 //        timer2();
@@ -132,10 +134,10 @@ public class EasyQuestionUI extends JFrame {
 
         String questionToBeAnswered = question.getText();
 
-        radioButton1.setText(qController.getAnEasyQuestionAnswerList(region, questionToBeAnswered).get(0));
-        radioButton2.setText(qController.getAnEasyQuestionAnswerList(region, questionToBeAnswered).get(1));
-        radioButton3.setText(qController.getAnEasyQuestionAnswerList(region, questionToBeAnswered).get(2));
-        radioButton4.setText(qController.getAnEasyQuestionAnswerList(region, questionToBeAnswered).get(3));
+        radioButton1.setText(controller.answerForQuestion(difficultyLevel, region, questionToBeAnswered));
+        radioButton2.setText(controller.answerForQuestion(difficultyLevel, region, questionToBeAnswered));
+        radioButton3.setText(controller.answerForQuestion(difficultyLevel, region, questionToBeAnswered));
+        radioButton4.setText(controller.answerForQuestion(difficultyLevel, region, questionToBeAnswered));
 
         question.setText("This is The Question: " + questionToBeAnswered);
 
@@ -246,7 +248,7 @@ public class EasyQuestionUI extends JFrame {
 
     }
 
-    private int startTimer() {
+    private void startTimer() {
 
         state = true;
 
@@ -288,8 +290,7 @@ public class EasyQuestionUI extends JFrame {
         });
         t.start();
 
-        int result = minutes + (hours / 60) + (seconds / 60);
-        return result;
+
     }
 
 //    private void timer2() {

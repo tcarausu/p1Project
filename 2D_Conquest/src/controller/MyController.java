@@ -31,6 +31,8 @@ public class MyController {
 
     private List<String> questionsAlreadyUsed = new ArrayList<>();
 
+    private List<String> answersAlreadyUsed = new ArrayList<>();
+
     public MyController(DatabaseI db, AdminController aController, QuestionController qController) {
         this.db = db;
         this.qController = qController;
@@ -263,27 +265,44 @@ public class MyController {
     public String questionToBeAnswered(String difficulty, String region) throws SQLException {
         //TODO FIX ME
         List<String> result = qController.getAllQuestionsByDifficultyLevelAndRegion(difficulty, region);
-        int totalNrOfQ = result.size();
+        return getResults(result, questionsAlreadyUsed);
 
-        if (totalNrOfQ == questionsAlreadyUsed.size()) {
-            return null;
+    }
+
+    public String answerForQuestion(String difficulty, String region, String question) throws SQLException {
+        //TODO FIX ME
+        List<String> result = qController.getAnQuestionAnswerList(difficulty, region, question);
+        return getResults(result, answersAlreadyUsed);
+
+    }
+
+    private String getResults(List<String> resultsFromDao, List<String> list) {
+        int totalNrOfResultsFromDao = resultsFromDao.size();
+
+        if (list == answersAlreadyUsed) {
+            if (totalNrOfResultsFromDao == list.size()) {
+                answersAlreadyUsed.clear();
+            }
+        } else if (list == questionsAlreadyUsed) {
+            if (totalNrOfResultsFromDao == list.size()) {
+                return null;
+            }
         }
 
         SecureRandom sr = new SecureRandom();
-        String tempQ;
+        String result;
         do {
-            int index = sr.nextInt(totalNrOfQ);
-            tempQ = result.get(index);
-            if (!questionsAlreadyUsed.contains(tempQ)) {
-                questionsAlreadyUsed.add(tempQ);
+            int index = sr.nextInt(totalNrOfResultsFromDao);
+            result = resultsFromDao.get(index);
+            if (!list.contains(result)) {
+                list.add(result);
+
                 break;
-                //CLEAR ME
             }
-        }
-        while (true);
 
-        return tempQ;
+        } while (true);
 
+        return result;
     }
 
     private static int decrementValueTilResultIsOne(int num) {

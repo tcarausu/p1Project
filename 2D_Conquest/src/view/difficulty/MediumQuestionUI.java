@@ -47,7 +47,7 @@ public class MediumQuestionUI extends JFrame {
         setLayout(null);
         setResizable(false);
         setVisible(true);
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         try {
             setMedium();

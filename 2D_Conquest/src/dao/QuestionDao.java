@@ -244,17 +244,15 @@ public class QuestionDao implements QuestionDatabaseI {
     }
 
     @Override
-    public List<String> getAnEasyQuestionAnswerList(String region, String question) throws SQLException {
+    public List<String> getAnQuestionAnswerList(String difficultyLevel,String region, String question) throws SQLException {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
 
         try {
             String SQL = "SELECT ans.givenanswer FROM p1Project.answer as ans " +
                     "join p1project.questions_answers as qAnsw on ans.id = qAnsw.answersid " +
                     "join p1project.questions as quest on quest.id = qAnsw.questionid " +
-                    "where ans.difficultylevel like 'easy' and quest.subject = '" + question + "' " +
-                    "and quest.region like '" + region + "'" +
-                    "ORDER BY random()" +
-                    "LIMIT 4";
+                    "where ans.difficultylevel like '"+difficultyLevel+"' and quest.subject = '" + question + "' " +
+                    "and quest.region like '" + region + "'" ;
 
 
             List<String> result = new ArrayList<>();
