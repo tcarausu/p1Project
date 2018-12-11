@@ -54,3 +54,6 @@ hs_err_pid*
 *.xml
 
 *.meta
+/2D_Conquest/.idea/misc.xml
+/2D_Conquest/.idea/workspace.xml
+/2D_Conquest/2D_Conquest.iml
