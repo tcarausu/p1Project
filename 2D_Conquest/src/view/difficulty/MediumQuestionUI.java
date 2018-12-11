@@ -97,11 +97,13 @@ public class MediumQuestionUI extends JFrame {
 
         String userName = controller.getUser().getUserName();
         String difficultyLevel = "medium";
-        int highScore = controller.getHighScoreOnUserWithDifficultyLevel(userName, difficultyLevel);
-        AtomicInteger timeSpent = new AtomicInteger(controller.timeSpent(userName, highScore, difficultyLevel));
+        int userIdForCurrentQuiz = controller.getHighScoreId();
+        int highScore = controller.getHighScoreOnUserWithDifficultyLevel(userIdForCurrentQuiz, difficultyLevel);
+        AtomicInteger timeSpent = new AtomicInteger(controller.timeSpent(userIdForCurrentQuiz, highScore, difficultyLevel));
 
-        AtomicInteger nrOfCurrentQAnswered = new AtomicInteger(controller.getNrOfQuestionsAnsweredFromCurrentQuiz(userName,
-                difficultyLevel, highScore));
+        AtomicInteger nrOfCurrentQAnswered = new AtomicInteger(controller.getNrOfQuestionsAnsweredFromCurrentQuiz
+                (userIdForCurrentQuiz, difficultyLevel, highScore));
+
 
         currentNrOfQuestion.setText(
                 nrOfCurrentQAnswered
@@ -109,7 +111,7 @@ public class MediumQuestionUI extends JFrame {
 
         totalNrOfQuestions.setText(
                 String.valueOf(
-                        controller.getNrOfQuestionsTotalFromCurrentQuiz(userName, difficultyLevel, highScore)));
+                        controller.getNrOfQuestionsTotalFromCurrentQuiz(userIdForCurrentQuiz, difficultyLevel, highScore)));
 
         next.addActionListener(e ->
         {

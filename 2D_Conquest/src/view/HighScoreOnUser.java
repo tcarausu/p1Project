@@ -67,7 +67,7 @@ public class HighScoreOnUser extends JFrame {
 
         back.addActionListener(ae -> {
             dispose();
-            controller.openScoreWindow();
+            controller.start();
         });
     }
 

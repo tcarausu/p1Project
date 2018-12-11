@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.sql.SQLException;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static com.sun.java.accessibility.util.AWTEventMonitor.addActionListener;
+
 /**
  * File created on 11/1/2018
  * by Toader
@@ -29,6 +31,8 @@ public class EasyQuestionUI extends JFrame {
     private JRadioButton radioButton3 = new JRadioButton();
     private JRadioButton radioButton4 = new JRadioButton();
 
+    private ButtonGroup buttonGroup = new ButtonGroup();
+
     private JLabel currentNrOfQuestion = new JLabel();
     private JLabel timeSpentOnTheQuiz = new JLabel();
     private JLabel totalNrOfQuestions = new JLabel();
@@ -45,7 +49,7 @@ public class EasyQuestionUI extends JFrame {
     private JLabel second = new JLabel("00: ");
     private JLabel millisecond = new JLabel("00");
 
-    private  Thread t = new Thread();
+    private Thread t = new Thread();
 
     /**
      * Easy Question UI's Constructor
@@ -74,6 +78,7 @@ public class EasyQuestionUI extends JFrame {
     @SuppressWarnings("Duplicates")
     private void setEasy() throws SQLException {
 
+
         super.add(question);
         super.add(currentNrOfQuestion);
         super.add(totalNrOfQuestions);
@@ -82,6 +87,11 @@ public class EasyQuestionUI extends JFrame {
         super.add(next);
         super.add(skip);
         super.add(done);
+
+        buttonGroup.add(radioButton1);
+        buttonGroup.add(radioButton2);
+        buttonGroup.add(radioButton3);
+        buttonGroup.add(radioButton4);
 
         super.add(radioButton1);
         super.add(radioButton2);
@@ -117,7 +127,7 @@ public class EasyQuestionUI extends JFrame {
         radioButton4.setBounds(360, 200, 150, 50);
 
         startTimer();
-
+//        timer2();
         question.setText(controller.questionToBeAnswered(difficultyLevel, region));
 
         String questionToBeAnswered = question.getText();
@@ -127,15 +137,17 @@ public class EasyQuestionUI extends JFrame {
         radioButton3.setText(qController.getAnEasyQuestionAnswerList(region, questionToBeAnswered).get(2));
         radioButton4.setText(qController.getAnEasyQuestionAnswerList(region, questionToBeAnswered).get(3));
 
-
         question.setText("This is The Question: " + questionToBeAnswered);
 
-        String userName = controller.getUser().getUserName();
-        int highScore = controller.getHighScoreOnUserWithDifficultyLevel(userName, difficultyLevel);
-        AtomicInteger timeSpent = new AtomicInteger(controller.timeSpent(userName, highScore, difficultyLevel));
+        int userIdForCurrentQuiz = controller.getHighScoreId();
+        int highScore = controller.getHighScoreOnUserWithDifficultyLevel(userIdForCurrentQuiz, difficultyLevel);
+        AtomicInteger timeSpent = new AtomicInteger(
+                controller.timeSpent(userIdForCurrentQuiz, highScore, difficultyLevel)
+//                startTimer()
+        );
 
-        AtomicInteger nrOfCurrentQAnswered = new AtomicInteger(controller.getNrOfQuestionsAnsweredFromCurrentQuiz(userName,
-                difficultyLevel, highScore));
+        AtomicInteger nrOfCurrentQAnswered = new AtomicInteger(controller.getNrOfQuestionsAnsweredFromCurrentQuiz
+                (userIdForCurrentQuiz, difficultyLevel, highScore));
 
         timeSpentOnTheQuiz.setText(String.valueOf(timeSpent));
 
@@ -145,7 +157,7 @@ public class EasyQuestionUI extends JFrame {
 
         totalNrOfQuestions.setText(
                 String.valueOf(
-                        controller.getNrOfQuestionsTotalFromCurrentQuiz(userName, difficultyLevel, highScore)));
+                        controller.getNrOfQuestionsTotalFromCurrentQuiz(userIdForCurrentQuiz, difficultyLevel, highScore)));
         next.addActionListener(e ->
         {
             dispose();
@@ -183,9 +195,9 @@ public class EasyQuestionUI extends JFrame {
                         int value = nrOfCurrentQAnswered.getAndIncrement();
                         int timeSpentOnAQuestion = timeSpent.getAndIncrement();
                         controller.skipToNextQuestion(value, difficultyLevel, timeSpentOnAQuestion);
-                        if (value >= 20) {
+                        if (value >= 13) {
                             dispose();
-                            controller.openScoreWindow();
+                            controller.openScoreWindowOnUser(controller.getUser().getUserName());
 
                         } else {
                             dispose();
@@ -200,7 +212,7 @@ public class EasyQuestionUI extends JFrame {
         );
         done.addActionListener(e -> {
             dispose();
-            stopTimer();
+//            stopTimer();
             controller.openScoreWindow();
         });
 
@@ -209,7 +221,7 @@ public class EasyQuestionUI extends JFrame {
 
     private void validationOfRButton(String answer, int value, int timeSpentOnAQuestion) throws SQLException {
         controller.updateScoreOnForUserAndDifficulty(answer, value, difficultyLevel, timeSpentOnAQuestion);
-        if (value >= 20) {
+        if (value >= 13) {
             dispose();
             controller.openScoreWindowOnUser(controller.getUser().getUserName());
 
@@ -234,11 +246,11 @@ public class EasyQuestionUI extends JFrame {
 
     }
 
-    private void startTimer() {
+    private int startTimer() {
 
         state = true;
 
-        t= new Thread(() -> {
+        t = new Thread(() -> {
             for (; ; )
                 if (state) {
                     try {
@@ -276,5 +288,34 @@ public class EasyQuestionUI extends JFrame {
         });
         t.start();
 
+        int result = minutes + (hours / 60) + (seconds / 60);
+        return result;
     }
+
+//    private void timer2() {
+//        SwingWorker<String, Integer> timer = new SwingWorker<String, Integer>() {
+//            Integer timer = 2;
+//
+//            @Override
+//            protected String doInBackground() throws Exception {
+//                //update guiModel
+//                timeSpentOnTheQuiz.setText(timer.toString());
+//                while (timer > 0) {
+//                    Thread.sleep(1000);
+//                    timer--;
+//                }
+//                return null;
+//            }
+//
+//            @Override
+//            public void done() {
+//                addActionListener(e -> {
+//                    dispose();
+////            stopTimer();
+//                    controller.openScoreWindow();
+//                });
+//            }
+//        };
+//
+//    }
 }

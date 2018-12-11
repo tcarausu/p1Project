@@ -51,9 +51,13 @@ hs_err_pid*
 *.iws
 
 # IntelliJ
-*.xml
+/out/
 
+## File-based project format:
+*.iws
+
+# IntelliJ
 *.meta
-/2D_Conquest/.idea/misc.xml
-/2D_Conquest/.idea/workspace.xml
-/2D_Conquest/2D_Conquest.iml
+*.xml
+*.iml
+

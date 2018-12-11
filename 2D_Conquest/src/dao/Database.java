@@ -120,14 +120,14 @@ public class Database implements DatabaseI {
     }
 
     @Override
-    public int getNrOfQAnsweredFromCurrQuiz(String username, String difficultyLevel, int score) throws SQLException {
+    public int getNrOfQAnsweredFromCurrQuiz(int id, String difficultyLevel, int score) throws SQLException {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
 
         try {
             String SQL = "SELECT score.nrofquestionsanswered FROM p1Project.highscore as score " +
-                    "where usernameofplayer ='" + username + "'"
+                    "where id ='" + id + "'"
                     + " AND difficultylevel ='" + difficultyLevel + "'"
-                    + " AND score =" + score + "";
+                    + " AND score.score =" + score + "";
 
             PreparedStatement st = conn.prepareStatement(SQL);
             st.execute();
@@ -150,7 +150,7 @@ public class Database implements DatabaseI {
     }
 
     @Override
-    public void updateNrfQuestionsAnswerFromCurrentQuiz(int nrOfQAnswered, String username, int score, int timeSpent) throws SQLException {
+    public void updateNrfQuestionsAnswerFromCurrentQuiz(int id, int nrOfQAnswered, int score, int timeSpent) throws SQLException {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
 
         try {
@@ -158,7 +158,7 @@ public class Database implements DatabaseI {
                     "set  nrofquestionsanswered  = '" + nrOfQAnswered + "' ,"
                     + " score ='" + score + "' ," +
                     " timespent ='" + timeSpent + "' " +
-                    "where usernameofplayer ='" + username + "'";
+                    "where id ='" + id + "'";
 
             PreparedStatement st = conn.prepareStatement(SQL);
             st.execute();
@@ -170,7 +170,7 @@ public class Database implements DatabaseI {
     }
 
     @Override
-    public void updateScoreOnDifficultyForUser(int currentNrOfQuestionsAnswered, int totalScore, String userName, String difficultyLevel) throws SQLException {
+    public void updateScoreOnDifficultyForUser(int id, int currentNrOfQuestionsAnswered, int totalScore, String userName, String difficultyLevel) throws SQLException {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
 
         try {
@@ -192,12 +192,12 @@ public class Database implements DatabaseI {
     }
 
     @Override
-    public int getNumberOfQuestionsTotalFromCurrentQuiz(String username, String difficultyLevel, int score) throws SQLException {
+    public int getNumberOfQuestionsTotalFromCurrentQuiz(int id, String difficultyLevel, int score) throws SQLException {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
 
         try {
             String SQL = "SELECT score.nrofquestionstotal FROM p1Project.highscore as score " +
-                    "where usernameofplayer ='" + username + "'"
+                    "where  id ='" + id + "'"
                     + " AND difficultylevel ='" + difficultyLevel + "'"
                     + " AND score ='" + score + "'";
 
@@ -222,13 +222,13 @@ public class Database implements DatabaseI {
     }
 
     @Override
-    public int getHighScoreOnUserWithDifficultyLevel(String username, String difficultyLevel) throws SQLException {
+    public int getHighScoreOnUserWithDifficultyLevel(int id, String difficultyLevel) throws SQLException {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
 
         try {
             String SQL = "SELECT score.score FROM p1Project.highscore as score " +
-                    "where score.usernameofplayer ='" + username + "'"
-                    + " AND difficultylevel ='" + difficultyLevel + "'";
+                    "where difficultylevel ='" + difficultyLevel + "'"
+                    + " AND id ='" + id + "'";
 
             PreparedStatement st = conn.prepareStatement(SQL);
             st.execute();
@@ -273,14 +273,14 @@ public class Database implements DatabaseI {
     }
 
     @Override
-    public int timeSpent(String username, int score, String difficultyLevel) throws SQLException {
+    public int timeSpent(int id, int score, String difficultyLevel) throws SQLException {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
 
         try {
             String SQL = "SELECT score.timespent FROM p1Project.highscore as score " +
-                    "where score.usernameofplayer ='" + username + "'"
-                    + " AND difficultylevel ='" + difficultyLevel + "'"
-                    + " AND score ='" + score + "'";
+                    "where score.difficultylevel ='" + difficultyLevel + "'"
+                    + " AND score.id ='" + id + "'"
+                    + " AND score.score ='" + score + "'";
 
             PreparedStatement st = conn.prepareStatement(SQL);
             st.execute();
@@ -306,7 +306,7 @@ public class Database implements DatabaseI {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
 
         try {
-            String SQL = "SELECT score.id FROM p1Project.highscore as score " ;
+            String SQL = "SELECT score.id FROM p1Project.highscore as score ";
 
             PreparedStatement st = conn.prepareStatement(SQL);
             st.execute();
@@ -340,7 +340,8 @@ public class Database implements DatabaseI {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres",
                 "postgres", "postgres");
 
-        final String sql = "SELECT * FROM p1Project.highscore ";
+        final String sql = "SELECT usernameofplayer,timespent,nrofquestionsanswered,nrofquestionstotal," +
+                "difficultylevel,score FROM p1Project.highscore ";
         final PreparedStatement preparedStatement = conn.prepareStatement(sql);
         return preparedStatement.executeQuery();
     }
@@ -349,7 +350,8 @@ public class Database implements DatabaseI {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres",
                 "postgres", "postgres");
 
-        final String sql = "SELECT * FROM p1Project.highscore " +
+        final String sql = "SELECT usernameofplayer,timespent,nrofquestionsanswered,nrofquestionstotal," +
+                "difficultylevel,score FROM p1Project.highscore " +
                 "where usernameofplayer = '" + username + "'";
         final PreparedStatement preparedStatement = conn.prepareStatement(sql);
         return preparedStatement.executeQuery();
