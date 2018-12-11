@@ -26,7 +26,7 @@ public interface QuestionDatabaseI {
 
     String getAHardQuestionCorrectAnswer(String region) throws SQLException;
 
-    List<String> getAnEasyQuestionAnswerList(String region, String question) throws SQLException;
+    List<String> getAnQuestionAnswerList(String difficultyLevel,String region, String question)  throws SQLException;
 
     List<String> getAllQuestionsByDifficultyLevelAndRegion(String difficulty, String region) throws SQLException;
 

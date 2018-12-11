@@ -36,8 +36,8 @@ public class QuestionController {
 
     }
 
-    public List<String> getAnEasyQuestionAnswerList(String region, String question) throws SQLException {
-        return qdb.getAnEasyQuestionAnswerList(region, question);
+    public List<String> getAnQuestionAnswerList(String difficultyLevel, String region, String question) throws SQLException {
+        return qdb.getAnQuestionAnswerList(difficultyLevel, region, question);
 
     }
 
