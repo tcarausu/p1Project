@@ -76,7 +76,7 @@ public interface QuestionDatabaseI {
     void deleteQuestionAnswerByQuestionIdFromQuestionAnswer(int id) throws SQLException;
 
     /**
-     * This method extracts a region by using
+     * This method extracts a region from the Question table by using
      *
      * @param region representing the region of said question
      * @return a region from the question table
@@ -91,6 +91,7 @@ public interface QuestionDatabaseI {
      * @param difficulty representing the difficultyLevel of said question
      * @param region     representing the region of said question
      *                   as parameters it can
+     * @return a list of questions by the selected difficulty level and region
      * @throws SQLException in case that there is no data or
      *                      there is an issue extracting data from the database
      */
@@ -99,11 +100,12 @@ public interface QuestionDatabaseI {
     /**
      * This method extracts a list of Answers specific for a question that by using
      *
-     * @param question        representing the question that the list is supposed to gain
-     *                        its results from
      * @param difficultyLevel representing the difficultyLevel of said question
      * @param region          representing the region of said question
      *                        as parameters it can
+     * @param question        representing the question that the list is supposed to gain
+     *                        its results from
+     * @return a list of answers from a question by the selected difficulty level and region of that question
      * @throws SQLException in case that there is no data or
      *                      there is an issue extracting data from the database
      */

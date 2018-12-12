@@ -23,23 +23,35 @@ public class AdminController {
     private MyController mainController;
 
     /**
-     * @param udb
+     * This constructor initiates the AdminController and initializes it
+     * with a UserDatabaseI interface
+     *
+     * @param udb is the UserDatabaseI interface needed to instantiate the constructor
      */
     public AdminController(UserDatabaseI udb) {
         this.udb = udb;
     }
 
     /**
-     * @param mainController
+     * This void method instantiates the Admin controller with an MyController class
+     *
+     * @param mainController is the MyController class needed to
+     *                       set the connection between the 2 controllers
      */
     public void setMainControllerAdminController(MyController mainController) {
         this.mainController = mainController;
     }
 
     /**
-     * @param userName
-     * @param password
-     * @throws SQLException
+     * This method method adds question to the User Table
+     * then after doing so it will display and Success panel
+     * and afterwards it will open the ConfirmationUI window
+     *
+     * @param userName representing the username introduced by the admin
+     * @param password representing the password introduced by the admin
+     *                 as parameters it can
+     * @throws SQLException in case that there is no data or
+     *                      there is an issue extracting data from the database
      */
     void createNewUser(String userName, String password) throws SQLException {
         udb.createNewUser(userName, password);
@@ -47,15 +59,42 @@ public class AdminController {
         mainController.confirmationUI();
     }
 
+
     /**
-     * @param userName
+     * This method deletes a User table entry by
+     * deleting the User by the same id
+     * used for the User table
+     *
+     * @param id representing the id introduced by the admin
+     * @throws SQLException in case that there is no data or
+     *                      there is an issue extracting data from the database
+     */
+    public void deleteUser(int id) throws SQLException {
+        udb.deleteUser(id);
+        mainController.confirmationUI();
+
+    }
+
+    /**
+     * @param id
+     * @param username
      * @param password
      * @throws SQLException
      */
-    void createNewUserOnLogin(String userName, String password) throws SQLException {
-        udb.createNewUser(userName, password);
-        mainController.dataAddedSuccess();
-        mainController.openCountryWindow();
+    public void updateUser(int id, String username, String password) throws SQLException {
+        udb.updateUser(id, username, password);
+        mainController.confirmationUI();
+
+    }
+
+    /**
+     * @param id
+     * @throws SQLException
+     */
+    public void resetPasswordForUserById(int id) throws SQLException {
+        udb.resetPasswordForUserById(id);
+        mainController.confirmationUI();
+
     }
 
     /**
@@ -119,48 +158,5 @@ public class AdminController {
      */
     public void openAdminQuestionCreateUI() {
         new AdminQuestionCreate(mainController, this);
-    }
-
-    public void openAdminQuestionEditUI() {
-//        new AdminQuestionEdit(this);
-    }
-
-    /**
-     *
-     */
-    public void openAdminQuestionDeleteUI() {
-//        new AdminQuestionDelete(this);
-    }
-
-    /**
-     * @param id
-     * @throws SQLException
-     */
-    public void deleteUser(int id) throws SQLException {
-        udb.deleteUser(id);
-        mainController.confirmationUI();
-
-    }
-
-    /**
-     * @param id
-     * @param username
-     * @param password
-     * @throws SQLException
-     */
-    public void updateUser(int id, String username, String password) throws SQLException {
-        udb.updateUser(id, username, password);
-        mainController.confirmationUI();
-
-    }
-
-    /**
-     * @param id
-     * @throws SQLException
-     */
-    public void resetPasswordForUserById(int id) throws SQLException {
-        udb.resetPasswordForUserById(id);
-        mainController.confirmationUI();
-
     }
 }

@@ -197,7 +197,7 @@ public class QuestionDao implements QuestionDatabaseI {
     }
 
     /**
-     * This method extracts a region by using
+     * This method extracts a region  from the Question table by using
      * a select query with
      *
      * @param region representing the region of said question
