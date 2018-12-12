@@ -199,7 +199,7 @@ public class HardQuestionUI extends JFrame {
                         controller.skipToNextQuestion(value, difficultyLevel, timeSpentOnAQuestion);
                         if (value >= 6) {
                             dispose();
-                            controller.openScoreWindowOnUser(controller.getUser().getUserName());
+                            controller.openScoreWindowOnUser(controller.getCurrentUser().getUserName());
 
                         } else {
                             dispose();
@@ -225,7 +225,7 @@ public class HardQuestionUI extends JFrame {
         controller.updateScoreOnForUserAndDifficulty(answer, value, difficultyLevel, timeSpentOnAQuestion);
         if (value >= 6) {
             dispose();
-            controller.openScoreWindowOnUser(controller.getUser().getUserName());
+            controller.openScoreWindowOnUser(controller.getCurrentUser().getUserName());
 
         } else {
             dispose();

@@ -279,6 +279,8 @@ public class QuestionDao implements QuestionDatabaseI {
      * This method extracts a list of Answers specific for a question that by using
      * an select query to check for each of the parameters to be present in the database
      * thus creating a list of answers for the specific
+     * <p>
+     * The number of answer is going to be limited to 4
      *
      * @param question        representing the question that the list is supposed to gain
      *                        its results from

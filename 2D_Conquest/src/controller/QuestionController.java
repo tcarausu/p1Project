@@ -137,7 +137,7 @@ public class QuestionController {
      * @param difficulty representing the difficultyLevel of said question
      * @param region     representing the region of said question
      *                   as parameters it can
-     * @return a list of questions by the selected difficulty level and region
+     * @return a list of questions subjects by the selected difficulty level and region
      * @throws SQLException in case that there is no data or
      *                      there is an issue extracting data from the database
      */
@@ -149,6 +149,8 @@ public class QuestionController {
     /**
      * This method extracts a list of Answers specific for a question that by using
      * difficulty and region of the current quiz
+     *
+     * The number of answer is going to be limited to 4
      *
      * @param difficultyLevel representing the difficultyLevel of said question
      * @param region          representing the region of said question

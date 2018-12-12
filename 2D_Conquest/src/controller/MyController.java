@@ -55,9 +55,18 @@ public class MyController {
      * This method checks the username and password
      * from the database with the input from the user
      * withing User table from our database on Login
+     * <p>
+     * If the username and password are in the database
+     * it sets the values to the controller for further use
+     * and opens up the Country UI window
+     * <p>
+     * If the values are not present it clears the fields
+     * for the Login UI and opens it up
      *
-     * @param userName is the username that has to be checked
-     * @param password is the password that has to be checked
+     * @param userName representing the username that is supposed
+     *                 to be verified in the user table
+     * @param password representing the username that is supposed
+     *                 to be verified in the user table
      * @throws SQLException in case that there is no data or
      *                      there is an issue extracting data from the database
      */
@@ -76,9 +85,18 @@ public class MyController {
      * This method checks the username and password
      * from the database with the input from the user
      * withing Admin table from our database on Login
+     * <p>
+     * If the username and password are in the database
+     * it sets the values to the controller for further use
+     * and opens up the Admin Settings UI window
+     * <p>
+     * If the values are not present it clears the fields
+     * for the Login UI and opens it up
      *
-     * @param userName is the username that has to be checked
-     * @param password is the password that has to be checked
+     * @param userName representing the username that is supposed
+     *                 to be verified in the user table
+     * @param password representing the username that is supposed
+     *                 to be verified in the user table
      * @throws SQLException in case that there is no data or
      *                      there is an issue extracting data from the database
      */
@@ -93,12 +111,16 @@ public class MyController {
     }
 
     /**
-     * This method checks the username and password
+     * This method tries to create another User by
+     * checking the username and password
      * from the database with the input from the user
-     * withing Admin table from our database
-     * if the data is already there then the user should try another user
-     * thus after checking it's availability it will add up to the database
-     * This is done on the Admin page to create it
+     * withing User table from our database
+     * <p>
+     * If the data is already there, it will display an pop up
+     * with an Already Exists tag and open the current UI;
+     * <p>
+     * If the data is not there it will create that user using
+     * the parameters written by the Admin
      *
      * @param userName is the username that has to be checked
      * @param password is the password that has to be checked
@@ -155,7 +177,7 @@ public class MyController {
      *                      there is an issue extracting data from the database
      */
     public void updateScoreOnForUserAndDifficulty(String answer, int nrOfQAnswered, String difficultyLevel, int timeSpentOnAQuestion) throws SQLException {
-        String userName = getUser().getUserName();
+        String userName = getCurrentUser().getUserName();
         int userIdForCurrentQuiz = getHighScoreId();
         int totalScore = getHighScoreOnUserWithDifficultyLevel(userIdForCurrentQuiz, difficultyLevel);
         int totalNrOfQ = getNrOfQuestionsTotalFromCurrentQuiz(userIdForCurrentQuiz, difficultyLevel, totalScore);
@@ -196,7 +218,6 @@ public class MyController {
 
     }
 
-
     /**
      * @param subject
      * @param typeOfQuestion
@@ -224,7 +245,7 @@ public class MyController {
      *                      there is an issue extracting data from the database
      */
     public void startQuiz(int total, String difficultyLevel) throws SQLException {
-        String username = getUser().getUserName();
+        String username = getCurrentUser().getUserName();
         switch (difficultyLevel) {
             case "easy":
                 db.startQuiz(username, total, difficultyLevel);
@@ -336,7 +357,8 @@ public class MyController {
     }
 
     /**
-     *
+     * This method Initiates the MainUI window and "starts" the Application
+     * using this MyController, an Admin Controller and a Question Controller
      */
     public void start() {
         new MainUI(this, aController, qController);
@@ -344,129 +366,161 @@ public class MyController {
     }
 
     /**
-     *
-     */
-    public void openLoginWindow() {
-        loginPageUI = new LoginPageUI(this, aController);
-    }
-
-    /**
-     *
-     */
-    public void openCountryWindow() {
-        new CountryUI(this, aController);
-    }
-
-    /**
-     * @param region
-     * @throws SQLException in case that there is no data or
-     *                      there is an issue extracting data from the database
-     */
-    public void openDifficultyWindow(String region) throws SQLException {
-        /*
-        While intitiating the difficulty/question we are going to check it based on the input/zone
-        String getRegion(String region)
-
-         */
-        new DifficultyLevelUI(this, qController.getRegion(region));
-    }
-
-    /**
-     * @throws SQLException in case that there is no data or
-     *                      there is an issue extracting data from the database
-     */
-    public void openEasyWindow(String region) {
-        new EasyQuestionUI(this, qController, region);
-    }
-
-    /**
-     * @throws SQLException in case that there is no data or
-     *                      there is an issue extracting data from the database
-     */
-    public void openMediumWindow(String region) {
-        new MediumQuestionUI(this, qController, region);
-    }
-
-    /**
-     * @param region
-     */
-    public void openHardWindow(String region) {
-        new HardQuestionUI(this, qController, region);
-    }
-
-    /**
-     *
+     * This method Initiates the ConfirmationUI window using this MyController
+     * and an Admin Controller
      */
     void confirmationUI() {
         new ConfirmationUI(this, aController);
     }
 
     /**
-     *
+     * This method Initiates the LoginPageUI window using this MyController
+     * and an Admin Controller
      */
-    public void openScoreWindow() {
-        new HighScoreUI(this, aController, (Database) db);
+    public void openLoginWindow() {
+        loginPageUI = new LoginPageUI(this, aController);
     }
 
     /**
-     * @param username
+     * This method Initiates the CountryUI window using this MyController
+     * and an Admin Controller
      */
-    public void openScoreWindowOnUser(String username) {
-        new HighScoreOnUser(this, aController, (Database) db, username);
+    public void openCountryWindow() {
+        new CountryUI(this, aController);
     }
 
     /**
+     * This method Initiates the HardQuestionUI window using this MyController
+     * and an Question Controller with a region as its parameter
+     * <p>
+     * This methods check the Question Controller for the region to be in the database
+     * to display the window
      *
+     * @param region represents the the current region for a hard difficulty to start.
      */
-    public void openAdminFullQuestionTable() {
-        new AdminAllQuestionTable(this, aController, (Database) db);
+    public void openDifficultyWindow(String region) throws SQLException {
+        new DifficultyLevelUI(this, qController.getRegion(region));
     }
 
     /**
+     * This method Initiates the EasyQuestionUI window using this MyController
+     * and an Question Controller with a region as its parameter
      *
+     * @param region represents the the current region for a easy difficulty to start.
      */
-    public void openAdminFullUserTable() {
-        new AdminAllUsersTable(this, aController, (Database) db);
+    public void openEasyWindow(String region) {
+        new EasyQuestionUI(this, qController, region);
     }
 
     /**
+     * This method Initiates the MediumQuestionUI window using this MyController
+     * and an Question Controller with a region as its parameter
      *
+     * @param region represents the the current region for a medium difficulty to start.
+     */
+    public void openMediumWindow(String region) {
+        new MediumQuestionUI(this, qController, region);
+    }
+
+    /**
+     * This method Initiates the HardQuestionUI window using this MyController
+     * and an Question Controller with a region as its parameter
+     *
+     * @param region represents the the current region for a hard difficulty to start.
+     */
+    public void openHardWindow(String region) {
+        new HardQuestionUI(this, qController, region);
+    }
+
+    /**
+     * This method Initiates the AdminQuestionDelete window using this MyController,
+     * an Admin Controller and Question Controller
      */
     public void openAdminQuestionDeleteUI() {
         new AdminQuestionDelete(this, qController, aController);
     }
 
     /**
-     *
+     * This method Initiates the AdminQuestionEdit window using this MyController,
+     * an Admin Controller and Question Controller
      */
     public void openAdminQuestionEditUI() {
         new AdminQuestionEdit(this, qController, aController);
     }
 
     /**
-     * @param difficulty
-     * @param region
-     * @return
+     * This method Initiates the AdminAllQuestionTable window using this MyController,
+     * an Admin Controller and Database Interface casted to Database Dao
+     * with username of the current User as parameter.
+     */
+    public void openAdminFullQuestionTable() {
+        new AdminAllQuestionTable(this, aController, (Database) db);
+    }
+
+    /**
+     * This method Initiates the AdminAllUsersTable window using this MyController,
+     * an Admin Controller and Database Interface casted to Database Dao
+     * with username of the current User as parameter.
+     */
+    public void openAdminFullUserTable() {
+        new AdminAllUsersTable(this, aController, (Database) db);
+    }
+
+    /**
+     * This method Initiates the HighScoreUI window using this MyController,
+     * an Admin Controller and Database Interface casted to Database Dao
+     * with username of the current User as parameter.
+     */
+    public void openScoreWindow() {
+        new HighScoreUI(this, aController, (Database) db);
+    }
+
+    /**
+     * This method Initiates the HighScoreOnUser window using this MyController,
+     * an Admin Controller and Database Interface casted to Database Dao
+     * with username of the current User as parameter.
+     *
+     * @param username represents the the current User's username.
+     */
+    public void openScoreWindowOnUser(String username) {
+        new HighScoreOnUser(this, aController, (Database) db, username);
+    }
+
+    /**
+     * This method is going to return a Question of type String
+     * after looping through the getResults auxiliary method
+     * <p>
+     * It instantiates a list of the question subjects using :
+     * its difficulty and region as parameters.
+     *
+     * @param difficulty represents the difficulty type for the current question
+     * @param region     represents the region type for the current question
+     * @return an Question Subject for each iteration of the question
      * @throws SQLException in case that there is no data or
      *                      there is an issue extracting data from the database
      */
     public String questionToBeAnswered(String difficulty, String region) throws SQLException {
-        //TODO FIX ME
         List<String> result = qController.getAllQuestionsByDifficultyLevelAndRegion(difficulty, region);
         return getResults(result, questionsAlreadyUsed);
 
     }
 
     /**
-     * @param difficulty
-     * @param region
-     * @param question
-     * @return
+     * This method is going to return an Answer of type String
+     * after looping through the getResults auxiliary method
+     * <p>
+     * It instantiates a list of the answer using:
+     * the question subject, its difficulty and region as parameters.
+     *
+     * @param difficulty represents the difficulty type for the current question
+     * @param region     represents the region type for the current question
+     * @param question   represents the current question that is going to be
+     *                   used to gather an answer list
+     * @return an Answer for each iteration of the question
      * @throws SQLException in case that there is no data or
      *                      there is an issue extracting data from the database
      */
     public String answerForQuestion(String difficulty, String region, String question) throws SQLException {
-        //TODO FIX ME
         List<String> result = qController.getAnQuestionAnswerList(difficulty, region, question);
         return getResults(result, answersAlreadyUsed);
 
@@ -507,7 +561,8 @@ public class MyController {
     }
 
     /**
-     *
+     * This method create a Panel which is going to display
+     * "Already in use" when trying to add data to the database
      */
     private void alreadyInDatabaseFields() {
         JOptionPane.showMessageDialog(null,
@@ -517,7 +572,8 @@ public class MyController {
     }
 
     /**
-     *
+     * This method create a Panel which is going to display
+     * a success after adding data to the database
      */
     void dataAddedSuccess() {
         JOptionPane.showMessageDialog(null,
@@ -527,7 +583,8 @@ public class MyController {
     }
 
     /**
-     *
+     * This method create a Panel which is going to display
+     * a failure when not selecting any answers
      */
     public void answerSelectionFailure() {
         JOptionPane.showMessageDialog(null,
@@ -537,8 +594,13 @@ public class MyController {
     }
 
     /**
-     * @param resultSet
-     * @return
+     * This is an auxiliary method which creates the structure for
+     * the table using a ResultSet from database
+     * for each of the operation
+     *
+     * @param resultSet is the resultSet used for further Displaying
+     *                  the data in a Table
+     * @return the visual Table structure of the ResultSet
      * @throws SQLException in case that there is no data or
      *                      there is an issue extracting data from the database
      */
@@ -566,18 +628,24 @@ public class MyController {
     }
 
     /**
-     * @param userName
-     * @param password
+     * This method returns the current User logged in to
+     * the current,My Controller, for further use
+     *
+     * @return It returns the current user
+     */
+    public User getCurrentUser() {
+        return user;
+    }
+
+    /**
+     * This method set the current User logged in to
+     * the current,My Controller, for further use
+     *
+     * @param userName represents the userName for the player User
+     * @param password represents the password for the player User
      */
     public void setCurrentUser(String userName, String password) {
         user = new User(userName, password);
         user.setController(this);
-    }
-
-    /**
-     * @return
-     */
-    public User getUser() {
-        return user;
     }
 }

@@ -99,6 +99,8 @@ public interface QuestionDatabaseI {
 
     /**
      * This method extracts a list of Answers specific for a question that by using
+     * <p>
+     * The number of answer is going to be limited to 4
      *
      * @param difficultyLevel representing the difficultyLevel of said question
      * @param region          representing the region of said question

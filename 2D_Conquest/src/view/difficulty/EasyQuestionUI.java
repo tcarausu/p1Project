@@ -181,7 +181,7 @@ public class EasyQuestionUI extends JFrame {
                         controller.skipToNextQuestion(value, difficultyLevel, timeSpentOnAQuestion);
                         if (value >= 13) {
                             dispose();
-                            controller.openScoreWindowOnUser(controller.getUser().getUserName());
+                            controller.openScoreWindowOnUser(controller.getCurrentUser().getUserName());
 
                         } else {
                             dispose();
@@ -207,7 +207,8 @@ public class EasyQuestionUI extends JFrame {
         controller.updateScoreOnForUserAndDifficulty(answer, value, difficultyLevel, timeSpentOnAQuestion);
         if (value >= 13) {
             dispose();
-            controller.openScoreWindowOnUser(controller.getUser().getUserName());
+            t.stop();
+            controller.openScoreWindowOnUser(controller.getCurrentUser().getUserName());
 
         } else {
             dispose();
@@ -259,7 +260,6 @@ public class EasyQuestionUI extends JFrame {
 
                         milliseconds++;
 
-//                        time = ((double) minutes + (double) hours * 60 + (double) seconds / 60);
                         time = (minutes + hours * 60 + seconds / 60);
 
                         timeSpentOnTheQuiz.setText(String.valueOf(time));
@@ -277,30 +277,4 @@ public class EasyQuestionUI extends JFrame {
 
     }
 
-//    private void timer2() {
-//        SwingWorker<String, Integer> timer = new SwingWorker<String, Integer>() {
-//            Integer timer = 2;
-//
-//            @Override
-//            protected String doInBackground() throws Exception {
-//                //update guiModel
-//                timeSpentOnTheQuiz.setText(timer.toString());
-//                while (timer > 0) {
-//                    Thread.sleep(1000);
-//                    timer--;
-//                }
-//                return null;
-//            }
-//
-//            @Override
-//            public void done() {
-//                addActionListener(e -> {
-//                    dispose();
-////            stopTimer();
-//                    controller.openScoreWindow();
-//                });
-//            }
-//        };
-//
-//    }
 }

@@ -199,7 +199,7 @@ public class MediumQuestionUI extends JFrame {
                         controller.skipToNextQuestion(value, difficultyLevel, timeSpentOnAQuestion);
                         if (value >= 8) {
                             dispose();
-                            controller.openScoreWindowOnUser(controller.getUser().getUserName());
+                            controller.openScoreWindowOnUser(controller.getCurrentUser().getUserName());
 
                         } else {
                             dispose();
@@ -224,7 +224,7 @@ public class MediumQuestionUI extends JFrame {
         controller.updateScoreOnForUserAndDifficulty(answer, value, difficultyLevel, timeSpentOnAQuestion);
         if (value >= 8) {
             dispose();
-            controller.openScoreWindowOnUser(controller.getUser().getUserName());
+            controller.openScoreWindowOnUser(controller.getCurrentUser().getUserName());
 
         } else {
             dispose();
