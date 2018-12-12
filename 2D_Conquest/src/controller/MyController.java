@@ -39,7 +39,8 @@ public class MyController {
     /**
      * This is the general constructor (MyController)
      * for the whole application
-     * @param db  is the Database interface
+     *
+     * @param db          is the Database interface
      * @param aController is the Admin Controller
      * @param qController is the Question Controller
      */
@@ -54,6 +55,7 @@ public class MyController {
      * This method checks the username and password
      * from the database with the input from the user
      * withing User table from our database on Login
+     *
      * @param userName is the username that has to be checked
      * @param password is the password that has to be checked
      * @throws SQLException in case that there is no data or
@@ -74,6 +76,7 @@ public class MyController {
      * This method checks the username and password
      * from the database with the input from the user
      * withing Admin table from our database on Login
+     *
      * @param userName is the username that has to be checked
      * @param password is the password that has to be checked
      * @throws SQLException in case that there is no data or
@@ -96,6 +99,7 @@ public class MyController {
      * if the data is already there then the user should try another user
      * thus after checking it's availability it will add up to the database
      * This is done on the Admin page to create it
+     *
      * @param userName is the username that has to be checked
      * @param password is the password that has to be checked
      * @throws SQLException in case that there is no data or
@@ -119,6 +123,7 @@ public class MyController {
      * if the data is already there then the user should try another user
      * thus after checking it's availability it will add up to the database
      * This is done on the Login page to create it before playing the game as an user
+     *
      * @param userName is the username that has to be checked
      * @param password is the password that has to be checked
      * @throws SQLException in case that there is no data or
@@ -129,7 +134,7 @@ public class MyController {
             alreadyInDatabaseFields();
             openLoginWindow();
         } else {
-            aController.createNewUserOnLogin(userName, password);
+            aController.createNewUser(userName, password);
 
         }
 
@@ -138,12 +143,13 @@ public class MyController {
     /**
      * If the value of the answer is correct for question, it will increase the score
      * if not i will stay the same(it will not skip to the next one)
-     *
+     * <p>
      * Both nr of Questions as well as the time spent will increment depending
      * on the how many answer the user had done thus far
-     * @param answer is the answer selected by the user
-     * @param nrOfQAnswered is the current number of questions answered
-     * @param difficultyLevel is the difficulty level of the game selected
+     *
+     * @param answer               is the answer selected by the user
+     * @param nrOfQAnswered        is the current number of questions answered
+     * @param difficultyLevel      is the difficulty level of the game selected
      * @param timeSpentOnAQuestion represents how much time the user spent thus far in the game
      * @throws SQLException in case that there is no data or
      *                      there is an issue extracting data from the database
@@ -155,11 +161,11 @@ public class MyController {
         int totalNrOfQ = getNrOfQuestionsTotalFromCurrentQuiz(userIdForCurrentQuiz, difficultyLevel, totalScore);
         if (db.checkValidityOfAnswerForAQuestion(answer)) {
             if (nrOfQAnswered == 0) {
-                updateNrfQuestionsAnswerFromCurrentQuiz(userIdForCurrentQuiz, nrOfQAnswered + 1, totalScore, timeSpentOnAQuestion + 1);
+                updateNrfQuestionsAnswerFromCurrentQuiz(userIdForCurrentQuiz, nrOfQAnswered + 1, totalScore, timeSpentOnAQuestion);
                 updateScoreOnDifficultyForUser(userIdForCurrentQuiz, nrOfQAnswered + 1, totalScore, userName, difficultyLevel);
 
             } else if (nrOfQAnswered >= 1 && nrOfQAnswered <= totalNrOfQ) {
-                updateNrfQuestionsAnswerFromCurrentQuiz(userIdForCurrentQuiz, nrOfQAnswered + 1, totalScore, timeSpentOnAQuestion + 1);
+                updateNrfQuestionsAnswerFromCurrentQuiz(userIdForCurrentQuiz, nrOfQAnswered + 1, totalScore, timeSpentOnAQuestion);
                 updateScoreOnDifficultyForUser(userIdForCurrentQuiz, nrOfQAnswered + 1, totalScore, userName, difficultyLevel);
             }
         } else {
@@ -182,10 +188,10 @@ public class MyController {
         totalScore = getHighScoreOnUserWithDifficultyLevel(userIdForCurrentQuiz, difficultyLevel);
         int totalNrOfQ = getNrOfQuestionsTotalFromCurrentQuiz(userIdForCurrentQuiz, difficultyLevel, totalScore);
         if (nrOfQAnswered == 0) {
-            updateNrfQuestionsAnswerFromCurrentQuiz(userIdForCurrentQuiz, nrOfQAnswered + 1, totalScore, timeSpentOnAQuestion + 1);
+            updateNrfQuestionsAnswerFromCurrentQuiz(userIdForCurrentQuiz, nrOfQAnswered + 1, totalScore, timeSpentOnAQuestion);
 
         } else if (nrOfQAnswered >= 1 && nrOfQAnswered < totalNrOfQ) {
-            updateNrfQuestionsAnswerFromCurrentQuiz(userIdForCurrentQuiz, nrOfQAnswered + 1, totalScore, timeSpentOnAQuestion + 1);
+            updateNrfQuestionsAnswerFromCurrentQuiz(userIdForCurrentQuiz, nrOfQAnswered + 1, totalScore, timeSpentOnAQuestion);
         }
 
     }

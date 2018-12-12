@@ -39,13 +39,9 @@ public class EasyQuestionUI extends JFrame {
     private static int seconds = 0;
     private static int minutes = 0;
     private static int hours = 0;
+    private static int time;
 
     private static boolean state = true;
-
-    private JLabel hour = new JLabel("00: ");
-    private JLabel minute = new JLabel("00: ");
-    private JLabel second = new JLabel("00: ");
-    private JLabel millisecond = new JLabel("00");
 
     private Thread t = new Thread();
 
@@ -80,7 +76,6 @@ public class EasyQuestionUI extends JFrame {
     @SuppressWarnings("Duplicates")
     private void setEasy() throws SQLException {
 
-
         super.add(question);
         super.add(currentNrOfQuestion);
         super.add(totalNrOfQuestions);
@@ -99,16 +94,6 @@ public class EasyQuestionUI extends JFrame {
         super.add(radioButton2);
         super.add(radioButton3);
         super.add(radioButton4);
-
-        super.add(hour);
-        super.add(minute);
-        super.add(second);
-        super.add(millisecond);
-
-        hour.setBounds(10, 10, 30, 30);
-        minute.setBounds(40, 10, 30, 30);
-        second.setBounds(70, 10, 30, 30);
-        millisecond.setBounds(110, 10, 30, 30);
 
         setSize(750, 500);
         setLocation(500, 200);
@@ -129,7 +114,7 @@ public class EasyQuestionUI extends JFrame {
         radioButton4.setBounds(360, 200, 200, 50);
 
         startTimer();
-//        timer2();
+
         question.setText(controller.questionToBeAnswered(difficultyLevel, region));
 
         String questionToBeAnswered = question.getText();
@@ -144,14 +129,11 @@ public class EasyQuestionUI extends JFrame {
         int userIdForCurrentQuiz = controller.getHighScoreId();
         int highScore = controller.getHighScoreOnUserWithDifficultyLevel(userIdForCurrentQuiz, difficultyLevel);
         AtomicInteger timeSpent = new AtomicInteger(
-                controller.timeSpent(userIdForCurrentQuiz, highScore, difficultyLevel)
-//                startTimer()
+                time
         );
 
         AtomicInteger nrOfCurrentQAnswered = new AtomicInteger(controller.getNrOfQuestionsAnsweredFromCurrentQuiz
                 (userIdForCurrentQuiz, difficultyLevel, highScore));
-
-        timeSpentOnTheQuiz.setText(String.valueOf(timeSpent));
 
         currentNrOfQuestion.setText(
                 nrOfCurrentQAnswered
@@ -165,7 +147,7 @@ public class EasyQuestionUI extends JFrame {
             dispose();
             try {
                 int value = nrOfCurrentQAnswered.getAndIncrement();
-                int timeSpentOnAQuestion = timeSpent.getAndIncrement();
+                int timeSpentOnAQuestion = Integer.parseInt(timeSpentOnTheQuiz.getText());
 
                 if (radioButton1.isSelected()) {
                     validationOfRButton(radioButton1.getText(), value, timeSpentOnAQuestion);
@@ -214,7 +196,7 @@ public class EasyQuestionUI extends JFrame {
         );
         done.addActionListener(e -> {
             dispose();
-//            stopTimer();
+            stopTimer();
             controller.openScoreWindow();
         });
 
@@ -274,12 +256,13 @@ public class EasyQuestionUI extends JFrame {
                             minutes = 0;
                             hours++;
                         }
-                        millisecond.setText(" : " + milliseconds);
 
                         milliseconds++;
-                        second.setText(" : " + seconds);
-                        minute.setText(" : " + minutes);
-                        hour.setText("" + hours);
+
+//                        time = ((double) minutes + (double) hours * 60 + (double) seconds / 60);
+                        time = (minutes + hours * 60 + seconds / 60);
+
+                        timeSpentOnTheQuiz.setText(String.valueOf(time));
                     } catch (Exception ignored) {
 
                     }
