@@ -26,6 +26,8 @@ public class MainUI extends JFrame {
      * Main UI's Constructor
      *
      * @param controller of type MyController
+     * @param aController
+     * @param qController
      */
     public MainUI(MyController controller,AdminController aController,QuestionController qController) {
         super("Main UI");
@@ -81,6 +83,11 @@ public class MainUI extends JFrame {
         quit.addActionListener(e -> dispose());
     }
 
+    /**
+     * This main methods initiates all the Dao classes,
+     * all the controller classes and initiating the connection
+     * between them so that it could properly start the application
+     */
     public static void main(String[] args) {
         Database database = new Database();
         UserDao userDao = new UserDao();

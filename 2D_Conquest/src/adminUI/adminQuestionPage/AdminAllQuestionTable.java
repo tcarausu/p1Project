@@ -52,7 +52,7 @@ public class AdminAllQuestionTable extends JFrame {
         setLocation(500, 300);
 
         JPanel panel = new JPanel();
-        TableModel tableModel = controller.buildTableModel(database.getQuestionsData());
+        TableModel tableModel = controller.buildTableModel(database.getQuestions());
         JTable questionsTable = new JTable(tableModel);
         panel.add(new JScrollPane(questionsTable));
 

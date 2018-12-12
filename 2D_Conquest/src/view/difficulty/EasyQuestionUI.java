@@ -234,7 +234,7 @@ public class EasyQuestionUI extends JFrame {
         }
     }
 
-    private void stopTimer() {
+    void stopTimer() {
         t.stop();
         done.addActionListener(e -> {
             state = false;
@@ -248,7 +248,8 @@ public class EasyQuestionUI extends JFrame {
 
     }
 
-    private void startTimer() {
+
+    void startTimer() {
 
         state = true;
 

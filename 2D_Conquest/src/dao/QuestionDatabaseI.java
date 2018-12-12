@@ -8,35 +8,105 @@ import java.util.List;
  * by Toader
  **/
 public interface QuestionDatabaseI {
+    /**
+     * This method creates an question by using
+     *
+     * @param subject         representing the subject introduced by the admin
+     * @param typeOfQuestion  representing the typeOfQuestion introduced by the admin
+     * @param difficultyLevel representing the difficultyLevel introduced by the admin
+     * @param region          representing the region introduced by the admin
+     *                        as parameters it can
+     * @throws SQLException in case that there is no data or
+     *                      there is an issue extracting data from the database
+     */
     void createNewQuestion(String subject,
                            String typeOfQuestion, String difficultyLevel,
                            String region) throws SQLException;
 
+    /**
+     * This method verifies an question that user tries to add by using
+     *
+     * @param subject         representing the subject introduced by the admin
+     * @param typeOfQuestion  representing the typeOfQuestion introduced by the admin
+     * @param difficultyLevel representing the difficultyLevel introduced by the admin
+     * @param region          representing the region introduced by the admin
+     *                        as parameters it can
+     * @return true if the question is already in the database
+     * and false if there is no such entry
+     * @throws SQLException in case that there is no data or
+     *                      there is an issue extracting data from the database
+     */
     boolean verifyIntroducedQuestion(String subject,
                                      String typeOfQuestion, String difficultyLevel,
                                      String region) throws SQLException;
 
-    String getAnEasyQuestion(String region) throws SQLException;
-
-    String getAMediumQuestion(String region) throws SQLException;
-
-    String getAHardQuestion(String region) throws SQLException;
-
-    String getAMediumQuestionCorrectAnswer(String region) throws SQLException;
-
-    String getAHardQuestionCorrectAnswer(String region) throws SQLException;
-
-    List<String> getAnQuestionAnswerList(String difficultyLevel,String region, String question)  throws SQLException;
-
-    List<String> getAllQuestionsByDifficultyLevelAndRegion(String difficulty, String region) throws SQLException;
-
-    String getRegion(String region) throws SQLException;
-
-    void deleteQuestionById(int id) throws SQLException;
-
-    void deleteQuestionByIdFromQuestionAnswer(int id) throws SQLException;
-
+    /**
+     * This method updates a question by using
+     * the id as a focal point
+     *
+     * @param id        representing the id of said question
+     * @param subject   representing the subject of said question
+     * @param typeOfQ   representing the typeOfQ of said question
+     * @param diffLevel representing the diffLevel of said question
+     * @param region    representing the region of said question
+     * @throws SQLException in case that there is no data or
+     *                      there is an issue extracting data from the database
+     */
     void updateQuestionById(int id, String subject, String typeOfQ,
                             String diffLevel, String region) throws SQLException;
+
+    /**
+     * This method deletes a question by using
+     * the id as a focal point
+     *
+     * @param id representing the id of said question
+     * @throws SQLException in case that there is no data or
+     *                      there is an issue extracting data from the database
+     */
+    void deleteQuestionById(int id) throws SQLException;
+
+    /**
+     * This method deletes a question_answer entry by using
+     * it's question id as a focal point
+     *
+     * @param id representing the id of said question
+     * @throws SQLException in case that there is no data or
+     *                      there is an issue extracting data from the database
+     */
+    void deleteQuestionAnswerByQuestionIdFromQuestionAnswer(int id) throws SQLException;
+
+    /**
+     * This method extracts a region by using
+     *
+     * @param region representing the region of said question
+     * @return a region from the question table
+     * @throws SQLException in case that there is no data or
+     *                      there is an issue extracting data from the database
+     */
+    String getRegion(String region) throws SQLException;
+
+    /**
+     * This method extracts a list of questions subjects that by using
+     *
+     * @param difficulty representing the difficultyLevel of said question
+     * @param region     representing the region of said question
+     *                   as parameters it can
+     * @throws SQLException in case that there is no data or
+     *                      there is an issue extracting data from the database
+     */
+    List<String> getAllQuestionsByDifficultyLevelAndRegion(String difficulty, String region) throws SQLException;
+
+    /**
+     * This method extracts a list of Answers specific for a question that by using
+     *
+     * @param question        representing the question that the list is supposed to gain
+     *                        its results from
+     * @param difficultyLevel representing the difficultyLevel of said question
+     * @param region          representing the region of said question
+     *                        as parameters it can
+     * @throws SQLException in case that there is no data or
+     *                      there is an issue extracting data from the database
+     */
+    List<String> getAnQuestionAnswerList(String difficultyLevel, String region, String question) throws SQLException;
 
 }
