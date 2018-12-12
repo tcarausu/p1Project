@@ -15,43 +15,39 @@ public class QuestionController {
 
     private MyController mainController;
 
+    /**
+     * @param qdb
+     */
     public QuestionController(QuestionDatabaseI qdb) {
         this.qdb = qdb;
     }
 
+    /**
+     * @param mainController
+     */
     public void setMainControllerQuestionController(MyController mainController) {
         this.mainController = mainController;
     }
 
-    String getAnEasyQuestion(String region) throws SQLException {
-        return qdb.getAnEasyQuestion(region);
-    }
-
-    public String getAMediumQuestion(String region) throws SQLException {
-        return qdb.getAMediumQuestion(region);
-    }
-
-    public String getAHardQuestion(String region) throws SQLException {
-        return qdb.getAHardQuestion(region);
-
-    }
-
+    /**
+     * @param difficultyLevel
+     * @param region
+     * @param question
+     * @return
+     * @throws SQLException
+     */
     public List<String> getAnQuestionAnswerList(String difficultyLevel, String region, String question) throws SQLException {
         return qdb.getAnQuestionAnswerList(difficultyLevel, region, question);
 
     }
 
-    public String getAMediumQuestionCorrectAnswer(String region) throws SQLException {
-        return qdb.getAMediumQuestionCorrectAnswer(region);
-
-    }
-
-    public String getAHardQuestionCorrectAnswer(String region) throws SQLException {
-        return qdb.getAHardQuestionCorrectAnswer(region);
-
-    }
-
-
+    /**
+     * @param subject
+     * @param typeOfQuestion
+     * @param difficultyLevel
+     * @param region
+     * @throws SQLException
+     */
     void createNewQuestion(String subject,
                            String typeOfQuestion, String difficultyLevel,
                            String region) throws SQLException {
@@ -61,6 +57,14 @@ public class QuestionController {
         mainController.confirmationUI();
     }
 
+    /**
+     * @param subject
+     * @param typeOfQuestion
+     * @param difficultyLevel
+     * @param region
+     * @return
+     * @throws SQLException
+     */
     boolean verifyIntroducedQuestion(String subject,
                                      String typeOfQuestion, String difficultyLevel,
                                      String region) throws SQLException {
@@ -68,11 +72,20 @@ public class QuestionController {
                 typeOfQuestion, difficultyLevel, region);
     }
 
+    /**
+     * @param region
+     * @return
+     * @throws SQLException
+     */
     String getRegion(String region) throws SQLException {
         return qdb.getRegion(region);
 
     }
 
+    /**
+     * @param id
+     * @throws SQLException
+     */
     public void deleteQuestionById(int id) throws SQLException {
         qdb.deleteQuestionByIdFromQuestionAnswer(id);
         qdb.deleteQuestionById(id);
@@ -80,6 +93,14 @@ public class QuestionController {
 
     }
 
+    /**
+     * @param id
+     * @param subject
+     * @param typeOfQ
+     * @param diffLevel
+     * @param region
+     * @throws SQLException
+     */
     public void updateQuestionById(int id, String subject, String typeOfQ,
                                    String diffLevel, String region) throws SQLException {
         qdb.updateQuestionById(id, subject, typeOfQ, diffLevel, region);
@@ -87,6 +108,12 @@ public class QuestionController {
 
     }
 
+    /**
+     * @param difficulty
+     * @param region
+     * @return
+     * @throws SQLException
+     */
     List<String> getAllQuestionsByDifficultyLevelAndRegion(String difficulty, String region) throws SQLException {
 
         return qdb.getAllQuestionsByDifficultyLevelAndRegion(difficulty, region);
