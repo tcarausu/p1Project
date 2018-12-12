@@ -86,8 +86,8 @@ public class QuestionController {
      * @param id
      * @throws SQLException
      */
-    public void deleteQuestionById(int id) throws SQLException {
-        qdb.deleteQuestionByIdFromQuestionAnswer(id);
+    public void deleteQuestionAnswerByQuestionIdFromQuestionAnswer(int id) throws SQLException {
+        qdb.deleteQuestionAnswerByQuestionIdFromQuestionAnswer(id);
         qdb.deleteQuestionById(id);
         mainController.confirmationUI();
 

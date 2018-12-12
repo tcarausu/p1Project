@@ -32,6 +32,7 @@ public interface UserDatabaseI {
      * This method updates an user by using
      *
      * @param id       representing the id introduced by the admin
+     *                 as catalyst to update
      * @param username representing the username introduced by the admin
      * @param password representing the password introduced by the admin
      *                 as parameters it can

@@ -17,9 +17,9 @@ public class UserDao implements UserDatabaseI {
 
     /**
      * This constructor initiates the Driver and registers it
-     *
-     * @throws SQLException in case that there is no way to connect
-     *                      it sets up the connection for the whole UserDao Class
+     * <p>
+     * throws SQLException in case that there is no way to connect
+     * it sets up the connection for the whole UserDao Class
      */
     public UserDao() {
 
@@ -92,6 +92,7 @@ public class UserDao implements UserDatabaseI {
      * This method updates an user by using update query
      *
      * @param id       representing the id introduced by the admin
+     *                 as catalyst to update
      * @param username representing the username introduced by the admin
      * @param password representing the password introduced by the admin
      *                 as parameters it can

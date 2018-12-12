@@ -125,6 +125,9 @@ public class AdminController {
 //        new AdminQuestionEdit(this);
     }
 
+    /**
+     *
+     */
     public void openAdminQuestionDeleteUI() {
 //        new AdminQuestionDelete(this);
     }

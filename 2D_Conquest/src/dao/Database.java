@@ -15,7 +15,7 @@ public class Database implements DatabaseI {
     /**
      * This constructor initiates the Driver and registers it
      *
-     * @throws SQLException in case that there is no way to connect
+     * throws SQLException in case that there is no way to connect
      *                      it sets up the connection for the whole Database Dao Class
      */
     public Database() {

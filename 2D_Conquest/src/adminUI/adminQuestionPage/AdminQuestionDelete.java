@@ -92,7 +92,7 @@ public class AdminQuestionDelete extends JFrame {
             if (idText != null
                     && !idText.equals("")
             ) {
-                qController.deleteQuestionById(Integer.parseInt(idText));
+                qController.deleteQuestionAnswerByQuestionIdFromQuestionAnswer(Integer.parseInt(idText));
             } else {
                 clearFieldsWhenNeeded();
                 aController.openAdminQuestionUI();
