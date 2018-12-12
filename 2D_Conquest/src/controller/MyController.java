@@ -141,8 +141,9 @@ public class MyController {
     /**
      * This method checks the username and password
      * from the database with the input from the user
-     * withing Admin table from our database
-     * if the data is already there then the user should try another user
+     * withing Admin table from our database.
+     * <p>
+     * If the data is already there then the user should try another user
      * thus after checking it's availability it will add up to the database
      * This is done on the Login page to create it before playing the game as an user
      *
@@ -163,11 +164,43 @@ public class MyController {
     }
 
     /**
-     * If the value of the answer is correct for question, it will increase the score
-     * if not i will stay the same(it will not skip to the next one)
+     * This method checks the admin data used for a question
+     *
+     * @param subject         represents the questions subject
+     * @param typeOfQuestion  represents the questions type Of Question
+     * @param difficultyLevel represents the questions difficulty Level
+     * @param region          represents the questions region
+     * @throws SQLException in case that there is no data or
+     *                      there is an issue extracting data from the database
+     */
+    public void verifyAdminDataOnQuestionCreate(String subject,
+                                                String typeOfQuestion, String difficultyLevel,
+                                                String region) throws SQLException {
+        if (qController.verifyIntroducedQuestion(subject, typeOfQuestion, difficultyLevel, region)) {
+            alreadyInDatabaseFields();
+            aController.openAdminQuestionCreateUI();
+        } else {
+            qController.createNewQuestion(subject, typeOfQuestion, difficultyLevel, region);
+        }
+
+    }
+
+    /**
+     * This method is going to update the score for an user based on the difficulty of the question.
+     * <p>
+     * The method will use the username of the current User (player),
+     * the highScore Id of the current quiz and it's total Score based on
+     * the userIdForCurrentQuiz and it's difficulty level;
+     * This method will obtain the total number of question  based on
+     * the userIdForCurrentQuiz and it's difficulty level and total Score of it.
      * <p>
      * Both nr of Questions as well as the time spent will increment depending
-     * on the how many answer the user had done thus far
+     * on the how many answers the user had done thus far.
+     * <p>
+     * In the case that - The number of questions answered for both
+     * 0 and
+     * 1 or more and at the same time is smaller then the total number of questions
+     * it will update the number of questions answered for this quiz by increment it.
      *
      * @param answer               is the answer selected by the user
      * @param nrOfQAnswered        is the current number of questions answered
@@ -198,9 +231,21 @@ public class MyController {
     }
 
     /**
-     * @param nrOfQAnswered
-     * @param difficultyLevel
-     * @param timeSpentOnAQuestion
+     * This method is going to skip a question in case the user decides so.
+     * <p>
+     * The method will use the highScore Id of the current quiz and it's total Score based on
+     * the userIdForCurrentQuiz and it's difficulty level;
+     * This method will obtain the total number of question  based on
+     * the userIdForCurrentQuiz and it's difficulty level and total Score of it.
+     * <p>
+     * In the case that - The number of questions answered for both
+     * 0 and
+     * 1 or more and at the same time is smaller then the total number of questions
+     * it will update the number of questions answered for this quiz by increment it.
+     *
+     * @param nrOfQAnswered        represents the number of questions on the quiz
+     * @param difficultyLevel      represents the difficulty Level of the quiz
+     * @param timeSpentOnAQuestion represents the time Spent On A Question for the quiz
      * @throws SQLException in case that there is no data or
      *                      there is an issue extracting data from the database
      */
@@ -219,28 +264,12 @@ public class MyController {
     }
 
     /**
-     * @param subject
-     * @param typeOfQuestion
-     * @param difficultyLevel
-     * @param region
-     * @throws SQLException in case that there is no data or
-     *                      there is an issue extracting data from the database
-     */
-    public void verifyAdminDataOnQuestionCreate(String subject,
-                                                String typeOfQuestion, String difficultyLevel,
-                                                String region) throws SQLException {
-        if (qController.verifyIntroducedQuestion(subject, typeOfQuestion, difficultyLevel, region)) {
-            alreadyInDatabaseFields();
-            aController.openAdminQuestionCreateUI();
-        } else {
-            qController.createNewQuestion(subject, typeOfQuestion, difficultyLevel, region);
-        }
-
-    }
-
-    /**
-     * @param total
-     * @param difficultyLevel
+     * This method stars a new Quiz by instantiating a new entry in the
+     * HighScore Table
+     * depending on the difficulty selected
+     *
+     * @param total           represents the total of questions the user will have to answer
+     * @param difficultyLevel represents the difficulty selected for the new quiz
      * @throws SQLException in case that there is no data or
      *                      there is an issue extracting data from the database
      */
@@ -263,31 +292,13 @@ public class MyController {
     }
 
     /**
-     * @return
-     * @throws SQLException in case that there is no data or
-     *                      there is an issue extracting data from the database
-     */
-    public int getHighScoreId() throws SQLException {
-        return db.getHighScoreId();
-    }
-
-    /**
-     * @param id
-     * @param difficultyLevel
-     * @param score
-     * @return
-     * @throws SQLException in case that there is no data or
-     *                      there is an issue extracting data from the database
-     */
-    public int getNrOfQuestionsAnsweredFromCurrentQuiz(int id, String difficultyLevel, int score) throws SQLException {
-        return db.getNrOfQAnsweredFromCurrQuiz(id, difficultyLevel, score);
-    }
-
-    /**
-     * @param id
-     * @param nrOfQAnswered
-     * @param totalScore
-     * @param timeSpent
+     * This method method updates the Number of Questions answered
+     * following it's Id, score and time spent doing that.
+     *
+     * @param id            represents the Id of the quiz
+     * @param nrOfQAnswered represents the nrOfQAnswered of the quiz
+     * @param totalScore    represents the totalScore of the quiz
+     * @param timeSpent     represents the timeSpent of the quiz
      * @throws SQLException in case that there is no data or
      *                      there is an issue extracting data from the database
      */
@@ -296,11 +307,17 @@ public class MyController {
     }
 
     /**
-     * @param id
-     * @param nrOfQAnswered
-     * @param totalScore
-     * @param userName
-     * @param difficulty
+     * This method updates the Score on a difficulty for an User
+     * depending on the difficulty :
+     * 100 for an correct Easy answer
+     * 200 for an correct Medium answer
+     * 500 for an correct Hard answer
+     *
+     * @param id            represents the Id of the quiz
+     * @param nrOfQAnswered represents the nrOfQAnswered of the quiz
+     * @param totalScore    represents the totalScore of the quiz
+     * @param userName      represents the userName of the quiz
+     * @param difficulty    represents the difficulty of the quiz
      * @throws SQLException in case that there is no data or
      *                      there is an issue extracting data from the database
      */
@@ -322,9 +339,13 @@ public class MyController {
     }
 
     /**
-     * @param id
-     * @param difficultyLevel
-     * @return
+     * This method returns the highScore on an User
+     * based on the current HighScore/Quiz Id
+     * by following it's difficulty level for the quiz
+     *
+     * @param id              represents the Id of the quiz
+     * @param difficultyLevel represents the difficultyLevel of the quiz
+     * @return Returns the Time Spent on the specific quiz Id
      * @throws SQLException in case that there is no data or
      *                      there is an issue extracting data from the database
      */
@@ -333,10 +354,28 @@ public class MyController {
     }
 
     /**
-     * @param id
-     * @param difficultyLevel
-     * @param score
-     * @return
+     * This method returns the number of questions total on the current HighScore/Quiz Id
+     * by following it's score and difficulty level for the quiz
+     *
+     * @param id              represents the Id of the quiz
+     * @param score           represents the score of the quiz
+     * @param difficultyLevel represents the difficultyLevel of the quiz
+     * @return Returns the number of questions total on the specific quiz Id
+     * @throws SQLException in case that there is no data or
+     *                      there is an issue extracting data from the database
+     */
+    public int getNrOfQuestionsAnsweredFromCurrentQuiz(int id, String difficultyLevel, int score) throws SQLException {
+        return db.getNrOfQAnsweredFromCurrQuiz(id, difficultyLevel, score);
+    }
+
+    /**
+     * This method returns the number of questions total on the current HighScore/Quiz Id
+     * by following it's score and difficulty level for the quiz
+     *
+     * @param id              represents the Id of the quiz
+     * @param difficultyLevel represents the difficultyLevel of the quiz
+     * @param score           represents the score of the quiz
+     * @return Returns the number of questions total on the specific quiz Id
      * @throws SQLException in case that there is no data or
      *                      there is an issue extracting data from the database
      */
@@ -345,10 +384,24 @@ public class MyController {
     }
 
     /**
-     * @param id
-     * @param score
-     * @param difficultyLevel
-     * @return
+     * This method returns the current HighScore Id of the quiz
+     *
+     * @return Returns the HighScore Id on the specific quiz Id
+     * @throws SQLException in case that there is no data or
+     *                      there is an issue extracting data from the database
+     */
+    public int getHighScoreId() throws SQLException {
+        return db.getHighScoreId();
+    }
+
+    /**
+     * This method returns the time spent based on the current HighScore/Quiz Id
+     * by following it's score and difficulty level for the quiz
+     *
+     * @param id              represents the Id of the quiz
+     * @param score           represents the score of the quiz
+     * @param difficultyLevel represents the difficultyLevel of the quiz
+     * @return Returns the Time Spent on the specific quiz Id
      * @throws SQLException in case that there is no data or
      *                      there is an issue extracting data from the database
      */
@@ -527,9 +580,27 @@ public class MyController {
     }
 
     /**
-     * @param resultsFromDao
-     * @param list
-     * @return
+     * This method returns either an question or an answer depending on the
+     * list ( resultsFromDao) parameter.
+     * <p>
+     * First this checks the size of the list that is used to loop and gather data
+     * 1. In case that questionsAlreadyUsed of the same size list that is currently looped through
+     * it will return null.
+     * <p>
+     * 2. In case that answersAlreadyUsed of the same size list that is currently looped through
+     * it will clear the current list; there was a bug related to the database returning 4 each time
+     * and thus it was decide to better clear the list
+     * <p>
+     * The lists get an SecureRandom which gets an index for a question to loop
+     * through and constantly checks it availability to add "unique" results.
+     *
+     * @param resultsFromDao represents the List which is going to be used
+     *                       for the do while loop to gather an appropriate answer
+     *                       or an question
+     * @param list           represents the Lists that are instantiated in as
+     *                       global parameters
+     * @return either an answer or an question depending on the list
+     * which is using as the second parameter
      */
     private String getResults(List<String> resultsFromDao, List<String> list) {
         int totalNrOfResultsFromDao = resultsFromDao.size();
