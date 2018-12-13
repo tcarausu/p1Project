@@ -44,14 +44,14 @@ public class AdminUserCreate extends JFrame {
         setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        introduceLogin();
+        introduceAdminUserCreate();
 
     }
 
     /**
      * This method allows the administrator to introduce new login information credentials.
      */
-    private void introduceLogin() {
+    private void introduceAdminUserCreate() {
         setSize(350, 300);
         setLocation(500, 280);
 

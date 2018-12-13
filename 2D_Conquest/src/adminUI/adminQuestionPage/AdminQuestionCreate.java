@@ -30,10 +30,10 @@ public class    AdminQuestionCreate extends JFrame {
     private JLabel lregion = new JLabel("Region");
 
     /**
-     * Login Page UI's Constructor
+     * Admin Question Create's Constructor. Displays the UI for question creation.
      *
-     * @param controller of type MyController
-     * @param aController
+     * @param controller  represent the MyController Controller needed to instantiate the constructor
+     * @param aController represent the AdminController Controller needed to instantiate the constructor
      */
     public AdminQuestionCreate(MyController controller,AdminController aController) {
 
@@ -47,14 +47,14 @@ public class    AdminQuestionCreate extends JFrame {
         setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        introduceLogin();
+        introduceAdminUserCreate();
 
     }
 
     /**
-     *
+     * This method allows the administrator to introduce new question information credentials.
      */
-    private void introduceLogin() {
+    private void introduceAdminUserCreate() {
         setSize(500, 300);
         setLocation(500, 280);
 
@@ -112,7 +112,9 @@ public class    AdminQuestionCreate extends JFrame {
     }
 
     /**
-     *
+     * This method creates a new question for the database by an administrator.
+     * <p>
+     * This method also checks for valid input (non null/empty).
      */
     private void createNewQuestion() {
         String subjectT = subject.getText();
@@ -144,7 +146,7 @@ public class    AdminQuestionCreate extends JFrame {
     }
 
     /**
-     *
+     * This method will erase inputs into the login fields for entering new information
      */
     private void clearFieldsWhenNeeded() {
         JOptionPane.showMessageDialog(null,

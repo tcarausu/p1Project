@@ -27,11 +27,12 @@ public class AdminQuestionDelete extends JFrame {
     private JLabel questionId = new JLabel("Question ID");
 
     /**
-     * Admin Quest Delete's Constructor
+     * Admin Question Delete's Constructor.
+     * <p>
+     * Allows an admin to delete a question that has registered.
      *
-     * @param controller of type MyController
-     * @param qController
-     * @param aController
+     * @param controller  represent the MyController Controller needed to instantiate the constructor
+     * @param aController represent the AdminController Controller needed to instantiate the constructor
      */
     public AdminQuestionDelete(MyController controller, QuestionController qController,
                                AdminController aController) {
@@ -47,15 +48,15 @@ public class AdminQuestionDelete extends JFrame {
         setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        introduceLogin();
+        introduceAdminQuestionDelete();
 
     }
 
     /**
-     *
+     * This method allows the administrator to introduce new login information credentials.
      */
     @SuppressWarnings("Duplicates")
-    private void introduceLogin() {
+    private void introduceAdminQuestionDelete() {
         setSize(500, 200);
         setLocation(500, 280);
 
@@ -92,7 +93,9 @@ public class AdminQuestionDelete extends JFrame {
     }
 
     /**
-     *
+     * This method will delete the question information stored in question database by an adminstrator.
+     * <p>
+     * This method also checks for valid input (non null/empty).
      */
     private void deleteQuestion() {
         String idText = id.getText();
@@ -112,7 +115,8 @@ public class AdminQuestionDelete extends JFrame {
     }
 
     /**
-     *
+     * Allows login information fields to be cleared when
+     * necessary to enter in new information or delete current input.
      */
     private void clearFieldsWhenNeeded() {
         JOptionPane.showMessageDialog(null,

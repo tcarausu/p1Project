@@ -35,9 +35,13 @@ public class AdminQuestionEdit extends JFrame {
     private JLabel regionOfQ = new JLabel("Region Of Question");
 
     /**
-     * Admin Quest Edit's Constructor
+     * Admin User Edit's Constructor.
+     * <p>
+     * Allows admin to edit a question in the database
+     * and edit its information in game.
      *
-     * @param controller of type MyController
+     * @param controller  represent the MyController Controller needed to instantiate the constructor
+     * @param aController represent the AdminController Controller needed to instantiate the constructor
      */
     public AdminQuestionEdit(MyController controller, QuestionController qController,
                              AdminController aController) {
@@ -53,14 +57,14 @@ public class AdminQuestionEdit extends JFrame {
         setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        introduceLogin();
+        introduceAdminQuestionEdit();
 
     }
 
     /**
-     *
+     * This method allows the administrator to introduce new login information credentials.
      */
-    private void introduceLogin() {
+    private void introduceAdminQuestionEdit() {
         setSize(500, 400);
         setLocation(500, 280);
 
@@ -117,7 +121,10 @@ public class AdminQuestionEdit extends JFrame {
     }
 
     /**
-     *
+     * This method allows the administrator to edit a question in the database
+     * and edit its information and status in game.
+     * <p>
+     * This method also checks for valid input (non null/empty).
      */
     private void editQuestion() {
         String idText = id.getText();
@@ -142,7 +149,7 @@ public class AdminQuestionEdit extends JFrame {
     }
 
     /**
-     *
+     * Allows login information fields to be cleared when necessary to enter in new information or delete current input.
      */
     private void clearFieldsWhenNeeded() {
         JOptionPane.showMessageDialog(null,

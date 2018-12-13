@@ -44,14 +44,14 @@ public class AdminUserDelete extends JFrame {
         setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        introduceLogin();
+        introduceAdminUserDelete();
 
     }
 
     /**
      * This method allows the administrator to introduce new login information credentials.
      */
-    private void introduceLogin() {
+    private void introduceAdminUserDelete() {
         setSize(500, 200);
         setLocation(500, 280);
 
