@@ -44,14 +44,14 @@ public class AdminUserReset extends JFrame {
         setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        introduceLogin();
+        introduceAdminUserReset();
 
     }
 
     /**
      * This method allows the administrator to introduce new login information credentials.
      */
-    private void introduceLogin() {
+    private void introduceAdminUserReset() {
         setSize(500, 200);
         setLocation(500, 280);
 

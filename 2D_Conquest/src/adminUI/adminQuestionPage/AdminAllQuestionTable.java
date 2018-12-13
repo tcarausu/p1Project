@@ -19,11 +19,13 @@ public class AdminAllQuestionTable extends JFrame {
     private JButton back = new JButton("Back");
 
     /**
-     * Admin Question Table Page  UI's Constructor
+     * Admin All Questions Table Page  UI's Constructor.
+     * <p>
+     * Displays the list of questions from the database.
      *
-     * @param controller  of type MyController
-     * @param aController
-     * @param database
+     * @param controller  represent the MyController Controller needed to instantiate the constructor
+     * @param aController represent the AdminController Controller needed to instantiate the constructor
+     * @param database    represent the Database Dao Layer needed to instantiate the constructor
      */
     public AdminAllQuestionTable(
             MyController controller,
@@ -49,6 +51,8 @@ public class AdminAllQuestionTable extends JFrame {
 
 
     /**
+     * This method displays a table of all the questions in the database
+     *
      * @throws SQLException in case that there is no data or
      *                      there is an issue extracting data from the database
      */

@@ -35,9 +35,13 @@ public class AdminQuestionEdit extends JFrame {
     private JLabel regionOfQ = new JLabel("Region Of Question");
 
     /**
-     * Admin Quest Edit's Constructor
+     * Admin User Edit's Constructor.
+     * <p>
+     * Allows admin to edit a question in the database
+     * and edit its information in game.
      *
-     * @param controller of type MyController
+     * @param controller  represent the MyController Controller needed to instantiate the constructor
+     * @param aController represent the AdminController Controller needed to instantiate the constructor
      */
     public AdminQuestionEdit(MyController controller, QuestionController qController,
                              AdminController aController) {
@@ -53,14 +57,25 @@ public class AdminQuestionEdit extends JFrame {
         setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        introduceLogin();
+        introduceAdminQuestionEdit();
 
     }
+    /**
+     * This method allows the administrator to edit existing question information credentials.
+     * <p>
+     * This method initiates the buttons and attaches them to the window.
+     * <p>
+     * To edit the question it can both do that from either the last field (region)
+     * by using "Enter" or by manually clicking on the Edit button.
+     * <p>
+     * If the user wants to go back to Admin UI it will use the Back button.
+     */
+
 
     /**
-     *
+     * This method allows the administrator to introduce new login information credentials.
      */
-    private void introduceLogin() {
+    private void introduceAdminQuestionEdit() {
         setSize(500, 400);
         setLocation(500, 280);
 
@@ -117,7 +132,16 @@ public class AdminQuestionEdit extends JFrame {
     }
 
     /**
-     *
+     * This method edits existing questions from the database
+     * by the Id of the question required (done by an administrator).
+     * <p>
+     * This method also checks for valid input (non null/empty).
+     * <p>
+     * In case of appropriate input the method will
+     * verify the admin data used for edits and and move forward.
+     * <p>
+     * As mentioned before if the data is invalid,
+     * it will clear the fields and open the same window.
      */
     private void editQuestion() {
         String idText = id.getText();
@@ -142,7 +166,7 @@ public class AdminQuestionEdit extends JFrame {
     }
 
     /**
-     *
+     * Allows login information fields to be cleared when necessary to enter in new information or delete current input.
      */
     private void clearFieldsWhenNeeded() {
         JOptionPane.showMessageDialog(null,

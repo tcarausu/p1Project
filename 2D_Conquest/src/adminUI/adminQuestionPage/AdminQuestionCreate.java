@@ -12,7 +12,7 @@ import java.sql.SQLException;
  * File created on 11/17/2018
  * by Toader
  **/
-public class    AdminQuestionCreate extends JFrame {
+public class AdminQuestionCreate extends JFrame {
     private MyController controller;
     private AdminController aController;
 
@@ -30,12 +30,12 @@ public class    AdminQuestionCreate extends JFrame {
     private JLabel lregion = new JLabel("Region");
 
     /**
-     * Login Page UI's Constructor
+     * Admin Question Create's Constructor. Displays the UI for question creation.
      *
-     * @param controller of type MyController
-     * @param aController
+     * @param controller  represent the MyController Controller needed to instantiate the constructor
+     * @param aController represent the AdminController Controller needed to instantiate the constructor
      */
-    public AdminQuestionCreate(MyController controller,AdminController aController) {
+    public AdminQuestionCreate(MyController controller, AdminController aController) {
 
         super("Create a New Question");
 
@@ -47,14 +47,21 @@ public class    AdminQuestionCreate extends JFrame {
         setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        introduceLogin();
+        introduceAdminUserCreate();
 
     }
 
     /**
-     *
+     * This method allows the administrator to introduce new question information credentials.
+     * <p>
+     * This method initiates the buttons and attaches them to the window.
+     * <p>
+     * To create the question it can both do that from either the last field (region)
+     * by using "Enter" or by manually clicking on the Create button.
+     * <p>
+     * If the user wants to go back to Admin UI it will use the Back button.
      */
-    private void introduceLogin() {
+    private void introduceAdminUserCreate() {
         setSize(500, 300);
         setLocation(500, 280);
 
@@ -112,7 +119,15 @@ public class    AdminQuestionCreate extends JFrame {
     }
 
     /**
-     *
+     * This method creates a new question for the database by an administrator.
+     * <p>
+     * This method also checks for valid input (non null/empty).
+     * <p>
+     * In case of appropriate input the method will
+     * verify the admin data used for creation and and move forward.
+     * <p>
+     * As mentioned before if the data is invalid,
+     * it will clear the fields and open the same window.
      */
     private void createNewQuestion() {
         String subjectT = subject.getText();
@@ -134,7 +149,7 @@ public class    AdminQuestionCreate extends JFrame {
 
                 controller.verifyAdminDataOnQuestionCreate(subjectT,
                         type, diff, regionT);
-            }  else {
+            } else {
                 clearFieldsWhenNeeded();
                 aController.openAdminQuestionUI();
             }
@@ -144,7 +159,7 @@ public class    AdminQuestionCreate extends JFrame {
     }
 
     /**
-     *
+     * This method will erase inputs into the login fields for entering new information
      */
     private void clearFieldsWhenNeeded() {
         JOptionPane.showMessageDialog(null,
