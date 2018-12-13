@@ -21,14 +21,12 @@ public class AdminQuestionUI extends JFrame {
     private JButton quit = new JButton("QUIT");
     private JButton back = new JButton("Back");
 
-//    private JButton setttingsMenu = new JButton("High Score");
-//    private JButton playGame = new JButton("Start");
-//
 
     /**
      * Admin Question UI's Constructor
      *
      * @param controller of type MyController
+     * @param aController
      */
     public AdminQuestionUI(MyController controller, AdminController aController) {
         super("AdminPage Questions UI");

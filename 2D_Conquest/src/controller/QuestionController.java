@@ -82,7 +82,7 @@ public class QuestionController {
      * This method updates a question by using
      * and update query to change/adjust
      * by using the id as a focal point
-     * and in case of success it will display the Confirmation Ui window
+     * and in case of success it will display the Confirmation UI  window
      *
      * @param id        representing the id of said question
      * @param subject   representing the subject of said question

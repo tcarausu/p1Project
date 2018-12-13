@@ -33,6 +33,7 @@ public class    AdminQuestionCreate extends JFrame {
      * Login Page UI's Constructor
      *
      * @param controller of type MyController
+     * @param aController
      */
     public AdminQuestionCreate(MyController controller,AdminController aController) {
 
@@ -50,6 +51,9 @@ public class    AdminQuestionCreate extends JFrame {
 
     }
 
+    /**
+     *
+     */
     private void introduceLogin() {
         setSize(500, 300);
         setLocation(500, 280);
@@ -107,6 +111,9 @@ public class    AdminQuestionCreate extends JFrame {
         });
     }
 
+    /**
+     *
+     */
     private void createNewQuestion() {
         String subjectT = subject.getText();
         String type = typeOfQuestion.getText();
@@ -136,6 +143,9 @@ public class    AdminQuestionCreate extends JFrame {
         }
     }
 
+    /**
+     *
+     */
     private void clearFieldsWhenNeeded() {
         JOptionPane.showMessageDialog(null,
                 "The information introduced is cleared",
@@ -147,15 +157,4 @@ public class    AdminQuestionCreate extends JFrame {
         subject.requestFocus();
     }
 
-    public void clearFieldsWhenDataAlreadyExists() {
-        JOptionPane.showMessageDialog(null,
-                "The information introduced is already in use.\n" +
-                        " Please make sure your information you are trying to introduce is not already in use",
-                "Already In use", JOptionPane.INFORMATION_MESSAGE);
-        subject.setText("");
-        typeOfQuestion.setText("");
-        difficultyLevel.setText("");
-        region.setText("");
-        subject.requestFocus();
-    }
 }

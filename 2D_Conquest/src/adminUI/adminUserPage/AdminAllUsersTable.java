@@ -22,7 +22,9 @@ public class AdminAllUsersTable extends JFrame {
     /**
      * Admin Users Table Page  UI's Constructor
      *
-     * @param controller of type MyController
+     * @param controller  of type MyController
+     * @param aController
+     * @param database
      */
     public AdminAllUsersTable(
             MyController controller,
@@ -47,6 +49,10 @@ public class AdminAllUsersTable extends JFrame {
     }
 
 
+    /**
+     * @throws SQLException in case that there is no data or
+     *                      there is an issue extracting data from the database
+     */
     @SuppressWarnings("Duplicates")
     private void displayAllQuestionsTable() throws SQLException {
 

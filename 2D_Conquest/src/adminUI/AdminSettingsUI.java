@@ -13,7 +13,7 @@ public class AdminSettingsUI extends JFrame {
 
     private ImageIcon button = new ImageIcon("C:\\Users\\Jesus\\Downloads\\button.jpg");
 
-    private JButton volume = new JButton("Volume",button);
+    private JButton volume = new JButton("Volume", button);
     private JButton defDif = new JButton("Default difficulty"); // easy-medium-hard-off radio button
     private JButton soundEffects = new JButton("Sound Effects"); // on-off
     private JButton music = new JButton("Music"); // on-off
@@ -28,10 +28,11 @@ public class AdminSettingsUI extends JFrame {
     private JButton quit = new JButton("QUIT");
     private JButton back = new JButton("Back");
 
-    private JSlider testslider = new JSlider(0,10);
+    private JSlider testslider = new JSlider(0, 10);
 
     /**
      * Admin Settings UI's Constructor
+     *
      * @param controller of type MyController
      */
     public AdminSettingsUI(MyController controller) {
@@ -48,6 +49,7 @@ public class AdminSettingsUI extends JFrame {
     }
 
     /**
+     *
      */
     private void introduceButton() {
 
@@ -66,7 +68,6 @@ public class AdminSettingsUI extends JFrame {
 
         JLabel background = new JLabel(new ImageIcon("C:\\Users\\Jesus\\Downloads\\clipart-png-elephant-11.png"));
         super.add(background);
-
 
 
         testslider.setBounds(240, 50, 160, 40);

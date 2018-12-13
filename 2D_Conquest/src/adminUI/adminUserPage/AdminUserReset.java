@@ -28,6 +28,7 @@ public class AdminUserReset extends JFrame {
      * Admin Quest Delete's Constructor
      *
      * @param controller of type MyController
+     * @param aController
      */
     public AdminUserReset(MyController controller, AdminController aController) {
 
@@ -45,6 +46,9 @@ public class AdminUserReset extends JFrame {
 
     }
 
+    /**
+     *
+     */
     private void introduceLogin() {
         setSize(500, 200);
         setLocation(500, 280);
@@ -80,6 +84,9 @@ public class AdminUserReset extends JFrame {
         });
     }
 
+    /**
+     *
+     */
     private void resetUserPassword() {
         String idText = id.getText();
         try {
@@ -97,6 +104,9 @@ public class AdminUserReset extends JFrame {
         }
     }
 
+    /**
+     *
+     */
     private void clearFieldsWhenNeeded() {
         JOptionPane.showMessageDialog(null,
                 "The information introduced is cleared",

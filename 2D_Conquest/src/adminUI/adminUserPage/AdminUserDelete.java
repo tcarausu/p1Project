@@ -28,6 +28,7 @@ public class AdminUserDelete extends JFrame {
      * Admin User Delete's Constructor
      *
      * @param controller of type MyController
+     * @param aController
      */
     public AdminUserDelete(MyController controller, AdminController aController) {
 
@@ -45,6 +46,9 @@ public class AdminUserDelete extends JFrame {
 
     }
 
+    /**
+     *
+     */
     private void introduceLogin() {
         setSize(500, 200);
         setLocation(500, 280);
@@ -80,6 +84,9 @@ public class AdminUserDelete extends JFrame {
         });
     }
 
+    /**
+     *
+     */
     private void deleteUser() {
         String idText = id.getText();
         try {
@@ -97,6 +104,9 @@ public class AdminUserDelete extends JFrame {
         }
     }
 
+    /**
+     *
+     */
     private void clearFieldsWhenNeeded() {
         JOptionPane.showMessageDialog(null,
                 "The information introduced is cleared",

@@ -281,14 +281,15 @@ public class MyController {
         String username = getCurrentUser().getUserName();
         switch (difficultyLevel) {
             case "easy":
-                db.startQuiz(username, total, difficultyLevel);
+                db.startQuiz(username, total, "easy");
+
                 break;
             case "medium":
-                db.startQuiz(username, total, difficultyLevel);
+                db.startQuiz(username, total, "medium");
 
                 break;
             case "hard":
-                db.startQuiz(username, total, difficultyLevel);
+                db.startQuiz(username, total, "hard");
 
                 break;
         }

@@ -24,35 +24,37 @@ public class HardQuestionUI extends JFrame {
     private final String difficultyLevel = "hard";
 
     private JLabel question = new JLabel();
+
+    private ButtonGroup buttonGroup = new ButtonGroup();
     private JRadioButton radioButton1 = new JRadioButton();
     private JRadioButton radioButton2 = new JRadioButton();
     private JRadioButton radioButton3 = new JRadioButton();
     private JRadioButton radioButton4 = new JRadioButton();
 
-    private ButtonGroup buttonGroup = new ButtonGroup();
-
     private JLabel currentNrOfQuestion = new JLabel();
-    private JLabel timeSpentOnTheQuiz = new JLabel();
     private JLabel totalNrOfQuestions = new JLabel();
+
+    private JLabel timeSpentOnTheQuiz = new JLabel();
+    private JLabel currentTimeInMin = new JLabel();
+    private JLabel currentTimeInSec = new JLabel();
 
     private static int milliseconds = 0;
     private static int seconds = 0;
     private static int minutes = 0;
     private static int hours = 0;
+    private static int time;
 
     private static boolean state = true;
-
-    private JLabel hour = new JLabel("00: ");
-    private JLabel minute = new JLabel("00: ");
-    private JLabel second = new JLabel("00: ");
-    private JLabel millisecond = new JLabel("00");
 
     private Thread t = new Thread();
 
     /**
-     * Easy Question UI's Constructor
+     * This constructor initiates the HardQuestionUI window and initializes it
+     * with a MyController Controller and QuestionController Controller
      *
-     * @param controller of type MyController
+     * @param controller  the MyController Controller needed to instantiate the constructor
+     * @param qController the QuestionController Controller needed to instantiate the constructor
+     * @param region      represent the region chosen in the Country UI and persisted through the Difficulty UI window
      */
     public HardQuestionUI(MyController controller, QuestionController qController, String region) {
 
@@ -67,24 +69,29 @@ public class HardQuestionUI extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         try {
-            setEasy();
+            setHard();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        if (t.isDaemon()) {
-            System.exit(0);
-        }
     }
 
+    /**
+     * @throws SQLException in case that there is no data or
+     *                      there is an issue extracting data from the database
+     */
     @SuppressWarnings("Duplicates")
-    private void setEasy() throws SQLException {
+    private void setHard() throws SQLException {
 
+        startTimer();
 
         super.add(question);
         super.add(currentNrOfQuestion);
         super.add(totalNrOfQuestions);
+
         super.add(timeSpentOnTheQuiz);
+        super.add(currentTimeInMin);
+        super.add(currentTimeInSec);
 
         super.add(next);
         super.add(skip);
@@ -100,36 +107,26 @@ public class HardQuestionUI extends JFrame {
         super.add(radioButton3);
         super.add(radioButton4);
 
-        super.add(hour);
-        super.add(minute);
-        super.add(second);
-        super.add(millisecond);
-
-        hour.setBounds(10, 10, 30, 30);
-        minute.setBounds(40, 10, 30, 30);
-        second.setBounds(70, 10, 30, 30);
-        millisecond.setBounds(110, 10, 30, 30);
-
         setSize(750, 500);
         setLocation(500, 200);
 
-        currentNrOfQuestion.setBounds(675, 0, 30, 20);
-        totalNrOfQuestions.setBounds(725, 0, 30, 20);
-        timeSpentOnTheQuiz.setBounds(325, 0, 30, 20);
         question.setBounds(50, 80, 600, 50);
 
+        currentNrOfQuestion.setBounds(675, 0, 20, 20);
+        totalNrOfQuestions.setBounds(705, 0, 20, 20);
+
+        currentTimeInMin.setBounds(25, 0, 150, 20);
+        timeSpentOnTheQuiz.setBounds(155, 0, 20, 20);
+        currentTimeInSec.setBounds(185, 0, 100, 20);
 
         next.setBounds(600, 180, 110, 40);
         skip.setBounds(600, 260, 110, 40);
         done.setBounds(600, 340, 110, 40);
 
-        radioButton1.setBounds(100, 250, 200, 50);
-        radioButton2.setBounds(360, 250, 200, 50);
-        radioButton3.setBounds(100, 200, 200, 50);
-        radioButton4.setBounds(360, 200, 200, 50);
-
-        EasyQuestionUI easyQuestionUI = new EasyQuestionUI(controller, qController, region);
-        easyQuestionUI.startTimer();
+        radioButton1.setBounds(50, 250, 250, 50);
+        radioButton2.setBounds(310, 250, 250, 50);
+        radioButton3.setBounds(50, 200, 250, 50);
+        radioButton4.setBounds(310, 200, 250, 50);
 
         question.setText(controller.questionToBeAnswered(difficultyLevel, region));
 
@@ -182,7 +179,7 @@ public class HardQuestionUI extends JFrame {
                 } else if (!radioButton1.isSelected() && !radioButton2.isSelected()
                         && !radioButton3.isSelected() && !radioButton4.isSelected()) {
                     controller.answerSelectionFailure();
-                    controller.openEasyWindow(region);
+                    controller.openHardWindow(region);
                 }
 
             } catch (SQLException e1) {
@@ -203,7 +200,7 @@ public class HardQuestionUI extends JFrame {
 
                         } else {
                             dispose();
-                            controller.openEasyWindow(region);
+                            controller.openHardWindow(region);
 
                         }
 
@@ -214,13 +211,20 @@ public class HardQuestionUI extends JFrame {
         );
         done.addActionListener(e -> {
             dispose();
-            easyQuestionUI.stopTimer();
+            stopTimer();
             controller.openScoreWindow();
         });
 
 
     }
 
+    /**
+     * @param answer
+     * @param value
+     * @param timeSpentOnAQuestion
+     * @throws SQLException in case that there is no data or
+     *                      there is an issue extracting data from the database
+     */
     private void validationOfRButton(String answer, int value, int timeSpentOnAQuestion) throws SQLException {
         controller.updateScoreOnForUserAndDifficulty(answer, value, difficultyLevel, timeSpentOnAQuestion);
         if (value >= 6) {
@@ -229,35 +233,79 @@ public class HardQuestionUI extends JFrame {
 
         } else {
             dispose();
-            controller.openEasyWindow(region);
+            controller.openHardWindow(region);
 
         }
     }
 
-//    private void timer2() {
-//        SwingWorker<String, Integer> timer = new SwingWorker<String, Integer>() {
-//            Integer timer = 2;
-//
-//            @Override
-//            protected String doInBackground() throws Exception {
-//                //update guiModel
-//                timeSpentOnTheQuiz.setText(timer.toString());
-//                while (timer > 0) {
-//                    Thread.sleep(1000);
-//                    timer--;
-//                }
-//                return null;
-//            }
-//
-//            @Override
-//            public void done() {
-//                addActionListener(e -> {
-//                    dispose();
-////            stopTimer();
-//                    controller.openScoreWindow();
-//                });
-//            }
-//        };
-//
-//    }
+    /**
+     *
+     */
+    @SuppressWarnings("Duplicates")
+    private void stopTimer() {
+        t.stop();
+        done.addActionListener(e -> {
+            state = false;
+            System.out.printf("You finished in this time: %d h:%d m:%d s", hours, minutes, seconds);
+            System.out.println();
+            hours = 0;
+            minutes = 0;
+            seconds = 0;
+            milliseconds = 0;
+        });
+
+    }
+
+    /**
+     * This method instantiates a thread to gather and sustain the
+     * time spent on a quiz , incrementally.
+     */
+    @SuppressWarnings("Duplicates")
+    private void startTimer() {
+
+        state = true;
+
+        t = new Thread(() -> {
+            for (; ; )
+                if (state) {
+                    try {
+                        Thread.sleep(1);
+
+                        if (milliseconds > 762) {
+                            milliseconds = 0;
+                            seconds++;
+                        }
+                        if (seconds > 60) {
+                            milliseconds = 0;
+                            seconds = 0;
+                            minutes++;
+                        }
+                        if (minutes > 60) {
+                            milliseconds = 0;
+                            seconds = 0;
+                            minutes = 0;
+                            hours++;
+                        }
+
+                        milliseconds++;
+
+                        time = (minutes + hours * 60 + seconds / 60);
+
+                        timeSpentOnTheQuiz.setText(String.valueOf(time));
+                        currentTimeInMin.setText("Time elapsed minutes: ");
+                        currentTimeInSec.setText(" seconds: " + seconds);
+                    } catch (Exception ignored) {
+
+                    }
+
+                } else {
+                    break;
+                }
+
+        });
+        t.start();
+
+
+    }
+
 }

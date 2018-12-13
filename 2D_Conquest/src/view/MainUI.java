@@ -87,6 +87,7 @@ public class MainUI extends JFrame {
      * This main methods initiates all the Dao classes,
      * all the controller classes and initiating the connection
      * between them so that it could properly start the application
+     * @param args are the initialisation for the main
      */
     public static void main(String[] args) {
         Database database = new Database();

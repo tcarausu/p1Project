@@ -21,7 +21,9 @@ public class AdminAllQuestionTable extends JFrame {
     /**
      * Admin Question Table Page  UI's Constructor
      *
-     * @param controller of type MyController
+     * @param controller  of type MyController
+     * @param aController
+     * @param database
      */
     public AdminAllQuestionTable(
             MyController controller,
@@ -46,6 +48,10 @@ public class AdminAllQuestionTable extends JFrame {
     }
 
 
+    /**
+     * @throws SQLException in case that there is no data or
+     *                      there is an issue extracting data from the database
+     */
     private void displayAllQuestionsTable() throws SQLException {
 
         super.setBounds(0, 0, 800, 200);
@@ -66,6 +72,5 @@ public class AdminAllQuestionTable extends JFrame {
             aController.openAdminPageUI();
         });
     }
-
 
 }

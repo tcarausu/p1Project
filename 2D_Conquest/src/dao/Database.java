@@ -473,7 +473,8 @@ public class Database implements DatabaseI {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres",
                 "postgres", "postgres");
 
-        final String sql = "SELECT * FROM p1Project.questions";
+        final String sql = "SELECT * FROM p1Project.questions "+
+                "order by id";
         final PreparedStatement preparedStatement = conn.prepareStatement(sql);
         return preparedStatement.executeQuery();
     }
@@ -491,7 +492,8 @@ public class Database implements DatabaseI {
                 "postgres", "postgres");
 
         final String sql = "SELECT usernameofplayer,timespent,nrofquestionsanswered,nrofquestionstotal," +
-                "difficultylevel,score FROM p1Project.highscore ";
+                "difficultylevel,score FROM p1Project.highscore "+
+                "order by id";
         final PreparedStatement preparedStatement = conn.prepareStatement(sql);
         return preparedStatement.executeQuery();
     }
@@ -511,7 +513,8 @@ public class Database implements DatabaseI {
 
         final String sql = "SELECT usernameofplayer,timespent,nrofquestionsanswered,nrofquestionstotal," +
                 "difficultylevel,score FROM p1Project.highscore " +
-                "where usernameofplayer = '" + username + "'";
+                "where usernameofplayer = '" + username + "'"+
+                "order by id";
         final PreparedStatement preparedStatement = conn.prepareStatement(sql);
         return preparedStatement.executeQuery();
     }
@@ -528,7 +531,8 @@ public class Database implements DatabaseI {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres",
                 "postgres", "postgres");
 
-        final String sql = "SELECT * FROM p1Project.user ";
+        final String sql = "SELECT * FROM p1Project.user "+
+                "order by id";
         final PreparedStatement preparedStatement = conn.prepareStatement(sql);
         return preparedStatement.executeQuery();
     }

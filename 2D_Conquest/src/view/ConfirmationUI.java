@@ -28,6 +28,7 @@ public class ConfirmationUI extends JFrame {
      * Confirmation UI's Constructor
      *
      * @param controller of type MyController
+     * @param aController
      */
     public ConfirmationUI(MyController controller, AdminController aController) {
 
@@ -44,6 +45,9 @@ public class ConfirmationUI extends JFrame {
 
     }
 
+    /**
+     *
+     */
     private void introduceLogin() {
         setSize(380, 250);
         setLocation(500, 280);

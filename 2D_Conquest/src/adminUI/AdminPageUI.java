@@ -25,6 +25,7 @@ public class AdminPageUI extends JFrame {
 
     /** Admin Page UI's Constructor
      * @param controller of type MyController
+     * @param aController
      */
     public AdminPageUI(MyController controller,AdminController aController) {
         super("AdminPage UI");

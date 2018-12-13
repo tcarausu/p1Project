@@ -24,6 +24,7 @@ public class DifficultyLevelUI extends JFrame {
      * DifficultyLevel UI's Constructor
      *
      * @param controller of type MyController
+     * @param region
      */
     public DifficultyLevelUI(MyController controller, String region) {
 
@@ -70,10 +71,9 @@ public class DifficultyLevelUI extends JFrame {
 
         medium.addActionListener(e -> {
             dispose();
-            controller.openMediumWindow(region);
 
             try {
-                controller.startQuiz(20,"medium");
+                controller.startQuiz(20, "medium");
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
@@ -81,10 +81,9 @@ public class DifficultyLevelUI extends JFrame {
         });
         hard.addActionListener(e -> {
             dispose();
-            controller.openHardWindow(region);
 
             try {
-                controller.startQuiz(20,"hard");
+                controller.startQuiz(20, "hard");
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }

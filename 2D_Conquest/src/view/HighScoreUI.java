@@ -23,6 +23,8 @@ public class HighScoreUI extends JFrame {
      * Admin Question Table Page  UI's Constructor
      *
      * @param controller of type MyController
+     * @param aController
+     * @param database
      */
     public HighScoreUI(
             MyController controller,
@@ -47,6 +49,9 @@ public class HighScoreUI extends JFrame {
     }
 
 
+    /**
+     * @throws SQLException in case that there is no data or
+     *                      there is an issue extracting data from the database     */
     private void displayAllQuestionsTable() throws SQLException {
 
         super.setBounds(0, 0, 500, 500);

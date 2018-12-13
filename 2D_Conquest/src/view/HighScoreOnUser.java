@@ -31,7 +31,7 @@ public class HighScoreOnUser extends JFrame {
                            Database database,
                            String username) {
 
-        super("High Score");
+        super("High Score For The User");
 
         this.controller = controller;
         this.aController = aController;

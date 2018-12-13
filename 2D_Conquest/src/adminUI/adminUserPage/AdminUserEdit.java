@@ -32,6 +32,7 @@ public class AdminUserEdit extends JFrame {
      * Admin Quest Delete's Constructor
      *
      * @param controller of type MyController
+     * @param aController
      */
     public AdminUserEdit(MyController controller, AdminController aController) {
 
@@ -49,6 +50,9 @@ public class AdminUserEdit extends JFrame {
 
     }
 
+    /**
+     *
+     */
     private void introduceLogin() {
         setSize(500, 200);
         setLocation(500, 280);
@@ -95,6 +99,9 @@ public class AdminUserEdit extends JFrame {
         });
     }
 
+    /**
+     *
+     */
     private void editUser() {
         String idText = id.getText();
         String user_nameText = username.getText();
@@ -114,6 +121,9 @@ public class AdminUserEdit extends JFrame {
         }
     }
 
+    /**
+     *
+     */
     private void clearFieldsWhenNeeded() {
         JOptionPane.showMessageDialog(null,
                 "The information introduced is cleared",

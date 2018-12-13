@@ -30,6 +30,7 @@ public class AdminUserCreate extends JFrame {
      * Login Page UI's Constructor
      *
      * @param controller of type MyController
+     * @param aController
      */
     public AdminUserCreate(MyController controller, AdminController aController) {
 
@@ -47,6 +48,9 @@ public class AdminUserCreate extends JFrame {
 
     }
 
+    /**
+     *
+     */
     private void introduceLogin() {
         setSize(350, 300);
         setLocation(500, 280);
@@ -93,6 +97,9 @@ public class AdminUserCreate extends JFrame {
         });
     }
 
+    /**
+     *
+     */
     private void createUser() {
         String puname = txuser.getText();
         String ppaswd = String.valueOf(pass.getPassword());
@@ -110,6 +117,9 @@ public class AdminUserCreate extends JFrame {
         }
     }
 
+    /**
+     *
+     */
     private void clearFields() {
         JOptionPane.showMessageDialog(null,
                 "The information introduced is wrong.\n" +
