@@ -30,6 +30,8 @@ public class AdminQuestionDelete extends JFrame {
      * Admin Quest Delete's Constructor
      *
      * @param controller of type MyController
+     * @param qController
+     * @param aController
      */
     public AdminQuestionDelete(MyController controller, QuestionController qController,
                                AdminController aController) {
@@ -49,6 +51,10 @@ public class AdminQuestionDelete extends JFrame {
 
     }
 
+    /**
+     *
+     */
+    @SuppressWarnings("Duplicates")
     private void introduceLogin() {
         setSize(500, 200);
         setLocation(500, 280);
@@ -85,6 +91,9 @@ public class AdminQuestionDelete extends JFrame {
         });
     }
 
+    /**
+     *
+     */
     private void deleteQuestion() {
         String idText = id.getText();
         try {
@@ -102,6 +111,9 @@ public class AdminQuestionDelete extends JFrame {
         }
     }
 
+    /**
+     *
+     */
     private void clearFieldsWhenNeeded() {
         JOptionPane.showMessageDialog(null,
                 "The information introduced is cleared",
@@ -109,7 +121,6 @@ public class AdminQuestionDelete extends JFrame {
         id.setText("");
         id.requestFocus();
     }
-
 
 }
 

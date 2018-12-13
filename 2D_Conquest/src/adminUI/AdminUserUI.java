@@ -16,14 +16,12 @@ public class AdminUserUI extends JFrame {
     private JButton deleteUser = new JButton("Delete User");
     private JButton editUser = new JButton("Edit User");
 
-    //    private JButton setttingsMenu = new JButton("High Score");
-//    private JButton playGame = new JButton("Start");
-//
     private JButton quit = new JButton("QUIT");
     private JButton back = new JButton("Back");
 
     /**
      * Admin User UI's Constructor
+     *
      * @param aController of type MyController
      */
     public AdminUserUI(AdminController aController) {
@@ -40,7 +38,9 @@ public class AdminUserUI extends JFrame {
     }
 
     /**
+     *
      */
+    @SuppressWarnings("Duplicates")
     private void introduceButton() {
         setSize(600, 400);
 
@@ -51,11 +51,6 @@ public class AdminUserUI extends JFrame {
         super.add(quit);
         super.add(back);
 
-//        super.add(setttingsMenu);
-//        super.add(playGame);
-//        setttingsMenu.setBounds(70, 150, 160, 40);
-//        playGame.setBounds(70, 150, 160, 40);
-//
         createUser.setBounds(70, 50, 160, 40);
         resetUser.setBounds(250, 50, 160, 40);
         deleteUser.setBounds(70, 150, 160, 40);

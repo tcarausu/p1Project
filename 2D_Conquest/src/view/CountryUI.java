@@ -29,6 +29,7 @@ public class CountryUI extends JFrame {
      * Country UI's Constructor
      *
      * @param controller of type MyController
+     * @param aController
      */
     public CountryUI(MyController controller, AdminController aController) {
 

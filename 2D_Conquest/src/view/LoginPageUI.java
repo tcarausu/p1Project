@@ -24,6 +24,7 @@ public class LoginPageUI extends JFrame {
      * Login Page UI's Constructor
      *
      * @param controller of type MyController
+     * @param adminController
      */
     public LoginPageUI(MyController controller, AdminController adminController) {
 
@@ -41,6 +42,9 @@ public class LoginPageUI extends JFrame {
 
     }
 
+    /**
+     *
+     */
     private void introduceLogin() { // admin panel de mutat dupa admin login
         setSize(350, 280);
         setLocation(500, 280);
@@ -105,6 +109,9 @@ public class LoginPageUI extends JFrame {
         });
     }
 
+    /**
+     *
+     */
     private void login() {
         String puname = txuser.getText().toLowerCase();
         String ppaswd = String.valueOf(pass.getPassword()).toLowerCase();
@@ -116,6 +123,9 @@ public class LoginPageUI extends JFrame {
         }
     }
 
+    /**
+     *
+     */
     public void clearFields() {
         JOptionPane.showMessageDialog(null,
                 "The system could not log you in.\n" + " Please make sure your username and password are correct",

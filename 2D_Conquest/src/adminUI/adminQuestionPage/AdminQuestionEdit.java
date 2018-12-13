@@ -57,6 +57,9 @@ public class AdminQuestionEdit extends JFrame {
 
     }
 
+    /**
+     *
+     */
     private void introduceLogin() {
         setSize(500, 400);
         setLocation(500, 280);
@@ -113,6 +116,9 @@ public class AdminQuestionEdit extends JFrame {
         });
     }
 
+    /**
+     *
+     */
     private void editQuestion() {
         String idText = id.getText();
         String subjectText = subject.getText();
@@ -135,6 +141,9 @@ public class AdminQuestionEdit extends JFrame {
         }
     }
 
+    /**
+     *
+     */
     private void clearFieldsWhenNeeded() {
         JOptionPane.showMessageDialog(null,
                 "The information introduced is cleared",
@@ -142,6 +151,5 @@ public class AdminQuestionEdit extends JFrame {
         id.setText("");
         id.requestFocus();
     }
-
 
 }
