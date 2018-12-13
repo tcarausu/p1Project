@@ -23,11 +23,15 @@ public class AdminPageUI extends JFrame {
     private JButton quit = new JButton("QUIT");
     private JButton back = new JButton("Back");
 
-    /** Admin Page UI's Constructor
-     * @param controller of type MyController
-     * @param aController
+    /**
+     * Admin Page UI's Constructor.
+     * <p>
+     * Initiates and displays AdminPage UI
+     *
+     * @param controller  controller  represent the MyController Controller needed to instantiate the constructor
+     * @param aController represent the AdminController Controller needed to instantiate the constructor
      */
-    public AdminPageUI(MyController controller,AdminController aController) {
+    public AdminPageUI(MyController controller, AdminController aController) {
         super("AdminPage UI");
         this.controller = controller;
         this.aController = aController;
@@ -42,6 +46,14 @@ public class AdminPageUI extends JFrame {
     }
 
     /**
+     * This method allows administrator to access userUI and questionUI or starting the game.
+     * <p>
+     * This method instantiates buttons and attaches them to the window.
+     * <p>
+     * To access userUI and questionUI should be used buttons with he exact name.
+     * <p>
+     * If the admin wants to go back to MainUI, Back button will be used
+     *
      */
     private void introduceButton() {
 

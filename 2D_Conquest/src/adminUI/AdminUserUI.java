@@ -22,7 +22,7 @@ public class AdminUserUI extends JFrame {
     /**
      * Admin User UI's Constructor
      *
-     * @param aController of type MyController
+     * @param aController represent the AdminController Controller needed to instantiate the constructor
      */
     public AdminUserUI(AdminController aController) {
         super("AdminPage User UI");
@@ -38,7 +38,12 @@ public class AdminUserUI extends JFrame {
     }
 
     /**
-     *
+     * This method allows the administrator to add new users
+     * reset,delete,edit existing users.
+     * <p>
+     * This method instantiates the buttons and attaches them to the window
+     * <p>
+     * If the user wants to go back to AdminPage UI it will use Back button
      */
     @SuppressWarnings("Duplicates")
     private void introduceButton() {
@@ -55,7 +60,6 @@ public class AdminUserUI extends JFrame {
         resetUser.setBounds(250, 50, 160, 40);
         deleteUser.setBounds(70, 150, 160, 40);
         editUser.setBounds(250, 150, 160, 40);
-
 
         back.setBounds(70, 250, 160, 40);
         quit.setBounds(250, 250, 160, 40);

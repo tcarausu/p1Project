@@ -32,8 +32,10 @@ public class AdminSettingsUI extends JFrame {
 
     /**
      * Admin Settings UI's Constructor
+     * <p>
      *
-     * @param controller of type MyController
+     *
+     * @param controller  represent the MyController Controller needed to instantiate the constructor
      */
     public AdminSettingsUI(MyController controller) {
         super("AdminPage Settings UI");
@@ -49,6 +51,7 @@ public class AdminSettingsUI extends JFrame {
     }
 
     /**
+     * This method introduce buttons to the existing frame
      *
      */
     private void introduceButton() {

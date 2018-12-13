@@ -24,9 +24,11 @@ public class AdminQuestionUI extends JFrame {
 
     /**
      * Admin Question UI's Constructor
+     * <p>
+     * Creates Admin Question window for editing the questions from database.
      *
-     * @param controller of type MyController
-     * @param aController
+     * @param controller represent the MyController Controller needed to instantiate the constructor
+     * @param aController represent the AdminController Controller needed to instantiate the constructor
      */
     public AdminQuestionUI(MyController controller, AdminController aController) {
         super("AdminPage Questions UI");
@@ -43,7 +45,14 @@ public class AdminQuestionUI extends JFrame {
     }
 
     /**
-     *
+     * This method allows the administrator to introduce new question
+     * delete,edit existing questions or display all question.
+     * <p>
+     * This method instantiates the buttons and attaches them to the window.
+     * <p>
+     * Question are added and edited by using the buttons with name of action selected.
+     * <p>
+     * For going back to AdminPage UI is used Back buttom
      */
     private void introduceButton() {
 
