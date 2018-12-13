@@ -21,10 +21,11 @@ public class DifficultyLevelUI extends JFrame {
     private JButton back = new JButton("Back");
 
     /**
-     * DifficultyLevel UI's Constructor
+     * This constructor initiates the DifficultyLevelUI window and initializes it
+     * with a MyController Controller
      *
-     * @param controller of type MyController
-     * @param region
+     * @param controller represents the MyController Controller needed to instantiate the constructor
+     * @param region     represents the current selected region at start of difficulty selection
      */
     public DifficultyLevelUI(MyController controller, String region) {
 
