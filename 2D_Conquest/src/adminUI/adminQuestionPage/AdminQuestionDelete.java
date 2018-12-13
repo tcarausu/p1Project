@@ -51,6 +51,17 @@ public class AdminQuestionDelete extends JFrame {
         introduceAdminQuestionDelete();
 
     }
+    /**
+     * This method allows the administrator to delete existing question information credentials.
+     * <p>
+     * This method initiates the buttons and attaches them to the window.
+     * <p>
+     * To delete the question it can both do that from either the last field (region)
+     * by using "Enter" or by manually clicking on the delete button.
+     * <p>
+     * If the user wants to go back to Admin UI it will use the Back button.
+     */
+
 
     /**
      * This method allows the administrator to introduce new login information credentials.
@@ -93,9 +104,16 @@ public class AdminQuestionDelete extends JFrame {
     }
 
     /**
-     * This method will delete the question information stored in question database by an adminstrator.
+     * This method deletes an existing question  from the database
+     * by the Id of the question required (done by an administrator)
      * <p>
      * This method also checks for valid input (non null/empty).
+     * <p>
+     * In case of appropriate input the method will
+     * verify the admin data used for deletion and and move forward.
+     * <p>
+     * As mentioned before if the data is invalid,
+     * it will clear the fields and open the same window.
      */
     private void deleteQuestion() {
         String idText = id.getText();

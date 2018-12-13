@@ -60,6 +60,17 @@ public class AdminQuestionEdit extends JFrame {
         introduceAdminQuestionEdit();
 
     }
+    /**
+     * This method allows the administrator to edit existing question information credentials.
+     * <p>
+     * This method initiates the buttons and attaches them to the window.
+     * <p>
+     * To edit the question it can both do that from either the last field (region)
+     * by using "Enter" or by manually clicking on the Edit button.
+     * <p>
+     * If the user wants to go back to Admin UI it will use the Back button.
+     */
+
 
     /**
      * This method allows the administrator to introduce new login information credentials.
@@ -121,10 +132,16 @@ public class AdminQuestionEdit extends JFrame {
     }
 
     /**
-     * This method allows the administrator to edit a question in the database
-     * and edit its information and status in game.
+     * This method edits existing questions from the database
+     * by the Id of the question required (done by an administrator).
      * <p>
      * This method also checks for valid input (non null/empty).
+     * <p>
+     * In case of appropriate input the method will
+     * verify the admin data used for edits and and move forward.
+     * <p>
+     * As mentioned before if the data is invalid,
+     * it will clear the fields and open the same window.
      */
     private void editQuestion() {
         String idText = id.getText();
