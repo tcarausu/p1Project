@@ -77,6 +77,8 @@ public class HardQuestionUI extends JFrame {
     }
 
     /**
+     * This method initiates and sets the hard difficulty questions.
+     *
      * @throws SQLException in case that there is no data or
      *                      there is an issue extracting data from the database
      */
@@ -161,20 +163,20 @@ public class HardQuestionUI extends JFrame {
         {
             dispose();
             try {
-                int value = nrOfCurrentQAnswered.getAndIncrement();
+                int questionsAnswered = nrOfCurrentQAnswered.getAndIncrement();
                 int timeSpentOnAQuestion = timeSpent.getAndIncrement();
 
                 if (radioButton1.isSelected()) {
-                    validationOfRButton(radioButton1.getText(), value, timeSpentOnAQuestion);
+                    validationOfRButton(radioButton1.getText(), questionsAnswered, timeSpentOnAQuestion);
                 }
                 if (radioButton2.isSelected()) {
-                    validationOfRButton(radioButton2.getText(), value, timeSpentOnAQuestion);
+                    validationOfRButton(radioButton2.getText(), questionsAnswered, timeSpentOnAQuestion);
                 }
                 if (radioButton3.isSelected()) {
-                    validationOfRButton(radioButton3.getText(), value, timeSpentOnAQuestion);
+                    validationOfRButton(radioButton3.getText(), questionsAnswered, timeSpentOnAQuestion);
                 }
                 if (radioButton4.isSelected()) {
-                    validationOfRButton(radioButton4.getText(), value, timeSpentOnAQuestion);
+                    validationOfRButton(radioButton4.getText(), questionsAnswered, timeSpentOnAQuestion);
 
                 } else if (!radioButton1.isSelected() && !radioButton2.isSelected()
                         && !radioButton3.isSelected() && !radioButton4.isSelected()) {
@@ -191,10 +193,10 @@ public class HardQuestionUI extends JFrame {
         skip.addActionListener(e -> {
                     dispose();
                     try {
-                        int value = nrOfCurrentQAnswered.getAndIncrement();
+                        int questionsAnswered = nrOfCurrentQAnswered.getAndIncrement();
                         int timeSpentOnAQuestion = timeSpent.getAndIncrement();
-                        controller.skipToNextQuestion(value, difficultyLevel, timeSpentOnAQuestion);
-                        if (value >= 6) {
+                        controller.skipToNextQuestion(questionsAnswered, difficultyLevel, timeSpentOnAQuestion);
+                        if (questionsAnswered >= 6) {
                             dispose();
                             controller.openScoreWindowOnUser(controller.getCurrentUser().getUserName());
 
@@ -219,15 +221,18 @@ public class HardQuestionUI extends JFrame {
     }
 
     /**
-     * @param answer
-     * @param value
-     * @param timeSpentOnAQuestion
+     * This constructor checks and validates the choosing and confirmation of a radio button by the user,
+     * which ticks an answer chosen.
+     *
+     * @param answer               represents the answer chosen by the user during the quiz
+     * @param questionsAnswered    represents the amount of questions answered thus far
+     * @param timeSpentOnAQuestion represents the time that has passed
      * @throws SQLException in case that there is no data or
      *                      there is an issue extracting data from the database
      */
-    private void validationOfRButton(String answer, int value, int timeSpentOnAQuestion) throws SQLException {
-        controller.updateScoreOnForUserAndDifficulty(answer, value, difficultyLevel, timeSpentOnAQuestion);
-        if (value >= 6) {
+    private void validationOfRButton(String answer, int questionsAnswered, int timeSpentOnAQuestion) throws SQLException {
+        controller.updateScoreOnForUserAndDifficulty(answer, questionsAnswered, difficultyLevel, timeSpentOnAQuestion);
+        if (questionsAnswered >= 6) {
             dispose();
             controller.openScoreWindowOnUser(controller.getCurrentUser().getUserName());
 
@@ -239,7 +244,8 @@ public class HardQuestionUI extends JFrame {
     }
 
     /**
-     *
+     * This method will stop Thread (the timer)
+     * and returns the value to the initial state.
      */
     @SuppressWarnings("Duplicates")
     private void stopTimer() {
@@ -257,7 +263,7 @@ public class HardQuestionUI extends JFrame {
     }
 
     /**
-     * This method instantiates a thread to gather and sustain the
+     * This method instantiates a Thread to gather and sustain the
      * time spent on a quiz , incrementally.
      */
     @SuppressWarnings("Duplicates")

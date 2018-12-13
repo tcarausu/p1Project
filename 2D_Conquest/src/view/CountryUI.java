@@ -26,10 +26,10 @@ public class CountryUI extends JFrame {
     private AdminController aController;
 
     /**
-     * Country UI's Constructor
+     * Country UI's Constructor. This displays our regional maps for quiz selection.
      *
-     * @param controller of type MyController
-     * @param aController
+     * @param controller represents the MyController class
+     * @param aController represents the AdminController class
      */
     public CountryUI(MyController controller, AdminController aController) {
 
@@ -46,23 +46,19 @@ public class CountryUI extends JFrame {
     }
 
     /**
-     * sets up the functionality for the Country "UI"
+     * Sets up the functionality for the Country "UI." The countries that are displayed in Country UI will be interactable by
+     * creating those maps into selectable buttons, done here.
+     *
+     *
      */
     private void countryButtons() {
         super.setBounds(0, 0, 900, 800);
         setLocation(250, 50);
 
-//        JPanel panel = new JPanel(new BorderLayout());
-//        panel.add(new ScrollPane());
-
         firstMap.setBounds(70, 50, 300, 300);
         secondMap.setBounds(70, 350, 300, 300);
         thirdMap.setBounds(370, 50, 300, 300);
         forthMap.setBounds(370, 350, 300, 300);
-
-//        firstMap.setVerticalTextPosition(AbstractButton.BOTTOM);
-//        firstMap.setHorizontalTextPosition(AbstractButton.LEADING);
-//        firstMap.setMnemonic(KeyEvent.VK_ENTER);
 
         back.setBounds(350, 650, 160, 40);
 
@@ -74,8 +70,6 @@ public class CountryUI extends JFrame {
         super.add(forthMap);
 
         super.add(back);
-
-//        super.getContentPane().add(panel);
 
         firstMap.addActionListener(e -> {
                     dispose();
