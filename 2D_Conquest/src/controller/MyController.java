@@ -23,7 +23,8 @@ import java.util.List;
 import java.util.Vector;
 
 /**
- *
+ * File created on 10/02/2018
+ * by Toader
  */
 public class MyController {
     private DatabaseI db;
@@ -144,7 +145,8 @@ public class MyController {
      * withing Admin table from our database.
      * <p>
      * If the data is already there then the user should try another user
-     * thus after checking it's availability it will add up to the database
+     * thus after checking it's availability it will add up to the database.
+     * <p>
      * This is done on the Login page to create it before playing the game as an user
      *
      * @param userName is the username that has to be checked
@@ -190,7 +192,8 @@ public class MyController {
      * <p>
      * The method will use the username of the current User (player),
      * the highScore Id of the current quiz and it's total Score based on
-     * the userIdForCurrentQuiz and it's difficulty level;
+     * the userIdForCurrentQuiz and it's difficulty level.
+     * <p>
      * This method will obtain the total number of question  based on
      * the userIdForCurrentQuiz and it's difficulty level and total Score of it.
      * <p>
@@ -234,7 +237,8 @@ public class MyController {
      * This method is going to skip a question in case the user decides so.
      * <p>
      * The method will use the highScore Id of the current quiz and it's total Score based on
-     * the userIdForCurrentQuiz and it's difficulty level;
+     * the userIdForCurrentQuiz and it's difficulty level.
+     * <p>
      * This method will obtain the total number of question  based on
      * the userIdForCurrentQuiz and it's difficulty level and total Score of it.
      * <p>
