@@ -23,7 +23,8 @@ import java.util.List;
 import java.util.Vector;
 
 /**
- *
+ * File created on 10/02/2018
+ * by Toader
  */
 public class MyController {
     private DatabaseI db;
@@ -55,9 +56,18 @@ public class MyController {
      * This method checks the username and password
      * from the database with the input from the user
      * withing User table from our database on Login
+     * <p>
+     * If the username and password are in the database
+     * it sets the values to the controller for further use
+     * and opens up the Country UI window
+     * <p>
+     * If the values are not present it clears the fields
+     * for the Login UI and opens it up
      *
-     * @param userName is the username that has to be checked
-     * @param password is the password that has to be checked
+     * @param userName representing the username that is supposed
+     *                 to be verified in the user table
+     * @param password representing the username that is supposed
+     *                 to be verified in the user table
      * @throws SQLException in case that there is no data or
      *                      there is an issue extracting data from the database
      */
@@ -76,9 +86,18 @@ public class MyController {
      * This method checks the username and password
      * from the database with the input from the user
      * withing Admin table from our database on Login
+     * <p>
+     * If the username and password are in the database
+     * it sets the values to the controller for further use
+     * and opens up the Admin Settings UI window
+     * <p>
+     * If the values are not present it clears the fields
+     * for the Login UI and opens it up
      *
-     * @param userName is the username that has to be checked
-     * @param password is the password that has to be checked
+     * @param userName representing the username that is supposed
+     *                 to be verified in the user table
+     * @param password representing the username that is supposed
+     *                 to be verified in the user table
      * @throws SQLException in case that there is no data or
      *                      there is an issue extracting data from the database
      */
@@ -93,12 +112,16 @@ public class MyController {
     }
 
     /**
-     * This method checks the username and password
+     * This method tries to create another User by
+     * checking the username and password
      * from the database with the input from the user
-     * withing Admin table from our database
-     * if the data is already there then the user should try another user
-     * thus after checking it's availability it will add up to the database
-     * This is done on the Admin page to create it
+     * withing User table from our database
+     * <p>
+     * If the data is already there, it will display an pop up
+     * with an Already Exists tag and open the current UI;
+     * <p>
+     * If the data is not there it will create that user using
+     * the parameters written by the Admin
      *
      * @param userName is the username that has to be checked
      * @param password is the password that has to be checked
@@ -119,9 +142,11 @@ public class MyController {
     /**
      * This method checks the username and password
      * from the database with the input from the user
-     * withing Admin table from our database
-     * if the data is already there then the user should try another user
-     * thus after checking it's availability it will add up to the database
+     * withing Admin table from our database.
+     * <p>
+     * If the data is already there then the user should try another user
+     * thus after checking it's availability it will add up to the database.
+     * <p>
      * This is done on the Login page to create it before playing the game as an user
      *
      * @param userName is the username that has to be checked
@@ -141,11 +166,44 @@ public class MyController {
     }
 
     /**
-     * If the value of the answer is correct for question, it will increase the score
-     * if not i will stay the same(it will not skip to the next one)
+     * This method checks the admin data used for a question
+     *
+     * @param subject         represents the questions subject
+     * @param typeOfQuestion  represents the questions type Of Question
+     * @param difficultyLevel represents the questions difficulty Level
+     * @param region          represents the questions region
+     * @throws SQLException in case that there is no data or
+     *                      there is an issue extracting data from the database
+     */
+    public void verifyAdminDataOnQuestionCreate(String subject,
+                                                String typeOfQuestion, String difficultyLevel,
+                                                String region) throws SQLException {
+        if (qController.verifyIntroducedQuestion(subject, typeOfQuestion, difficultyLevel, region)) {
+            alreadyInDatabaseFields();
+            aController.openAdminQuestionCreateUI();
+        } else {
+            qController.createNewQuestion(subject, typeOfQuestion, difficultyLevel, region);
+        }
+
+    }
+
+    /**
+     * This method is going to update the score for an user based on the difficulty of the question.
+     * <p>
+     * The method will use the username of the current User (player),
+     * the highScore Id of the current quiz and it's total Score based on
+     * the userIdForCurrentQuiz and it's difficulty level.
+     * <p>
+     * This method will obtain the total number of question  based on
+     * the userIdForCurrentQuiz and it's difficulty level and total Score of it.
      * <p>
      * Both nr of Questions as well as the time spent will increment depending
-     * on the how many answer the user had done thus far
+     * on the how many answers the user had done thus far.
+     * <p>
+     * In the case that - The number of questions answered for both
+     * 0 and
+     * 1 or more and at the same time is smaller then the total number of questions
+     * it will update the number of questions answered for this quiz by increment it.
      *
      * @param answer               is the answer selected by the user
      * @param nrOfQAnswered        is the current number of questions answered
@@ -155,7 +213,7 @@ public class MyController {
      *                      there is an issue extracting data from the database
      */
     public void updateScoreOnForUserAndDifficulty(String answer, int nrOfQAnswered, String difficultyLevel, int timeSpentOnAQuestion) throws SQLException {
-        String userName = getUser().getUserName();
+        String userName = getCurrentUser().getUserName();
         int userIdForCurrentQuiz = getHighScoreId();
         int totalScore = getHighScoreOnUserWithDifficultyLevel(userIdForCurrentQuiz, difficultyLevel);
         int totalNrOfQ = getNrOfQuestionsTotalFromCurrentQuiz(userIdForCurrentQuiz, difficultyLevel, totalScore);
@@ -176,9 +234,22 @@ public class MyController {
     }
 
     /**
-     * @param nrOfQAnswered
-     * @param difficultyLevel
-     * @param timeSpentOnAQuestion
+     * This method is going to skip a question in case the user decides so.
+     * <p>
+     * The method will use the highScore Id of the current quiz and it's total Score based on
+     * the userIdForCurrentQuiz and it's difficulty level.
+     * <p>
+     * This method will obtain the total number of question  based on
+     * the userIdForCurrentQuiz and it's difficulty level and total Score of it.
+     * <p>
+     * In the case that - The number of questions answered for both
+     * 0 and
+     * 1 or more and at the same time is smaller then the total number of questions
+     * it will update the number of questions answered for this quiz by increment it.
+     *
+     * @param nrOfQAnswered        represents the number of questions on the quiz
+     * @param difficultyLevel      represents the difficulty Level of the quiz
+     * @param timeSpentOnAQuestion represents the time Spent On A Question for the quiz
      * @throws SQLException in case that there is no data or
      *                      there is an issue extracting data from the database
      */
@@ -196,35 +267,18 @@ public class MyController {
 
     }
 
-
     /**
-     * @param subject
-     * @param typeOfQuestion
-     * @param difficultyLevel
-     * @param region
-     * @throws SQLException in case that there is no data or
-     *                      there is an issue extracting data from the database
-     */
-    public void verifyAdminDataOnQuestionCreate(String subject,
-                                                String typeOfQuestion, String difficultyLevel,
-                                                String region) throws SQLException {
-        if (qController.verifyIntroducedQuestion(subject, typeOfQuestion, difficultyLevel, region)) {
-            alreadyInDatabaseFields();
-            aController.openAdminQuestionCreateUI();
-        } else {
-            qController.createNewQuestion(subject, typeOfQuestion, difficultyLevel, region);
-        }
-
-    }
-
-    /**
-     * @param total
-     * @param difficultyLevel
+     * This method stars a new Quiz by instantiating a new entry in the
+     * HighScore Table
+     * depending on the difficulty selected
+     *
+     * @param total           represents the total of questions the user will have to answer
+     * @param difficultyLevel represents the difficulty selected for the new quiz
      * @throws SQLException in case that there is no data or
      *                      there is an issue extracting data from the database
      */
     public void startQuiz(int total, String difficultyLevel) throws SQLException {
-        String username = getUser().getUserName();
+        String username = getCurrentUser().getUserName();
         switch (difficultyLevel) {
             case "easy":
                 db.startQuiz(username, total, difficultyLevel);
@@ -242,31 +296,13 @@ public class MyController {
     }
 
     /**
-     * @return
-     * @throws SQLException in case that there is no data or
-     *                      there is an issue extracting data from the database
-     */
-    public int getHighScoreId() throws SQLException {
-        return db.getHighScoreId();
-    }
-
-    /**
-     * @param id
-     * @param difficultyLevel
-     * @param score
-     * @return
-     * @throws SQLException in case that there is no data or
-     *                      there is an issue extracting data from the database
-     */
-    public int getNrOfQuestionsAnsweredFromCurrentQuiz(int id, String difficultyLevel, int score) throws SQLException {
-        return db.getNrOfQAnsweredFromCurrQuiz(id, difficultyLevel, score);
-    }
-
-    /**
-     * @param id
-     * @param nrOfQAnswered
-     * @param totalScore
-     * @param timeSpent
+     * This method method updates the Number of Questions answered
+     * following it's Id, score and time spent doing that.
+     *
+     * @param id            represents the Id of the quiz
+     * @param nrOfQAnswered represents the nrOfQAnswered of the quiz
+     * @param totalScore    represents the totalScore of the quiz
+     * @param timeSpent     represents the timeSpent of the quiz
      * @throws SQLException in case that there is no data or
      *                      there is an issue extracting data from the database
      */
@@ -275,11 +311,17 @@ public class MyController {
     }
 
     /**
-     * @param id
-     * @param nrOfQAnswered
-     * @param totalScore
-     * @param userName
-     * @param difficulty
+     * This method updates the Score on a difficulty for an User
+     * depending on the difficulty :
+     * 100 for an correct Easy answer
+     * 200 for an correct Medium answer
+     * 500 for an correct Hard answer
+     *
+     * @param id            represents the Id of the quiz
+     * @param nrOfQAnswered represents the nrOfQAnswered of the quiz
+     * @param totalScore    represents the totalScore of the quiz
+     * @param userName      represents the userName of the quiz
+     * @param difficulty    represents the difficulty of the quiz
      * @throws SQLException in case that there is no data or
      *                      there is an issue extracting data from the database
      */
@@ -301,9 +343,13 @@ public class MyController {
     }
 
     /**
-     * @param id
-     * @param difficultyLevel
-     * @return
+     * This method returns the highScore on an User
+     * based on the current HighScore/Quiz Id
+     * by following it's difficulty level for the quiz
+     *
+     * @param id              represents the Id of the quiz
+     * @param difficultyLevel represents the difficultyLevel of the quiz
+     * @return Returns the Time Spent on the specific quiz Id
      * @throws SQLException in case that there is no data or
      *                      there is an issue extracting data from the database
      */
@@ -312,10 +358,28 @@ public class MyController {
     }
 
     /**
-     * @param id
-     * @param difficultyLevel
-     * @param score
-     * @return
+     * This method returns the number of questions total on the current HighScore/Quiz Id
+     * by following it's score and difficulty level for the quiz
+     *
+     * @param id              represents the Id of the quiz
+     * @param score           represents the score of the quiz
+     * @param difficultyLevel represents the difficultyLevel of the quiz
+     * @return Returns the number of questions total on the specific quiz Id
+     * @throws SQLException in case that there is no data or
+     *                      there is an issue extracting data from the database
+     */
+    public int getNrOfQuestionsAnsweredFromCurrentQuiz(int id, String difficultyLevel, int score) throws SQLException {
+        return db.getNrOfQAnsweredFromCurrQuiz(id, difficultyLevel, score);
+    }
+
+    /**
+     * This method returns the number of questions total on the current HighScore/Quiz Id
+     * by following it's score and difficulty level for the quiz
+     *
+     * @param id              represents the Id of the quiz
+     * @param difficultyLevel represents the difficultyLevel of the quiz
+     * @param score           represents the score of the quiz
+     * @return Returns the number of questions total on the specific quiz Id
      * @throws SQLException in case that there is no data or
      *                      there is an issue extracting data from the database
      */
@@ -324,10 +388,24 @@ public class MyController {
     }
 
     /**
-     * @param id
-     * @param score
-     * @param difficultyLevel
-     * @return
+     * This method returns the current HighScore Id of the quiz
+     *
+     * @return Returns the HighScore Id on the specific quiz Id
+     * @throws SQLException in case that there is no data or
+     *                      there is an issue extracting data from the database
+     */
+    public int getHighScoreId() throws SQLException {
+        return db.getHighScoreId();
+    }
+
+    /**
+     * This method returns the time spent based on the current HighScore/Quiz Id
+     * by following it's score and difficulty level for the quiz
+     *
+     * @param id              represents the Id of the quiz
+     * @param score           represents the score of the quiz
+     * @param difficultyLevel represents the difficultyLevel of the quiz
+     * @return Returns the Time Spent on the specific quiz Id
      * @throws SQLException in case that there is no data or
      *                      there is an issue extracting data from the database
      */
@@ -336,7 +414,8 @@ public class MyController {
     }
 
     /**
-     *
+     * This method Initiates the MainUI window and "starts" the Application
+     * using this MyController, an Admin Controller and a Question Controller
      */
     public void start() {
         new MainUI(this, aController, qController);
@@ -344,138 +423,188 @@ public class MyController {
     }
 
     /**
-     *
-     */
-    public void openLoginWindow() {
-        loginPageUI = new LoginPageUI(this, aController);
-    }
-
-    /**
-     *
-     */
-    public void openCountryWindow() {
-        new CountryUI(this, aController);
-    }
-
-    /**
-     * @param region
-     * @throws SQLException in case that there is no data or
-     *                      there is an issue extracting data from the database
-     */
-    public void openDifficultyWindow(String region) throws SQLException {
-        /*
-        While intitiating the difficulty/question we are going to check it based on the input/zone
-        String getRegion(String region)
-
-         */
-        new DifficultyLevelUI(this, qController.getRegion(region));
-    }
-
-    /**
-     * @throws SQLException in case that there is no data or
-     *                      there is an issue extracting data from the database
-     */
-    public void openEasyWindow(String region) {
-        new EasyQuestionUI(this, qController, region);
-    }
-
-    /**
-     * @throws SQLException in case that there is no data or
-     *                      there is an issue extracting data from the database
-     */
-    public void openMediumWindow(String region) {
-        new MediumQuestionUI(this, qController, region);
-    }
-
-    /**
-     * @param region
-     */
-    public void openHardWindow(String region) {
-        new HardQuestionUI(this, qController, region);
-    }
-
-    /**
-     *
+     * This method Initiates the ConfirmationUI window using this MyController
+     * and an Admin Controller
      */
     void confirmationUI() {
         new ConfirmationUI(this, aController);
     }
 
     /**
-     *
+     * This method Initiates the LoginPageUI window using this MyController
+     * and an Admin Controller
      */
-    public void openScoreWindow() {
-        new HighScoreUI(this, aController, (Database) db);
+    public void openLoginWindow() {
+        loginPageUI = new LoginPageUI(this, aController);
     }
 
     /**
-     * @param username
+     * This method Initiates the CountryUI window using this MyController
+     * and an Admin Controller
      */
-    public void openScoreWindowOnUser(String username) {
-        new HighScoreOnUser(this, aController, (Database) db, username);
+    public void openCountryWindow() {
+        new CountryUI(this, aController);
     }
 
     /**
+     * This method Initiates the HardQuestionUI window using this MyController
+     * and an Question Controller with a region as its parameter
+     * <p>
+     * This methods check the Question Controller for the region to be in the database
+     * to display the window
      *
+     * @param region represents the the current region for a hard difficulty to start.
      */
-    public void openAdminFullQuestionTable() {
-        new AdminAllQuestionTable(this, aController, (Database) db);
+    public void openDifficultyWindow(String region) throws SQLException {
+        new DifficultyLevelUI(this, qController.getRegion(region));
     }
 
     /**
+     * This method Initiates the EasyQuestionUI window using this MyController
+     * and an Question Controller with a region as its parameter
      *
+     * @param region represents the the current region for a easy difficulty to start.
      */
-    public void openAdminFullUserTable() {
-        new AdminAllUsersTable(this, aController, (Database) db);
+    public void openEasyWindow(String region) {
+        new EasyQuestionUI(this, qController, region);
     }
 
     /**
+     * This method Initiates the MediumQuestionUI window using this MyController
+     * and an Question Controller with a region as its parameter
      *
+     * @param region represents the the current region for a medium difficulty to start.
+     */
+    public void openMediumWindow(String region) {
+        new MediumQuestionUI(this, qController, region);
+    }
+
+    /**
+     * This method Initiates the HardQuestionUI window using this MyController
+     * and an Question Controller with a region as its parameter
+     *
+     * @param region represents the the current region for a hard difficulty to start.
+     */
+    public void openHardWindow(String region) {
+        new HardQuestionUI(this, qController, region);
+    }
+
+    /**
+     * This method Initiates the AdminQuestionDelete window using this MyController,
+     * an Admin Controller and Question Controller
      */
     public void openAdminQuestionDeleteUI() {
         new AdminQuestionDelete(this, qController, aController);
     }
 
     /**
-     *
+     * This method Initiates the AdminQuestionEdit window using this MyController,
+     * an Admin Controller and Question Controller
      */
     public void openAdminQuestionEditUI() {
         new AdminQuestionEdit(this, qController, aController);
     }
 
     /**
-     * @param difficulty
-     * @param region
-     * @return
+     * This method Initiates the AdminAllQuestionTable window using this MyController,
+     * an Admin Controller and Database Interface casted to Database Dao
+     * with username of the current User as parameter.
+     */
+    public void openAdminFullQuestionTable() {
+        new AdminAllQuestionTable(this, aController, (Database) db);
+    }
+
+    /**
+     * This method Initiates the AdminAllUsersTable window using this MyController,
+     * an Admin Controller and Database Interface casted to Database Dao
+     * with username of the current User as parameter.
+     */
+    public void openAdminFullUserTable() {
+        new AdminAllUsersTable(this, aController, (Database) db);
+    }
+
+    /**
+     * This method Initiates the HighScoreUI window using this MyController,
+     * an Admin Controller and Database Interface casted to Database Dao
+     * with username of the current User as parameter.
+     */
+    public void openScoreWindow() {
+        new HighScoreUI(this, aController, (Database) db);
+    }
+
+    /**
+     * This method Initiates the HighScoreOnUser window using this MyController,
+     * an Admin Controller and Database Interface casted to Database Dao
+     * with username of the current User as parameter.
+     *
+     * @param username represents the the current User's username.
+     */
+    public void openScoreWindowOnUser(String username) {
+        new HighScoreOnUser(this, aController, (Database) db, username);
+    }
+
+    /**
+     * This method is going to return a Question of type String
+     * after looping through the getResults auxiliary method
+     * <p>
+     * It instantiates a list of the question subjects using :
+     * its difficulty and region as parameters.
+     *
+     * @param difficulty represents the difficulty type for the current question
+     * @param region     represents the region type for the current question
+     * @return an Question Subject for each iteration of the question
      * @throws SQLException in case that there is no data or
      *                      there is an issue extracting data from the database
      */
     public String questionToBeAnswered(String difficulty, String region) throws SQLException {
-        //TODO FIX ME
         List<String> result = qController.getAllQuestionsByDifficultyLevelAndRegion(difficulty, region);
         return getResults(result, questionsAlreadyUsed);
 
     }
 
     /**
-     * @param difficulty
-     * @param region
-     * @param question
-     * @return
+     * This method is going to return an Answer of type String
+     * after looping through the getResults auxiliary method
+     * <p>
+     * It instantiates a list of the answer using:
+     * the question subject, its difficulty and region as parameters.
+     *
+     * @param difficulty represents the difficulty type for the current question
+     * @param region     represents the region type for the current question
+     * @param question   represents the current question that is going to be
+     *                   used to gather an answer list
+     * @return an Answer for each iteration of the question
      * @throws SQLException in case that there is no data or
      *                      there is an issue extracting data from the database
      */
     public String answerForQuestion(String difficulty, String region, String question) throws SQLException {
-        //TODO FIX ME
         List<String> result = qController.getAnQuestionAnswerList(difficulty, region, question);
         return getResults(result, answersAlreadyUsed);
 
     }
 
     /**
-     * @param resultsFromDao
-     * @param list
-     * @return
+     * This method returns either an question or an answer depending on the
+     * list ( resultsFromDao) parameter.
+     * <p>
+     * First this checks the size of the list that is used to loop and gather data
+     * 1. In case that questionsAlreadyUsed of the same size list that is currently looped through
+     * it will return null.
+     * <p>
+     * 2. In case that answersAlreadyUsed of the same size list that is currently looped through
+     * it will clear the current list; there was a bug related to the database returning 4 each time
+     * and thus it was decide to better clear the list
+     * <p>
+     * The lists get an SecureRandom which gets an index for a question to loop
+     * through and constantly checks it availability to add "unique" results.
+     *
+     * @param resultsFromDao represents the List which is going to be used
+     *                       for the do while loop to gather an appropriate answer
+     *                       or an question
+     * @param list           represents the Lists that are instantiated in as
+     *                       global parameters
+     * @return either an answer or an question depending on the list
+     * which is using as the second parameter
      */
     private String getResults(List<String> resultsFromDao, List<String> list) {
         int totalNrOfResultsFromDao = resultsFromDao.size();
@@ -507,7 +636,8 @@ public class MyController {
     }
 
     /**
-     *
+     * This method create a Panel which is going to display
+     * "Already in use" when trying to add data to the database
      */
     private void alreadyInDatabaseFields() {
         JOptionPane.showMessageDialog(null,
@@ -517,7 +647,8 @@ public class MyController {
     }
 
     /**
-     *
+     * This method create a Panel which is going to display
+     * a success after adding data to the database
      */
     void dataAddedSuccess() {
         JOptionPane.showMessageDialog(null,
@@ -527,7 +658,8 @@ public class MyController {
     }
 
     /**
-     *
+     * This method create a Panel which is going to display
+     * a failure when not selecting any answers
      */
     public void answerSelectionFailure() {
         JOptionPane.showMessageDialog(null,
@@ -537,8 +669,13 @@ public class MyController {
     }
 
     /**
-     * @param resultSet
-     * @return
+     * This is an auxiliary method which creates the structure for
+     * the table using a ResultSet from database
+     * for each of the operation
+     *
+     * @param resultSet is the resultSet used for further Displaying
+     *                  the data in a Table
+     * @return the visual Table structure of the ResultSet
      * @throws SQLException in case that there is no data or
      *                      there is an issue extracting data from the database
      */
@@ -566,18 +703,24 @@ public class MyController {
     }
 
     /**
-     * @param userName
-     * @param password
+     * This method returns the current User logged in to
+     * the current,My Controller, for further use
+     *
+     * @return It returns the current user
+     */
+    public User getCurrentUser() {
+        return user;
+    }
+
+    /**
+     * This method set the current User logged in to
+     * the current,My Controller, for further use
+     *
+     * @param userName represents the userName for the player User
+     * @param password represents the password for the player User
      */
     public void setCurrentUser(String userName, String password) {
         user = new User(userName, password);
         user.setController(this);
-    }
-
-    /**
-     * @return
-     */
-    public User getUser() {
-        return user;
     }
 }

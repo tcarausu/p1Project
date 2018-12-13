@@ -3,6 +3,5 @@ adminUI.adminQuestionPage
 adminUI.adminUserPage
 controller
 dao
-TimeTests
 view
 view.difficulty
