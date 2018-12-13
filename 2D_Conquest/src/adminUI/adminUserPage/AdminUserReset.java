@@ -25,10 +25,12 @@ public class AdminUserReset extends JFrame {
     private JLabel userId = new JLabel("User ID");
 
     /**
-     * Admin Quest Delete's Constructor
+     * Admin User Delete's Constructor.
+     * <p>
+     * Allows administrator to reset a user's information in the database.
      *
-     * @param controller of type MyController
-     * @param aController
+     * @param controller  represent the MyController Controller needed to instantiate the constructor
+     * @param aController represent the AdminController Controller needed to instantiate the constructor
      */
     public AdminUserReset(MyController controller, AdminController aController) {
 
@@ -47,7 +49,7 @@ public class AdminUserReset extends JFrame {
     }
 
     /**
-     *
+     * This method allows the administrator to introduce new login information credentials.
      */
     private void introduceLogin() {
         setSize(500, 200);
@@ -85,7 +87,9 @@ public class AdminUserReset extends JFrame {
     }
 
     /**
-     *
+     * This method allows the administrator to reset the password credentials of a specific user.
+     * <p>
+     * This method also checks for valid input (non null/empty).
      */
     private void resetUserPassword() {
         String idText = id.getText();
@@ -105,7 +109,7 @@ public class AdminUserReset extends JFrame {
     }
 
     /**
-     *
+     * Allows login information fields to be cleared when necessary to enter in new information or delete current input.
      */
     private void clearFieldsWhenNeeded() {
         JOptionPane.showMessageDialog(null,
@@ -114,6 +118,5 @@ public class AdminUserReset extends JFrame {
         id.setText("");
         id.requestFocus();
     }
-
 
 }

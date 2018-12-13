@@ -29,10 +29,13 @@ public class AdminUserEdit extends JFrame {
     private JLabel user_password = new JLabel("User password");
 
     /**
-     * Admin Quest Delete's Constructor
+     * Admin User Delete's Constructor.
+     * <p>
+     * Allows admin to enter an admin user in the database
+     * and edit their login information and statuses in game.
      *
-     * @param controller of type MyController
-     * @param aController
+     * @param controller  represent the MyController Controller needed to instantiate the constructor
+     * @param aController represent the AdminController Controller needed to instantiate the constructor
      */
     public AdminUserEdit(MyController controller, AdminController aController) {
 
@@ -51,7 +54,7 @@ public class AdminUserEdit extends JFrame {
     }
 
     /**
-     *
+     * This method allows the administrator to introduce new login information credentials.
      */
     private void introduceLogin() {
         setSize(500, 200);
@@ -100,7 +103,10 @@ public class AdminUserEdit extends JFrame {
     }
 
     /**
-     *
+     * This method allows the administrator to edit a user in the database
+     * and edit their login information and status in game.
+     * <p>
+     * This method also checks for valid input (non null/empty).
      */
     private void editUser() {
         String idText = id.getText();
@@ -122,7 +128,7 @@ public class AdminUserEdit extends JFrame {
     }
 
     /**
-     *
+     * Allows login information fields to be cleared when necessary to enter in new information or delete current input.
      */
     private void clearFieldsWhenNeeded() {
         JOptionPane.showMessageDialog(null,
