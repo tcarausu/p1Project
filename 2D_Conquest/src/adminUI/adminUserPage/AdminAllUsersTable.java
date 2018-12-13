@@ -20,11 +20,13 @@ public class AdminAllUsersTable extends JFrame {
     private Database database;
 
     /**
-     * Admin Users Table Page  UI's Constructor
+     * Admin All Users Table Page  UI's Constructor.
+     * <p>
+     * Displays the list of users from the database.
      *
-     * @param controller  of type MyController
-     * @param aController
-     * @param database
+     * @param controller  represent the MyController Controller needed to instantiate the constructor
+     * @param aController represent the AdminController Controller needed to instantiate the constructor
+     * @param database    represent the Database Dao Layer needed to instantiate the constructor
      */
     public AdminAllUsersTable(
             MyController controller,
@@ -42,7 +44,7 @@ public class AdminAllUsersTable extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         try {
-            displayAllQuestionsTable();
+            displayAllUserTable();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -50,11 +52,13 @@ public class AdminAllUsersTable extends JFrame {
 
 
     /**
+     * This method displays a table of all the users in the database
+     *
      * @throws SQLException in case that there is no data or
      *                      there is an issue extracting data from the database
      */
     @SuppressWarnings("Duplicates")
-    private void displayAllQuestionsTable() throws SQLException {
+    private void displayAllUserTable() throws SQLException {
 
         super.setBounds(0, 0, 500, 500);
         setLocation(500, 200);
@@ -74,6 +78,5 @@ public class AdminAllUsersTable extends JFrame {
             aController.openAdminPageUI();
         });
     }
-
 
 }

@@ -25,10 +25,12 @@ public class AdminUserDelete extends JFrame {
     private JLabel userId = new JLabel("User ID");
 
     /**
-     * Admin User Delete's Constructor
+     * Admin User Delete's Constructor.
+     * <p>
+     * Allows an admin to delete a user that has registered.
      *
-     * @param controller of type MyController
-     * @param aController
+     * @param controller  represent the MyController Controller needed to instantiate the constructor
+     * @param aController represent the AdminController Controller needed to instantiate the constructor
      */
     public AdminUserDelete(MyController controller, AdminController aController) {
 
@@ -47,7 +49,7 @@ public class AdminUserDelete extends JFrame {
     }
 
     /**
-     *
+     * This method allows the administrator to introduce new login information credentials.
      */
     private void introduceLogin() {
         setSize(500, 200);
@@ -85,7 +87,9 @@ public class AdminUserDelete extends JFrame {
     }
 
     /**
-     *
+     * This method will delete the user information stored in user database by an adminstrator.
+     * <p>
+     * This method also checks for valid input (non null/empty).
      */
     private void deleteUser() {
         String idText = id.getText();
@@ -105,7 +109,8 @@ public class AdminUserDelete extends JFrame {
     }
 
     /**
-     *
+     * Allows login information fields to be cleared when
+     * necessary to enter in new information or delete current input.
      */
     private void clearFieldsWhenNeeded() {
         JOptionPane.showMessageDialog(null,

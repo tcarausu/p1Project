@@ -27,10 +27,10 @@ public class AdminUserCreate extends JFrame {
     private JLabel lpass = new JLabel("New Password");
 
     /**
-     * Login Page UI's Constructor
+     * Admin User Create's Constructor. Displays the UI for Admin/User Login.
      *
-     * @param controller of type MyController
-     * @param aController
+     * @param controller  represent the MyController Controller needed to instantiate the constructor
+     * @param aController represent the AdminController Controller needed to instantiate the constructor
      */
     public AdminUserCreate(MyController controller, AdminController aController) {
 
@@ -49,7 +49,7 @@ public class AdminUserCreate extends JFrame {
     }
 
     /**
-     *
+     * This method allows the administrator to introduce new login information credentials.
      */
     private void introduceLogin() {
         setSize(350, 300);
@@ -98,7 +98,9 @@ public class AdminUserCreate extends JFrame {
     }
 
     /**
-     *
+     * This method creates a new user for the database by an administrator.
+     * <p>
+     * This method also checks for valid input (non null/empty).
      */
     private void createUser() {
         String puname = txuser.getText();
@@ -118,7 +120,7 @@ public class AdminUserCreate extends JFrame {
     }
 
     /**
-     *
+     * This method will erase inputs into the login fields for entering new login information
      */
     private void clearFields() {
         JOptionPane.showMessageDialog(null,
