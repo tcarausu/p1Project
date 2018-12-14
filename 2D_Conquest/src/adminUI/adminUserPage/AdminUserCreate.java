@@ -53,7 +53,7 @@ public class AdminUserCreate extends JFrame {
      */
     @SuppressWarnings("Duplicates")
     private void introduceAdminUserCreate() {
-        setSize(350, 300);
+        setSize(375, 300);
         setLocation(500, 280);
 
         luser.setBounds(20, 30, 120, 20);

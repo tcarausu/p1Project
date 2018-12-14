@@ -56,13 +56,7 @@ public class AdminUserUI extends JFrame {
         super.add(quit);
         super.add(back);
 
-        createUser.setBounds(70, 50, 160, 40);
-        resetUser.setBounds(250, 50, 160, 40);
-        deleteUser.setBounds(70, 150, 160, 40);
-        editUser.setBounds(250, 150, 160, 40);
-
-        back.setBounds(70, 250, 160, 40);
-        quit.setBounds(250, 250, 160, 40);
+        AdminPageUI.uiSetup(createUser, resetUser, deleteUser, editUser, back, quit);
 
 
         createUser.addActionListener(

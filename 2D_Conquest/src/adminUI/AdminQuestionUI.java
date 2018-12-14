@@ -66,13 +66,7 @@ public class AdminQuestionUI extends JFrame {
         super.add(quit);
         super.add(back);
 
-        addQuestion.setBounds(70, 50, 160, 40);
-        deleteQuestion.setBounds(250, 50, 160, 40);
-        editQuestion.setBounds(70, 150, 160, 40);
-        displayAllQuestions.setBounds(250, 150, 160, 40);
-
-        back.setBounds(70, 250, 160, 40);
-        quit.setBounds(250, 250, 160, 40);
+        AdminPageUI.uiSetup(addQuestion, deleteQuestion, editQuestion, displayAllQuestions, back, quit);
 
 
         addQuestion.addActionListener(

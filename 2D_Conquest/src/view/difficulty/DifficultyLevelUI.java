@@ -42,7 +42,13 @@ public class DifficultyLevelUI extends JFrame {
     }
 
     /**
-     * sets up the functionality for the Country "UI"
+     * This method instantiates the difficulty level UI buttons.
+     * <p>
+     * By choosing either: "Easy", "Hard" or "Medium" this will start a quiz,
+     * by initializing a new entry in the HighScore table.
+     * <p>
+     * In case the person would like to select other region to play the quiz in,
+     * She/he should select the "Back" button.
      */
     private void difficultyButtons() {
 

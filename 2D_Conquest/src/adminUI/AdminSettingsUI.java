@@ -1,5 +1,6 @@
 package adminUI;
 
+import controller.AdminController;
 import controller.MyController;
 
 import javax.swing.*;
@@ -9,16 +10,15 @@ import javax.swing.*;
  * by Toader
  **/
 public class AdminSettingsUI extends JFrame {
-    private MyController controller;
+    private AdminController aController;
 
-    private ImageIcon button = new ImageIcon("C:\\Users\\Jesus\\Downloads\\button.jpg");
+    private ImageIcon button = new ImageIcon("images/login.jpg");
 
     private JButton volume = new JButton("Volume", button);
     private JButton defDif = new JButton("Default difficulty"); // easy-medium-hard-off radio button
     private JButton soundEffects = new JButton("Sound Effects"); // on-off
     private JButton music = new JButton("Music"); // on-off
 
-    private JButton settingsMenu = new JButton("High Score");
     private JButton playGame = new JButton("Start");
 
     private JButton quit = new JButton("QUIT");
@@ -28,17 +28,15 @@ public class AdminSettingsUI extends JFrame {
 
     /**
      * Admin Settings UI's Constructor
-     * <p>
      *
-     *
-     * @param controller  represent the MyController Controller needed to instantiate the constructor
+     * @param aController represent the MyController Controller needed to instantiate the constructor
      */
-    public AdminSettingsUI(MyController controller) {
+    public AdminSettingsUI(AdminController aController) {
         super("AdminPage Settings UI");
-        this.controller = controller;
+        this.aController = aController;
 
-        setLocation(500, 200);
-//        setLayout(null);
+        setLocation(500, 150);
+        setSize(500, 650);
         setResizable(false);
         setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -49,6 +47,8 @@ public class AdminSettingsUI extends JFrame {
     /**
      * This method introduce buttons to the existing frame
      *
+     * If the user wants to return to the Admin Page UI it will use back button;
+     * If the user wants to close the application he is going to use the Quit Button
      */
     private void introduceSettings() {
 
@@ -57,7 +57,6 @@ public class AdminSettingsUI extends JFrame {
         super.add(soundEffects);
         super.add(music);
 
-        super.add(settingsMenu);
         super.add(playGame);
 
         super.add(quit);
@@ -70,26 +69,20 @@ public class AdminSettingsUI extends JFrame {
 
         testSlider.setBounds(240, 50, 160, 40);
 
-        setSize(500, 700);
-
         volume.setBounds(70, 50, 160, 40);
         defDif.setBounds(70, 100, 160, 40);
         soundEffects.setBounds(70, 150, 160, 40);
 
         music.setBounds(70, 200, 160, 40);
 
-        settingsMenu.setBounds(70, 400, 160, 40);
-
         back.setBounds(70, 500, 160, 40);
         quit.setBounds(70, 550, 160, 40);
 
-        settingsMenu.addActionListener(
-                e -> {
-                    dispose();
-                    controller.openScoreWindow();
+        back.addActionListener(e -> {
+            dispose();
+            aController.openAdminPageUI();
+        });
 
-                }
-        );
         quit.addActionListener(e -> dispose());
     }
 

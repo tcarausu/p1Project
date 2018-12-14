@@ -51,6 +51,7 @@ public class AdminQuestionDelete extends JFrame {
         introduceAdminQuestionDelete();
 
     }
+
     /**
      * This method allows the administrator to delete existing question information credentials.
      * <p>
@@ -61,11 +62,6 @@ public class AdminQuestionDelete extends JFrame {
      * <p>
      * If the user wants to go back to Admin UI it will use the Back button.
      */
-
-
-    /**
-     * This method allows the administrator to introduce new login information credentials.
-     */
     @SuppressWarnings("Duplicates")
     private void introduceAdminQuestionDelete() {
         setSize(500, 200);
@@ -75,7 +71,7 @@ public class AdminQuestionDelete extends JFrame {
         questionId.setBounds(20, 30, 140, 20);
         id.setBounds(160, 30, 250, 20);
 
-        deleteQuestion.setBounds(30, 100, 120, 40);
+        deleteQuestion.setBounds(30, 100, 160, 40);
         back.setBounds(350, 100, 120, 40);
 
         super.add(questionId);

@@ -59,7 +59,7 @@ public class AdminAllQuestionTable extends JFrame {
     @SuppressWarnings("Duplicates")
     private void displayAllQuestionsTable() throws SQLException {
 
-        super.setBounds(0, 0, 800, 200);
+        super.setBounds(0, 0, 500, 500);
         setLocation(500, 300);
 
         JPanel panel = new JPanel();

@@ -22,7 +22,7 @@ public class HighScoreUI extends JFrame {
     /**
      * Admin Question Table Page  UI's Constructor
      *
-     * @param controller of type MyController
+     * @param controller  of type MyController
      * @param aController
      * @param database
      */
@@ -42,7 +42,7 @@ public class HighScoreUI extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         try {
-            displayAllQuestionsTable();
+            displayAllHighScoreDataTable();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -50,10 +50,14 @@ public class HighScoreUI extends JFrame {
 
 
     /**
+     * This method create an visual interpretation for the HighScore table of the
+     * database.
+     *
      * @throws SQLException in case that there is no data or
-     *                      there is an issue extracting data from the database     */
+     *                      there is an issue extracting data from the database
+     */
     @SuppressWarnings("Duplicates")
-    private void displayAllQuestionsTable() throws SQLException {
+    private void displayAllHighScoreDataTable() throws SQLException {
 
         super.setBounds(0, 0, 500, 500);
         setLocation(500, 200);

@@ -12,19 +12,19 @@ public class LoginPageUI extends JFrame {
     private MyController controller;
     private AdminController aController;
 
-    private JButton ulogin = new JButton("User Login");
-    private JButton alogin = new JButton("Admin Login");
-    private JButton createuser = new JButton("Create User");
-    private JTextField txuser = new JTextField(15);
+    private JButton userLogin = new JButton("User Login");
+    private JButton adminLogin = new JButton("Admin Login");
+    private JButton createUser = new JButton("Create User");
+    private JTextField userTextField = new JTextField(15);
     private JPasswordField pass = new JPasswordField(15);
-    private JLabel luser = new JLabel("Login UserName");
-    private JLabel lpass = new JLabel("Login Password");
+    private JLabel userNameLabel = new JLabel("Login UserName");
+    private JLabel passwordLabel = new JLabel("Login Password");
 
     /**
      * Login Page UI's Constructor
      *
-     * @param controller of type MyController
-     * @param adminController
+     * @param controller  represent the MyController Controller needed to instantiate the constructor
+     * @param adminController represent the AdminController Controller needed to instantiate the constructor
      */
     public LoginPageUI(MyController controller, AdminController adminController) {
 
@@ -43,28 +43,37 @@ public class LoginPageUI extends JFrame {
     }
 
     /**
-     *
+     * This method introduces the buttons and other extremities.
+     * <p>
+     * For both the Password field as well as the (User) Login  button it will
+     * perform a login using Admin credentials, by checking the value from database using the auxiliary method: "login".
+     * <p>
+     * For the (Admin) Login it will perform a login using Admin credentials afterwards it will open
+     * the admin panel.
+     * <p>
+     * Lastly there is a create new user button which will create an user for the new players, this method is also done by
+     * the admin in the Admin User Create UI.
      */
     @SuppressWarnings("Duplicates")
     private void introduceLogin() {
         setSize(350, 280);
         setLocation(500, 280);
 
-        luser.setBounds(20, 30, 120, 20);
-        lpass.setBounds(20, 65, 120, 20);
-        txuser.setBounds(140, 30, 150, 20);
+        userNameLabel.setBounds(20, 30, 120, 20);
+        passwordLabel.setBounds(20, 65, 120, 20);
+        userTextField.setBounds(140, 30, 150, 20);
         pass.setBounds(140, 65, 150, 20);
-        ulogin.setBounds(30, 125, 120, 40);
-        alogin.setBounds(110, 190, 120, 40);
-        createuser.setBounds(190, 125, 120, 40);
+        userLogin.setBounds(30, 125, 120, 40);
+        adminLogin.setBounds(110, 190, 120, 40);
+        createUser.setBounds(190, 125, 120, 40);
 
-        super.add(luser);
-        super.add(lpass);
-        super.add(txuser);
+        super.add(userNameLabel);
+        super.add(passwordLabel);
+        super.add(userTextField);
         super.add(pass);
-        super.add(ulogin);
-        super.add(alogin);
-        super.add(createuser);
+        super.add(userLogin);
+        super.add(adminLogin);
+        super.add(createUser);
 
         pass.addKeyListener(new KeyAdapter() {
             @Override
@@ -76,19 +85,16 @@ public class LoginPageUI extends JFrame {
                 }
             }
         });
-        ulogin.addActionListener(e -> {
+        userLogin.addActionListener(e -> login());
 
-            login();
-        });
-
-        createuser.addActionListener(e -> {
-            String puname = txuser.getText().toLowerCase();
-            String ppaswd = String.valueOf(pass.getPassword()).toLowerCase();
+        createUser.addActionListener(e -> {
+            String username = userTextField.getText().toLowerCase();
+            String password = String.valueOf(pass.getPassword()).toLowerCase();
             try {
                 dispose();
-                if (!puname.equals("") && !ppaswd.equals("")) {
-                    controller.verifyAdminDataOnUserCreateOnLogin(puname, ppaswd);
-                    controller.setCurrentUser(puname,ppaswd);
+                if (!username.equals("") && !password.equals("")) {
+                    controller.verifyAdminDataOnUserCreateOnLogin(username, password);
+                    controller.setCurrentUser(username, password);
                 } else {
                     clearFields();
                     controller.openLoginWindow();
@@ -98,12 +104,15 @@ public class LoginPageUI extends JFrame {
             }
         });
 
-        alogin.addActionListener(ae -> {
-            String puname = txuser.getText();
-            String ppaswd = String.valueOf(pass.getPassword());
+        adminLogin.addActionListener(ae -> {
+            String username = userTextField.getText();
+            String password = String.valueOf(pass.getPassword()).toLowerCase();
+
             try {
                 dispose();
-                controller.verifyAdminLogin(puname, ppaswd);
+                controller.verifyAdminLogin(username, password);
+                controller.setCurrentUser(username, password);
+
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -111,28 +120,30 @@ public class LoginPageUI extends JFrame {
     }
 
     /**
-     *
+     * Auxiliary method for verifying the input of the the user
+     * and continue to the game.
      */
     private void login() {
-        String puname = txuser.getText().toLowerCase();
-        String ppaswd = String.valueOf(pass.getPassword()).toLowerCase();
+        String username = userTextField.getText();
+        String password = String.valueOf(pass.getPassword()).toLowerCase();
         try {
             dispose();
-            controller.verifyUserLogin(puname, ppaswd);
+            controller.verifyUserLogin(username, password);
         } catch (SQLException sql) {
             sql.printStackTrace();
         }
     }
 
     /**
-     *
+     * This method clears the fields when the user types incorrect information
+     * for further use.
      */
     public void clearFields() {
         JOptionPane.showMessageDialog(null,
                 "The system could not log you in.\n" + " Please make sure your username and password are correct",
                 "Login Failure", JOptionPane.INFORMATION_MESSAGE);
-        txuser.setText("");
+        userTextField.setText("");
         pass.setText("");
-        txuser.requestFocus();
+        userTextField.requestFocus();
     }
 }

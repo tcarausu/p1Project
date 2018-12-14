@@ -21,14 +21,14 @@ public class ConfirmationUI extends JFrame {
 
     private JTextField adminUser = new JTextField(15);
     private JPasswordField pass = new JPasswordField(15);
-    private JLabel luser = new JLabel("New Admin UserName");
-    private JLabel lpass = new JLabel("New Admin Password");
+    private JLabel userLabel = new JLabel("Admin UserName");
+    private JLabel passLabel = new JLabel("Admin Password");
 
     /**
      * Confirmation UI's Constructor
      *
-     * @param controller of type MyController
-     * @param aController
+     * @param controller  represent the MyController Controller needed to instantiate the constructor
+     * @param aController represent the AdminController Controller needed to instantiate the constructor
      */
     public ConfirmationUI(MyController controller, AdminController aController) {
 
@@ -41,27 +41,28 @@ public class ConfirmationUI extends JFrame {
         setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        introduceLogin();
+        confirmUI();
 
     }
 
     /**
-     *
+     *This method instantiates the buttons as well as performs the check of the admin,
+     *  by either using the "Enter" button or clicking on the button
      */
-    private void introduceLogin() {
+    private void confirmUI() {
         setSize(380, 250);
         setLocation(500, 280);
 
-        luser.setBounds(20, 30, 140, 20);
-        lpass.setBounds(20, 65, 140, 20);
+        userLabel.setBounds(20, 30, 140, 20);
+        passLabel.setBounds(20, 65, 140, 20);
         adminUser.setBounds(160, 30, 180, 20);
         pass.setBounds(160, 65, 180, 20);
         back.setBounds(110, 140, 160, 40);
 
 
         super.add(back);
-        super.add(luser);
-        super.add(lpass);
+        super.add(userLabel);
+        super.add(passLabel);
         super.add(adminUser);
         super.add(pass);
 
@@ -72,14 +73,7 @@ public class ConfirmationUI extends JFrame {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 
-                    String user = adminUser.getText();
-                    String password = valueOf(pass.getPassword());
-                    try {
-                        dispose();
-                        controller.verifyAdminLogin(user, password);
-                    } catch (SQLException sql) {
-                        sql.printStackTrace();
-                    }
+                    confirmationOfAdmin();
 
                 }
             }
@@ -88,8 +82,23 @@ public class ConfirmationUI extends JFrame {
         back.addActionListener(ae -> {
 
             dispose();
+            confirmationOfAdmin();
             aController.openAdminPageUI();
         });
+    }
+
+    /**
+     * This is an auxiliary method to confirm the Admin data.
+     */
+    private void confirmationOfAdmin() {
+        String user = adminUser.getText();
+        String password = valueOf(pass.getPassword());
+        try {
+            dispose();
+            controller.verifyAdminLogin(user, password);
+        } catch (SQLException sql) {
+            sql.printStackTrace();
+        }
     }
 
 }

@@ -77,7 +77,21 @@ public class EasyQuestionUI extends JFrame {
     }
 
     /**
-     * This method initiates and sets the easy difficulty questions.
+     * This method instantiates the difficulty level UI buttons.
+     * <p>
+     * It will as well start the Thread for our timer,which is going to be used at the end
+     * as a mean to display how much time an user spent on the game.
+     * <p>
+     * The window will have a question selected by checking for it not being used thus far
+     * or having a random one at the start. The question is going to be selected from the pool
+     * of the same region and difficulty selected before hand.
+     * <p>
+     * For each question there will be 4 answers referred to the question.
+     * <p>
+     * For gaining points an continuing to play the game the user is supposed to select an answer and press next for another question.
+     * If the user will not choose an answer it will display an Selection Failure pop up, thus making the user try again.
+     * <p>
+     * The is the option of skipping a question as well, thus moving forward to another objective.
      *
      * @throws SQLException in case that there is no data or
      *                      there is an issue extracting data from the database

@@ -18,18 +18,20 @@ public class MainUI extends JFrame {
 
     private JButton start = new JButton("Start");
     private JButton highScore = new JButton("High Score");
-    private JButton adminUI = new JButton("Admin Panel");
 
     private JButton quit = new JButton("QUIT");
 
     /**
-     * Main UI's Constructor
+     * Main Application UI's Constructor
+     * <p>
+     * This constructor instantiates all the controller, thus method which later on will connect the
+     * application to the database to retrieve data from.
      *
-     * @param controller of type MyController
-     * @param aController
-     * @param qController
+     * @param controller  represent the MyController Controller needed to instantiate the constructor
+     * @param aController represent the AdminController Controller needed to instantiate the constructor
+     * @param qController represent the QuestionController Controller needed to instantiate the constructor
      */
-    public MainUI(MyController controller,AdminController aController,QuestionController qController) {
+    public MainUI(MyController controller, AdminController aController, QuestionController qController) {
         super("Main UI");
         this.controller = controller;
         this.aController = aController;
@@ -45,13 +47,20 @@ public class MainUI extends JFrame {
     }
 
     /**
+     * This method introduces the buttons and other extremities.
+     * <p>
+     * For the Start button it open up the Login Page. Thus providing the user or admin
+     * with a way to login, and create an user if necessary.
+     * <p>
+     * For the HighScore button, anyone could see the highScore any of the players have received.
+     * <p>
+     * Lastly the user can quit the application using the quit button.
      */
     private void introduceButton() {
 
         super.add(start);
         super.add(quit);
         super.add(highScore);
-        super.add(adminUI);
 
         setSize(300, 385);
 
@@ -73,13 +82,7 @@ public class MainUI extends JFrame {
 
                 }
         );
-        adminUI.addActionListener(
-                e -> {
-                    dispose();
-                    aController.openAdminPageUI();
 
-                }
-        );
         quit.addActionListener(e -> dispose());
     }
 
@@ -87,6 +90,7 @@ public class MainUI extends JFrame {
      * This main methods initiates all the Dao classes,
      * all the controller classes and initiating the connection
      * between them so that it could properly start the application
+     *
      * @param args are the initialisation for the main
      */
     public static void main(String[] args) {
@@ -96,7 +100,7 @@ public class MainUI extends JFrame {
 
         AdminController aController = new AdminController(userDao);
         QuestionController qController = new QuestionController(questionDao);
-        MyController myController = new MyController(database,  aController, qController);
+        MyController myController = new MyController(database, aController, qController);
 
         aController.setMainControllerAdminController(myController);
         qController.setMainControllerQuestionController(myController);
