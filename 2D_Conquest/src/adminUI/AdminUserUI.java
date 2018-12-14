@@ -34,7 +34,7 @@ public class AdminUserUI extends JFrame {
         setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        introduceButton();
+        introduceUserButtons();
     }
 
     /**
@@ -46,7 +46,7 @@ public class AdminUserUI extends JFrame {
      * If the user wants to go back to AdminPage UI it will use Back button
      */
     @SuppressWarnings("Duplicates")
-    private void introduceButton() {
+    private void introduceUserButtons() {
         setSize(600, 400);
 
         super.add(createUser);

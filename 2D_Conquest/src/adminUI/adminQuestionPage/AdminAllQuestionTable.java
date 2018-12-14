@@ -56,6 +56,7 @@ public class AdminAllQuestionTable extends JFrame {
      * @throws SQLException in case that there is no data or
      *                      there is an issue extracting data from the database
      */
+    @SuppressWarnings("Duplicates")
     private void displayAllQuestionsTable() throws SQLException {
 
         super.setBounds(0, 0, 800, 200);

@@ -27,7 +27,7 @@ public class AdminQuestionUI extends JFrame {
      * <p>
      * Creates Admin Question window for editing the questions from database.
      *
-     * @param controller represent the MyController Controller needed to instantiate the constructor
+     * @param controller  represent the MyController Controller needed to instantiate the constructor
      * @param aController represent the AdminController Controller needed to instantiate the constructor
      */
     public AdminQuestionUI(MyController controller, AdminController aController) {
@@ -41,7 +41,7 @@ public class AdminQuestionUI extends JFrame {
         setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        introduceButton();
+        introduceQuestionButtons();
     }
 
     /**
@@ -54,7 +54,8 @@ public class AdminQuestionUI extends JFrame {
      * <p>
      * For going back to AdminPage UI is used Back buttom
      */
-    private void introduceButton() {
+    @SuppressWarnings("Duplicates")
+    private void introduceQuestionButtons() {
 
         setSize(600, 400);
         super.add(addQuestion);
@@ -65,11 +66,6 @@ public class AdminQuestionUI extends JFrame {
         super.add(quit);
         super.add(back);
 
-//        super.add(setttingsMenu);
-//        super.add(playGame);
-//        setttingsMenu.setBounds(70, 150, 160, 40);
-//        playGame.setBounds(70, 150, 160, 40);
-//
         addQuestion.setBounds(70, 50, 160, 40);
         deleteQuestion.setBounds(250, 50, 160, 40);
         editQuestion.setBounds(70, 150, 160, 40);

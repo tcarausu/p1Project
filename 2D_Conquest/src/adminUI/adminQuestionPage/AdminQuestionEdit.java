@@ -60,6 +60,7 @@ public class AdminQuestionEdit extends JFrame {
         introduceAdminQuestionEdit();
 
     }
+
     /**
      * This method allows the administrator to edit existing question information credentials.
      * <p>
@@ -69,11 +70,6 @@ public class AdminQuestionEdit extends JFrame {
      * by using "Enter" or by manually clicking on the Edit button.
      * <p>
      * If the user wants to go back to Admin UI it will use the Back button.
-     */
-
-
-    /**
-     * This method allows the administrator to introduce new login information credentials.
      */
     private void introduceAdminQuestionEdit() {
         setSize(500, 400);

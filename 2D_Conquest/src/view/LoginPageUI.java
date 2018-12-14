@@ -45,7 +45,8 @@ public class LoginPageUI extends JFrame {
     /**
      *
      */
-    private void introduceLogin() { // admin panel de mutat dupa admin login
+    @SuppressWarnings("Duplicates")
+    private void introduceLogin() {
         setSize(350, 280);
         setLocation(500, 280);
 
@@ -85,7 +86,7 @@ public class LoginPageUI extends JFrame {
             String ppaswd = String.valueOf(pass.getPassword()).toLowerCase();
             try {
                 dispose();
-                if (puname != null && !puname.equals("") && !ppaswd.equals("")) {
+                if (!puname.equals("") && !ppaswd.equals("")) {
                     controller.verifyAdminDataOnUserCreateOnLogin(puname, ppaswd);
                     controller.setCurrentUser(puname,ppaswd);
                 } else {

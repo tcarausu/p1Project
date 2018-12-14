@@ -50,6 +50,7 @@ public class HighScoreOnUser extends JFrame {
     }
 
 
+    @SuppressWarnings("Duplicates")
     private void displayAllQuestionsTable(String username) throws SQLException {
 
         setBounds(0, 0, 500, 500);

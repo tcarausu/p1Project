@@ -42,7 +42,7 @@ public class AdminPageUI extends JFrame {
         setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        introduceButton();
+        introducePageUI();
     }
 
     /**
@@ -55,7 +55,7 @@ public class AdminPageUI extends JFrame {
      * If the admin wants to go back to MainUI, Back button will be used
      *
      */
-    private void introduceButton() {
+    private void introducePageUI() {
 
         super.add(userUI);
         super.add(questionsUI);
