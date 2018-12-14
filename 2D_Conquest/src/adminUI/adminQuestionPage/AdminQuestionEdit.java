@@ -41,6 +41,7 @@ public class AdminQuestionEdit extends JFrame {
      * and edit its information in game.
      *
      * @param controller  represent the MyController Controller needed to instantiate the constructor
+     * @param qController represent the QuestionController Controller needed to instantiate the constructor
      * @param aController represent the AdminController Controller needed to instantiate the constructor
      */
     public AdminQuestionEdit(MyController controller, QuestionController qController,

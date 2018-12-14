@@ -20,11 +20,13 @@ public class HighScoreUI extends JFrame {
     private Database database;
 
     /**
-     * Admin Question Table Page  UI's Constructor
+     * HighScore table Page  UI's Constructor.
+     * <p>
+     * Displays the list of higScore entries from the database.
      *
-     * @param controller  of type MyController
-     * @param aController
-     * @param database
+     * @param controller  represent the MyController Controller needed to instantiate the constructor
+     * @param aController represent the AdminController Controller needed to instantiate the constructor
+     * @param database    represent the Database Dao Layer needed to instantiate the constructor
      */
     public HighScoreUI(
             MyController controller,

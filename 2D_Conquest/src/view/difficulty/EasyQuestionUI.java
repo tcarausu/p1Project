@@ -96,7 +96,6 @@ public class EasyQuestionUI extends JFrame {
      * @throws SQLException in case that there is no data or
      *                      there is an issue extracting data from the database
      */
-    @SuppressWarnings("Duplicates")
     private void setEasy() throws SQLException {
 
         startTimer();

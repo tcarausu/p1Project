@@ -1,7 +1,7 @@
 adminUI
 adminUI.adminQuestionPage
 adminUI.adminUserPage
-aController
+controller
 dao
 view
 view.difficulty

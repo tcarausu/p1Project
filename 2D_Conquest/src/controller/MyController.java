@@ -455,6 +455,8 @@ public class MyController {
      * to display the window
      *
      * @param region represents the the current region for a hard difficulty to start.
+     * @throws SQLException in case that there is no data or
+     *                      there is an issue extracting data from the database
      */
     public void openDifficultyWindow(String region) throws SQLException {
         new DifficultyLevelUI(this, qController.getRegion(region));

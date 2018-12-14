@@ -32,6 +32,7 @@ public class AdminQuestionDelete extends JFrame {
      * Allows an admin to delete a question that has registered.
      *
      * @param controller  represent the MyController Controller needed to instantiate the constructor
+     * @param qController represent the QuestionController Controller needed to instantiate the constructor
      * @param aController represent the AdminController Controller needed to instantiate the constructor
      */
     public AdminQuestionDelete(MyController controller, QuestionController qController,
