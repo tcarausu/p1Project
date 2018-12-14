@@ -28,8 +28,8 @@ public class CountryUI extends JFrame {
     /**
      * Country UI's Constructor. This displays our regional maps for quiz selection.
      *
-     * @param controller represents the MyController class
-     * @param aController represents the AdminController class
+     * @param controller  represent the MyController Controller needed to instantiate the constructor
+     * @param aController represent the AdminController Controller needed to instantiate the constructor
      */
     public CountryUI(MyController controller, AdminController aController) {
 

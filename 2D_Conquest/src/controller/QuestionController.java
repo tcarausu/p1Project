@@ -149,7 +149,7 @@ public class QuestionController {
     /**
      * This method extracts a list of Answers specific for a question that by using
      * difficulty and region of the current quiz
-     *
+     * <p>
      * The number of answer is going to be limited to 4
      *
      * @param difficultyLevel representing the difficultyLevel of said question

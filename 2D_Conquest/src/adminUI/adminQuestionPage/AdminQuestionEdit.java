@@ -41,6 +41,7 @@ public class AdminQuestionEdit extends JFrame {
      * and edit its information in game.
      *
      * @param controller  represent the MyController Controller needed to instantiate the constructor
+     * @param qController represent the QuestionController Controller needed to instantiate the constructor
      * @param aController represent the AdminController Controller needed to instantiate the constructor
      */
     public AdminQuestionEdit(MyController controller, QuestionController qController,
@@ -60,6 +61,7 @@ public class AdminQuestionEdit extends JFrame {
         introduceAdminQuestionEdit();
 
     }
+
     /**
      * This method allows the administrator to edit existing question information credentials.
      * <p>
@@ -69,11 +71,6 @@ public class AdminQuestionEdit extends JFrame {
      * by using "Enter" or by manually clicking on the Edit button.
      * <p>
      * If the user wants to go back to Admin UI it will use the Back button.
-     */
-
-
-    /**
-     * This method allows the administrator to introduce new login information credentials.
      */
     private void introduceAdminQuestionEdit() {
         setSize(500, 400);

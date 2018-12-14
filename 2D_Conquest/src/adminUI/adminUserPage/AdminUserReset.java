@@ -51,6 +51,7 @@ public class AdminUserReset extends JFrame {
     /**
      * This method allows the administrator to introduce new login information credentials.
      */
+    @SuppressWarnings("Duplicates")
     private void introduceAdminUserReset() {
         setSize(500, 200);
         setLocation(500, 280);

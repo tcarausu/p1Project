@@ -32,6 +32,7 @@ public class AdminQuestionDelete extends JFrame {
      * Allows an admin to delete a question that has registered.
      *
      * @param controller  represent the MyController Controller needed to instantiate the constructor
+     * @param qController represent the QuestionController Controller needed to instantiate the constructor
      * @param aController represent the AdminController Controller needed to instantiate the constructor
      */
     public AdminQuestionDelete(MyController controller, QuestionController qController,
@@ -51,6 +52,7 @@ public class AdminQuestionDelete extends JFrame {
         introduceAdminQuestionDelete();
 
     }
+
     /**
      * This method allows the administrator to delete existing question information credentials.
      * <p>
@@ -61,11 +63,6 @@ public class AdminQuestionDelete extends JFrame {
      * <p>
      * If the user wants to go back to Admin UI it will use the Back button.
      */
-
-
-    /**
-     * This method allows the administrator to introduce new login information credentials.
-     */
     @SuppressWarnings("Duplicates")
     private void introduceAdminQuestionDelete() {
         setSize(500, 200);
@@ -75,7 +72,7 @@ public class AdminQuestionDelete extends JFrame {
         questionId.setBounds(20, 30, 140, 20);
         id.setBounds(160, 30, 250, 20);
 
-        deleteQuestion.setBounds(30, 100, 120, 40);
+        deleteQuestion.setBounds(30, 100, 160, 40);
         back.setBounds(350, 100, 120, 40);
 
         super.add(questionId);

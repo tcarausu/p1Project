@@ -24,7 +24,10 @@ public class HighScoreOnUser extends JFrame {
     /**
      * Admin Question Table Page  UI's Constructor
      *
-     * @param controller of type MyController
+     * @param controller  represent the MyController Controller needed to instantiate the constructor
+     * @param aController represent the AdminController Controller needed to instantiate the constructor
+     * @param database    represent the Database  Dao Layer class needed to instantiate the constructor
+     * @param username    represent the username of the User the highScore should be displayed for
      */
     public HighScoreOnUser(MyController controller,
                            AdminController aController,
@@ -43,14 +46,23 @@ public class HighScoreOnUser extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         try {
-            displayAllQuestionsTable(username);
+            displayAllHighScoreResultsOnTheUserTable(username);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
 
-    private void displayAllQuestionsTable(String username) throws SQLException {
+    /**
+     * This method create an visual interpretation for the HighScore table of the
+     * database.
+     *
+     * @param username represent the username of the User the highScore should be displayed for
+     * @throws SQLException in case that there is no data or
+     *                      there is an issue extracting data from the database
+     */
+    @SuppressWarnings("Duplicates")
+    private void displayAllHighScoreResultsOnTheUserTable(String username) throws SQLException {
 
         setBounds(0, 0, 500, 500);
         setLocation(500, 200);

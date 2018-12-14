@@ -47,7 +47,7 @@ public class AdminQuestionCreate extends JFrame {
         setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        introduceAdminUserCreate();
+        introduceAdminQuestionCreate();
 
     }
 
@@ -61,7 +61,7 @@ public class AdminQuestionCreate extends JFrame {
      * <p>
      * If the user wants to go back to Admin UI it will use the Back button.
      */
-    private void introduceAdminUserCreate() {
+    private void introduceAdminQuestionCreate() {
         setSize(500, 300);
         setLocation(500, 280);
 

@@ -20,11 +20,13 @@ public class HighScoreUI extends JFrame {
     private Database database;
 
     /**
-     * Admin Question Table Page  UI's Constructor
+     * HighScore table Page  UI's Constructor.
+     * <p>
+     * Displays the list of higScore entries from the database.
      *
-     * @param controller of type MyController
-     * @param aController
-     * @param database
+     * @param controller  represent the MyController Controller needed to instantiate the constructor
+     * @param aController represent the AdminController Controller needed to instantiate the constructor
+     * @param database    represent the Database Dao Layer needed to instantiate the constructor
      */
     public HighScoreUI(
             MyController controller,
@@ -42,7 +44,7 @@ public class HighScoreUI extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         try {
-            displayAllQuestionsTable();
+            displayAllHighScoreDataTable();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -50,9 +52,14 @@ public class HighScoreUI extends JFrame {
 
 
     /**
+     * This method create an visual interpretation for the HighScore table of the
+     * database.
+     *
      * @throws SQLException in case that there is no data or
-     *                      there is an issue extracting data from the database     */
-    private void displayAllQuestionsTable() throws SQLException {
+     *                      there is an issue extracting data from the database
+     */
+    @SuppressWarnings("Duplicates")
+    private void displayAllHighScoreDataTable() throws SQLException {
 
         super.setBounds(0, 0, 500, 500);
         setLocation(500, 200);

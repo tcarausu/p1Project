@@ -39,6 +39,7 @@ public class QuestionDao implements QuestionDatabaseI {
 
     /**
      * This method creates an question by using insert query
+     * it will set the id for an incremental default(of type serial in database/int)
      *
      * @param subject         representing the subject introduced by the admin
      * @param typeOfQuestion  representing the typeOfQuestion introduced by the admin
@@ -54,8 +55,8 @@ public class QuestionDao implements QuestionDatabaseI {
                                   String region) throws SQLException {
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
         try {
-            String SQL = "Insert into  p1Project.questions(subject," +
-                    "typeOfQuestion,difficultylevel,region) values(?,?,?,?)";
+            String SQL = "Insert into  p1Project.questions(id,subject," +
+                    "typeOfQuestion,difficultylevel,region) values(default,?,?,?,?)";
 
             PreparedStatement st = conn.prepareStatement(SQL);
             st.setString(1, subject);

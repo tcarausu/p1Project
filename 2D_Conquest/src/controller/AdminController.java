@@ -125,10 +125,10 @@ public class AdminController {
     }
 
     /**
-     * This method Initiates the AdminSettingsUI window using the MyController
+     * This method Initiates the AdminSettingsUI window using this Controller
      */
     public void openAdminSettingsUI() {
-        new AdminSettingsUI(mainController);
+        new AdminSettingsUI(this);
     }
 
     /**

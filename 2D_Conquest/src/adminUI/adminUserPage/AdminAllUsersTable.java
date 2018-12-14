@@ -75,7 +75,7 @@ public class AdminAllUsersTable extends JFrame {
 
         back.addActionListener(ae -> {
             dispose();
-            aController.openAdminPageUI();
+            aController.openAdminCreateUserUI();
         });
     }
 

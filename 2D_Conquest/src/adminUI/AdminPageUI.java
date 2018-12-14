@@ -37,12 +37,13 @@ public class AdminPageUI extends JFrame {
         this.aController = aController;
 
         setLocation(500, 200);
+        setSize(500, 400);
         setLayout(null);
         setResizable(false);
         setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        introduceButton();
+        introducePageUI();
     }
 
     /**
@@ -55,7 +56,7 @@ public class AdminPageUI extends JFrame {
      * If the admin wants to go back to MainUI, Back button will be used
      *
      */
-    private void introduceButton() {
+    private void introducePageUI() {
 
         super.add(userUI);
         super.add(questionsUI);
@@ -66,16 +67,7 @@ public class AdminPageUI extends JFrame {
         super.add(quit);
         super.add(back);
 
-        setSize(600, 400);
-
-        userUI.setBounds(70, 50, 160, 40);
-        questionsUI.setBounds(250, 50, 160, 40);
-
-        playGame.setBounds(70, 150, 160, 40);
-        settingsMenu.setBounds(250, 150, 160, 40);
-
-        quit.setBounds(70, 250, 160, 40);
-        back.setBounds(250, 250, 160, 40);
+        uiSetup(userUI, questionsUI, playGame, settingsMenu, quit, back);
 
         userUI.addActionListener(
                 e -> {
@@ -108,12 +100,23 @@ public class AdminPageUI extends JFrame {
         back.addActionListener(
                 e -> {
                     dispose();
-                    controller.start();
+                    controller.openLoginWindow();
 
                 }
         );
 
         quit.addActionListener(e -> dispose());
+    }
+
+    static void uiSetup(JButton userUI, JButton questionsUI, JButton playGame, JButton settingsMenu, JButton quit, JButton back) {
+        userUI.setBounds(70, 50, 160, 40);
+        questionsUI.setBounds(250, 50, 160, 40);
+
+        playGame.setBounds(70, 150, 160, 40);
+        settingsMenu.setBounds(250, 150, 160, 40);
+
+        quit.setBounds(70, 250, 160, 40);
+        back.setBounds(250, 250, 160, 40);
     }
 
 }

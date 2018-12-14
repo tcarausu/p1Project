@@ -10,6 +10,7 @@ import java.util.List;
 public interface QuestionDatabaseI {
     /**
      * This method creates an question by using
+     * it will set the id for an incremental default(of type serial in database/int)
      *
      * @param subject         representing the subject introduced by the admin
      * @param typeOfQuestion  representing the typeOfQuestion introduced by the admin
