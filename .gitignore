@@ -27,7 +27,6 @@ hs_err_pid*
 *.js
 
 #Image types
-*.png
 *.jpg
 *.gif
 
