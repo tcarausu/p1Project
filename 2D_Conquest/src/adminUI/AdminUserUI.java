@@ -58,7 +58,6 @@ public class AdminUserUI extends JFrame {
 
         AdminPageUI.uiSetup(createUser, resetUser, deleteUser, editUser, back, quit);
 
-
         createUser.addActionListener(
                 e -> {
                     dispose();

@@ -46,8 +46,8 @@ public class ConfirmationUI extends JFrame {
     }
 
     /**
-     *This method instantiates the buttons as well as performs the check of the admin,
-     *  by either using the "Enter" button or clicking on the button
+     * This method instantiates the buttons as well as performs the check of the admin,
+     * by either using the "Enter" button or clicking on the button
      */
     private void confirmUI() {
         setSize(380, 250);
@@ -72,9 +72,7 @@ public class ConfirmationUI extends JFrame {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-
                     confirmationOfAdmin();
-
                 }
             }
         });

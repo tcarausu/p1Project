@@ -262,15 +262,11 @@ public class MediumQuestionUI extends JFrame {
     @SuppressWarnings("Duplicates")
     private void stopTimer() {
         t.stop();
-        done.addActionListener(e -> {
-            state = false;
-            System.out.printf("You finished in this time: %d h:%d m:%d s", hours, minutes, seconds);
-            System.out.println();
-            hours = 0;
-            minutes = 0;
-            seconds = 0;
-            milliseconds = 0;
-        });
+        state = false;
+        hours = 0;
+        minutes = 0;
+        seconds = 0;
+        milliseconds = 0;
 
     }
 
@@ -322,7 +318,6 @@ public class MediumQuestionUI extends JFrame {
 
         });
         t.start();
-
 
     }
 

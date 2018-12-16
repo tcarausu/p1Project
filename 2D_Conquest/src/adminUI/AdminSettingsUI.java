@@ -1,7 +1,6 @@
 package adminUI;
 
 import controller.AdminController;
-import controller.MyController;
 
 import javax.swing.*;
 
@@ -46,7 +45,7 @@ public class AdminSettingsUI extends JFrame {
 
     /**
      * This method introduce buttons to the existing frame
-     *
+     * <p>
      * If the user wants to return to the Admin Page UI it will use back button;
      * If the user wants to close the application he is going to use the Quit Button
      */

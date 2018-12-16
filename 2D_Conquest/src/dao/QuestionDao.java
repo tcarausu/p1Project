@@ -212,7 +212,7 @@ public class QuestionDao implements QuestionDatabaseI {
 
         try {
             String SQL = "SELECT quest.region FROM p1Project.questions as quest " +
-                    "where quest.region ='" + region.toLowerCase() + "'";
+                    "where quest.region ='" + region + "'";
 
             PreparedStatement st = conn.prepareStatement(SQL);
             st.execute();
@@ -255,20 +255,7 @@ public class QuestionDao implements QuestionDatabaseI {
                     "where quest.difficultylevel like '" + difficulty + "' " +
                     "and quest.region like '" + region + "'";
 
-            List<String> result = new ArrayList<>();
-            PreparedStatement st = conn.prepareStatement(SQL);
-            st.execute();
-            ResultSet rs = st.getResultSet();
-            int numCols = rs.getMetaData().getColumnCount();
-
-            while (rs.next()) {
-
-                for (int i = 1; i <= numCols; i++) {
-                    // loop through the ArrayList and add results accordingly
-                    result.add(rs.getString(i));
-                }
-            }
-            return result;
+            return getStrings(SQL);
 
         } finally {
             conn.close();
@@ -305,24 +292,28 @@ public class QuestionDao implements QuestionDatabaseI {
                     "limit 4";
 
 
-            List<String> result = new ArrayList<>();
-            PreparedStatement st = conn.prepareStatement(SQL);
-            st.execute();
-            ResultSet rs = st.getResultSet();
-            int numCols = rs.getMetaData().getColumnCount();
-
-            while (rs.next()) {
-
-                for (int i = 1; i <= numCols; i++) {  // loop through the ArrayList and add results accordingly
-                    result.add(rs.getString(i));
-                }
-            }
-            return result;
+            return getStrings(SQL);
         } finally {
             conn.close();
 
         }
 
+    }
+
+    private List<String> getStrings(String SQL) throws SQLException {
+        List<String> result = new ArrayList<>();
+        PreparedStatement st = conn.prepareStatement(SQL);
+        st.execute();
+        ResultSet rs = st.getResultSet();
+        int numCols = rs.getMetaData().getColumnCount();
+
+        while (rs.next()) {
+
+            for (int i = 1; i <= numCols; i++) {
+                result.add(rs.getString(i));
+            }
+        }
+        return result;
     }
 
 }
