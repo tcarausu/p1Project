@@ -626,6 +626,9 @@ public class MyController {
         String result;
         do {
             int index = sr.nextInt(totalNrOfResultsFromDao);
+            if (index <= 0) {
+                throw new IndexOutOfBoundsException();
+            }
             result = resultsFromDao.get(index);
             if (!list.contains(result)) {
                 list.add(result);
@@ -726,4 +729,17 @@ public class MyController {
         user = new User(userName, password);
         user.setController(this);
     }
+
+    /**
+     * This method set the current User logged in to
+     * the current,My Controller, for further use
+     *
+     * @param id                represents the id for the player User
+     * @param defaultDifficulty represents the default Difficulty for the player User
+     */
+    public void setCurrentUserIdAndDefaultDifficulty(int id, String defaultDifficulty) {
+        user = new User(id, defaultDifficulty);
+        user.setController(this);
+    }
+
 }

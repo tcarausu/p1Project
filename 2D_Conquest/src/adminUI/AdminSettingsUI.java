@@ -14,7 +14,7 @@ public class AdminSettingsUI extends JFrame {
     private ImageIcon button = new ImageIcon("images/login.jpg");
 
     private JButton volume = new JButton("Volume", button);
-    private JButton defDif = new JButton("Default difficulty"); // easy-medium-hard-off radio button
+    private JButton defaultDifficulty = new JButton("Default difficulty"); // easy-medium-hard-off radio button
     private JButton soundEffects = new JButton("Sound Effects"); // on-off
     private JButton music = new JButton("Music"); // on-off
 
@@ -52,7 +52,7 @@ public class AdminSettingsUI extends JFrame {
     private void introduceSettings() {
 
         super.add(volume);
-        super.add(defDif);
+        super.add(defaultDifficulty);
         super.add(soundEffects);
         super.add(music);
 
@@ -69,7 +69,7 @@ public class AdminSettingsUI extends JFrame {
         testSlider.setBounds(240, 50, 160, 40);
 
         volume.setBounds(70, 50, 160, 40);
-        defDif.setBounds(70, 100, 160, 40);
+        defaultDifficulty.setBounds(70, 100, 160, 40);
         soundEffects.setBounds(70, 150, 160, 40);
 
         music.setBounds(70, 200, 160, 40);
@@ -81,7 +81,7 @@ public class AdminSettingsUI extends JFrame {
             dispose();
             aController.openAdminPageUI();
         });
-
+        defaultDifficulty.addActionListener(e -> aController.openAdminSetDifficultyOnUser());
         quit.addActionListener(e -> dispose());
     }
 
