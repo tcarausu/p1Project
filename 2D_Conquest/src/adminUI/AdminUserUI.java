@@ -47,7 +47,7 @@ public class AdminUserUI extends JFrame {
      */
     @SuppressWarnings("Duplicates")
     private void introduceUserButtons() {
-        setSize(600, 400);
+        setSize(500, 400);
 
         super.add(createUser);
         super.add(resetUser);

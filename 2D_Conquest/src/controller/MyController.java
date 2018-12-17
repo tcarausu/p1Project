@@ -444,7 +444,7 @@ public class MyController {
      * and an Admin Controller
      */
     public void openCountryWindow() {
-        new CountryUI(this, aController);
+        new CountryUI(this);
     }
 
     /**
@@ -626,9 +626,7 @@ public class MyController {
         String result;
         do {
             int index = sr.nextInt(totalNrOfResultsFromDao);
-            if (index <= 0) {
-                throw new IndexOutOfBoundsException();
-            }
+
             result = resultsFromDao.get(index);
             if (!list.contains(result)) {
                 list.add(result);
@@ -741,5 +739,13 @@ public class MyController {
         user = new User(id, defaultDifficulty);
         user.setController(this);
     }
-
+    /**
+     * This method get the defaultDifficulty for the specific user
+     *
+     * @return gives defaultDifficulty for the User
+     */
+    public boolean getCurrentDefaultDifficulty() {
+        user = getCurrentUser();
+        return user.getDefaultDifficulty();
+    }
 }

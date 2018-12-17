@@ -40,7 +40,7 @@ public class User {
      *
      * @param id represents the id for the User
      */
-    public User(int id,String defaultDifficulty) {
+    public User(int id, String defaultDifficulty) {
         this.id = id;
         this.defaultDifficulty = defaultDifficulty;
     }
@@ -117,16 +117,18 @@ public class User {
     public void setId(int id) {
         this.id = id;
     }
+
     /**
-     * This method get the password for the specific user
+     * This method get the defaultDifficulty for the specific user
      *
      * @return gives defaultDifficulty for the User
      */
-    public String getDefaultDifficulty() {
-        return defaultDifficulty;
+    public boolean getDefaultDifficulty() {
+        return Boolean.parseBoolean(defaultDifficulty);
     }
+
     /**
-     * This method set the password for the specific user
+     * This method set the defaultDifficulty for the specific user
      *
      * @param defaultDifficulty represents the new password for the User
      */

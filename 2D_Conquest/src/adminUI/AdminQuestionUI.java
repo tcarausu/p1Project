@@ -35,6 +35,7 @@ public class AdminQuestionUI extends JFrame {
         this.controller = controller;
         this.aController = aController;
 
+        setSize(500, 400);
         setLocation(500, 200);
         setLayout(null);
         setResizable(false);
@@ -57,7 +58,6 @@ public class AdminQuestionUI extends JFrame {
     @SuppressWarnings("Duplicates")
     private void introduceQuestionButtons() {
 
-        setSize(600, 400);
         super.add(addQuestion);
         super.add(deleteQuestion);
         super.add(editQuestion);

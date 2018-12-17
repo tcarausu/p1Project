@@ -1,39 +1,39 @@
 package view;
 
 
-import controller.AdminController;
 import controller.MyController;
 
 import javax.swing.*;
 import java.sql.SQLException;
 
 public class CountryUI extends JFrame {
-    private ImageIcon firstImage = new ImageIcon("images/Region-Top.png");
-    private ImageIcon secondImage = new ImageIcon("images/Region-Middle.png");
-    private ImageIcon thirdImage = new ImageIcon("images/Region-Bottom.png");
-    private ImageIcon forthImage = new ImageIcon("images/Region-Side.png");
+    private ImageIcon firstImage = new ImageIcon("images/TopOfDenmark.png");
+    private ImageIcon secondImage = new ImageIcon("images/MiddleOfDenmark.png");
+    private ImageIcon thirdImage = new ImageIcon("images/BottomOfDenmark.png");
+    private ImageIcon forthImage = new ImageIcon("images/CapitalArea.png");
 
-    private JButton firstMap = new JButton("northDenmark", firstImage);
-    private JButton secondMap = new JButton("midDenmark", secondImage);
-    private JButton thirdMap = new JButton("southDenmark", thirdImage);
-    private JButton forthMap = new JButton("capital", forthImage);
+    private JButton firstMap = new JButton( firstImage);
+    private JButton secondMap = new JButton( secondImage);
+    private JButton thirdMap = new JButton( thirdImage);
+    private JButton forthMap = new JButton( forthImage);
 
     private JButton back = new JButton("Back");
 
     private MyController controller;
-    private AdminController aController;
+    private String firstMapRegion = "northDenmark";
+    private String secondMapRegion = "midDenmark";
+    private String thirdMapRegion = "southDenmark";
+    private String forthMapRegion = "capital";
 
     /**
      * Country UI's Constructor. This displays our regional maps for quiz selection.
      *
      * @param controller  represent the MyController Controller needed to instantiate the constructor
-     * @param aController represent the AdminController Controller needed to instantiate the constructor
      */
-    public CountryUI(MyController controller, AdminController aController) {
+    public CountryUI(MyController controller) {
 
         super("Country UI");
         this.controller = controller;
-        this.aController = aController;
 
         setLayout(null);
         setResizable(false);
@@ -49,20 +49,15 @@ public class CountryUI extends JFrame {
      */
     @SuppressWarnings("Duplicates")
     private void countryButtons() {
-        super.setBounds(0, 0, 900, 800);
-        setLocation(250, 50);
+        super.setBounds(0, 0, 625, 800);
+        setLocation(250, 5);
 
-        firstMap.setBounds(70, 50, 300, 300);
-        secondMap.setBounds(70, 350, 300, 300);
-        thirdMap.setBounds(370, 50, 300, 300);
-        forthMap.setBounds(370, 350, 300, 300);
+        firstMap.setBounds(20, 5, 300, 250);
+        secondMap.setBounds(20, 255, 300, 250);
+        thirdMap.setBounds(20, 505, 300, 200);
+        forthMap.setBounds(320, 505, 300, 200);
 
-        back.setBounds(350, 650, 160, 40);
-
-        String firstMapRegion = firstMap.getText();
-        String secondMapRegion = secondMap.getText();
-        String thirdMapRegion = thirdMap.getText();
-        String forthMapRegion = forthMap.getText();
+        back.setBounds(250, 710, 160, 40);
 
         super.add(firstMap);
         super.add(secondMap);
@@ -111,8 +106,7 @@ public class CountryUI extends JFrame {
         back.addActionListener(
                 e -> {
                     dispose();
-                    LoginPageUI loginPageUI = new LoginPageUI(controller, aController);
-                    loginPageUI.setVisible(true);
+                    controller.openLoginWindow();
                 });
     }
 
