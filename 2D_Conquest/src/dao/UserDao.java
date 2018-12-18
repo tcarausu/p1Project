@@ -2,10 +2,7 @@ package dao;
 
 import org.postgresql.Driver;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 /**
  * File created on 11/13/2018
@@ -143,5 +140,31 @@ public class UserDao implements UserDatabaseI {
         }
 
 
+    }
+
+    /**
+     * This method resets an user password by using update query using
+     *
+     * @param id representing the id introduced by the admin
+     *           as parameters and setting the password to 'password" for initial value
+     *           it can
+     * @throws SQLException in case that there is no data or
+     *                      there is an issue extracting data from the database
+     */
+    @Override
+    public boolean checkUserIdValidity(int id) throws SQLException {
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
+        try {
+            String SQL = "SELECT * FROM p1Project.user " +
+                    "where id  = '" + id + "' ";
+
+            PreparedStatement st = conn.prepareStatement(SQL);
+            st.execute();
+            ResultSet rs = st.getResultSet();
+            return rs.next();
+        } finally {
+            conn.close();
+
+        }
     }
 }

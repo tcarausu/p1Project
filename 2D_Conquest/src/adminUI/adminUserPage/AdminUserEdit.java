@@ -92,10 +92,7 @@ public class AdminUserEdit extends JFrame {
 
         });
 
-
-        editUser.addActionListener(ae -> {
-            editUser();
-        });
+        editUser.addActionListener(ae -> editUser());
         back.addActionListener(ae -> {
             dispose();
             aController.openAdminPageUI();

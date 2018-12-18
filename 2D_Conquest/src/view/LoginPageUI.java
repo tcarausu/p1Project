@@ -95,6 +95,7 @@ public class LoginPageUI extends JFrame {
                 if (!username.equals("") && !password.equals("")) {
                     controller.verifyAdminDataOnUserCreateOnLogin(username, password);
                     controller.setCurrentUser(username, password);
+                    controller.getCurrentDefaultDifficulty();
                 } else {
                     clearFields();
                     controller.openLoginWindow();

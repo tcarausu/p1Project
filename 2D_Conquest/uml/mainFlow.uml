@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>controller.MyController</OriginalElement>
+  <nodes>
+    <node x="636.8232954545456" y="0.0">controller.QuestionController</node>
+    <node x="1086.5" y="112.0">view.CountryUI</node>
+    <node x="360.5" y="112.0">view.MainUI</node>
+    <node x="797.5" y="112.0">view.difficulty.DifficultyLevelUI</node>
+    <node x="448.2499999999999" y="304.0">controller.MyController</node>
+    <node x="10.5" y="112.0">view.LoginPageUI</node>
+    <node x="227.03162878787884" y="0.0">controller.AdminController</node>
+    <node x="595.7499999999999" y="406.0">view.difficulty.EasyQuestionUI</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="controller.MyController" target="view.MainUI">
+      <point x="-45.34090909090901" y="-26.0" />
+      <point x="602.4090909090909" y="204.0" />
+      <point x="408.375" y="204.0" />
+      <point x="-143.625" y="26.0" />
+    </edge>
+    <edge source="view.LoginPageUI" target="controller.AdminController">
+      <point x="-76.75" y="-26.0" />
+      <point x="87.25" y="82.0" />
+      <point x="267.36496212121216" y="82.0" />
+      <point x="-80.66666666666669" y="26.0" />
+    </edge>
+    <edge source="view.LoginPageUI" target="controller.MyController">
+      <point x="38.375" y="26.0" />
+      <point x="202.375" y="254.0" />
+      <point x="511.72727272727263" y="254.0" />
+      <point x="-136.02272727272725" y="-26.0" />
+    </edge>
+    <edge source="view.MainUI" target="controller.QuestionController">
+      <point x="95.75" y="-26.0" />
+      <point x="647.75" y="92.0" />
+      <point x="683.1566287878788" y="92.0" />
+      <point x="-92.66666666666674" y="26.0" />
+    </edge>
+    <edge source="controller.MyController" target="view.LoginPageUI">
+      <point x="-154.15909090909076" y="-26.0" />
+      <point x="493.5909090909091" y="264.0" />
+      <point x="125.625" y="264.0" />
+      <point x="-38.375" y="26.0" />
+    </edge>
+    <edge source="controller.MyController" target="view.difficulty.DifficultyLevelUI">
+      <point x="99.75" y="-26.0" />
+      <point x="747.4999999999999" y="234.0" />
+      <point x="842.3333333333333" y="234.0" />
+      <point x="-89.66666666666674" y="26.0" />
+    </edge>
+    <edge source="view.CountryUI" target="controller.MyController">
+      <point x="0.0" y="26.0" />
+      <point x="1185.5" y="274.0" />
+      <point x="820.0454545454544" y="274.0" />
+      <point x="172.2954545454545" y="-26.0" />
+    </edge>
+    <edge source="view.MainUI" target="controller.AdminController">
+      <point x="-95.75000000000006" y="-26.0" />
+      <point x="456.24999999999994" y="92.0" />
+      <point x="428.6982954545455" y="92.0" />
+      <point x="80.66666666666663" y="26.0" />
+    </edge>
+    <edge source="view.MainUI" target="controller.MyController">
+      <point x="143.625" y="26.0" />
+      <point x="695.625" y="184.0" />
+      <point x="656.8181818181818" y="184.0" />
+      <point x="9.06818181818187" y="-26.0" />
+    </edge>
+    <edge source="controller.MyController" target="view.difficulty.EasyQuestionUI">
+      <point x="133.0" y="26.0" />
+      <point x="0.0" y="-26.0" />
+    </edge>
+    <edge source="controller.MyController" target="view.CountryUI">
+      <point x="154.15909090909088" y="-26.0" />
+      <point x="801.9090909090908" y="264.0" />
+      <point x="1119.5" y="264.0" />
+      <point x="-66.0" y="26.0" />
+    </edge>
+    <edge source="controller.AdminController" target="controller.MyController">
+      <point x="-107.55555555555554" y="26.0" />
+      <point x="240.4760732323233" y="72.0" />
+      <point x="0.0" y="72.0" />
+      <point x="0.0" y="284.0" />
+      <point x="457.31818181818187" y="284.0" />
+      <point x="-190.43181818181802" y="-26.0" />
+    </edge>
+    <edge source="controller.MyController" target="controller.QuestionController">
+      <point x="27.204545454545496" y="-26.0" />
+      <point x="674.9545454545454" y="194.0" />
+      <point x="754.0" y="194.0" />
+      <point x="754.0" y="92.0" />
+      <point x="744.9344065656567" y="92.0" />
+      <point x="-30.888888888888914" y="26.0" />
+    </edge>
+    <edge source="view.difficulty.EasyQuestionUI" target="controller.MyController">
+      <point x="-74.0" y="-26.0" />
+      <point x="706.7499999999999" y="386.0" />
+      <point x="647.7499999999999" y="386.0" />
+      <point x="0.0" y="26.0" />
+    </edge>
+    <edge source="controller.QuestionController" target="controller.MyController">
+      <point x="61.77777777777783" y="26.0" />
+      <point x="837.6010732323234" y="92.0" />
+      <point x="787.0" y="92.0" />
+      <point x="787.0" y="224.0" />
+      <point x="729.3636363636363" y="224.0" />
+      <point x="81.61363636363637" y="-26.0" />
+    </edge>
+    <edge source="view.difficulty.DifficultyLevelUI" target="controller.MyController">
+      <point x="0.0" y="26.0" />
+      <point x="932.0" y="244.0" />
+      <point x="765.6363636363635" y="244.0" />
+      <point x="117.88636363636363" y="-26.0" />
+    </edge>
+    <edge source="controller.MyController" target="controller.AdminController">
+      <point x="-81.61363636363626" y="-26.0" />
+      <point x="566.1363636363636" y="224.0" />
+      <point x="339.0" y="224.0" />
+      <point x="339.0" y="82.0" />
+      <point x="348.03162878787884" y="82.0" />
+      <point x="0.0" y="26.0" />
+    </edge>
+    <edge source="view.difficulty.EasyQuestionUI" target="controller.QuestionController">
+      <point x="74.0" y="-26.0" />
+      <point x="854.7499999999999" y="376.0" />
+      <point x="1295.0" y="376.0" />
+      <point x="1295.0" y="92.0" />
+      <point x="868.4899621212123" y="92.0" />
+      <point x="92.66666666666674" y="26.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="502.5" y="229.0" />
+  <SelectedNodes>
+    <node>controller.MyController</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Constructors</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

@@ -264,15 +264,11 @@ public class HardQuestionUI extends JFrame {
     @SuppressWarnings("Duplicates")
     private void stopTimer() {
         t.stop();
-        done.addActionListener(e -> {
-            state = false;
-            System.out.printf("You finished in this time: %d h:%d m:%d s", hours, minutes, seconds);
-            System.out.println();
-            hours = 0;
-            minutes = 0;
-            seconds = 0;
-            milliseconds = 0;
-        });
+        state = false;
+        hours = 0;
+        minutes = 0;
+        seconds = 0;
+        milliseconds = 0;
 
     }
 
@@ -280,7 +276,6 @@ public class HardQuestionUI extends JFrame {
      * This method instantiates a Thread to gather and sustain the
      * time spent on a quiz , incrementally.
      */
-    @SuppressWarnings("Duplicates")
     private void startTimer() {
 
         state = true;

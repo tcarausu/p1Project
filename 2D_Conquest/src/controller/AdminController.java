@@ -1,9 +1,6 @@
 package controller;
 
-import adminUI.AdminPageUI;
-import adminUI.AdminQuestionUI;
-import adminUI.AdminSettingsUI;
-import adminUI.AdminUserUI;
+import adminUI.*;
 import adminUI.adminQuestionPage.AdminQuestionCreate;
 import adminUI.adminUserPage.AdminUserCreate;
 import adminUI.adminUserPage.AdminUserDelete;
@@ -59,7 +56,6 @@ public class AdminController {
         mainController.confirmationUI();
     }
 
-
     /**
      * This method deletes a User table entry by
      * deleting the User by the same id
@@ -109,6 +105,10 @@ public class AdminController {
 
     }
 
+    public boolean checkUserIdValidity(int id) throws SQLException {
+        return udb.checkUserIdValidity(id);
+    }
+
     /**
      * This method Initiates the AdminQuestionUI window using the current controller
      * and the MyController
@@ -129,6 +129,13 @@ public class AdminController {
      */
     public void openAdminSettingsUI() {
         new AdminSettingsUI(this);
+    }
+
+    /**
+     * This method Initiates the AdminSetDifficultyForUser window using this Controller
+     */
+    public void openAdminSetDifficultyOnUser() {
+        new AdminSetDifficultyForUser(mainController, this);
     }
 
     /**
