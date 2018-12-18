@@ -39,6 +39,7 @@ public class User {
      * username and password variables
      *
      * @param id represents the id for the User
+     * @param defaultDifficulty represents the defaultDifficulty for the User
      */
     public User(int id, String defaultDifficulty) {
         this.id = id;
