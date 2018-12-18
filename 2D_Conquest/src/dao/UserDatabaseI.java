@@ -57,6 +57,7 @@ public interface UserDatabaseI {
      *           as parameters it can
      * @throws SQLException in case that there is no data or
      *                      there is an issue extracting data from the database
+     * @return boolean is the user Id is valid, and false when id is invalid.
      */
     boolean checkUserIdValidity(int id)throws SQLException;
 }
